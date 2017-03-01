@@ -31,14 +31,14 @@
         </javaModelGenerator>  
   
         <!-- targetProject:mapper映射xml文件生成的位置，重要！！ -->  
-        <sqlMapGenerator targetPackage="cn.com.noomn.dao.mapper"  
+        <sqlMapGenerator targetPackage="cn.com.noomn.mapper.dao"  
                          targetProject=".\src\main\java\">  
             <property name="enableSubPackages" value="false"/>  
         </sqlMapGenerator>  
   
         <!-- targetPackage：mapper接口生成的位置，重要！！ -->  
         <javaClientGenerator type="XMLMAPPER"  
-                             targetPackage="cn.com.noomn.dao.mapper"  
+                             targetPackage="cn.com.noomn.mapper.dao"  
                              targetProject=".\src\main\java\">  
             <property name="enableSubPackages" value="false"/>  
         </javaClientGenerator>  
@@ -89,7 +89,6 @@
         <table tableName="templet_type"></table>  
         <table tableName="userrole"></table>  
         <table tableName="userrole_authority"></table>  
-        <table tableName="workoutside"></table>  
         <table tableName="workoutside"></table>  
  
     </context>  
