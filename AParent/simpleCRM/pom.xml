@@ -97,13 +97,19 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.30</version>
 		</dependency>
+		
+		<dependency>  
+	        <groupId>commons-dbcp</groupId>  
+	        <artifactId>commons-dbcp</artifactId>  
+	        <version>1.4</version>  
+	    </dependency> 
 
 		<!-- 导入c3p0的jar包，用来在applicationContext.xml中配置数据库 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
 			<version>0.9.1.2</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- Other Web dependencies -->
 		<dependency>
@@ -175,5 +181,19 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.9</version>
 		</dependency>
+		
+		<!-- jstl -->
+		<dependency>
+            <groupId>javax.servlet.jsp.jstl</groupId>
+            <artifactId>jstl-api</artifactId>
+            <version>1.2</version>
+    	</dependency>
+		
+		<!-- 不同类相同属性复制 -->
+<!-- 		<dependency>
+		    <groupId>commons-beanutils</groupId>
+		    <artifactId>commons-beanutils</artifactId>
+		    <version>1.9.2</version>
+		</dependency> -->
 	</dependencies>
 </project>

@@ -455,73 +455,73 @@ public class EmployeeExample {
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeNameIsNull() {
-            addCriterion("EMPLOYEE_NAME is null");
+        public Criteria andEmployeeRealNameIsNull() {
+            addCriterion("EMPLOYEE_REAL_NAME is null");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeNameIsNotNull() {
-            addCriterion("EMPLOYEE_NAME is not null");
+        public Criteria andEmployeeRealNameIsNotNull() {
+            addCriterion("EMPLOYEE_REAL_NAME is not null");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeNameEqualTo(String value) {
-            addCriterion("EMPLOYEE_NAME =", value, "employeeName");
+        public Criteria andEmployeeRealNameEqualTo(String value) {
+            addCriterion("EMPLOYEE_REAL_NAME =", value, "employeeRealName");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeNameNotEqualTo(String value) {
-            addCriterion("EMPLOYEE_NAME <>", value, "employeeName");
+        public Criteria andEmployeeRealNameNotEqualTo(String value) {
+            addCriterion("EMPLOYEE_REAL_NAME <>", value, "employeeRealName");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeNameGreaterThan(String value) {
-            addCriterion("EMPLOYEE_NAME >", value, "employeeName");
+        public Criteria andEmployeeRealNameGreaterThan(String value) {
+            addCriterion("EMPLOYEE_REAL_NAME >", value, "employeeRealName");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeNameGreaterThanOrEqualTo(String value) {
-            addCriterion("EMPLOYEE_NAME >=", value, "employeeName");
+        public Criteria andEmployeeRealNameGreaterThanOrEqualTo(String value) {
+            addCriterion("EMPLOYEE_REAL_NAME >=", value, "employeeRealName");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeNameLessThan(String value) {
-            addCriterion("EMPLOYEE_NAME <", value, "employeeName");
+        public Criteria andEmployeeRealNameLessThan(String value) {
+            addCriterion("EMPLOYEE_REAL_NAME <", value, "employeeRealName");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeNameLessThanOrEqualTo(String value) {
-            addCriterion("EMPLOYEE_NAME <=", value, "employeeName");
+        public Criteria andEmployeeRealNameLessThanOrEqualTo(String value) {
+            addCriterion("EMPLOYEE_REAL_NAME <=", value, "employeeRealName");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeNameLike(String value) {
-            addCriterion("EMPLOYEE_NAME like", value, "employeeName");
+        public Criteria andEmployeeRealNameLike(String value) {
+            addCriterion("EMPLOYEE_REAL_NAME like", value, "employeeRealName");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeNameNotLike(String value) {
-            addCriterion("EMPLOYEE_NAME not like", value, "employeeName");
+        public Criteria andEmployeeRealNameNotLike(String value) {
+            addCriterion("EMPLOYEE_REAL_NAME not like", value, "employeeRealName");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeNameIn(List<String> values) {
-            addCriterion("EMPLOYEE_NAME in", values, "employeeName");
+        public Criteria andEmployeeRealNameIn(List<String> values) {
+            addCriterion("EMPLOYEE_REAL_NAME in", values, "employeeRealName");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeNameNotIn(List<String> values) {
-            addCriterion("EMPLOYEE_NAME not in", values, "employeeName");
+        public Criteria andEmployeeRealNameNotIn(List<String> values) {
+            addCriterion("EMPLOYEE_REAL_NAME not in", values, "employeeRealName");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeNameBetween(String value1, String value2) {
-            addCriterion("EMPLOYEE_NAME between", value1, value2, "employeeName");
+        public Criteria andEmployeeRealNameBetween(String value1, String value2) {
+            addCriterion("EMPLOYEE_REAL_NAME between", value1, value2, "employeeRealName");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeNameNotBetween(String value1, String value2) {
-            addCriterion("EMPLOYEE_NAME not between", value1, value2, "employeeName");
+        public Criteria andEmployeeRealNameNotBetween(String value1, String value2) {
+            addCriterion("EMPLOYEE_REAL_NAME not between", value1, value2, "employeeRealName");
             return (Criteria) this;
         }
 
@@ -1062,6 +1062,76 @@ public class EmployeeExample {
 
         public Criteria andEmployeeStateNotBetween(String value1, String value2) {
             addCriterion("EMPLOYEE_STATE not between", value1, value2, "employeeState");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsernameIsNull() {
+            addCriterion("EMPLOYEE_USERNAME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsernameIsNotNull() {
+            addCriterion("EMPLOYEE_USERNAME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsernameEqualTo(String value) {
+            addCriterion("EMPLOYEE_USERNAME =", value, "employeeUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsernameNotEqualTo(String value) {
+            addCriterion("EMPLOYEE_USERNAME <>", value, "employeeUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsernameGreaterThan(String value) {
+            addCriterion("EMPLOYEE_USERNAME >", value, "employeeUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsernameGreaterThanOrEqualTo(String value) {
+            addCriterion("EMPLOYEE_USERNAME >=", value, "employeeUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsernameLessThan(String value) {
+            addCriterion("EMPLOYEE_USERNAME <", value, "employeeUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsernameLessThanOrEqualTo(String value) {
+            addCriterion("EMPLOYEE_USERNAME <=", value, "employeeUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsernameLike(String value) {
+            addCriterion("EMPLOYEE_USERNAME like", value, "employeeUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsernameNotLike(String value) {
+            addCriterion("EMPLOYEE_USERNAME not like", value, "employeeUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsernameIn(List<String> values) {
+            addCriterion("EMPLOYEE_USERNAME in", values, "employeeUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsernameNotIn(List<String> values) {
+            addCriterion("EMPLOYEE_USERNAME not in", values, "employeeUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsernameBetween(String value1, String value2) {
+            addCriterion("EMPLOYEE_USERNAME between", value1, value2, "employeeUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsernameNotBetween(String value1, String value2) {
+            addCriterion("EMPLOYEE_USERNAME not between", value1, value2, "employeeUsername");
             return (Criteria) this;
         }
 

@@ -13307,6 +13307,13 @@ th .lbl:only-child, td .lbl:only-child {
 }
 
 .login-box .toolbar > div {
+    width: 100%;
+    display: inline-block;
+    padding: 9px 0 11px
+}
+
+/* 自定义 */
+.login-box .toolbar2 > div {
     width: 50%;
     display: inline-block;
     padding: 9px 0 11px
@@ -13342,7 +13349,21 @@ th .lbl:only-child, td .lbl:only-child {
     padding: 9px 18px
 }
 
+/* 自定义 */
+.login-box .mytoolbar {
+	background: #5090C1;
+    padding: 9px 18px
+}
+
 .forgot-box .back-to-login-link, .signup-box .back-to-login-link {
+    color: #FE9;
+    font-size: 14px;
+    font-weight: 700;
+    text-shadow: 1px 0 1px rgba(0, 0, 0, .25)
+}
+
+/* 自定义 */
+.login-box .forgot-password-link{
     color: #FE9;
     font-size: 14px;
     font-weight: 700;

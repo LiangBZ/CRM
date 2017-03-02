@@ -13,7 +13,7 @@ public class Employee {
 
     private String employeeNumber;
 
-    private String employeeName;
+    private String employeeRealName;
 
     private String employeeSex;
 
@@ -30,6 +30,8 @@ public class Employee {
     private Date employeeEntrydate;
 
     private String employeeState;
+
+    private String employeeUsername;
 
     private String employeePassword;
 
@@ -73,12 +75,12 @@ public class Employee {
         this.employeeNumber = employeeNumber == null ? null : employeeNumber.trim();
     }
 
-    public String getEmployeeName() {
-        return employeeName;
+    public String getEmployeeRealName() {
+        return employeeRealName;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName == null ? null : employeeName.trim();
+    public void setEmployeeRealName(String employeeRealName) {
+        this.employeeRealName = employeeRealName == null ? null : employeeRealName.trim();
     }
 
     public String getEmployeeSex() {
@@ -143,6 +145,14 @@ public class Employee {
 
     public void setEmployeeState(String employeeState) {
         this.employeeState = employeeState == null ? null : employeeState.trim();
+    }
+
+    public String getEmployeeUsername() {
+        return employeeUsername;
+    }
+
+    public void setEmployeeUsername(String employeeUsername) {
+        this.employeeUsername = employeeUsername == null ? null : employeeUsername.trim();
     }
 
     public String getEmployeePassword() {

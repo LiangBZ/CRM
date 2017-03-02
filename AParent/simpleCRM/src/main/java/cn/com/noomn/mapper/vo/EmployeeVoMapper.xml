@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.noomn.mapper.vo.EmployeeVoMapper">
+  <resultMap id="BaseResultMap" type="cn.com.noomn.vo.EmployeeVo">
+    <id column="EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
+    <result column="DEPARTMENT_ID" jdbcType="VARCHAR" property="departmentId" />
+    <result column="USERROLE_ID" jdbcType="VARCHAR" property="userroleId" />
+    <result column="NEXT_DEP_DEPARTMENT_ID" jdbcType="VARCHAR" property="nextDepDepartmentId" />
+    <result column="EMPLOYEE_NUMBER" jdbcType="VARCHAR" property="employeeNumber" />
+    <result column="EMPLOYEE_REAL_NAME" jdbcType="CHAR" property="employeeRealName" />
+    <result column="EMPLOYEE_SEX" jdbcType="CHAR" property="employeeSex" />
+    <result column="EMPLOYEE_EMAIL" jdbcType="VARCHAR" property="employeeEmail" />
+    <result column="EMPLOYEE_PHONE" jdbcType="VARCHAR" property="employeePhone" />
+    <result column="EMPLOYEE_ADDRESS" jdbcType="VARCHAR" property="employeeAddress" />
+    <result column="EMPLOYEE_BIRTHDAY" jdbcType="TIMESTAMP" property="employeeBirthday" />
+    <result column="EMPLOYEE_IDNUMBER" jdbcType="VARCHAR" property="employeeIdnumber" />
+    <result column="EMPLOYEE_ENTRYDATE" jdbcType="TIMESTAMP" property="employeeEntrydate" />
+    <result column="EMPLOYEE_STATE" jdbcType="CHAR" property="employeeState" />
+    <result column="EMPLOYEE_USERNAME" jdbcType="VARCHAR" property="employeeUsername" />
+    <result column="EMPLOYEE_PASSWORD" jdbcType="VARCHAR" property="employeePassword" />
+  </resultMap>
+  
+  <select id="selectForlogin" parameterType="cn.com.noomn.vo.EmployeeVo" resultMap="BaseResultMap">
+  	select * from employee where EMPLOYEE_USERNAME = #{employeeUsername} and EMPLOYEE_PASSWORD = #{employeePassword}
+  </select>
+  
+</mapper>

@@ -1,28 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta charset="utf-8"/>
-    <title>登录页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>登录</title>
 
-    <!-- jquery -->
-    <script src="js/jquery/jquery.2.1.1.min.js"></script>
+	<!-- jquery -->
+    <script src="${pageContext.request.contextPath}/login/js/jquery/jquery.2.1.1.min.js"></script>
 
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="js/bootstrap/bootstrap.min.css"/>
-    <link rel="stylesheet" href="fonts/font-awesome/4.2.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/login/js/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/login/fonts/font-awesome/4.2.0/css/font-awesome.min.css"/>
 
     <!-- text fonts -->
-    <link rel="stylesheet" href="fonts/fonts-googleapis/fonts.googleapis.com.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/login/fonts/fonts-googleapis/fonts.googleapis.com.css"/>
 
     <!-- ace styles -->
-    <link rel="stylesheet" href="css/ace.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/login/css/ace.min.css"/>
 
-    <link rel="stylesheet" href="js/bootstrapValidator0.5.2/css/bootstrapValidator.min.css">
-    <script src="js/bootstrapValidator0.5.2/js/bootstrapValidator.min.js"></script>
-    <script src="js/bootstrapValidator0.5.2/js/language/zh_CN.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/login/js/bootstrapValidator0.5.2/css/bootstrapValidator.min.css">
+    <script src="${pageContext.request.contextPath}/login/js/bootstrapValidator0.5.2/js/bootstrapValidator.min.js"></script>
+    <script src="${pageContext.request.contextPath}/login/js/bootstrapValidator0.5.2/js/language/zh_CN.js"></script>
+
 </head>
-
 <body class="login-layout">
 <div class="main-container">
     <div class="main-content">
@@ -42,27 +45,29 @@
                     </div>
 
                     <div class="space-6"></div>
-
+			
+					<!-- .position-relative begin -->
                     <div class="position-relative">
 
+						<!-- 用户登录 begin -->
                         <!-- login-box-->
                         <div id="login-box" class="login-box visible widget-box no-border">
                             <div class="widget-body">
                                 <div class="widget-main">
                                     <h4 class="header blue lighter bigger">
                                         <i class="ace-icon fa fa-coffee green"></i>
-                                        请输入您的信息
+                                        	请输入您的信息
                                     </h4>
 
                                     <div class="space-6"></div>
 
                                     <!-- 登录表单 -->
-                                    <form data-form="loginBoxForm" action="return false;">
+                                    <form id="form1" data-form="loginBoxForm" action="${pageContext.request.contextPath}/logins/login">
                                         <!-- 用户名 -->
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                                <input type="text" class="form-control" placeholder="用户名.." name="username" />
+                                                <input type="text" class="form-control" placeholder="用户名.." name="username" value="123" />
                                             </div>
                                         </div><!-- /用户名 -->
 
@@ -70,58 +75,50 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                <input type="password" class="form-control" placeholder="密码.." name="password" />
+                                                <input type="password" class="form-control" placeholder="密码.." name="password" value="123" />
                                             </div>
                                         </div><!-- /密码 -->
 
                                         <div class="space"></div>
 
                                             <div class="clearfix">
-                                                <label class="inline">
-                                                    <input type="checkbox" class="ace"/>
-                                                    <span class="lbl"> 记住</span>
-                                                </label>
-
-                                                <button data-submit="submitButton" type="button" class="width-35 pull-right btn btn-sm btn-primary">
+                                            	
+                                                <button data-submit="submitButton" data-formName="loginBoxForm" type="button" class="width-35 pull-right btn btn-sm btn-primary">
                                                     <i class="ace-icon fa fa-key"></i>
                                                     <span class="bigger-110">登录</span>
                                                 </button>
+                                                <input type="submit" value="提交"/>
                                             </div>
 
                                             <div class="space-4"></div>
                                     </form><!-- /登录表单 -->
 
                                 </div><!-- /.widget-main -->
-
-                                <div class="toolbar clearfix">
-                                    <div>
-                                        <a href="#" data-target="#forgot-box" class="forgot-password-link">
-                                            <i class="ace-icon fa fa-arrow-left"></i>
-                                            忘记密码
-                                        </a>
-                                    </div>
-
-                                    <div>
-                                        <a href="#" data-target="#signup-box" class="user-signup-link">
-                                            注册
-                                            <i class="ace-icon fa fa-arrow-right"></i>
-                                        </a>
-                                    </div>
+                                
+                                <div class="toolbar clearfix mytoolbar center">
+                                    <a href="#" data-target="#forgot-box" class="forgot-password-link">
+                                        <i class="ace-icon fa fa-arrow-left"></i>
+                                       	 忘记密码
+                                    </a>
                                 </div>
+                                
                             </div><!-- /.widget-body -->
                         </div><!-- /.login-box -->
-
+                        <!-- 用户登录 /end -->
+						
+						
+						<!-- 找回密码 begin -->
                         <div id="forgot-box" class="forgot-box widget-box no-border">
                             <div class="widget-body">
                                 <div class="widget-main">
                                     <h4 class="header red lighter bigger">
                                         <i class="ace-icon fa fa-key"></i>
-                                        找回密码
+                                        	找回密码
                                     </h4>
 
                                     <div class="space-6"></div>
                                     <p>
-                                        输入您的电子邮件和接收指令
+                                       	 输入您的电子邮件和接收指令
                                     </p>
 
                                     <!--  找回密码表单 -->
@@ -145,19 +142,22 @@
 
                                 <div class="toolbar center">
                                     <a href="#" data-target="#login-box" class="back-to-login-link">
-                                        返回登录
+                                       	 返回登录
                                         <i class="ace-icon fa fa-arrow-right"></i>
                                     </a>
                                 </div>
                             </div><!-- /.widget-body -->
                         </div><!-- /.forgot-box -->
+                        <!-- 找回密码 /end -->
 
+
+						<!-- 用户注册 begin-->
                         <div id="signup-box" class="signup-box widget-box no-border">
                             <div class="widget-body">
                                 <div class="widget-main">
                                     <h4 class="header green lighter bigger">
                                         <i class="ace-icon fa fa-users blue"></i>
-                                        用户注册
+                                       	 用户注册
                                     </h4>
 
                                     <div class="space-6"></div>
@@ -224,13 +224,18 @@
                                 <div class="toolbar center">
                                     <a href="#" data-target="#login-box" class="back-to-login-link">
                                         <i class="ace-icon fa fa-arrow-left"></i>
-                                        返回登录
+                                        	返回登录
                                     </a>
                                 </div>
                             </div><!-- /.widget-body -->
                         </div><!-- /.signup-box -->
+                        <!-- 用户注册 /end-->
+                        
                     </div><!-- /.position-relative -->
 
+
+
+					<!-- 主题 begin -->
                     <div class="navbar-fixed-top align-right">
                         <br/>
                         &nbsp;
@@ -245,6 +250,7 @@
                         <a id="btn-login-light" href="#">Light</a>
                         &nbsp; &nbsp; &nbsp;
                     </div>
+                    <!-- 主题 /end -->
                 </div>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -346,5 +352,8 @@
 
 </script>
 
+<script type="text/javascript">
+	
+</script>
 </body>
 </html>
