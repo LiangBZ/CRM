@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+
 <title>登录</title>
 
 	<!-- jquery -->
@@ -24,7 +28,11 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/login/js/bootstrapValidator0.5.2/css/bootstrapValidator.min.css">
     <script src="${pageContext.request.contextPath}/login/js/bootstrapValidator0.5.2/js/bootstrapValidator.min.js"></script>
     <script src="${pageContext.request.contextPath}/login/js/bootstrapValidator0.5.2/js/language/zh_CN.js"></script>
-
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/Util/js/security.js"></script>
+	
+	<!-- MyUtil.js -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/Util/js/util.js"></script>
 </head>
 <body class="login-layout">
 <div class="main-container">
@@ -62,12 +70,12 @@
                                     <div class="space-6"></div>
 
                                     <!-- 登录表单 -->
-                                    <form id="form1" data-form="loginBoxForm" action="${pageContext.request.contextPath}/logins/login">
+                                    <form data-form="loginBoxForm" action="${pageContext.request.contextPath}/logins/login" method="post">
                                         <!-- 用户名 -->
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                                <input type="text" class="form-control" placeholder="用户名.." name="username" value="123" />
+                                                <input type="text" class="form-control" placeholder="用户名.." name="employeeUsername" value="liangbozhao" />
                                             </div>
                                         </div><!-- /用户名 -->
 
@@ -75,7 +83,8 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                <input type="password" class="form-control" placeholder="密码.." name="password" value="123" />
+                                                <input type="password" class="form-control" placeholder="密码.." name="password" value="111111" />
+                                                <input type="hidden" name="employeeRSAPassword"/>
                                             </div>
                                         </div><!-- /密码 -->
 
@@ -87,7 +96,6 @@
                                                     <i class="ace-icon fa fa-key"></i>
                                                     <span class="bigger-110">登录</span>
                                                 </button>
-                                                <input type="submit" value="提交"/>
                                             </div>
 
                                             <div class="space-4"></div>
@@ -257,6 +265,8 @@
     </div><!-- /.main-content -->
 </div><!-- /.main-container -->
 
+<!-- 安全校验 -->
+<%@ include file="/WEB-INF/Util/jsp/securityRSA.jsp" %>
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
@@ -310,7 +320,7 @@
                     }
                 }
             },
-            username: {
+            employeeUsername: {
                 validators: {
                     notEmpty: {
                         message: ' 用户名不能为空'
@@ -353,7 +363,27 @@
 </script>
 
 <script type="text/javascript">
-	
+	$('form[data-form="loginBoxForm"]').find(':button[data-submit="submitButton"]').click(function() {
+		var passwordVal = $('form[data-form="loginBoxForm"]').find(':input[name="password"]').val();
+		passwordVal = encryptRSA("${publicKeyModulus}", "${publicExponent}", passwordVal);
+		$('form[data-form="loginBoxForm"]').find(':input[name="employeeRSAPassword"]').val(passwordVal);
+		$('form[data-form="loginBoxForm"]').find(':button[type="submit"]').click();
+	});
+</script>
+
+<script type="text/javascript">
+	//消息提示
+	showInfos("${infos}", "${infos.message}", "${infos.obj}", "${pageContext.request.contextPath}");
+</script>
+
+<script type="text/javascript">
+
+	//封装一个加密方法，m对应modulus，e对应public exponent，text是明文
+	function encryptRSA(m, e, text) {
+		var key = RSAUtils.getKeyPair(e, '', m);
+		return RSAUtils.encryptedString(key, text);
+	};
+
 </script>
 </body>
 </html>

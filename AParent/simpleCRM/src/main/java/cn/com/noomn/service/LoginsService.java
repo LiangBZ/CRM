@@ -11,5 +11,13 @@ public interface LoginsService {
 	 * @return cn.com.noomn.vo.EmployeeVo
 	 * @throws Exception
 	 */
-	boolean selectForlogin(final cn.com.noomn.vo.EmployeeVo employeeVo) throws Exception;
+	boolean selectForlogin(final cn.com.noomn.vo.EmployeeVo employeeVo);
+	
+	/**
+	 * 查询员工信息
+	 * @param employeeVo
+	 * @return
+	 * @throws Exception
+	 */
+	cn.com.noomn.vo.EmployeeVo selectEmployee(final cn.com.noomn.vo.EmployeeVo employeeVo);
 }

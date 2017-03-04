@@ -8,7 +8,7 @@
 	<context:component-scan base-package="cn.com.noomn.dao, cn.com.noomn.service" />
 	<context:property-placeholder location="classpath:db.properties"/>
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"   
+<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"   
         destroy-method="close">   
         <property name="driverClassName" value="${jdbc.driverClassName}" />   
         <property name="url" value="${jdbc.url}" />   
@@ -18,10 +18,10 @@
         <property name="maxIdle" value="10" />   
         <property name="maxWait" value="1000" />   
         <property name="defaultAutoCommit" value="true" /> 
-    </bean>
+    </bean> -->
 
 	<!-- 配置c3p0 -->
-	<!-- <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="${jdbc.driverClassName}" />
 		<property name="jdbcUrl" value="${jdbc.url}" />
 		<property name="user" value="${jdbc.username}" />
@@ -37,7 +37,7 @@
 		<property name="acquireRetryAttempts" value="30" />
 		<property name="breakAfterAcquireFailure" value="true" />
 		<property name="testConnectionOnCheckout" value="false" />
-	</bean> -->
+	</bean>
 
 	<!-- 让spring管理sqlsessionfactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

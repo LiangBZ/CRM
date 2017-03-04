@@ -13,8 +13,24 @@ public class LoginsServiceImpl implements LoginsService {
 	@Autowired
 	private EmployeeVoMapper employeeVoMapper;
 
-	public boolean selectForlogin(EmployeeVo employeeVo) throws Exception {
-		return employeeVoMapper.selectForlogin(employeeVo) == null ? false : true ;
+	@Override
+	public boolean selectForlogin(EmployeeVo employeeVo) {
+		try {
+			return employeeVoMapper.selectForlogin(employeeVo) == null ? false : true ;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public EmployeeVo selectEmployee(EmployeeVo employeeVo) {
+		try {
+			return employeeVoMapper.selectForNimble(employeeVo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
 	}
 
 }

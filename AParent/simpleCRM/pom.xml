@@ -13,6 +13,13 @@
 	</parent>
 
 	<dependencies>
+		<!-- RSA -->
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.54</version>
+		</dependency>
+	
 		<!-- test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -105,11 +112,11 @@
 	    </dependency> 
 
 		<!-- 导入c3p0的jar包，用来在applicationContext.xml中配置数据库 -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
 			<version>0.9.1.2</version>
-		</dependency> -->
+		</dependency>
 
 		<!-- Other Web dependencies -->
 		<dependency>
@@ -182,18 +189,6 @@
 			<version>1.9</version>
 		</dependency>
 		
-		<!-- jstl -->
-		<dependency>
-            <groupId>javax.servlet.jsp.jstl</groupId>
-            <artifactId>jstl-api</artifactId>
-            <version>1.2</version>
-    	</dependency>
-		
-		<!-- 不同类相同属性复制 -->
-<!-- 		<dependency>
-		    <groupId>commons-beanutils</groupId>
-		    <artifactId>commons-beanutils</artifactId>
-		    <version>1.9.2</version>
-		</dependency> -->
 	</dependencies>
+	
 </project>

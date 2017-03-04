@@ -19,9 +19,66 @@
     <result column="EMPLOYEE_USERNAME" jdbcType="VARCHAR" property="employeeUsername" />
     <result column="EMPLOYEE_PASSWORD" jdbcType="VARCHAR" property="employeePassword" />
   </resultMap>
-  
-  <select id="selectForlogin" parameterType="cn.com.noomn.vo.EmployeeVo" resultMap="BaseResultMap">
-  	select * from employee where EMPLOYEE_USERNAME = #{employeeUsername} and EMPLOYEE_PASSWORD = #{employeePassword}
-  </select>
-  
+
+	<select id="selectForlogin" parameterType="cn.com.noomn.vo.EmployeeVo"
+		resultMap="BaseResultMap">
+		select * from employee where EMPLOYEE_USERNAME = #{employeeUsername} and
+		EMPLOYEE_PASSWORD = #{employeePassword}
+	</select>
+
+	<!-- 根据vo已经赋值的属性（所有已经赋值的属性）查询 -->
+	<select id="selectForNimble" parameterType="cn.com.noomn.vo.EmployeeVo" resultMap="BaseResultMap">
+		select * from employee
+		<where>
+			<if test="employeeId != null">
+				EMPLOYEE_ID = #{employeeId}
+			</if>
+			<if test="departmentId != null">
+				DEPARTMENT_ID = #{departmentId}
+			</if>
+			<if test="userroleId != null">
+				USERROLE_ID = #{userroleId}
+			</if>
+			<if test="nextDepDepartmentId != null">
+				NEXT_DEP_DEPARTMENT_ID = #{nextDepDepartmentId}
+			</if>
+			<if test="employeeNumber != null">
+				EMPLOYEE_NUMBER = #{employeeNumber}
+			</if>
+			<if test="employeeRealName != null">
+				EMPLOYEE_REAL_NAME = #{employeeRealName}
+			</if>
+			<if test="employeeSex != null">
+				EMPLOYEE_SEX = #{employeeSex}
+			</if>
+			<if test="employeeEmail != null">
+				EMPLOYEE_EMAIL = #{employeeEmail}
+			</if>
+			<if test="employeePhone != null">
+				EMPLOYEE_PHONE = #{employeePhone}
+			</if>
+			<if test="employeeAddress != null">
+				EMPLOYEE_ADDRESS = #{employeeAddress}
+			</if>
+			<if test="employeeBirthday != null">
+				EMPLOYEE_BIRTHDAY = #{employeeBirthday}
+			</if>
+			<if test="employeeIdnumber != null">
+				EMPLOYEE_IDNUMBER = #{employeeIdnumber}
+			</if>
+			<if test="employeeEntrydate != null">
+				EMPLOYEE_ENTRYDATE = #{employeeEntrydate}
+			</if>
+			<if test="employeeState != null">
+				EMPLOYEE_STATE = #{employeeState}
+			</if>
+			<if test="employeeUsername != null">
+				EMPLOYEE_USERNAME = #{employeeUsername}
+			</if>
+			<if test="employeePassword != null">
+				EMPLOYEE_PASSWORD = #{employeePassword}
+			</if>
+		</where>
+	</select>
 </mapper>
+    

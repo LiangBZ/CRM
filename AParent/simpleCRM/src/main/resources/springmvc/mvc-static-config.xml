@@ -9,7 +9,8 @@
 
 	<!-- 静态资源 -->
 	<mvc:resources location="/WEB-INF/login/" mapping="/login/**"></mvc:resources>
-	<mvc:resources location="/WEB-INF/mainBody/**" mapping="/mainBody/**"></mvc:resources>
+	<mvc:resources location="/WEB-INF/mainBody/" mapping="/mainBody/**"></mvc:resources>
+	<mvc:resources location="/WEB-INF/Util/" mapping="/Util/**"></mvc:resources>
 	
 	<mvc:view-controller path="/" view-name="login/index"/>
 
