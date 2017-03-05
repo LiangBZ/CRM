@@ -13,6 +13,14 @@
 	</parent>
 
 	<dependencies>
+	
+		<!-- javaMail -->
+		<dependency>  
+		    <groupId>javax.mail</groupId>  
+		    <artifactId>mail</artifactId>  
+		    <version>1.4.4</version>  
+		</dependency> 
+	
 		<!-- RSA -->
 		<dependency>
 			<groupId>org.bouncycastle</groupId>

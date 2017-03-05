@@ -1,5 +1,7 @@
 package cn.com.noomn.service;
 
+import cn.com.noomn.util.Infos;
+
 /**
  * 登录接口
  *
@@ -20,4 +22,18 @@ public interface LoginsService {
 	 * @throws Exception
 	 */
 	cn.com.noomn.vo.EmployeeVo selectEmployee(final cn.com.noomn.vo.EmployeeVo employeeVo);
+	
+	/**
+	 * 发送邮件
+	 * @param employeeVo
+	 * @return
+	 */
+	Infos sendEmail(final cn.com.noomn.vo.EmployeeVo employeeVo);
+	
+	/**
+	 * 根据主键更新
+	 * @param employeeVo
+	 * @return
+	 */
+	int updateEmployeeByPrimaryKey(final cn.com.noomn.vo.EmployeeVo employeeVo);
 }

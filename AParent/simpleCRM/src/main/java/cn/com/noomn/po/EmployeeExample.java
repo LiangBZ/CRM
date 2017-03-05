@@ -175,6 +175,66 @@ public class EmployeeExample {
             return (Criteria) this;
         }
 
+        public Criteria andEmployeeEntrydateIsNull() {
+            addCriterion("EMPLOYEE_ENTRYDATE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeEntrydateIsNotNull() {
+            addCriterion("EMPLOYEE_ENTRYDATE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeEntrydateEqualTo(Date value) {
+            addCriterion("EMPLOYEE_ENTRYDATE =", value, "employeeEntrydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeEntrydateNotEqualTo(Date value) {
+            addCriterion("EMPLOYEE_ENTRYDATE <>", value, "employeeEntrydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeEntrydateGreaterThan(Date value) {
+            addCriterion("EMPLOYEE_ENTRYDATE >", value, "employeeEntrydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeEntrydateGreaterThanOrEqualTo(Date value) {
+            addCriterion("EMPLOYEE_ENTRYDATE >=", value, "employeeEntrydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeEntrydateLessThan(Date value) {
+            addCriterion("EMPLOYEE_ENTRYDATE <", value, "employeeEntrydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeEntrydateLessThanOrEqualTo(Date value) {
+            addCriterion("EMPLOYEE_ENTRYDATE <=", value, "employeeEntrydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeEntrydateIn(List<Date> values) {
+            addCriterion("EMPLOYEE_ENTRYDATE in", values, "employeeEntrydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeEntrydateNotIn(List<Date> values) {
+            addCriterion("EMPLOYEE_ENTRYDATE not in", values, "employeeEntrydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeEntrydateBetween(Date value1, Date value2) {
+            addCriterion("EMPLOYEE_ENTRYDATE between", value1, value2, "employeeEntrydate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeEntrydateNotBetween(Date value1, Date value2) {
+            addCriterion("EMPLOYEE_ENTRYDATE not between", value1, value2, "employeeEntrydate");
+            return (Criteria) this;
+        }
+
         public Criteria andDepartmentIdIsNull() {
             addCriterion("DEPARTMENT_ID is null");
             return (Criteria) this;
@@ -935,66 +995,6 @@ public class EmployeeExample {
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeEntrydateIsNull() {
-            addCriterion("EMPLOYEE_ENTRYDATE is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmployeeEntrydateIsNotNull() {
-            addCriterion("EMPLOYEE_ENTRYDATE is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmployeeEntrydateEqualTo(Date value) {
-            addCriterion("EMPLOYEE_ENTRYDATE =", value, "employeeEntrydate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmployeeEntrydateNotEqualTo(Date value) {
-            addCriterion("EMPLOYEE_ENTRYDATE <>", value, "employeeEntrydate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmployeeEntrydateGreaterThan(Date value) {
-            addCriterion("EMPLOYEE_ENTRYDATE >", value, "employeeEntrydate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmployeeEntrydateGreaterThanOrEqualTo(Date value) {
-            addCriterion("EMPLOYEE_ENTRYDATE >=", value, "employeeEntrydate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmployeeEntrydateLessThan(Date value) {
-            addCriterion("EMPLOYEE_ENTRYDATE <", value, "employeeEntrydate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmployeeEntrydateLessThanOrEqualTo(Date value) {
-            addCriterion("EMPLOYEE_ENTRYDATE <=", value, "employeeEntrydate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmployeeEntrydateIn(List<Date> values) {
-            addCriterion("EMPLOYEE_ENTRYDATE in", values, "employeeEntrydate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmployeeEntrydateNotIn(List<Date> values) {
-            addCriterion("EMPLOYEE_ENTRYDATE not in", values, "employeeEntrydate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmployeeEntrydateBetween(Date value1, Date value2) {
-            addCriterion("EMPLOYEE_ENTRYDATE between", value1, value2, "employeeEntrydate");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmployeeEntrydateNotBetween(Date value1, Date value2) {
-            addCriterion("EMPLOYEE_ENTRYDATE not between", value1, value2, "employeeEntrydate");
-            return (Criteria) this;
-        }
-
         public Criteria andEmployeeStateIsNull() {
             addCriterion("EMPLOYEE_STATE is null");
             return (Criteria) this;
@@ -1202,6 +1202,136 @@ public class EmployeeExample {
 
         public Criteria andEmployeePasswordNotBetween(String value1, String value2) {
             addCriterion("EMPLOYEE_PASSWORD not between", value1, value2, "employeePassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeInstructIsNull() {
+            addCriterion("EMPLOYEE_INSTRUCT is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeInstructIsNotNull() {
+            addCriterion("EMPLOYEE_INSTRUCT is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeInstructEqualTo(String value) {
+            addCriterion("EMPLOYEE_INSTRUCT =", value, "employeeInstruct");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeInstructNotEqualTo(String value) {
+            addCriterion("EMPLOYEE_INSTRUCT <>", value, "employeeInstruct");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeInstructGreaterThan(String value) {
+            addCriterion("EMPLOYEE_INSTRUCT >", value, "employeeInstruct");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeInstructGreaterThanOrEqualTo(String value) {
+            addCriterion("EMPLOYEE_INSTRUCT >=", value, "employeeInstruct");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeInstructLessThan(String value) {
+            addCriterion("EMPLOYEE_INSTRUCT <", value, "employeeInstruct");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeInstructLessThanOrEqualTo(String value) {
+            addCriterion("EMPLOYEE_INSTRUCT <=", value, "employeeInstruct");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeInstructLike(String value) {
+            addCriterion("EMPLOYEE_INSTRUCT like", value, "employeeInstruct");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeInstructNotLike(String value) {
+            addCriterion("EMPLOYEE_INSTRUCT not like", value, "employeeInstruct");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeInstructIn(List<String> values) {
+            addCriterion("EMPLOYEE_INSTRUCT in", values, "employeeInstruct");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeInstructNotIn(List<String> values) {
+            addCriterion("EMPLOYEE_INSTRUCT not in", values, "employeeInstruct");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeInstructBetween(String value1, String value2) {
+            addCriterion("EMPLOYEE_INSTRUCT between", value1, value2, "employeeInstruct");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeInstructNotBetween(String value1, String value2) {
+            addCriterion("EMPLOYEE_INSTRUCT not between", value1, value2, "employeeInstruct");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsefulTimeIsNull() {
+            addCriterion("EMPLOYEE_USEFUL_TIME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsefulTimeIsNotNull() {
+            addCriterion("EMPLOYEE_USEFUL_TIME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsefulTimeEqualTo(Date value) {
+            addCriterion("EMPLOYEE_USEFUL_TIME =", value, "employeeUsefulTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsefulTimeNotEqualTo(Date value) {
+            addCriterion("EMPLOYEE_USEFUL_TIME <>", value, "employeeUsefulTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsefulTimeGreaterThan(Date value) {
+            addCriterion("EMPLOYEE_USEFUL_TIME >", value, "employeeUsefulTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsefulTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("EMPLOYEE_USEFUL_TIME >=", value, "employeeUsefulTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsefulTimeLessThan(Date value) {
+            addCriterion("EMPLOYEE_USEFUL_TIME <", value, "employeeUsefulTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsefulTimeLessThanOrEqualTo(Date value) {
+            addCriterion("EMPLOYEE_USEFUL_TIME <=", value, "employeeUsefulTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsefulTimeIn(List<Date> values) {
+            addCriterion("EMPLOYEE_USEFUL_TIME in", values, "employeeUsefulTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsefulTimeNotIn(List<Date> values) {
+            addCriterion("EMPLOYEE_USEFUL_TIME not in", values, "employeeUsefulTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsefulTimeBetween(Date value1, Date value2) {
+            addCriterion("EMPLOYEE_USEFUL_TIME between", value1, value2, "employeeUsefulTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeeUsefulTimeNotBetween(Date value1, Date value2) {
+            addCriterion("EMPLOYEE_USEFUL_TIME not between", value1, value2, "employeeUsefulTime");
             return (Criteria) this;
         }
     }

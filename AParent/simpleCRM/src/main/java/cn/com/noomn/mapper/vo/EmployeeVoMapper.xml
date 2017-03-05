@@ -3,6 +3,7 @@
 <mapper namespace="cn.com.noomn.mapper.vo.EmployeeVoMapper">
   <resultMap id="BaseResultMap" type="cn.com.noomn.vo.EmployeeVo">
     <id column="EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
+    <result column="EMPLOYEE_ENTRYDATE" jdbcType="TIMESTAMP" property="employeeEntrydate" />
     <result column="DEPARTMENT_ID" jdbcType="VARCHAR" property="departmentId" />
     <result column="USERROLE_ID" jdbcType="VARCHAR" property="userroleId" />
     <result column="NEXT_DEP_DEPARTMENT_ID" jdbcType="VARCHAR" property="nextDepDepartmentId" />
@@ -14,10 +15,11 @@
     <result column="EMPLOYEE_ADDRESS" jdbcType="VARCHAR" property="employeeAddress" />
     <result column="EMPLOYEE_BIRTHDAY" jdbcType="TIMESTAMP" property="employeeBirthday" />
     <result column="EMPLOYEE_IDNUMBER" jdbcType="VARCHAR" property="employeeIdnumber" />
-    <result column="EMPLOYEE_ENTRYDATE" jdbcType="TIMESTAMP" property="employeeEntrydate" />
     <result column="EMPLOYEE_STATE" jdbcType="CHAR" property="employeeState" />
     <result column="EMPLOYEE_USERNAME" jdbcType="VARCHAR" property="employeeUsername" />
     <result column="EMPLOYEE_PASSWORD" jdbcType="VARCHAR" property="employeePassword" />
+    <result column="EMPLOYEE_INSTRUCT" jdbcType="VARCHAR" property="employeeInstruct" />
+    <result column="EMPLOYEE_USEFUL_TIME" jdbcType="TIMESTAMP" property="employeeUsefulTime" />
   </resultMap>
 
 	<select id="selectForlogin" parameterType="cn.com.noomn.vo.EmployeeVo"
@@ -31,54 +33,80 @@
 		select * from employee
 		<where>
 			<if test="employeeId != null">
-				EMPLOYEE_ID = #{employeeId}
-			</if>
-			<if test="departmentId != null">
-				DEPARTMENT_ID = #{departmentId}
-			</if>
-			<if test="userroleId != null">
-				USERROLE_ID = #{userroleId}
-			</if>
-			<if test="nextDepDepartmentId != null">
-				NEXT_DEP_DEPARTMENT_ID = #{nextDepDepartmentId}
-			</if>
-			<if test="employeeNumber != null">
-				EMPLOYEE_NUMBER = #{employeeNumber}
-			</if>
-			<if test="employeeRealName != null">
-				EMPLOYEE_REAL_NAME = #{employeeRealName}
-			</if>
-			<if test="employeeSex != null">
-				EMPLOYEE_SEX = #{employeeSex}
-			</if>
-			<if test="employeeEmail != null">
-				EMPLOYEE_EMAIL = #{employeeEmail}
-			</if>
-			<if test="employeePhone != null">
-				EMPLOYEE_PHONE = #{employeePhone}
-			</if>
-			<if test="employeeAddress != null">
-				EMPLOYEE_ADDRESS = #{employeeAddress}
-			</if>
-			<if test="employeeBirthday != null">
-				EMPLOYEE_BIRTHDAY = #{employeeBirthday}
-			</if>
-			<if test="employeeIdnumber != null">
-				EMPLOYEE_IDNUMBER = #{employeeIdnumber}
+				and
+				EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR}
 			</if>
 			<if test="employeeEntrydate != null">
-				EMPLOYEE_ENTRYDATE = #{employeeEntrydate}
+				and
+				EMPLOYEE_ENTRYDATE = #{employeeEntrydate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="departmentId != null">
+				and
+				DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR}
+			</if>
+			<if test="userroleId != null">
+				and
+				USERROLE_ID = #{userroleId,jdbcType=VARCHAR}
+			</if>
+			<if test="nextDepDepartmentId != null">
+				and
+				NEXT_DEP_DEPARTMENT_ID = #{nextDepDepartmentId,jdbcType=VARCHAR}
+			</if>
+			<if test="employeeNumber != null">
+				and
+				EMPLOYEE_NUMBER = #{employeeNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="employeeRealName != null">
+				and
+				EMPLOYEE_REAL_NAME = #{employeeRealName,jdbcType=CHAR}
+			</if>
+			<if test="employeeSex != null">
+				and
+				EMPLOYEE_SEX = #{employeeSex,jdbcType=CHAR}
+			</if>
+			<if test="employeeEmail != null">
+				and
+				EMPLOYEE_EMAIL = #{employeeEmail,jdbcType=VARCHAR}
+			</if>
+			<if test="employeePhone != null">
+				and
+				EMPLOYEE_PHONE = #{employeePhone,jdbcType=VARCHAR}
+			</if>
+			<if test="employeeAddress != null">
+				and
+				EMPLOYEE_ADDRESS = #{employeeAddress,jdbcType=VARCHAR}
+			</if>
+			<if test="employeeBirthday != null">
+				and
+				EMPLOYEE_BIRTHDAY = #{employeeBirthday,jdbcType=TIMESTAMP}
+			</if>
+			<if test="employeeIdnumber != null">
+				and
+				EMPLOYEE_IDNUMBER = #{employeeIdnumber,jdbcType=VARCHAR}
 			</if>
 			<if test="employeeState != null">
-				EMPLOYEE_STATE = #{employeeState}
+				and
+				EMPLOYEE_STATE = #{employeeState,jdbcType=CHAR}
 			</if>
 			<if test="employeeUsername != null">
-				EMPLOYEE_USERNAME = #{employeeUsername}
+				and
+				EMPLOYEE_USERNAME = #{employeeUsername,jdbcType=VARCHAR}
 			</if>
 			<if test="employeePassword != null">
-				EMPLOYEE_PASSWORD = #{employeePassword}
+				and
+				EMPLOYEE_PASSWORD = #{employeePassword,jdbcType=VARCHAR}
+			</if>
+			<if test="employeeInstruct != null">
+				and
+				EMPLOYEE_INSTRUCT = #{employeeInstruct,jdbcType=VARCHAR}
+			</if>
+			<if test="employeeUsefulTime != null">
+				and
+				EMPLOYEE_USEFUL_TIME = #{employeeUsefulTime,jdbcType=TIMESTAMP}
 			</if>
 		</where>
 	</select>
+
+	
 </mapper>
     

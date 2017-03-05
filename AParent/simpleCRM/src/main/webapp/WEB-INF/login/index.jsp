@@ -121,7 +121,7 @@
                                 <div class="widget-main">
                                     <h4 class="header red lighter bigger">
                                         <i class="ace-icon fa fa-key"></i>
-                                        	找回密码
+                                        	重置密码
                                     </h4>
 
                                     <div class="space-6"></div>
@@ -130,19 +130,40 @@
                                     </p>
 
                                     <!--  找回密码表单 -->
-                                    <form data-form="forgotBoxForm" action="#" >
+                                    <form data-form="forgotBoxForm" action="#">
+                                    	
+                                    	<!-- employeeUsername -->
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                                <input name="employeeUsername" type="text" class="form-control" placeholder="用户名.." />
+                                            </div>
+                                        </div><!-- /employeeUsername -->
+                                    
                                         <!-- email -->
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                                <input name="email" type="email" class="form-control" placeholder="Email.." />
+                                                <input name="employeeEmail" type="email" class="form-control" placeholder="Email.." />
                                             </div>
                                         </div><!-- /email -->
-
+                                        
+                                        <!-- employeeInstruct -->
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-wrench"></i></span>
+                                                <input name="employeeInstruct" type="text" class="form-control" placeholder="验证码.." />
+                                            </div>
+                                        </div><!-- /employeeInstruct -->
+                                        
                                         <div class="clearfix">
-                                            <button data-submit="submitButton" type="button" class="width-35 pull-right btn btn-sm btn-danger">
+                                        	<button onclick="sendEmailForResetPassword();" data-sendEmail="sendEmailButton" type="button" class="width-40 pull-left btn btn-sm btn-danger">
                                                 <i class="ace-icon fa fa-lightbulb-o"></i>
                                                 <span class="bigger-110">发送邮件</span>
+                                            </button>
+                                        	<button onclick="resetPassword();" data-submit="submitButton" type="button" class="width-40 pull-right btn btn-sm btn-danger">
+                                                <i class="ace-icon fa fa-lightbulb-o"></i>
+                                                <span class="bigger-110">重置密码</span>
                                             </button>
                                         </div>
                                     </form><!--  找回密码表单 -->
@@ -310,13 +331,20 @@
             validating:'glyphicon glyphicon-refresh'
         },
         fields: {
-            email: {
+        	employeeEmail: {
                 validators: {
                     notEmpty: {
                         message: '请输入邮箱'
                     },
                     emailAddress: {
                         message: '请输入正确的邮件地址'
+                    }
+                }
+            },
+            employeeInstruct: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入验证码'
                     }
                 }
             },
@@ -345,7 +373,7 @@
             },
         }
     }
-
+ 
     $(function() {
         var $form = $("form");
         $form.bootstrapValidator(option);
@@ -363,6 +391,7 @@
 </script>
 
 <script type="text/javascript">
+	//提交: 登录按钮
 	$('form[data-form="loginBoxForm"]').find(':button[data-submit="submitButton"]').click(function() {
 		var passwordVal = $('form[data-form="loginBoxForm"]').find(':input[name="password"]').val();
 		passwordVal = encryptRSA("${publicKeyModulus}", "${publicExponent}", passwordVal);
@@ -384,6 +413,72 @@
 		return RSAUtils.encryptedString(key, text);
 	};
 
+</script>
+
+<script type="text/javascript">
+	//发送邮件
+	function sendEmailForResetPassword() {
+		$form = $('form[data-form="forgotBoxForm"]');
+		
+		var isTrue = false;
+		$form.data("bootstrapValidator").validateField('employeeUsername');
+		$form.data("bootstrapValidator").validateField('employeeEmail');
+		isTrue = $form.data("bootstrapValidator").isValidField('employeeUsername');
+		if(isTrue == false) return;
+		isTrue = $form.data("bootstrapValidator").isValidField('employeeEmail');
+		if(isTrue == false) return;
+
+		var employeeUsernameVal = $form.find(':input[name="employeeUsername"]').val();
+		var employeeEmailVal = $form.find(':input[name="employeeEmail"]').val();
+		$.ajax({
+			async: false,
+			url : "${pageContext.request.contextPath}/logins/sendEmailForResetPassword",
+			type : "POST",
+			dataType : "json",
+			data : {
+				employeeUsername : employeeUsernameVal,
+				employeeEmail : employeeEmailVal
+			},
+			async : false,
+			success : function(data) {
+				alert(data.obj);
+			},
+			error : function() {
+				alert("error");
+			}
+		});
+	}
+	
+	//重置密码
+	function resetPassword() {
+		$form = $('form[data-form="forgotBoxForm"]');
+		
+		var isTrue = $form.bootstrapValidator('validate').data('bootstrapValidator').isValid();
+		if(isTrue == false) return;
+		
+		var employeeUsernameVal = $form.find(':input[name="employeeUsername"]').val();
+		var employeeEmailVal = $form.find(':input[name="employeeEmail"]').val();
+		var employeeInstructVal = $form.find(':input[name="employeeInstruct"]').val();
+		$.ajax({
+			async: false,
+			url : "${pageContext.request.contextPath}/logins/resetPassword",
+			type : "POST",
+			dataType : "json",
+			data : {
+				employeeUsername : employeeUsernameVal,
+				employeeEmail : employeeEmailVal,
+				employeeInstruct : employeeInstructVal
+			},
+			async : false,
+			success : function(data) {
+				alert(data.obj);
+			},
+			error : function() {
+				alert("error");
+			}
+		});
+	}
+	
 </script>
 </body>
 </html>

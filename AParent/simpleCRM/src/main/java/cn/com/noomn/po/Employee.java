@@ -5,6 +5,8 @@ import java.util.Date;
 public class Employee {
     private String employeeId;
 
+    private Date employeeEntrydate;
+
     private String departmentId;
 
     private String userroleId;
@@ -27,13 +29,15 @@ public class Employee {
 
     private String employeeIdnumber;
 
-    private Date employeeEntrydate;
-
     private String employeeState;
 
     private String employeeUsername;
 
     private String employeePassword;
+
+    private String employeeInstruct;
+
+    private Date employeeUsefulTime;
 
     public String getEmployeeId() {
         return employeeId;
@@ -41,6 +45,14 @@ public class Employee {
 
     public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId == null ? null : employeeId.trim();
+    }
+
+    public Date getEmployeeEntrydate() {
+        return employeeEntrydate;
+    }
+
+    public void setEmployeeEntrydate(Date employeeEntrydate) {
+        this.employeeEntrydate = employeeEntrydate;
     }
 
     public String getDepartmentId() {
@@ -131,14 +143,6 @@ public class Employee {
         this.employeeIdnumber = employeeIdnumber == null ? null : employeeIdnumber.trim();
     }
 
-    public Date getEmployeeEntrydate() {
-        return employeeEntrydate;
-    }
-
-    public void setEmployeeEntrydate(Date employeeEntrydate) {
-        this.employeeEntrydate = employeeEntrydate;
-    }
-
     public String getEmployeeState() {
         return employeeState;
     }
@@ -161,5 +165,21 @@ public class Employee {
 
     public void setEmployeePassword(String employeePassword) {
         this.employeePassword = employeePassword == null ? null : employeePassword.trim();
+    }
+
+    public String getEmployeeInstruct() {
+        return employeeInstruct;
+    }
+
+    public void setEmployeeInstruct(String employeeInstruct) {
+        this.employeeInstruct = employeeInstruct == null ? null : employeeInstruct.trim();
+    }
+
+    public Date getEmployeeUsefulTime() {
+        return employeeUsefulTime;
+    }
+
+    public void setEmployeeUsefulTime(Date employeeUsefulTime) {
+        this.employeeUsefulTime = employeeUsefulTime;
     }
 }

@@ -3,6 +3,7 @@
 <mapper namespace="cn.com.noomn.mapper.dao.EmployeeMapper">
   <resultMap id="BaseResultMap" type="cn.com.noomn.po.Employee">
     <id column="EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
+    <result column="EMPLOYEE_ENTRYDATE" jdbcType="TIMESTAMP" property="employeeEntrydate" />
     <result column="DEPARTMENT_ID" jdbcType="VARCHAR" property="departmentId" />
     <result column="USERROLE_ID" jdbcType="VARCHAR" property="userroleId" />
     <result column="NEXT_DEP_DEPARTMENT_ID" jdbcType="VARCHAR" property="nextDepDepartmentId" />
@@ -14,10 +15,11 @@
     <result column="EMPLOYEE_ADDRESS" jdbcType="VARCHAR" property="employeeAddress" />
     <result column="EMPLOYEE_BIRTHDAY" jdbcType="TIMESTAMP" property="employeeBirthday" />
     <result column="EMPLOYEE_IDNUMBER" jdbcType="VARCHAR" property="employeeIdnumber" />
-    <result column="EMPLOYEE_ENTRYDATE" jdbcType="TIMESTAMP" property="employeeEntrydate" />
     <result column="EMPLOYEE_STATE" jdbcType="CHAR" property="employeeState" />
     <result column="EMPLOYEE_USERNAME" jdbcType="VARCHAR" property="employeeUsername" />
     <result column="EMPLOYEE_PASSWORD" jdbcType="VARCHAR" property="employeePassword" />
+    <result column="EMPLOYEE_INSTRUCT" jdbcType="VARCHAR" property="employeeInstruct" />
+    <result column="EMPLOYEE_USEFUL_TIME" jdbcType="TIMESTAMP" property="employeeUsefulTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -78,10 +80,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    EMPLOYEE_ID, DEPARTMENT_ID, USERROLE_ID, NEXT_DEP_DEPARTMENT_ID, EMPLOYEE_NUMBER, 
-    EMPLOYEE_REAL_NAME, EMPLOYEE_SEX, EMPLOYEE_EMAIL, EMPLOYEE_PHONE, EMPLOYEE_ADDRESS, 
-    EMPLOYEE_BIRTHDAY, EMPLOYEE_IDNUMBER, EMPLOYEE_ENTRYDATE, EMPLOYEE_STATE, EMPLOYEE_USERNAME, 
-    EMPLOYEE_PASSWORD
+    EMPLOYEE_ID, EMPLOYEE_ENTRYDATE, DEPARTMENT_ID, USERROLE_ID, NEXT_DEP_DEPARTMENT_ID, 
+    EMPLOYEE_NUMBER, EMPLOYEE_REAL_NAME, EMPLOYEE_SEX, EMPLOYEE_EMAIL, EMPLOYEE_PHONE, 
+    EMPLOYEE_ADDRESS, EMPLOYEE_BIRTHDAY, EMPLOYEE_IDNUMBER, EMPLOYEE_STATE, EMPLOYEE_USERNAME, 
+    EMPLOYEE_PASSWORD, EMPLOYEE_INSTRUCT, EMPLOYEE_USEFUL_TIME
   </sql>
   <select id="selectByExample" parameterType="cn.com.noomn.po.EmployeeExample" resultMap="BaseResultMap">
     select
@@ -114,24 +116,29 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.com.noomn.po.Employee">
-    insert into employee (EMPLOYEE_ID, DEPARTMENT_ID, USERROLE_ID, 
-      NEXT_DEP_DEPARTMENT_ID, EMPLOYEE_NUMBER, EMPLOYEE_REAL_NAME, 
-      EMPLOYEE_SEX, EMPLOYEE_EMAIL, EMPLOYEE_PHONE, 
-      EMPLOYEE_ADDRESS, EMPLOYEE_BIRTHDAY, EMPLOYEE_IDNUMBER, 
-      EMPLOYEE_ENTRYDATE, EMPLOYEE_STATE, EMPLOYEE_USERNAME, 
-      EMPLOYEE_PASSWORD)
-    values (#{employeeId,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR}, #{userroleId,jdbcType=VARCHAR}, 
-      #{nextDepDepartmentId,jdbcType=VARCHAR}, #{employeeNumber,jdbcType=VARCHAR}, #{employeeRealName,jdbcType=CHAR}, 
-      #{employeeSex,jdbcType=CHAR}, #{employeeEmail,jdbcType=VARCHAR}, #{employeePhone,jdbcType=VARCHAR}, 
-      #{employeeAddress,jdbcType=VARCHAR}, #{employeeBirthday,jdbcType=TIMESTAMP}, #{employeeIdnumber,jdbcType=VARCHAR}, 
-      #{employeeEntrydate,jdbcType=TIMESTAMP}, #{employeeState,jdbcType=CHAR}, #{employeeUsername,jdbcType=VARCHAR}, 
-      #{employeePassword,jdbcType=VARCHAR})
+    insert into employee (EMPLOYEE_ID, EMPLOYEE_ENTRYDATE, 
+      DEPARTMENT_ID, USERROLE_ID, NEXT_DEP_DEPARTMENT_ID, 
+      EMPLOYEE_NUMBER, EMPLOYEE_REAL_NAME, EMPLOYEE_SEX, 
+      EMPLOYEE_EMAIL, EMPLOYEE_PHONE, EMPLOYEE_ADDRESS, 
+      EMPLOYEE_BIRTHDAY, EMPLOYEE_IDNUMBER, EMPLOYEE_STATE, 
+      EMPLOYEE_USERNAME, EMPLOYEE_PASSWORD, EMPLOYEE_INSTRUCT, 
+      EMPLOYEE_USEFUL_TIME)
+    values (#{employeeId,jdbcType=VARCHAR}, #{employeeEntrydate,jdbcType=TIMESTAMP}, 
+      #{departmentId,jdbcType=VARCHAR}, #{userroleId,jdbcType=VARCHAR}, #{nextDepDepartmentId,jdbcType=VARCHAR}, 
+      #{employeeNumber,jdbcType=VARCHAR}, #{employeeRealName,jdbcType=CHAR}, #{employeeSex,jdbcType=CHAR}, 
+      #{employeeEmail,jdbcType=VARCHAR}, #{employeePhone,jdbcType=VARCHAR}, #{employeeAddress,jdbcType=VARCHAR}, 
+      #{employeeBirthday,jdbcType=TIMESTAMP}, #{employeeIdnumber,jdbcType=VARCHAR}, #{employeeState,jdbcType=CHAR}, 
+      #{employeeUsername,jdbcType=VARCHAR}, #{employeePassword,jdbcType=VARCHAR}, #{employeeInstruct,jdbcType=VARCHAR}, 
+      #{employeeUsefulTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cn.com.noomn.po.Employee">
     insert into employee
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="employeeId != null">
         EMPLOYEE_ID,
+      </if>
+      <if test="employeeEntrydate != null">
+        EMPLOYEE_ENTRYDATE,
       </if>
       <if test="departmentId != null">
         DEPARTMENT_ID,
@@ -166,9 +173,6 @@
       <if test="employeeIdnumber != null">
         EMPLOYEE_IDNUMBER,
       </if>
-      <if test="employeeEntrydate != null">
-        EMPLOYEE_ENTRYDATE,
-      </if>
       <if test="employeeState != null">
         EMPLOYEE_STATE,
       </if>
@@ -178,10 +182,19 @@
       <if test="employeePassword != null">
         EMPLOYEE_PASSWORD,
       </if>
+      <if test="employeeInstruct != null">
+        EMPLOYEE_INSTRUCT,
+      </if>
+      <if test="employeeUsefulTime != null">
+        EMPLOYEE_USEFUL_TIME,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="employeeId != null">
         #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeEntrydate != null">
+        #{employeeEntrydate,jdbcType=TIMESTAMP},
       </if>
       <if test="departmentId != null">
         #{departmentId,jdbcType=VARCHAR},
@@ -216,9 +229,6 @@
       <if test="employeeIdnumber != null">
         #{employeeIdnumber,jdbcType=VARCHAR},
       </if>
-      <if test="employeeEntrydate != null">
-        #{employeeEntrydate,jdbcType=TIMESTAMP},
-      </if>
       <if test="employeeState != null">
         #{employeeState,jdbcType=CHAR},
       </if>
@@ -227,6 +237,12 @@
       </if>
       <if test="employeePassword != null">
         #{employeePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeInstruct != null">
+        #{employeeInstruct,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeUsefulTime != null">
+        #{employeeUsefulTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -241,6 +257,9 @@
     <set>
       <if test="record.employeeId != null">
         EMPLOYEE_ID = #{record.employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeEntrydate != null">
+        EMPLOYEE_ENTRYDATE = #{record.employeeEntrydate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.departmentId != null">
         DEPARTMENT_ID = #{record.departmentId,jdbcType=VARCHAR},
@@ -275,9 +294,6 @@
       <if test="record.employeeIdnumber != null">
         EMPLOYEE_IDNUMBER = #{record.employeeIdnumber,jdbcType=VARCHAR},
       </if>
-      <if test="record.employeeEntrydate != null">
-        EMPLOYEE_ENTRYDATE = #{record.employeeEntrydate,jdbcType=TIMESTAMP},
-      </if>
       <if test="record.employeeState != null">
         EMPLOYEE_STATE = #{record.employeeState,jdbcType=CHAR},
       </if>
@@ -287,6 +303,12 @@
       <if test="record.employeePassword != null">
         EMPLOYEE_PASSWORD = #{record.employeePassword,jdbcType=VARCHAR},
       </if>
+      <if test="record.employeeInstruct != null">
+        EMPLOYEE_INSTRUCT = #{record.employeeInstruct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeUsefulTime != null">
+        EMPLOYEE_USEFUL_TIME = #{record.employeeUsefulTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -295,6 +317,7 @@
   <update id="updateByExample" parameterType="map">
     update employee
     set EMPLOYEE_ID = #{record.employeeId,jdbcType=VARCHAR},
+      EMPLOYEE_ENTRYDATE = #{record.employeeEntrydate,jdbcType=TIMESTAMP},
       DEPARTMENT_ID = #{record.departmentId,jdbcType=VARCHAR},
       USERROLE_ID = #{record.userroleId,jdbcType=VARCHAR},
       NEXT_DEP_DEPARTMENT_ID = #{record.nextDepDepartmentId,jdbcType=VARCHAR},
@@ -306,10 +329,11 @@
       EMPLOYEE_ADDRESS = #{record.employeeAddress,jdbcType=VARCHAR},
       EMPLOYEE_BIRTHDAY = #{record.employeeBirthday,jdbcType=TIMESTAMP},
       EMPLOYEE_IDNUMBER = #{record.employeeIdnumber,jdbcType=VARCHAR},
-      EMPLOYEE_ENTRYDATE = #{record.employeeEntrydate,jdbcType=TIMESTAMP},
       EMPLOYEE_STATE = #{record.employeeState,jdbcType=CHAR},
       EMPLOYEE_USERNAME = #{record.employeeUsername,jdbcType=VARCHAR},
-      EMPLOYEE_PASSWORD = #{record.employeePassword,jdbcType=VARCHAR}
+      EMPLOYEE_PASSWORD = #{record.employeePassword,jdbcType=VARCHAR},
+      EMPLOYEE_INSTRUCT = #{record.employeeInstruct,jdbcType=VARCHAR},
+      EMPLOYEE_USEFUL_TIME = #{record.employeeUsefulTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -317,6 +341,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="cn.com.noomn.po.Employee">
     update employee
     <set>
+      <if test="employeeEntrydate != null">
+        EMPLOYEE_ENTRYDATE = #{employeeEntrydate,jdbcType=TIMESTAMP},
+      </if>
       <if test="departmentId != null">
         DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR},
       </if>
@@ -350,9 +377,6 @@
       <if test="employeeIdnumber != null">
         EMPLOYEE_IDNUMBER = #{employeeIdnumber,jdbcType=VARCHAR},
       </if>
-      <if test="employeeEntrydate != null">
-        EMPLOYEE_ENTRYDATE = #{employeeEntrydate,jdbcType=TIMESTAMP},
-      </if>
       <if test="employeeState != null">
         EMPLOYEE_STATE = #{employeeState,jdbcType=CHAR},
       </if>
@@ -362,12 +386,19 @@
       <if test="employeePassword != null">
         EMPLOYEE_PASSWORD = #{employeePassword,jdbcType=VARCHAR},
       </if>
+      <if test="employeeInstruct != null">
+        EMPLOYEE_INSTRUCT = #{employeeInstruct,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeUsefulTime != null">
+        EMPLOYEE_USEFUL_TIME = #{employeeUsefulTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.com.noomn.po.Employee">
     update employee
-    set DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR},
+    set EMPLOYEE_ENTRYDATE = #{employeeEntrydate,jdbcType=TIMESTAMP},
+      DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR},
       USERROLE_ID = #{userroleId,jdbcType=VARCHAR},
       NEXT_DEP_DEPARTMENT_ID = #{nextDepDepartmentId,jdbcType=VARCHAR},
       EMPLOYEE_NUMBER = #{employeeNumber,jdbcType=VARCHAR},
@@ -378,10 +409,11 @@
       EMPLOYEE_ADDRESS = #{employeeAddress,jdbcType=VARCHAR},
       EMPLOYEE_BIRTHDAY = #{employeeBirthday,jdbcType=TIMESTAMP},
       EMPLOYEE_IDNUMBER = #{employeeIdnumber,jdbcType=VARCHAR},
-      EMPLOYEE_ENTRYDATE = #{employeeEntrydate,jdbcType=TIMESTAMP},
       EMPLOYEE_STATE = #{employeeState,jdbcType=CHAR},
       EMPLOYEE_USERNAME = #{employeeUsername,jdbcType=VARCHAR},
-      EMPLOYEE_PASSWORD = #{employeePassword,jdbcType=VARCHAR}
+      EMPLOYEE_PASSWORD = #{employeePassword,jdbcType=VARCHAR},
+      EMPLOYEE_INSTRUCT = #{employeeInstruct,jdbcType=VARCHAR},
+      EMPLOYEE_USEFUL_TIME = #{employeeUsefulTime,jdbcType=TIMESTAMP}
     where EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR}
   </update>
 </mapper>

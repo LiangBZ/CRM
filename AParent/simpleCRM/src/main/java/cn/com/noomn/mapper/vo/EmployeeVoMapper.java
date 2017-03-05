@@ -16,4 +16,5 @@ public interface EmployeeVoMapper {
 	 * @throws Exception
 	 */
 	cn.com.noomn.vo.EmployeeVo selectForNimble(final cn.com.noomn.vo.EmployeeVo employeeVo) throws Exception;
+	
 }
