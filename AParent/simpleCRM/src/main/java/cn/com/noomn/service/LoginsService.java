@@ -28,7 +28,14 @@ public interface LoginsService {
 	 * @param employeeVo
 	 * @return
 	 */
-	Infos sendEmail(final cn.com.noomn.vo.EmployeeVo employeeVo);
+	Infos sendEmailForResetPassword(final cn.com.noomn.vo.EmployeeVo employeeVo);
+
+	/**
+	 * 发送邮件
+	 * @param employeeVo
+	 * @return
+	 */
+	Infos sendEmailForMessage(final cn.com.noomn.vo.EmployeeVo employeeVo, String title, String mess);
 	
 	/**
 	 * 根据主键更新

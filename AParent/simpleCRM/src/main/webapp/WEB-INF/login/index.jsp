@@ -13,10 +13,11 @@
 <title>登录</title>
 
 	<!-- jquery -->
-    <script src="${pageContext.request.contextPath}/login/js/jquery/jquery.2.1.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/Util/js/jquery/jquery.2.1.1.min.js"></script>
 
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/login/js/bootstrap/bootstrap.min.css"/>
+    <script src="${pageContext.request.contextPath}/Util/js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Util/js/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/login/fonts/font-awesome/4.2.0/css/font-awesome.min.css"/>
 
     <!-- text fonts -->
@@ -25,14 +26,19 @@
     <!-- ace styles -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/login/css/ace.min.css"/>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/login/js/bootstrapValidator0.5.2/css/bootstrapValidator.min.css">
-    <script src="${pageContext.request.contextPath}/login/js/bootstrapValidator0.5.2/js/bootstrapValidator.min.js"></script>
-    <script src="${pageContext.request.contextPath}/login/js/bootstrapValidator0.5.2/js/language/zh_CN.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Util/js/bootstrapValidator0.5.2/css/bootstrapValidator.min.css">
+    <script src="${pageContext.request.contextPath}/Util/js/bootstrapValidator0.5.2/js/bootstrapValidator.min.js"></script>
+    <script src="${pageContext.request.contextPath}/Util/js/bootstrapValidator0.5.2/js/language/zh_CN.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/Util/js/security.js"></script>
 	
 	<!-- MyUtil.js -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/Util/js/util.js"></script>
+	
+	<!-- 安全校验 -->
+	<%@ include file="/WEB-INF/Util/jsp/securityRSA.jsp" %>
+	<!-- 模态弹出框 -->
+	<%@ include file="/WEB-INF/Util/jsp/alertModal.jsp" %>
 </head>
 <body class="login-layout">
 <div class="main-container">
@@ -157,13 +163,13 @@
                                         </div><!-- /employeeInstruct -->
                                         
                                         <div class="clearfix">
-                                        	<button onclick="sendEmailForResetPassword();" data-sendEmail="sendEmailButton" type="button" class="width-40 pull-left btn btn-sm btn-danger">
+                                        	<button data-sendEmail="sendEmailButton" onclick="sendEmailForResetPassword(20,20);" type="button" class="width-48 pull-left btn btn-sm btn-danger">
                                                 <i class="ace-icon fa fa-lightbulb-o"></i>
-                                                <span class="bigger-110">发送邮件</span>
+                                                <span data-sendEmail="sendEmailButtonSpan" class="bigger-110">发送邮件</span>
                                             </button>
-                                        	<button onclick="resetPassword();" data-submit="submitButton" type="button" class="width-40 pull-right btn btn-sm btn-danger">
+                                        	<button onclick="resetPassword();" data-submit="submitButton" type="button" class="width-48 pull-right btn btn-sm btn-danger">
                                                 <i class="ace-icon fa fa-lightbulb-o"></i>
-                                                <span class="bigger-110">重置密码</span>
+                                                <span data-submitButtonSpan="data-submitButtonSpan" class="bigger-110">重置密码</span>
                                             </button>
                                         </div>
                                     </form><!--  找回密码表单 -->
@@ -286,9 +292,6 @@
     </div><!-- /.main-content -->
 </div><!-- /.main-container -->
 
-<!-- 安全校验 -->
-<%@ include file="/WEB-INF/Util/jsp/securityRSA.jsp" %>
-
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
 
@@ -377,7 +380,7 @@
     $(function() {
         var $form = $("form");
         $form.bootstrapValidator(option);
-        $form.each(function(index){
+/*         $form.each(function(index){
             var $fromNow = $(this);
             $fromNow.find(':button[data-submit="submitButton"]').click(function() {
                 $fromNow.bootstrapValidator('validate');
@@ -385,7 +388,7 @@
             $fromNow.find(':button[data-reset="resetButton"]').click(function() {
                 $fromNow.data('bootstrapValidator').resetForm(true);
             });
-        });
+        }); */
     })
 
 </script>
@@ -394,7 +397,9 @@
 	//提交: 登录按钮
 	$('form[data-form="loginBoxForm"]').find(':button[data-submit="submitButton"]').click(function() {
 		var passwordVal = $('form[data-form="loginBoxForm"]').find(':input[name="password"]').val();
-		passwordVal = encryptRSA("${publicKeyModulus}", "${publicExponent}", passwordVal);
+		var publicKeyModulus = "${publicKeyModulus}";
+		var publicExponent = "${publicExponent}";
+		passwordVal = encryptRSA(publicKeyModulus, publicExponent, passwordVal);
 		$('form[data-form="loginBoxForm"]').find(':input[name="employeeRSAPassword"]').val(passwordVal);
 		$('form[data-form="loginBoxForm"]').find(':button[type="submit"]').click();
 	});
@@ -416,51 +421,84 @@
 </script>
 
 <script type="text/javascript">
-	//发送邮件
-	function sendEmailForResetPassword() {
-		$form = $('form[data-form="forgotBoxForm"]');
-		
-		var isTrue = false;
-		$form.data("bootstrapValidator").validateField('employeeUsername');
-		$form.data("bootstrapValidator").validateField('employeeEmail');
-		isTrue = $form.data("bootstrapValidator").isValidField('employeeUsername');
-		if(isTrue == false) return;
-		isTrue = $form.data("bootstrapValidator").isValidField('employeeEmail');
-		if(isTrue == false) return;
 
-		var employeeUsernameVal = $form.find(':input[name="employeeUsername"]').val();
-		var employeeEmailVal = $form.find(':input[name="employeeEmail"]').val();
-		$.ajax({
-			async: false,
-			url : "${pageContext.request.contextPath}/logins/sendEmailForResetPassword",
-			type : "POST",
-			dataType : "json",
-			data : {
-				employeeUsername : employeeUsernameVal,
-				employeeEmail : employeeEmailVal
-			},
-			async : false,
-			success : function(data) {
-				alert(data.obj);
-			},
-			error : function() {
-				alert("error");
-			}
-		});
+	//发送邮件
+	function sendEmailForResetPassword(timeMax, timeNow) {
+		$form = $('form[data-form="forgotBoxForm"]');
+		$form.data('bootstrapValidator').resetForm();
+		if (timeNow === timeMax) { 
+			
+			$form = $('form[data-form="forgotBoxForm"]');
+			var isTrue = false;
+			$form.data("bootstrapValidator").validateField('employeeUsername');
+			$form.data("bootstrapValidator").validateField('employeeEmail');
+			isTrue = $form.data("bootstrapValidator").isValidField('employeeUsername');
+			if (isTrue == false) return;
+			isTrue = $form.data("bootstrapValidator").isValidField('employeeEmail');
+			if (isTrue == false) return;
+			
+			var $sendEmailButton = $(':button[data-sendEmail="sendEmailButton"]');
+			var $sendEmailButtonSpan = $('span[data-sendEmail="sendEmailButtonSpan"]');
+			$sendEmailButton.attr("disabled", true);
+			$sendEmailButtonSpan.html(timeNow  + "秒后再次发送" );
+			setTimeout(function() { 
+				sendEmailForResetPassword(timeMax, --timeNow); 
+	        }, 
+	        1000);
+			
+			var employeeUsernameVal = $form.find(':input[name="employeeUsername"]').val();
+			var employeeEmailVal = $form.find(':input[name="employeeEmail"]').val();
+			$.ajax({
+				url : "${pageContext.request.contextPath}/logins/sendEmailForResetPassword",
+				type : "POST",
+				dataType : "json",
+				data : {
+					employeeUsername : employeeUsernameVal,
+					employeeEmail : employeeEmailVal
+				},
+				
+				success : function(data) {
+					setAlertModalTitleAndBody("发送邮件", data.obj);
+					$('div[data-Modal="alertModal"]').modal('show');
+				},
+				error : function() {
+					setAlertModalTitleAndBody("发送邮件", "发送失败，我们会尽快修复该问题。");
+					$('div[data-Modal="alertModal"]').modal('show');
+				}
+			});
+			
+        }else if(timeNow === 0){
+        	var $sendEmailButton = $(':button[data-sendEmail="sendEmailButton"]');
+			var $sendEmailButtonSpan = $('span[data-sendEmail="sendEmailButtonSpan"]');
+			$sendEmailButton.removeAttr("disabled");
+			$sendEmailButtonSpan.html("发送邮件");
+
+        }else if(timeNow < timeMax && timeNow > 0){
+			var $sendEmailButtonSpan = $('span[data-sendEmail="sendEmailButtonSpan"]');
+			$sendEmailButtonSpan.html(timeNow + "秒后再次发送");
+			
+			setTimeout(function() { 
+				sendEmailForResetPassword(timeMax, --timeNow); 
+	        }, 
+	        1000);
+        }
 	}
-	
+
 	//重置密码
 	function resetPassword() {
 		$form = $('form[data-form="forgotBoxForm"]');
-		
+
 		var isTrue = $form.bootstrapValidator('validate').data('bootstrapValidator').isValid();
-		if(isTrue == false) return;
+		if (isTrue == false) return;
 		
+		$('form[data-form="forgotBoxForm"]').find(':button[data-submit="submitButton"]').attr("disabled", true);
+		$('form[data-form="forgotBoxForm"]').find('span[data-submitButtonSpan="data-submitButtonSpan"]').html("正在重置");
+
 		var employeeUsernameVal = $form.find(':input[name="employeeUsername"]').val();
 		var employeeEmailVal = $form.find(':input[name="employeeEmail"]').val();
 		var employeeInstructVal = $form.find(':input[name="employeeInstruct"]').val();
 		$.ajax({
-			async: false,
+			async: true,
 			url : "${pageContext.request.contextPath}/logins/resetPassword",
 			type : "POST",
 			dataType : "json",
@@ -469,16 +507,23 @@
 				employeeEmail : employeeEmailVal,
 				employeeInstruct : employeeInstructVal
 			},
-			async : false,
 			success : function(data) {
-				alert(data.obj);
+				setAlertModalTitleAndBody("发送邮件", data.obj);
+				$('div[data-Modal="alertModal"]').modal('show');
+				
+				$('form[data-form="forgotBoxForm"]').find(':button[data-submit="submitButton"]').removeAttr("disabled");
+				$('form[data-form="forgotBoxForm"]').find('span[data-submitButtonSpan="data-submitButtonSpan"]').html("重置密码");
 			},
 			error : function() {
-				alert("error");
+				setAlertModalTitleAndBody("发送邮件", "发送失败，我们会尽快修复该问题。");
+				$('div[data-Modal="alertModal"]').modal('show');
+					
+				$('form[data-form="forgotBoxForm"]').find(':button[data-submit="submitButton"]').removeAttr("disabled");
+				$('form[data-form="forgotBoxForm"]').find('span[data-submitButtonSpan="data-submitButtonSpan"]').html("重置密码");
 			}
 		});
 	}
-	
+
 </script>
 </body>
 </html>

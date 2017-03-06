@@ -1,5 +1,6 @@
 package cn.com.noomn.controller;
 
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -118,7 +119,7 @@ public class LoginsController {
 		}
 		
 //		发送邮件
-		Infos info = loginsService.sendEmail(employeeVo);
+		Infos info = loginsService.sendEmailForResetPassword(employeeVo);
 		return info;
 	}
 	
@@ -154,9 +155,16 @@ public class LoginsController {
 		}
 		
 		Infos info = Infos.getInfosInstance();
+		
 		if(!((String)map.get("instruct")).equals(employeeVo.getEmployeeInstruct())) {
 			info.message = Message.WARN;
 			info.obj = "验证码错误";
+			return info;
+		}
+		
+		if(new Date().getTime() > employeeVo.getEmployeeUsefulTime().getTime()) {
+			info.message = Message.WARN;
+			info.obj = "验证码已过期";
 			return info;
 		}
 		
@@ -165,8 +173,7 @@ public class LoginsController {
 		int updateRecordNum = loginsService.updateEmployeeByPrimaryKey(employeeVo);
 
 		if(updateRecordNum > 0) {
-			info.message = Message.SUCCESS;
-			info.obj = "重置密码成功";
+			return loginsService.sendEmailForMessage(employeeVo, "密码重置成功", "密码重置成功,请及时修改密码。");
 		}else {
 			info.message = Message.ERROR;
 			info.obj = "重置密码失败";

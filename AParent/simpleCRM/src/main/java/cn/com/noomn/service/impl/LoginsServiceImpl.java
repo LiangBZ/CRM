@@ -44,13 +44,13 @@ public class LoginsServiceImpl implements LoginsService {
 	}
 
 	@Override
-	public Infos sendEmail(EmployeeVo employeeVo) {
+	public Infos sendEmailForResetPassword(EmployeeVo employeeVo) {
 		String employeeInstruct = String.valueOf(RandomUtil.getRandomNumber(1000, 10000));
 		employeeVo.setEmployeeInstruct(employeeInstruct);
 		employeeVo.setEmployeeUsefulTime(new Date(DataUtil.getNextDay()));
 		
 		String employeeEmail = employeeVo.getEmployeeEmail();
-		JavaMail.sendMail(employeeEmail, employeeInstruct);
+		JavaMail.sendEmail(employeeEmail,"验证码:", "验证码： " + employeeInstruct);
 		employeeMapper.updateByPrimaryKey(employeeVo);
 		
 		Infos info = Infos.getInfosInstance();
@@ -62,6 +62,15 @@ public class LoginsServiceImpl implements LoginsService {
 	@Override
 	public int updateEmployeeByPrimaryKey(EmployeeVo employeeVo) {
 		return employeeMapper.updateByPrimaryKey(employeeVo);
+	}
+
+	@Override
+	public Infos sendEmailForMessage(EmployeeVo employeeVo, String title, String mess) {
+		JavaMail.sendEmail(employeeVo.getEmployeeEmail(),"密码重置成功", "密码重置成功,请及时修改密码。");
+		Infos info = Infos.getInfosInstance();
+		info.message = Message.SUCCESS;
+		info.obj = mess;
+		return info;
 	}
 
 }

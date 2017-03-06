@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMessage;
 
 public class JavaMail {
 
-	public static Infos sendMail(String receiveEmail, String number) {
+	public static Infos sendEmail(String receiveEmail, String title, String mess) {
 		Properties prop = new Properties();
 		prop.setProperty("mail.smtp.host", "smtp.qq.com");
 		prop.setProperty("mail.smtp.port", "587");
@@ -32,8 +32,8 @@ public class JavaMail {
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("1175194928@qq.com"));
 			message.setRecipients(RecipientType.TO, receiveEmail);
-			message.setSubject("密码重置(简易客户关系管理系统):");
-			message.setContent("验证码： " + number + ", 有效期为1天", "text/html;charset=utf-8");
+			message.setSubject(title);
+			message.setContent(mess, "text/html;charset=utf-8");
 
 			Transport.send(message);
 			
@@ -47,4 +47,5 @@ public class JavaMail {
 		info.obj = "发送成功";
 		return info;
 	}
+	
 }
