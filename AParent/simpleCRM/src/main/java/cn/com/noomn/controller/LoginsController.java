@@ -72,7 +72,7 @@ public class LoginsController {
 		try {
 			boolean isExist = loginsService.selectForlogin(employeeVo);
 			if(isExist) {
-				return "mainBody/jsp/welcome";
+				return "mainBody/jsp/container";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

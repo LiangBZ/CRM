@@ -5,8 +5,11 @@
 	<!-- spring -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring/application-config.xml,
-			classpath:spring/application-transactionManager.xml</param-value>
+		<param-value>
+			classpath:spring/application-config.xml,
+			classpath:spring/application-transactionManager-config.xml,
+			classpath:spring/application-util-config.xml,
+			</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

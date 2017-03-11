@@ -174,9 +174,9 @@ var Script = function () {
 
 // scroller
 
-    $('.scroller').slimscroll({
-        height: 'auto'
-    });
+//    $('.scroller').slimscroll({
+//        height: 'auto'
+//    });
 
 
 }();

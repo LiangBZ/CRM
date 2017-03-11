@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<authoritys id="root" explain="所有权限" fatherNodeId="/" isFatherNode="true">
+	<authority id="logins" explain="登录" fatherNodeId="root" isFatherNode="true">
+		<key-value id="123456" name="login" explain="登录权限" fatherNodeId="logins" isFatherNode="false"></key-value>
+		<key-value id="2222" name="你才擦你" explain="4444" fatherNodeId="logins" isFatherNode="false"></key-value>
+	</authority>
+	<authority id="regists" explain="注册" fatherNodeId="root" isFatherNode="true">
+		<key-value id="654321" name="regist" explain="注册权限" fatherNodeId="regists" isFatherNode="false"></key-value>
+		<key-value id="6756fd71-ff1f-11e6-b4ba-28d2444b860a" name="添加员工" explain="可添加新的员工，并赋予其权限" fatherNodeId="regists" isFatherNode="false"></key-value>
+	</authority>
+</authoritys>

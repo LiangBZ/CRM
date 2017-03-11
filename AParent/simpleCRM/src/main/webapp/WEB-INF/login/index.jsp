@@ -89,7 +89,7 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                <input type="password" class="form-control" placeholder="密码.." name="password" value="111111" />
+                                                <input type="password" class="form-control" placeholder="密码.." name="password" value="123456" />
                                                 <input type="hidden" name="employeeRSAPassword"/>
                                             </div>
                                         </div><!-- /密码 -->
@@ -439,9 +439,11 @@
 			
 			var $sendEmailButton = $(':button[data-sendEmail="sendEmailButton"]');
 			var $sendEmailButtonSpan = $('span[data-sendEmail="sendEmailButtonSpan"]');
-			$sendEmailButton.attr("disabled", true);
+			$('form[data-form="forgotBoxForm"]').find(":input").attr("disabled", true);
+			$('form[data-form="forgotBoxForm"]').find(":button").attr("disabled", true);
+			
 			$sendEmailButtonSpan.html(timeNow  + "秒后再次发送" );
-			setTimeout(function() { 
+			var hander = setTimeout(function() { 
 				sendEmailForResetPassword(timeMax, --timeNow); 
 	        }, 
 	        1000);
@@ -470,9 +472,9 @@
         }else if(timeNow === 0){
         	var $sendEmailButton = $(':button[data-sendEmail="sendEmailButton"]');
 			var $sendEmailButtonSpan = $('span[data-sendEmail="sendEmailButtonSpan"]');
-			$sendEmailButton.removeAttr("disabled");
 			$sendEmailButtonSpan.html("发送邮件");
-
+			$('form[data-form="forgotBoxForm"]').find(":input").removeAttr("disabled");
+			$('form[data-form="forgotBoxForm"]').find(":button").removeAttr("disabled");
         }else if(timeNow < timeMax && timeNow > 0){
 			var $sendEmailButtonSpan = $('span[data-sendEmail="sendEmailButtonSpan"]');
 			$sendEmailButtonSpan.html(timeNow + "秒后再次发送");
@@ -491,9 +493,10 @@
 		var isTrue = $form.bootstrapValidator('validate').data('bootstrapValidator').isValid();
 		if (isTrue == false) return;
 		
-		$('form[data-form="forgotBoxForm"]').find(':button[data-submit="submitButton"]').attr("disabled", true);
 		$('form[data-form="forgotBoxForm"]').find('span[data-submitButtonSpan="data-submitButtonSpan"]').html("正在重置");
-
+		$('form[data-form="forgotBoxForm"]').find(":input").attr("disabled", true);
+		$('form[data-form="forgotBoxForm"]').find(":button").attr("disabled", true);
+		
 		var employeeUsernameVal = $form.find(':input[name="employeeUsername"]').val();
 		var employeeEmailVal = $form.find(':input[name="employeeEmail"]').val();
 		var employeeInstructVal = $form.find(':input[name="employeeInstruct"]').val();
@@ -513,6 +516,7 @@
 				
 				$('form[data-form="forgotBoxForm"]').find(':button[data-submit="submitButton"]').removeAttr("disabled");
 				$('form[data-form="forgotBoxForm"]').find('span[data-submitButtonSpan="data-submitButtonSpan"]').html("重置密码");
+				$(':button[data-sendEmail="sendEmailButton"]').removeAttr("disabled");
 			},
 			error : function() {
 				setAlertModalTitleAndBody("发送邮件", "发送失败，我们会尽快修复该问题。");
@@ -520,6 +524,7 @@
 					
 				$('form[data-form="forgotBoxForm"]').find(':button[data-submit="submitButton"]').removeAttr("disabled");
 				$('form[data-form="forgotBoxForm"]').find('span[data-submitButtonSpan="data-submitButtonSpan"]').html("重置密码");
+				$(':button[data-sendEmail="sendEmailButton"]').removeAttr("disabled");
 			}
 		});
 	}
