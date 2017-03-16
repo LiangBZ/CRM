@@ -21,13 +21,3 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
-
-<script>
-	//$('div[data-Modal="alertModal"]').modal('show');
-	
-	function setAlertModalTitleAndBody(title, body) {
-		$alertModal = $('div[data-Modal="alertModal"]');
-		$alertModal.find('h4[data-modalPart="modalTitle"]').html(title);
-		$alertModal.find('div[data-modalPart="modalBody"]').html(body);
-	}
-</script>

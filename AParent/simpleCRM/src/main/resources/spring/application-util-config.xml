@@ -7,6 +7,10 @@
 	<bean id="resolveXMLUtil" class="cn.com.noomn.util.ResolveXMLUtil">
 		<constructor-arg index="0" name="resourceURL" type="java.lang.String" value="authority.xml"></constructor-arg>
 	</bean>
+	<!-- xml读取权限 -->
+	<bean id="initXMLResolve" class="cn.com.noomn.util.InitXMLResolve">
+		<constructor-arg index="0" name="resourceURL" type="java.lang.String" value="init.xml"></constructor-arg>
+	</bean>
 
 	<!-- 容器初始化结束后执行 -->
 	<bean class="cn.com.noomn.init.InitDatabase"></bean>

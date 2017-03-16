@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<init inited="0">
+
+<role userroleId="10988d26-0986-11e7-b918-28d2444b860a" userroleName="manager" userroleExplain="管理员"/>
+<role userroleId="6566dff0-0987-11e7-b918-28d2444b860a" userroleName="topManager" userroleExplain="总经理"/>
+<role userroleId="5e8d627f-0987-11e7-b918-28d2444b860a" userroleName="departmentManager" userroleExplain="部门经理"/>
+<role userroleId="57695387-0987-11e7-b918-28d2444b860a" userroleName="salesman" userroleExplain="销售人员"/>
+
+<department departmentId="cfd4baa2-0986-11e7-b918-28d2444b860a" departmentName="总裁办"/>
+<department departmentId="7fc51cfa-0986-11e7-b918-28d2444b860a" departmentName="待分配"/>
+<department departmentId="85ef362e-0987-11e7-b918-28d2444b860a" departmentName="离职员工"/>
+
+<user employeeId="5e2bf358-0985-11e7-b918-28d2444b860a" departmentIdEmployee="cfd4baa2-0986-11e7-b918-28d2444b860a" employeePhone="12345678901" employeeIdnumber="1234567890" employeeState="1" employeeNumber="001" employeeUsername="manager" employeePassword="123456"/>
+	
+</init>

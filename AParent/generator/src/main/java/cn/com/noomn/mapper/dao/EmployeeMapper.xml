@@ -3,10 +3,9 @@
 <mapper namespace="cn.com.noomn.mapper.dao.EmployeeMapper">
   <resultMap id="BaseResultMap" type="cn.com.noomn.po.Employee">
     <id column="EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
+    <result column="DEPARTMENT_ID_EMPLOYEE" jdbcType="VARCHAR" property="departmentIdEmployee" />
+    <result column="USERROLE_ID_EMPLOYEE" jdbcType="VARCHAR" property="userroleIdEmployee" />
     <result column="EMPLOYEE_ENTRYDATE" jdbcType="TIMESTAMP" property="employeeEntrydate" />
-    <result column="DEPARTMENT_ID" jdbcType="VARCHAR" property="departmentId" />
-    <result column="USERROLE_ID" jdbcType="VARCHAR" property="userroleId" />
-    <result column="NEXT_DEP_DEPARTMENT_ID" jdbcType="VARCHAR" property="nextDepDepartmentId" />
     <result column="EMPLOYEE_NUMBER" jdbcType="VARCHAR" property="employeeNumber" />
     <result column="EMPLOYEE_REAL_NAME" jdbcType="CHAR" property="employeeRealName" />
     <result column="EMPLOYEE_SEX" jdbcType="CHAR" property="employeeSex" />
@@ -80,10 +79,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    EMPLOYEE_ID, EMPLOYEE_ENTRYDATE, DEPARTMENT_ID, USERROLE_ID, NEXT_DEP_DEPARTMENT_ID, 
-    EMPLOYEE_NUMBER, EMPLOYEE_REAL_NAME, EMPLOYEE_SEX, EMPLOYEE_EMAIL, EMPLOYEE_PHONE, 
-    EMPLOYEE_ADDRESS, EMPLOYEE_BIRTHDAY, EMPLOYEE_IDNUMBER, EMPLOYEE_STATE, EMPLOYEE_USERNAME, 
-    EMPLOYEE_PASSWORD, EMPLOYEE_INSTRUCT, EMPLOYEE_USEFUL_TIME
+    EMPLOYEE_ID, DEPARTMENT_ID_EMPLOYEE, USERROLE_ID_EMPLOYEE, EMPLOYEE_ENTRYDATE, EMPLOYEE_NUMBER, 
+    EMPLOYEE_REAL_NAME, EMPLOYEE_SEX, EMPLOYEE_EMAIL, EMPLOYEE_PHONE, EMPLOYEE_ADDRESS, 
+    EMPLOYEE_BIRTHDAY, EMPLOYEE_IDNUMBER, EMPLOYEE_STATE, EMPLOYEE_USERNAME, EMPLOYEE_PASSWORD, 
+    EMPLOYEE_INSTRUCT, EMPLOYEE_USEFUL_TIME
   </sql>
   <select id="selectByExample" parameterType="cn.com.noomn.po.EmployeeExample" resultMap="BaseResultMap">
     select
@@ -116,15 +115,15 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.com.noomn.po.Employee">
-    insert into employee (EMPLOYEE_ID, EMPLOYEE_ENTRYDATE, 
-      DEPARTMENT_ID, USERROLE_ID, NEXT_DEP_DEPARTMENT_ID, 
+    insert into employee (EMPLOYEE_ID, DEPARTMENT_ID_EMPLOYEE, 
+      USERROLE_ID_EMPLOYEE, EMPLOYEE_ENTRYDATE, 
       EMPLOYEE_NUMBER, EMPLOYEE_REAL_NAME, EMPLOYEE_SEX, 
       EMPLOYEE_EMAIL, EMPLOYEE_PHONE, EMPLOYEE_ADDRESS, 
       EMPLOYEE_BIRTHDAY, EMPLOYEE_IDNUMBER, EMPLOYEE_STATE, 
       EMPLOYEE_USERNAME, EMPLOYEE_PASSWORD, EMPLOYEE_INSTRUCT, 
       EMPLOYEE_USEFUL_TIME)
-    values (#{employeeId,jdbcType=VARCHAR}, #{employeeEntrydate,jdbcType=TIMESTAMP}, 
-      #{departmentId,jdbcType=VARCHAR}, #{userroleId,jdbcType=VARCHAR}, #{nextDepDepartmentId,jdbcType=VARCHAR}, 
+    values (#{employeeId,jdbcType=VARCHAR}, #{departmentIdEmployee,jdbcType=VARCHAR}, 
+      #{userroleIdEmployee,jdbcType=VARCHAR}, #{employeeEntrydate,jdbcType=TIMESTAMP}, 
       #{employeeNumber,jdbcType=VARCHAR}, #{employeeRealName,jdbcType=CHAR}, #{employeeSex,jdbcType=CHAR}, 
       #{employeeEmail,jdbcType=VARCHAR}, #{employeePhone,jdbcType=VARCHAR}, #{employeeAddress,jdbcType=VARCHAR}, 
       #{employeeBirthday,jdbcType=TIMESTAMP}, #{employeeIdnumber,jdbcType=VARCHAR}, #{employeeState,jdbcType=CHAR}, 
@@ -137,17 +136,14 @@
       <if test="employeeId != null">
         EMPLOYEE_ID,
       </if>
+      <if test="departmentIdEmployee != null">
+        DEPARTMENT_ID_EMPLOYEE,
+      </if>
+      <if test="userroleIdEmployee != null">
+        USERROLE_ID_EMPLOYEE,
+      </if>
       <if test="employeeEntrydate != null">
         EMPLOYEE_ENTRYDATE,
-      </if>
-      <if test="departmentId != null">
-        DEPARTMENT_ID,
-      </if>
-      <if test="userroleId != null">
-        USERROLE_ID,
-      </if>
-      <if test="nextDepDepartmentId != null">
-        NEXT_DEP_DEPARTMENT_ID,
       </if>
       <if test="employeeNumber != null">
         EMPLOYEE_NUMBER,
@@ -193,17 +189,14 @@
       <if test="employeeId != null">
         #{employeeId,jdbcType=VARCHAR},
       </if>
+      <if test="departmentIdEmployee != null">
+        #{departmentIdEmployee,jdbcType=VARCHAR},
+      </if>
+      <if test="userroleIdEmployee != null">
+        #{userroleIdEmployee,jdbcType=VARCHAR},
+      </if>
       <if test="employeeEntrydate != null">
         #{employeeEntrydate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="departmentId != null">
-        #{departmentId,jdbcType=VARCHAR},
-      </if>
-      <if test="userroleId != null">
-        #{userroleId,jdbcType=VARCHAR},
-      </if>
-      <if test="nextDepDepartmentId != null">
-        #{nextDepDepartmentId,jdbcType=VARCHAR},
       </if>
       <if test="employeeNumber != null">
         #{employeeNumber,jdbcType=VARCHAR},
@@ -258,17 +251,14 @@
       <if test="record.employeeId != null">
         EMPLOYEE_ID = #{record.employeeId,jdbcType=VARCHAR},
       </if>
+      <if test="record.departmentIdEmployee != null">
+        DEPARTMENT_ID_EMPLOYEE = #{record.departmentIdEmployee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userroleIdEmployee != null">
+        USERROLE_ID_EMPLOYEE = #{record.userroleIdEmployee,jdbcType=VARCHAR},
+      </if>
       <if test="record.employeeEntrydate != null">
         EMPLOYEE_ENTRYDATE = #{record.employeeEntrydate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.departmentId != null">
-        DEPARTMENT_ID = #{record.departmentId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userroleId != null">
-        USERROLE_ID = #{record.userroleId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.nextDepDepartmentId != null">
-        NEXT_DEP_DEPARTMENT_ID = #{record.nextDepDepartmentId,jdbcType=VARCHAR},
       </if>
       <if test="record.employeeNumber != null">
         EMPLOYEE_NUMBER = #{record.employeeNumber,jdbcType=VARCHAR},
@@ -317,10 +307,9 @@
   <update id="updateByExample" parameterType="map">
     update employee
     set EMPLOYEE_ID = #{record.employeeId,jdbcType=VARCHAR},
+      DEPARTMENT_ID_EMPLOYEE = #{record.departmentIdEmployee,jdbcType=VARCHAR},
+      USERROLE_ID_EMPLOYEE = #{record.userroleIdEmployee,jdbcType=VARCHAR},
       EMPLOYEE_ENTRYDATE = #{record.employeeEntrydate,jdbcType=TIMESTAMP},
-      DEPARTMENT_ID = #{record.departmentId,jdbcType=VARCHAR},
-      USERROLE_ID = #{record.userroleId,jdbcType=VARCHAR},
-      NEXT_DEP_DEPARTMENT_ID = #{record.nextDepDepartmentId,jdbcType=VARCHAR},
       EMPLOYEE_NUMBER = #{record.employeeNumber,jdbcType=VARCHAR},
       EMPLOYEE_REAL_NAME = #{record.employeeRealName,jdbcType=CHAR},
       EMPLOYEE_SEX = #{record.employeeSex,jdbcType=CHAR},
@@ -341,17 +330,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="cn.com.noomn.po.Employee">
     update employee
     <set>
+      <if test="departmentIdEmployee != null">
+        DEPARTMENT_ID_EMPLOYEE = #{departmentIdEmployee,jdbcType=VARCHAR},
+      </if>
+      <if test="userroleIdEmployee != null">
+        USERROLE_ID_EMPLOYEE = #{userroleIdEmployee,jdbcType=VARCHAR},
+      </if>
       <if test="employeeEntrydate != null">
         EMPLOYEE_ENTRYDATE = #{employeeEntrydate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="departmentId != null">
-        DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR},
-      </if>
-      <if test="userroleId != null">
-        USERROLE_ID = #{userroleId,jdbcType=VARCHAR},
-      </if>
-      <if test="nextDepDepartmentId != null">
-        NEXT_DEP_DEPARTMENT_ID = #{nextDepDepartmentId,jdbcType=VARCHAR},
       </if>
       <if test="employeeNumber != null">
         EMPLOYEE_NUMBER = #{employeeNumber,jdbcType=VARCHAR},
@@ -397,10 +383,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.com.noomn.po.Employee">
     update employee
-    set EMPLOYEE_ENTRYDATE = #{employeeEntrydate,jdbcType=TIMESTAMP},
-      DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR},
-      USERROLE_ID = #{userroleId,jdbcType=VARCHAR},
-      NEXT_DEP_DEPARTMENT_ID = #{nextDepDepartmentId,jdbcType=VARCHAR},
+    set DEPARTMENT_ID_EMPLOYEE = #{departmentIdEmployee,jdbcType=VARCHAR},
+      USERROLE_ID_EMPLOYEE = #{userroleIdEmployee,jdbcType=VARCHAR},
+      EMPLOYEE_ENTRYDATE = #{employeeEntrydate,jdbcType=TIMESTAMP},
       EMPLOYEE_NUMBER = #{employeeNumber,jdbcType=VARCHAR},
       EMPLOYEE_REAL_NAME = #{employeeRealName,jdbcType=CHAR},
       EMPLOYEE_SEX = #{employeeSex,jdbcType=CHAR},

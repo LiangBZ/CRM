@@ -245,73 +245,73 @@ public class TaskExample {
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdIsNull() {
-            addCriterion("CUSTOM_ID is null");
+        public Criteria andCustomIdTaskIsNull() {
+            addCriterion("CUSTOM_ID_TASK is null");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdIsNotNull() {
-            addCriterion("CUSTOM_ID is not null");
+        public Criteria andCustomIdTaskIsNotNull() {
+            addCriterion("CUSTOM_ID_TASK is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdEqualTo(String value) {
-            addCriterion("CUSTOM_ID =", value, "customId");
+        public Criteria andCustomIdTaskEqualTo(String value) {
+            addCriterion("CUSTOM_ID_TASK =", value, "customIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdNotEqualTo(String value) {
-            addCriterion("CUSTOM_ID <>", value, "customId");
+        public Criteria andCustomIdTaskNotEqualTo(String value) {
+            addCriterion("CUSTOM_ID_TASK <>", value, "customIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdGreaterThan(String value) {
-            addCriterion("CUSTOM_ID >", value, "customId");
+        public Criteria andCustomIdTaskGreaterThan(String value) {
+            addCriterion("CUSTOM_ID_TASK >", value, "customIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdGreaterThanOrEqualTo(String value) {
-            addCriterion("CUSTOM_ID >=", value, "customId");
+        public Criteria andCustomIdTaskGreaterThanOrEqualTo(String value) {
+            addCriterion("CUSTOM_ID_TASK >=", value, "customIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdLessThan(String value) {
-            addCriterion("CUSTOM_ID <", value, "customId");
+        public Criteria andCustomIdTaskLessThan(String value) {
+            addCriterion("CUSTOM_ID_TASK <", value, "customIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdLessThanOrEqualTo(String value) {
-            addCriterion("CUSTOM_ID <=", value, "customId");
+        public Criteria andCustomIdTaskLessThanOrEqualTo(String value) {
+            addCriterion("CUSTOM_ID_TASK <=", value, "customIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdLike(String value) {
-            addCriterion("CUSTOM_ID like", value, "customId");
+        public Criteria andCustomIdTaskLike(String value) {
+            addCriterion("CUSTOM_ID_TASK like", value, "customIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdNotLike(String value) {
-            addCriterion("CUSTOM_ID not like", value, "customId");
+        public Criteria andCustomIdTaskNotLike(String value) {
+            addCriterion("CUSTOM_ID_TASK not like", value, "customIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdIn(List<String> values) {
-            addCriterion("CUSTOM_ID in", values, "customId");
+        public Criteria andCustomIdTaskIn(List<String> values) {
+            addCriterion("CUSTOM_ID_TASK in", values, "customIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdNotIn(List<String> values) {
-            addCriterion("CUSTOM_ID not in", values, "customId");
+        public Criteria andCustomIdTaskNotIn(List<String> values) {
+            addCriterion("CUSTOM_ID_TASK not in", values, "customIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdBetween(String value1, String value2) {
-            addCriterion("CUSTOM_ID between", value1, value2, "customId");
+        public Criteria andCustomIdTaskBetween(String value1, String value2) {
+            addCriterion("CUSTOM_ID_TASK between", value1, value2, "customIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdNotBetween(String value1, String value2) {
-            addCriterion("CUSTOM_ID not between", value1, value2, "customId");
+        public Criteria andCustomIdTaskNotBetween(String value1, String value2) {
+            addCriterion("CUSTOM_ID_TASK not between", value1, value2, "customIdTask");
             return (Criteria) this;
         }
 

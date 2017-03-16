@@ -3,10 +3,9 @@
 <mapper namespace="cn.com.noomn.mapper.vo.EmployeeVoMapper">
   <resultMap id="BaseResultMap" type="cn.com.noomn.vo.EmployeeVo">
     <id column="EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
+    <result column="DEPARTMENT_ID_EMPLOYEE" jdbcType="VARCHAR" property="departmentIdEmployee" />
+    <result column="USERROLE_ID_EMPLOYEE" jdbcType="VARCHAR" property="userroleIdEmployee" />
     <result column="EMPLOYEE_ENTRYDATE" jdbcType="TIMESTAMP" property="employeeEntrydate" />
-    <result column="DEPARTMENT_ID" jdbcType="VARCHAR" property="departmentId" />
-    <result column="USERROLE_ID" jdbcType="VARCHAR" property="userroleId" />
-    <result column="NEXT_DEP_DEPARTMENT_ID" jdbcType="VARCHAR" property="nextDepDepartmentId" />
     <result column="EMPLOYEE_NUMBER" jdbcType="VARCHAR" property="employeeNumber" />
     <result column="EMPLOYEE_REAL_NAME" jdbcType="CHAR" property="employeeRealName" />
     <result column="EMPLOYEE_SEX" jdbcType="CHAR" property="employeeSex" />
@@ -40,17 +39,13 @@
 				and
 				EMPLOYEE_ENTRYDATE = #{employeeEntrydate,jdbcType=TIMESTAMP}
 			</if>
-			<if test="departmentId != null">
+			<if test="departmentIdEmployee != null">
 				and
-				DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR}
+				DEPARTMENT_ID_EMPLOYEE = #{departmentIdEmployee,jdbcType=VARCHAR}
 			</if>
-			<if test="userroleId != null">
+			<if test="userroleIdEmployee != null">
 				and
-				USERROLE_ID = #{userroleId,jdbcType=VARCHAR}
-			</if>
-			<if test="nextDepDepartmentId != null">
-				and
-				NEXT_DEP_DEPARTMENT_ID = #{nextDepDepartmentId,jdbcType=VARCHAR}
+				USERROLE_ID_EMPLOYEE = #{userroleIdEmployee,jdbcType=VARCHAR}
 			</if>
 			<if test="employeeNumber != null">
 				and

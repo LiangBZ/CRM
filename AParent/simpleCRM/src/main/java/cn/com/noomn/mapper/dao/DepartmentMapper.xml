@@ -4,7 +4,6 @@
   <resultMap id="BaseResultMap" type="cn.com.noomn.po.Department">
     <id column="DEPARTMENT_ID" jdbcType="VARCHAR" property="departmentId" />
     <result column="DEPARTMENT_NAME" jdbcType="VARCHAR" property="departmentName" />
-    <result column="DEPARTMENT_PRE" jdbcType="VARCHAR" property="departmentPre" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +64,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    DEPARTMENT_ID, DEPARTMENT_NAME, DEPARTMENT_PRE
+    DEPARTMENT_ID, DEPARTMENT_NAME
   </sql>
   <select id="selectByExample" parameterType="cn.com.noomn.po.DepartmentExample" resultMap="BaseResultMap">
     select
@@ -98,10 +97,8 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.com.noomn.po.Department">
-    insert into department (DEPARTMENT_ID, DEPARTMENT_NAME, DEPARTMENT_PRE
-      )
-    values (#{departmentId,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR}, #{departmentPre,jdbcType=VARCHAR}
-      )
+    insert into department (DEPARTMENT_ID, DEPARTMENT_NAME)
+    values (#{departmentId,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.com.noomn.po.Department">
     insert into department
@@ -112,9 +109,6 @@
       <if test="departmentName != null">
         DEPARTMENT_NAME,
       </if>
-      <if test="departmentPre != null">
-        DEPARTMENT_PRE,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="departmentId != null">
@@ -122,9 +116,6 @@
       </if>
       <if test="departmentName != null">
         #{departmentName,jdbcType=VARCHAR},
-      </if>
-      <if test="departmentPre != null">
-        #{departmentPre,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -143,9 +134,6 @@
       <if test="record.departmentName != null">
         DEPARTMENT_NAME = #{record.departmentName,jdbcType=VARCHAR},
       </if>
-      <if test="record.departmentPre != null">
-        DEPARTMENT_PRE = #{record.departmentPre,jdbcType=VARCHAR},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -154,8 +142,7 @@
   <update id="updateByExample" parameterType="map">
     update department
     set DEPARTMENT_ID = #{record.departmentId,jdbcType=VARCHAR},
-      DEPARTMENT_NAME = #{record.departmentName,jdbcType=VARCHAR},
-      DEPARTMENT_PRE = #{record.departmentPre,jdbcType=VARCHAR}
+      DEPARTMENT_NAME = #{record.departmentName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -166,16 +153,12 @@
       <if test="departmentName != null">
         DEPARTMENT_NAME = #{departmentName,jdbcType=VARCHAR},
       </if>
-      <if test="departmentPre != null">
-        DEPARTMENT_PRE = #{departmentPre,jdbcType=VARCHAR},
-      </if>
     </set>
     where DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.com.noomn.po.Department">
     update department
-    set DEPARTMENT_NAME = #{departmentName,jdbcType=VARCHAR},
-      DEPARTMENT_PRE = #{departmentPre,jdbcType=VARCHAR}
+    set DEPARTMENT_NAME = #{departmentName,jdbcType=VARCHAR}
     where DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR}
   </update>
 </mapper>

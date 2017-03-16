@@ -175,6 +175,146 @@ public class EmployeeExample {
             return (Criteria) this;
         }
 
+        public Criteria andDepartmentIdEmployeeIsNull() {
+            addCriterion("DEPARTMENT_ID_EMPLOYEE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentIdEmployeeIsNotNull() {
+            addCriterion("DEPARTMENT_ID_EMPLOYEE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentIdEmployeeEqualTo(String value) {
+            addCriterion("DEPARTMENT_ID_EMPLOYEE =", value, "departmentIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentIdEmployeeNotEqualTo(String value) {
+            addCriterion("DEPARTMENT_ID_EMPLOYEE <>", value, "departmentIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentIdEmployeeGreaterThan(String value) {
+            addCriterion("DEPARTMENT_ID_EMPLOYEE >", value, "departmentIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentIdEmployeeGreaterThanOrEqualTo(String value) {
+            addCriterion("DEPARTMENT_ID_EMPLOYEE >=", value, "departmentIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentIdEmployeeLessThan(String value) {
+            addCriterion("DEPARTMENT_ID_EMPLOYEE <", value, "departmentIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentIdEmployeeLessThanOrEqualTo(String value) {
+            addCriterion("DEPARTMENT_ID_EMPLOYEE <=", value, "departmentIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentIdEmployeeLike(String value) {
+            addCriterion("DEPARTMENT_ID_EMPLOYEE like", value, "departmentIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentIdEmployeeNotLike(String value) {
+            addCriterion("DEPARTMENT_ID_EMPLOYEE not like", value, "departmentIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentIdEmployeeIn(List<String> values) {
+            addCriterion("DEPARTMENT_ID_EMPLOYEE in", values, "departmentIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentIdEmployeeNotIn(List<String> values) {
+            addCriterion("DEPARTMENT_ID_EMPLOYEE not in", values, "departmentIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentIdEmployeeBetween(String value1, String value2) {
+            addCriterion("DEPARTMENT_ID_EMPLOYEE between", value1, value2, "departmentIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentIdEmployeeNotBetween(String value1, String value2) {
+            addCriterion("DEPARTMENT_ID_EMPLOYEE not between", value1, value2, "departmentIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserroleIdEmployeeIsNull() {
+            addCriterion("USERROLE_ID_EMPLOYEE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserroleIdEmployeeIsNotNull() {
+            addCriterion("USERROLE_ID_EMPLOYEE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserroleIdEmployeeEqualTo(String value) {
+            addCriterion("USERROLE_ID_EMPLOYEE =", value, "userroleIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserroleIdEmployeeNotEqualTo(String value) {
+            addCriterion("USERROLE_ID_EMPLOYEE <>", value, "userroleIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserroleIdEmployeeGreaterThan(String value) {
+            addCriterion("USERROLE_ID_EMPLOYEE >", value, "userroleIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserroleIdEmployeeGreaterThanOrEqualTo(String value) {
+            addCriterion("USERROLE_ID_EMPLOYEE >=", value, "userroleIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserroleIdEmployeeLessThan(String value) {
+            addCriterion("USERROLE_ID_EMPLOYEE <", value, "userroleIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserroleIdEmployeeLessThanOrEqualTo(String value) {
+            addCriterion("USERROLE_ID_EMPLOYEE <=", value, "userroleIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserroleIdEmployeeLike(String value) {
+            addCriterion("USERROLE_ID_EMPLOYEE like", value, "userroleIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserroleIdEmployeeNotLike(String value) {
+            addCriterion("USERROLE_ID_EMPLOYEE not like", value, "userroleIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserroleIdEmployeeIn(List<String> values) {
+            addCriterion("USERROLE_ID_EMPLOYEE in", values, "userroleIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserroleIdEmployeeNotIn(List<String> values) {
+            addCriterion("USERROLE_ID_EMPLOYEE not in", values, "userroleIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserroleIdEmployeeBetween(String value1, String value2) {
+            addCriterion("USERROLE_ID_EMPLOYEE between", value1, value2, "userroleIdEmployee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserroleIdEmployeeNotBetween(String value1, String value2) {
+            addCriterion("USERROLE_ID_EMPLOYEE not between", value1, value2, "userroleIdEmployee");
+            return (Criteria) this;
+        }
+
         public Criteria andEmployeeEntrydateIsNull() {
             addCriterion("EMPLOYEE_ENTRYDATE is null");
             return (Criteria) this;
@@ -232,216 +372,6 @@ public class EmployeeExample {
 
         public Criteria andEmployeeEntrydateNotBetween(Date value1, Date value2) {
             addCriterion("EMPLOYEE_ENTRYDATE not between", value1, value2, "employeeEntrydate");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdIsNull() {
-            addCriterion("DEPARTMENT_ID is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdIsNotNull() {
-            addCriterion("DEPARTMENT_ID is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdEqualTo(String value) {
-            addCriterion("DEPARTMENT_ID =", value, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdNotEqualTo(String value) {
-            addCriterion("DEPARTMENT_ID <>", value, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdGreaterThan(String value) {
-            addCriterion("DEPARTMENT_ID >", value, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdGreaterThanOrEqualTo(String value) {
-            addCriterion("DEPARTMENT_ID >=", value, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdLessThan(String value) {
-            addCriterion("DEPARTMENT_ID <", value, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdLessThanOrEqualTo(String value) {
-            addCriterion("DEPARTMENT_ID <=", value, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdLike(String value) {
-            addCriterion("DEPARTMENT_ID like", value, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdNotLike(String value) {
-            addCriterion("DEPARTMENT_ID not like", value, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdIn(List<String> values) {
-            addCriterion("DEPARTMENT_ID in", values, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdNotIn(List<String> values) {
-            addCriterion("DEPARTMENT_ID not in", values, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdBetween(String value1, String value2) {
-            addCriterion("DEPARTMENT_ID between", value1, value2, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdNotBetween(String value1, String value2) {
-            addCriterion("DEPARTMENT_ID not between", value1, value2, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserroleIdIsNull() {
-            addCriterion("USERROLE_ID is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserroleIdIsNotNull() {
-            addCriterion("USERROLE_ID is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserroleIdEqualTo(String value) {
-            addCriterion("USERROLE_ID =", value, "userroleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserroleIdNotEqualTo(String value) {
-            addCriterion("USERROLE_ID <>", value, "userroleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserroleIdGreaterThan(String value) {
-            addCriterion("USERROLE_ID >", value, "userroleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserroleIdGreaterThanOrEqualTo(String value) {
-            addCriterion("USERROLE_ID >=", value, "userroleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserroleIdLessThan(String value) {
-            addCriterion("USERROLE_ID <", value, "userroleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserroleIdLessThanOrEqualTo(String value) {
-            addCriterion("USERROLE_ID <=", value, "userroleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserroleIdLike(String value) {
-            addCriterion("USERROLE_ID like", value, "userroleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserroleIdNotLike(String value) {
-            addCriterion("USERROLE_ID not like", value, "userroleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserroleIdIn(List<String> values) {
-            addCriterion("USERROLE_ID in", values, "userroleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserroleIdNotIn(List<String> values) {
-            addCriterion("USERROLE_ID not in", values, "userroleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserroleIdBetween(String value1, String value2) {
-            addCriterion("USERROLE_ID between", value1, value2, "userroleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserroleIdNotBetween(String value1, String value2) {
-            addCriterion("USERROLE_ID not between", value1, value2, "userroleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andNextDepDepartmentIdIsNull() {
-            addCriterion("NEXT_DEP_DEPARTMENT_ID is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNextDepDepartmentIdIsNotNull() {
-            addCriterion("NEXT_DEP_DEPARTMENT_ID is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNextDepDepartmentIdEqualTo(String value) {
-            addCriterion("NEXT_DEP_DEPARTMENT_ID =", value, "nextDepDepartmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andNextDepDepartmentIdNotEqualTo(String value) {
-            addCriterion("NEXT_DEP_DEPARTMENT_ID <>", value, "nextDepDepartmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andNextDepDepartmentIdGreaterThan(String value) {
-            addCriterion("NEXT_DEP_DEPARTMENT_ID >", value, "nextDepDepartmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andNextDepDepartmentIdGreaterThanOrEqualTo(String value) {
-            addCriterion("NEXT_DEP_DEPARTMENT_ID >=", value, "nextDepDepartmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andNextDepDepartmentIdLessThan(String value) {
-            addCriterion("NEXT_DEP_DEPARTMENT_ID <", value, "nextDepDepartmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andNextDepDepartmentIdLessThanOrEqualTo(String value) {
-            addCriterion("NEXT_DEP_DEPARTMENT_ID <=", value, "nextDepDepartmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andNextDepDepartmentIdLike(String value) {
-            addCriterion("NEXT_DEP_DEPARTMENT_ID like", value, "nextDepDepartmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andNextDepDepartmentIdNotLike(String value) {
-            addCriterion("NEXT_DEP_DEPARTMENT_ID not like", value, "nextDepDepartmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andNextDepDepartmentIdIn(List<String> values) {
-            addCriterion("NEXT_DEP_DEPARTMENT_ID in", values, "nextDepDepartmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andNextDepDepartmentIdNotIn(List<String> values) {
-            addCriterion("NEXT_DEP_DEPARTMENT_ID not in", values, "nextDepDepartmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andNextDepDepartmentIdBetween(String value1, String value2) {
-            addCriterion("NEXT_DEP_DEPARTMENT_ID between", value1, value2, "nextDepDepartmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andNextDepDepartmentIdNotBetween(String value1, String value2) {
-            addCriterion("NEXT_DEP_DEPARTMENT_ID not between", value1, value2, "nextDepDepartmentId");
             return (Criteria) this;
         }
 

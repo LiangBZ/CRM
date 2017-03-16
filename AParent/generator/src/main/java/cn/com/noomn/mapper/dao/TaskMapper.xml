@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="cn.com.noomn.po.Task">
     <id column="TASK_ID" jdbcType="VARCHAR" property="taskId" />
     <result column="TASK_SPONSOR_ID" jdbcType="VARCHAR" property="taskSponsorId" />
-    <result column="CUSTOM_ID" jdbcType="VARCHAR" property="customId" />
+    <result column="CUSTOM_ID_TASK" jdbcType="VARCHAR" property="customIdTask" />
     <result column="TASK_CONTENT" jdbcType="VARCHAR" property="taskContent" />
     <result column="TASK_PHOTO" jdbcType="VARCHAR" property="taskPhoto" />
     <result column="TASK_ENCLOSURE" jdbcType="VARCHAR" property="taskEnclosure" />
@@ -71,8 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    TASK_ID, TASK_SPONSOR_ID, CUSTOM_ID, TASK_CONTENT, TASK_PHOTO, TASK_ENCLOSURE, TASK_REPORT_DATE, 
-    TASK_START_TIME, TASK_END_TIME
+    TASK_ID, TASK_SPONSOR_ID, CUSTOM_ID_TASK, TASK_CONTENT, TASK_PHOTO, TASK_ENCLOSURE, 
+    TASK_REPORT_DATE, TASK_START_TIME, TASK_END_TIME
   </sql>
   <select id="selectByExample" parameterType="cn.com.noomn.po.TaskExample" resultMap="BaseResultMap">
     select
@@ -105,11 +105,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.com.noomn.po.Task">
-    insert into task (TASK_ID, TASK_SPONSOR_ID, CUSTOM_ID, 
+    insert into task (TASK_ID, TASK_SPONSOR_ID, CUSTOM_ID_TASK, 
       TASK_CONTENT, TASK_PHOTO, TASK_ENCLOSURE, 
       TASK_REPORT_DATE, TASK_START_TIME, TASK_END_TIME
       )
-    values (#{taskId,jdbcType=VARCHAR}, #{taskSponsorId,jdbcType=VARCHAR}, #{customId,jdbcType=VARCHAR}, 
+    values (#{taskId,jdbcType=VARCHAR}, #{taskSponsorId,jdbcType=VARCHAR}, #{customIdTask,jdbcType=VARCHAR}, 
       #{taskContent,jdbcType=VARCHAR}, #{taskPhoto,jdbcType=VARCHAR}, #{taskEnclosure,jdbcType=VARCHAR}, 
       #{taskReportDate,jdbcType=TIMESTAMP}, #{taskStartTime,jdbcType=TIMESTAMP}, #{taskEndTime,jdbcType=TIMESTAMP}
       )
@@ -123,8 +123,8 @@
       <if test="taskSponsorId != null">
         TASK_SPONSOR_ID,
       </if>
-      <if test="customId != null">
-        CUSTOM_ID,
+      <if test="customIdTask != null">
+        CUSTOM_ID_TASK,
       </if>
       <if test="taskContent != null">
         TASK_CONTENT,
@@ -152,8 +152,8 @@
       <if test="taskSponsorId != null">
         #{taskSponsorId,jdbcType=VARCHAR},
       </if>
-      <if test="customId != null">
-        #{customId,jdbcType=VARCHAR},
+      <if test="customIdTask != null">
+        #{customIdTask,jdbcType=VARCHAR},
       </if>
       <if test="taskContent != null">
         #{taskContent,jdbcType=VARCHAR},
@@ -190,8 +190,8 @@
       <if test="record.taskSponsorId != null">
         TASK_SPONSOR_ID = #{record.taskSponsorId,jdbcType=VARCHAR},
       </if>
-      <if test="record.customId != null">
-        CUSTOM_ID = #{record.customId,jdbcType=VARCHAR},
+      <if test="record.customIdTask != null">
+        CUSTOM_ID_TASK = #{record.customIdTask,jdbcType=VARCHAR},
       </if>
       <if test="record.taskContent != null">
         TASK_CONTENT = #{record.taskContent,jdbcType=VARCHAR},
@@ -220,7 +220,7 @@
     update task
     set TASK_ID = #{record.taskId,jdbcType=VARCHAR},
       TASK_SPONSOR_ID = #{record.taskSponsorId,jdbcType=VARCHAR},
-      CUSTOM_ID = #{record.customId,jdbcType=VARCHAR},
+      CUSTOM_ID_TASK = #{record.customIdTask,jdbcType=VARCHAR},
       TASK_CONTENT = #{record.taskContent,jdbcType=VARCHAR},
       TASK_PHOTO = #{record.taskPhoto,jdbcType=VARCHAR},
       TASK_ENCLOSURE = #{record.taskEnclosure,jdbcType=VARCHAR},
@@ -237,8 +237,8 @@
       <if test="taskSponsorId != null">
         TASK_SPONSOR_ID = #{taskSponsorId,jdbcType=VARCHAR},
       </if>
-      <if test="customId != null">
-        CUSTOM_ID = #{customId,jdbcType=VARCHAR},
+      <if test="customIdTask != null">
+        CUSTOM_ID_TASK = #{customIdTask,jdbcType=VARCHAR},
       </if>
       <if test="taskContent != null">
         TASK_CONTENT = #{taskContent,jdbcType=VARCHAR},
@@ -264,7 +264,7 @@
   <update id="updateByPrimaryKey" parameterType="cn.com.noomn.po.Task">
     update task
     set TASK_SPONSOR_ID = #{taskSponsorId,jdbcType=VARCHAR},
-      CUSTOM_ID = #{customId,jdbcType=VARCHAR},
+      CUSTOM_ID_TASK = #{customIdTask,jdbcType=VARCHAR},
       TASK_CONTENT = #{taskContent,jdbcType=VARCHAR},
       TASK_PHOTO = #{taskPhoto,jdbcType=VARCHAR},
       TASK_ENCLOSURE = #{taskEnclosure,jdbcType=VARCHAR},

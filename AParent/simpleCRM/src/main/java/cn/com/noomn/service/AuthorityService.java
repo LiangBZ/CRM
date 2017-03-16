@@ -7,4 +7,5 @@ public interface AuthorityService {
 	 * @return
 	 */
 	public void initAuthority();
+	
 }

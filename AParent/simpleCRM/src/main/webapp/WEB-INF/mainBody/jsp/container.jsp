@@ -12,6 +12,15 @@
     <link href="${pageContext.request.contextPath}/mainBody/css/style.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/mainBody/css/style-responsive.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/mainBody/css/style-default.css" rel="stylesheet" id="style_color"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Util/js/bootstrapValidator0.5.2/css/bootstrapValidator.min.css">
+	
+	<!-- 组织结构 -->
+	<link href="${pageContext.request.contextPath}/Util/Font-Awesome-master/css/font-awesome.css" rel="stylesheet" />
+	<link href="${pageContext.request.contextPath}/Util/js/zTree_v3-master/css/metroStyle/metroStyle.css" rel="stylesheet" />
+	
+	<%@ include file="/WEB-INF/Util/jsp/alertModal.jsp" %>
+	<%@ include file="/WEB-INF/Util/jsp/organizing_editDepartment.jsp" %>
+	<%@ include file="/WEB-INF/Util/jsp/organizing_addDepartment.jsp" %>
 </head>
 
 <body class="fixed-top">
@@ -244,7 +253,7 @@
                         <ul class="dropdown-menu extended logout">
                             <li><a href="#"><i class="icon-user"></i>我的资料</a></li>
                             <li><a href="#"><i class="icon-cog"></i>我的设置</a></li>
-                            <li><a href="login.html"><i class="icon-key"></i>退出</a></li>
+                            <li><a href="${pageContext.request.contextPath}"><i class="icon-key"></i>退出</a></li>
                         </ul>
                     </li>
 
@@ -278,14 +287,14 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a href="javascript:void(0)" class="">
+                    <a href="javascript:void(0)">
                         <i class="icon-book"></i>
                         <span>成员管理</span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="javascript:void(0)">组织结构</a></li>
-                        <li><a class="" href="javascript:void(0)">职务权限</a></li>
+                        <li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/organizingTheStructure')">组织结构</a></li>
+                        <li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/test')">职务权限</a></li>
                         <li><a class="" href="javascript:void(0)">成员信息</a></li>
                     </ul>
                 </li>
@@ -382,9 +391,9 @@
                 </li>
 
                 <li>
-                    <a class="" href="${pageContext.request.contextPath}">
+                    <a class="" href="javascript:void(0)">
                         <i class="icon-user"></i>
-                        <span>重新登录</span>
+                        <span>个人资料</span>
                     </a>
                 </li>
             </ul>
@@ -394,7 +403,7 @@
 
 
     <div id="main-content">
-
+		<!-- 页面加载 -->
     </div>
 
 </div>
@@ -404,12 +413,27 @@
     2017 &copy; www.noomn.simplecrm.com
 </div>
 
+<a class="twitter" data-title="Goto twitter?" href="http://twitter.com/craftpip">Goto twitter</a>
+
 </body>
 
 <script src="${pageContext.request.contextPath}/mainBody/js/jquery.nicescroll.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/mainBody/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/mainBody/js/jquery.scrollto.min.js"></script>
 <script src="${pageContext.request.contextPath}/mainBody/js/common-scripts.js"></script>
+<script src="${pageContext.request.contextPath}/Util/js/bootstrapValidator0.5.2/js/bootstrapValidator.min.js"></script>
+<script src="${pageContext.request.contextPath}/Util/js/bootstrapValidator0.5.2/js/language/zh_CN.js"></script>
+
+<!-- 组织结构 -->
+<script src="${pageContext.request.contextPath}/mainBody/js/jquery.datatables.js"></script>
+<script src="${pageContext.request.contextPath}/mainBody/js/dt_bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/Util/js/zTree_v3-master/js/jquery.ztree.all.js"></script>
+<script src="${pageContext.request.contextPath}/Util/js/myTree.js"></script>
+<script src="${pageContext.request.contextPath}/Util/js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/Util/js/util.js"></script>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/Util/js/craftpip-jquery-confirm-e3e217e/css/jquery-confirm.css">
+<script src="${pageContext.request.contextPath}/Util/js/craftpip-jquery-confirm-e3e217e/js/jquery-confirm.js"></script>
 
 <script type="text/javascript">
 	var loadMainBody = function(jspURL) {
@@ -418,5 +442,6 @@
  	$(function() {
 		loadMainBody('mainBody/jsp/consoleDesk');
 	})
+	
 </script>
 </html>

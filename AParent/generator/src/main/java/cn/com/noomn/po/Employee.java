@@ -5,13 +5,11 @@ import java.util.Date;
 public class Employee {
     private String employeeId;
 
+    private String departmentIdEmployee;
+
+    private String userroleIdEmployee;
+
     private Date employeeEntrydate;
-
-    private String departmentId;
-
-    private String userroleId;
-
-    private String nextDepDepartmentId;
 
     private String employeeNumber;
 
@@ -47,36 +45,28 @@ public class Employee {
         this.employeeId = employeeId == null ? null : employeeId.trim();
     }
 
+    public String getDepartmentIdEmployee() {
+        return departmentIdEmployee;
+    }
+
+    public void setDepartmentIdEmployee(String departmentIdEmployee) {
+        this.departmentIdEmployee = departmentIdEmployee == null ? null : departmentIdEmployee.trim();
+    }
+
+    public String getUserroleIdEmployee() {
+        return userroleIdEmployee;
+    }
+
+    public void setUserroleIdEmployee(String userroleIdEmployee) {
+        this.userroleIdEmployee = userroleIdEmployee == null ? null : userroleIdEmployee.trim();
+    }
+
     public Date getEmployeeEntrydate() {
         return employeeEntrydate;
     }
 
     public void setEmployeeEntrydate(Date employeeEntrydate) {
         this.employeeEntrydate = employeeEntrydate;
-    }
-
-    public String getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(String departmentId) {
-        this.departmentId = departmentId == null ? null : departmentId.trim();
-    }
-
-    public String getUserroleId() {
-        return userroleId;
-    }
-
-    public void setUserroleId(String userroleId) {
-        this.userroleId = userroleId == null ? null : userroleId.trim();
-    }
-
-    public String getNextDepDepartmentId() {
-        return nextDepDepartmentId;
-    }
-
-    public void setNextDepDepartmentId(String nextDepDepartmentId) {
-        this.nextDepDepartmentId = nextDepDepartmentId == null ? null : nextDepDepartmentId.trim();
     }
 
     public String getEmployeeNumber() {

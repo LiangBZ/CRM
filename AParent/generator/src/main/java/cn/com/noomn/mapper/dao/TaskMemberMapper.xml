@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="cn.com.noomn.po.TaskMember">
     <id column="TASK_MEMBER_ID" jdbcType="VARCHAR" property="taskMemberId" />
     <result column="TASK_ID" jdbcType="VARCHAR" property="taskId" />
-    <result column="MEMBER_ID" jdbcType="VARCHAR" property="memberId" />
+    <result column="MEMBER_ID_TASK" jdbcType="VARCHAR" property="memberIdTask" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    TASK_MEMBER_ID, TASK_ID, MEMBER_ID
+    TASK_MEMBER_ID, TASK_ID, MEMBER_ID_TASK
   </sql>
   <select id="selectByExample" parameterType="cn.com.noomn.po.TaskMemberExample" resultMap="BaseResultMap">
     select
@@ -98,9 +98,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.com.noomn.po.TaskMember">
-    insert into task_member (TASK_MEMBER_ID, TASK_ID, MEMBER_ID
+    insert into task_member (TASK_MEMBER_ID, TASK_ID, MEMBER_ID_TASK
       )
-    values (#{taskMemberId,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR}, #{memberId,jdbcType=VARCHAR}
+    values (#{taskMemberId,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR}, #{memberIdTask,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.com.noomn.po.TaskMember">
@@ -112,8 +112,8 @@
       <if test="taskId != null">
         TASK_ID,
       </if>
-      <if test="memberId != null">
-        MEMBER_ID,
+      <if test="memberIdTask != null">
+        MEMBER_ID_TASK,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -123,8 +123,8 @@
       <if test="taskId != null">
         #{taskId,jdbcType=VARCHAR},
       </if>
-      <if test="memberId != null">
-        #{memberId,jdbcType=VARCHAR},
+      <if test="memberIdTask != null">
+        #{memberIdTask,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -143,8 +143,8 @@
       <if test="record.taskId != null">
         TASK_ID = #{record.taskId,jdbcType=VARCHAR},
       </if>
-      <if test="record.memberId != null">
-        MEMBER_ID = #{record.memberId,jdbcType=VARCHAR},
+      <if test="record.memberIdTask != null">
+        MEMBER_ID_TASK = #{record.memberIdTask,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -155,7 +155,7 @@
     update task_member
     set TASK_MEMBER_ID = #{record.taskMemberId,jdbcType=VARCHAR},
       TASK_ID = #{record.taskId,jdbcType=VARCHAR},
-      MEMBER_ID = #{record.memberId,jdbcType=VARCHAR}
+      MEMBER_ID_TASK = #{record.memberIdTask,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -166,8 +166,8 @@
       <if test="taskId != null">
         TASK_ID = #{taskId,jdbcType=VARCHAR},
       </if>
-      <if test="memberId != null">
-        MEMBER_ID = #{memberId,jdbcType=VARCHAR},
+      <if test="memberIdTask != null">
+        MEMBER_ID_TASK = #{memberIdTask,jdbcType=VARCHAR},
       </if>
     </set>
     where TASK_MEMBER_ID = #{taskMemberId,jdbcType=VARCHAR}
@@ -175,7 +175,7 @@
   <update id="updateByPrimaryKey" parameterType="cn.com.noomn.po.TaskMember">
     update task_member
     set TASK_ID = #{taskId,jdbcType=VARCHAR},
-      MEMBER_ID = #{memberId,jdbcType=VARCHAR}
+      MEMBER_ID_TASK = #{memberIdTask,jdbcType=VARCHAR}
     where TASK_MEMBER_ID = #{taskMemberId,jdbcType=VARCHAR}
   </update>
 </mapper>

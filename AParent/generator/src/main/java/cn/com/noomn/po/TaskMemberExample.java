@@ -244,73 +244,73 @@ public class TaskMemberExample {
             return (Criteria) this;
         }
 
-        public Criteria andMemberIdIsNull() {
-            addCriterion("MEMBER_ID is null");
+        public Criteria andMemberIdTaskIsNull() {
+            addCriterion("MEMBER_ID_TASK is null");
             return (Criteria) this;
         }
 
-        public Criteria andMemberIdIsNotNull() {
-            addCriterion("MEMBER_ID is not null");
+        public Criteria andMemberIdTaskIsNotNull() {
+            addCriterion("MEMBER_ID_TASK is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMemberIdEqualTo(String value) {
-            addCriterion("MEMBER_ID =", value, "memberId");
+        public Criteria andMemberIdTaskEqualTo(String value) {
+            addCriterion("MEMBER_ID_TASK =", value, "memberIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andMemberIdNotEqualTo(String value) {
-            addCriterion("MEMBER_ID <>", value, "memberId");
+        public Criteria andMemberIdTaskNotEqualTo(String value) {
+            addCriterion("MEMBER_ID_TASK <>", value, "memberIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andMemberIdGreaterThan(String value) {
-            addCriterion("MEMBER_ID >", value, "memberId");
+        public Criteria andMemberIdTaskGreaterThan(String value) {
+            addCriterion("MEMBER_ID_TASK >", value, "memberIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andMemberIdGreaterThanOrEqualTo(String value) {
-            addCriterion("MEMBER_ID >=", value, "memberId");
+        public Criteria andMemberIdTaskGreaterThanOrEqualTo(String value) {
+            addCriterion("MEMBER_ID_TASK >=", value, "memberIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andMemberIdLessThan(String value) {
-            addCriterion("MEMBER_ID <", value, "memberId");
+        public Criteria andMemberIdTaskLessThan(String value) {
+            addCriterion("MEMBER_ID_TASK <", value, "memberIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andMemberIdLessThanOrEqualTo(String value) {
-            addCriterion("MEMBER_ID <=", value, "memberId");
+        public Criteria andMemberIdTaskLessThanOrEqualTo(String value) {
+            addCriterion("MEMBER_ID_TASK <=", value, "memberIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andMemberIdLike(String value) {
-            addCriterion("MEMBER_ID like", value, "memberId");
+        public Criteria andMemberIdTaskLike(String value) {
+            addCriterion("MEMBER_ID_TASK like", value, "memberIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andMemberIdNotLike(String value) {
-            addCriterion("MEMBER_ID not like", value, "memberId");
+        public Criteria andMemberIdTaskNotLike(String value) {
+            addCriterion("MEMBER_ID_TASK not like", value, "memberIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andMemberIdIn(List<String> values) {
-            addCriterion("MEMBER_ID in", values, "memberId");
+        public Criteria andMemberIdTaskIn(List<String> values) {
+            addCriterion("MEMBER_ID_TASK in", values, "memberIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andMemberIdNotIn(List<String> values) {
-            addCriterion("MEMBER_ID not in", values, "memberId");
+        public Criteria andMemberIdTaskNotIn(List<String> values) {
+            addCriterion("MEMBER_ID_TASK not in", values, "memberIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andMemberIdBetween(String value1, String value2) {
-            addCriterion("MEMBER_ID between", value1, value2, "memberId");
+        public Criteria andMemberIdTaskBetween(String value1, String value2) {
+            addCriterion("MEMBER_ID_TASK between", value1, value2, "memberIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andMemberIdNotBetween(String value1, String value2) {
-            addCriterion("MEMBER_ID not between", value1, value2, "memberId");
+        public Criteria andMemberIdTaskNotBetween(String value1, String value2) {
+            addCriterion("MEMBER_ID_TASK not between", value1, value2, "memberIdTask");
             return (Criteria) this;
         }
     }

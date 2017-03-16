@@ -22,7 +22,7 @@
 			<tx:method name="send*" propagation="REQUIRED" isolation="REPEATABLE_READ"/>
 			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
 			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
-			<tx:method name="select*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="select*" propagation="SUPPORTS" read-only="true" isolation="REPEATABLE_READ"/>
 		</tx:attributes>
 	</tx:advice>
 

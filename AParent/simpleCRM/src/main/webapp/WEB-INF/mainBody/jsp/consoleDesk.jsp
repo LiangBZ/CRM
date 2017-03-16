@@ -7,8 +7,7 @@
 		
 			<h3 class="page-title">控制台</h3>
 			<ul class="breadcrumb">
-				<li><a href="#">首页</a> <span class="divider">/</span></li>
-				<li class="active">控制台</li>
+				<li class="active">控制台</li> <span class="divider">/</span></li>
 			</ul>
 
 		</div>
@@ -75,9 +74,9 @@
 				</a>
 			</div>
 			<div class="metro-nav-block nav-block-grey ">
-				<a data-original-title="" href="${pageContext.request.contextPath}"> <i class="icon-user"></i>
+				<a data-original-title="" href="javascript:void(0);"> <i class="icon-user"></i>
 					<div class="info">0</div>
-					<div class="status">重新登录</div>
+					<div class="status">个人资料</div>
 				</a>
 			</div>
 		</div>

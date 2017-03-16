@@ -30,6 +30,4 @@ public class Authority {
     public void setAuthorityExplain(String authorityExplain) {
         this.authorityExplain = authorityExplain == null ? null : authorityExplain.trim();
     }
-
-    
 }

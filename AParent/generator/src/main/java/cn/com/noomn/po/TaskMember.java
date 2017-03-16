@@ -5,7 +5,7 @@ public class TaskMember {
 
     private String taskId;
 
-    private String memberId;
+    private String memberIdTask;
 
     public String getTaskMemberId() {
         return taskMemberId;
@@ -23,11 +23,11 @@ public class TaskMember {
         this.taskId = taskId == null ? null : taskId.trim();
     }
 
-    public String getMemberId() {
-        return memberId;
+    public String getMemberIdTask() {
+        return memberIdTask;
     }
 
-    public void setMemberId(String memberId) {
-        this.memberId = memberId == null ? null : memberId.trim();
+    public void setMemberIdTask(String memberIdTask) {
+        this.memberIdTask = memberIdTask == null ? null : memberIdTask.trim();
     }
 }

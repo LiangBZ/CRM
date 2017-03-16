@@ -7,7 +7,7 @@ public class Task {
 
     private String taskSponsorId;
 
-    private String customId;
+    private String customIdTask;
 
     private String taskContent;
 
@@ -37,12 +37,12 @@ public class Task {
         this.taskSponsorId = taskSponsorId == null ? null : taskSponsorId.trim();
     }
 
-    public String getCustomId() {
-        return customId;
+    public String getCustomIdTask() {
+        return customIdTask;
     }
 
-    public void setCustomId(String customId) {
-        this.customId = customId == null ? null : customId.trim();
+    public void setCustomIdTask(String customIdTask) {
+        this.customIdTask = customIdTask == null ? null : customIdTask.trim();
     }
 
     public String getTaskContent() {
