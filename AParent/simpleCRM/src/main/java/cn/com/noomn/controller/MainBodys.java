@@ -92,6 +92,7 @@ public class MainBodys {
 	@ResponseBody
 	private Infos insertDepartmentVo(DepartmentVo departmentVo) {
 		departmentVo.setDepartmentId(UUID.randomUUID().toString());
+		departmentVo.setDepartmentInit(0);
 		return departmentService.insertDepartment(departmentVo);
 	}
 	

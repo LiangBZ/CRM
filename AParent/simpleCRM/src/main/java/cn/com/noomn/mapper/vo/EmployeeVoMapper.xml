@@ -5,18 +5,13 @@
     <id column="EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
     <result column="DEPARTMENT_ID_EMPLOYEE" jdbcType="VARCHAR" property="departmentIdEmployee" />
     <result column="USERROLE_ID_EMPLOYEE" jdbcType="VARCHAR" property="userroleIdEmployee" />
-    <result column="EMPLOYEE_ENTRYDATE" jdbcType="TIMESTAMP" property="employeeEntrydate" />
-    <result column="EMPLOYEE_NUMBER" jdbcType="VARCHAR" property="employeeNumber" />
-    <result column="EMPLOYEE_REAL_NAME" jdbcType="CHAR" property="employeeRealName" />
-    <result column="EMPLOYEE_SEX" jdbcType="CHAR" property="employeeSex" />
-    <result column="EMPLOYEE_EMAIL" jdbcType="VARCHAR" property="employeeEmail" />
-    <result column="EMPLOYEE_PHONE" jdbcType="VARCHAR" property="employeePhone" />
-    <result column="EMPLOYEE_ADDRESS" jdbcType="VARCHAR" property="employeeAddress" />
-    <result column="EMPLOYEE_BIRTHDAY" jdbcType="TIMESTAMP" property="employeeBirthday" />
-    <result column="EMPLOYEE_IDNUMBER" jdbcType="VARCHAR" property="employeeIdnumber" />
-    <result column="EMPLOYEE_STATE" jdbcType="CHAR" property="employeeState" />
     <result column="EMPLOYEE_USERNAME" jdbcType="VARCHAR" property="employeeUsername" />
     <result column="EMPLOYEE_PASSWORD" jdbcType="VARCHAR" property="employeePassword" />
+    <result column="EMPLOYEE_NUMBER" jdbcType="VARCHAR" property="employeeNumber" />
+    <result column="EMPLOYEE_REAL_NAME" jdbcType="VARCHAR" property="employeeRealName" />
+    <result column="EMPLOYEE_EMAIL" jdbcType="VARCHAR" property="employeeEmail" />
+    <result column="EMPLOYEE_PHONE" jdbcType="VARCHAR" property="employeePhone" />
+    <result column="EMPLOYEE_INIT" jdbcType="INTEGER" property="employeeInit" />
     <result column="EMPLOYEE_INSTRUCT" jdbcType="VARCHAR" property="employeeInstruct" />
     <result column="EMPLOYEE_USEFUL_TIME" jdbcType="TIMESTAMP" property="employeeUsefulTime" />
   </resultMap>
@@ -35,10 +30,6 @@
 				and
 				EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR}
 			</if>
-			<if test="employeeEntrydate != null">
-				and
-				EMPLOYEE_ENTRYDATE = #{employeeEntrydate,jdbcType=TIMESTAMP}
-			</if>
 			<if test="departmentIdEmployee != null">
 				and
 				DEPARTMENT_ID_EMPLOYEE = #{departmentIdEmployee,jdbcType=VARCHAR}
@@ -47,17 +38,21 @@
 				and
 				USERROLE_ID_EMPLOYEE = #{userroleIdEmployee,jdbcType=VARCHAR}
 			</if>
+			<if test="employeeUsername != null">
+				and
+				EMPLOYEE_USERNAME = #{employeeUsername,jdbcType=VARCHAR}
+			</if>
+			<if test="employeePassword != null">
+				and
+				EMPLOYEE_PASSWORD = #{employeePassword,jdbcType=VARCHAR}
+			</if>
 			<if test="employeeNumber != null">
 				and
 				EMPLOYEE_NUMBER = #{employeeNumber,jdbcType=VARCHAR}
 			</if>
 			<if test="employeeRealName != null">
 				and
-				EMPLOYEE_REAL_NAME = #{employeeRealName,jdbcType=CHAR}
-			</if>
-			<if test="employeeSex != null">
-				and
-				EMPLOYEE_SEX = #{employeeSex,jdbcType=CHAR}
+				EMPLOYEE_REAL_NAME = #{employeeRealName,jdbcType=VARCHAR}
 			</if>
 			<if test="employeeEmail != null">
 				and
@@ -67,29 +62,9 @@
 				and
 				EMPLOYEE_PHONE = #{employeePhone,jdbcType=VARCHAR}
 			</if>
-			<if test="employeeAddress != null">
+			<if test="employeeInit != null">
 				and
-				EMPLOYEE_ADDRESS = #{employeeAddress,jdbcType=VARCHAR}
-			</if>
-			<if test="employeeBirthday != null">
-				and
-				EMPLOYEE_BIRTHDAY = #{employeeBirthday,jdbcType=TIMESTAMP}
-			</if>
-			<if test="employeeIdnumber != null">
-				and
-				EMPLOYEE_IDNUMBER = #{employeeIdnumber,jdbcType=VARCHAR}
-			</if>
-			<if test="employeeState != null">
-				and
-				EMPLOYEE_STATE = #{employeeState,jdbcType=CHAR}
-			</if>
-			<if test="employeeUsername != null">
-				and
-				EMPLOYEE_USERNAME = #{employeeUsername,jdbcType=VARCHAR}
-			</if>
-			<if test="employeePassword != null">
-				and
-				EMPLOYEE_PASSWORD = #{employeePassword,jdbcType=VARCHAR}
+				EMPLOYEE_INIT = #{employeeInit,jdbcType=INTEGER}
 			</if>
 			<if test="employeeInstruct != null">
 				and
@@ -101,7 +76,5 @@
 			</if>
 		</where>
 	</select>
-
-	
 </mapper>
     

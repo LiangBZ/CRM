@@ -1,30 +1,25 @@
 package cn.com.noomn.po;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class Process {
     private String processId;
 
+    private String taskIdProcess;
+
     private String processEmployeeId;
 
-    private String customId;
-
-    private String processTempletId;
-
-    private String stepDetaileId;
+    private String processApprover;
 
     private Timestamp processDate;
 
+    private String processTitle;
+
     private String processContent;
 
-    private Timestamp processStartTime;
+    private Integer processState;
 
-    private Timestamp processEndTime;
-
-    private BigDecimal processMoney;
-
-    private String processState;
+    private Timestamp processApprovalDeadline;
 
     public String getProcessId() {
         return processId;
@@ -32,6 +27,14 @@ public class Process {
 
     public void setProcessId(String processId) {
         this.processId = processId == null ? null : processId.trim();
+    }
+
+    public String getTaskIdProcess() {
+        return taskIdProcess;
+    }
+
+    public void setTaskIdProcess(String taskIdProcess) {
+        this.taskIdProcess = taskIdProcess == null ? null : taskIdProcess.trim();
     }
 
     public String getProcessEmployeeId() {
@@ -42,28 +45,12 @@ public class Process {
         this.processEmployeeId = processEmployeeId == null ? null : processEmployeeId.trim();
     }
 
-    public String getCustomId() {
-        return customId;
+    public String getProcessApprover() {
+        return processApprover;
     }
 
-    public void setCustomId(String customId) {
-        this.customId = customId == null ? null : customId.trim();
-    }
-
-    public String getProcessTempletId() {
-        return processTempletId;
-    }
-
-    public void setProcessTempletId(String processTempletId) {
-        this.processTempletId = processTempletId == null ? null : processTempletId.trim();
-    }
-
-    public String getStepDetaileId() {
-        return stepDetaileId;
-    }
-
-    public void setStepDetaileId(String stepDetaileId) {
-        this.stepDetaileId = stepDetaileId == null ? null : stepDetaileId.trim();
+    public void setProcessApprover(String processApprover) {
+        this.processApprover = processApprover == null ? null : processApprover.trim();
     }
 
     public Timestamp getProcessDate() {
@@ -74,6 +61,14 @@ public class Process {
         this.processDate = processDate;
     }
 
+    public String getProcessTitle() {
+        return processTitle;
+    }
+
+    public void setProcessTitle(String processTitle) {
+        this.processTitle = processTitle == null ? null : processTitle.trim();
+    }
+
     public String getProcessContent() {
         return processContent;
     }
@@ -82,35 +77,19 @@ public class Process {
         this.processContent = processContent == null ? null : processContent.trim();
     }
 
-    public Timestamp getProcessStartTime() {
-        return processStartTime;
-    }
-
-    public void setProcessStartTime(Timestamp processStartTime) {
-        this.processStartTime = processStartTime;
-    }
-
-    public Timestamp getProcessEndTime() {
-        return processEndTime;
-    }
-
-    public void setProcessEndTime(Timestamp processEndTime) {
-        this.processEndTime = processEndTime;
-    }
-
-    public BigDecimal getProcessMoney() {
-        return processMoney;
-    }
-
-    public void setProcessMoney(BigDecimal processMoney) {
-        this.processMoney = processMoney;
-    }
-
-    public String getProcessState() {
+    public Integer getProcessState() {
         return processState;
     }
 
-    public void setProcessState(String processState) {
-        this.processState = processState == null ? null : processState.trim();
+    public void setProcessState(Integer processState) {
+        this.processState = processState;
+    }
+
+    public Timestamp getProcessApprovalDeadline() {
+        return processApprovalDeadline;
+    }
+
+    public void setProcessApprovalDeadline(Timestamp processApprovalDeadline) {
+        this.processApprovalDeadline = processApprovalDeadline;
     }
 }

@@ -11,7 +11,7 @@ import cn.com.noomn.mapper.dao.AuthorityMapper;
 import cn.com.noomn.mapper.vo.AuthorityVoMapper;
 import cn.com.noomn.mapper.vo.UserroleAuthorityVoMapper;
 import cn.com.noomn.service.AuthorityService;
-import cn.com.noomn.util.ResolveXMLUtil;
+import cn.com.noomn.util.AuthorityXMLResolveUtil;
 import cn.com.noomn.vo.AuthorityVo;
 
 @Service
@@ -22,7 +22,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 	@Autowired
 	private AuthorityMapper authorityMapper;
 	@Autowired
-	private ResolveXMLUtil resolveXMLUtil;
+	private AuthorityXMLResolveUtil authorityXMLResolveUtil;
 	@Autowired
 	private UserroleAuthorityVoMapper userroleAuthorityVoMapper;
 	
@@ -30,7 +30,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 	@Override
 	public void initAuthority() {
 		//获取xml中所有的主键
-		List<String> xmlKeysList = resolveXMLUtil.getAllLeafNodeKeysByXPathExpression();
+		List<String> xmlKeysList = authorityXMLResolveUtil.getAllLeafNodeKeysByXPathExpression();
 		//查询数据库中不在xml中出现的主键
 		String[] primaryKeys = authorityVoMapper.selectAuthorityXMLNoExistByPrimaryKeys(xmlKeysList.toArray());
 		//删除过时主键
@@ -55,7 +55,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 			int insertCount = 0;
 			for(int i=0; i<xmlKeysList.size(); i++) {
 				String XPathExpression = "//key-value[@id='" + xmlKeysList.get(i) + "']";
-				AuthorityVo authorityVo = resolveXMLUtil.getAuthorityVoSingleByXPathExpression(XPathExpression);
+				AuthorityVo authorityVo = authorityXMLResolveUtil.getAuthorityVoSingleByXPathExpression(XPathExpression);
 				int count = authorityMapper.insert(authorityVo);
 				insertCount += count;
 				System.out.println("插入第" + insertCount +"条记录: " + authorityVo);
@@ -65,7 +65,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 		}
 		
 		//更新所有权限信息
-		Map<String, AuthorityVo> allAuthorityVo = resolveXMLUtil.getAllLeafNodeByXPathExpression();
+		Map<String, AuthorityVo> allAuthorityVo = authorityXMLResolveUtil.getAllLeafNodeByXPathExpression();
 		Iterator<String> keySetIterator = allAuthorityVo.keySet().iterator();
 		int updateFalseCount = 0;
 		while(keySetIterator.hasNext()) {

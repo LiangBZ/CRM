@@ -4,13 +4,13 @@
   <resultMap id="BaseResultMap" type="cn.com.noomn.vo.DepartmentVo">
     <id column="DEPARTMENT_ID" jdbcType="VARCHAR" property="departmentId" />
     <result column="DEPARTMENT_NAME" jdbcType="VARCHAR" property="departmentName" />
-    <result column="DEPARTMENT_PRE" jdbcType="VARCHAR" property="departmentPre" />
+    <result column="DEPARTMENT_INIT" jdbcType="INTEGER" property="departmentInit" />
   </resultMap>
   
   <resultMap id="departmentAndEmployee" type="cn.com.noomn.vo.DepartmentVo">
     <id column="DEPARTMENT_ID" jdbcType="VARCHAR" property="departmentId" />
     <result column="DEPARTMENT_NAME" jdbcType="VARCHAR" property="departmentName" />
-    <result column="DEPARTMENT_PRE" jdbcType="VARCHAR" property="departmentPre" />
+    <result column="DEPARTMENT_INIT" jdbcType="INTEGER" property="departmentInit" />
     
     <collection property="employeeVoList" resultMap="cn.com.noomn.mapper.vo.EmployeeVoMapper.BaseResultMap"></collection>
   </resultMap>
@@ -26,6 +26,10 @@
 			and
 			DEPARTMENT_NAME = #{departmentName,jdbcType=VARCHAR}
 		</if>
+		<if test="departmentInit != null">
+			and
+        	DEPARTMENT_INIT = #{departmentInit,jdbcType=INTEGER}
+      </if>
   	</where>
   </select>
   

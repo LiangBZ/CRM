@@ -8,6 +8,10 @@
     <result column="DEPARTMENT_ID" jdbcType="VARCHAR" property="departmentId" />
     <result column="CUSTOM_NAME" jdbcType="VARCHAR" property="customName" />
     <result column="CUSTOM_ADDRESS" jdbcType="VARCHAR" property="customAddress" />
+    <result column="CUSTOM_LINKMAN_NAME" jdbcType="VARCHAR" property="customLinkmanName" />
+    <result column="CUSTOM_LINKMAN_PHONE" jdbcType="VARCHAR" property="customLinkmanPhone" />
+    <result column="CUSTOM_LINKMAN_POST" jdbcType="VARCHAR" property="customLinkmanPost" />
+    <result column="CUSTOM_LINKMAN_REMARK" jdbcType="VARCHAR" property="customLinkmanRemark" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    CUSTOM_ID, CUSTOM_RANK_ID, CUSTOM_STATE_ID, DEPARTMENT_ID, CUSTOM_NAME, CUSTOM_ADDRESS
+    CUSTOM_ID, CUSTOM_RANK_ID, CUSTOM_STATE_ID, DEPARTMENT_ID, CUSTOM_NAME, CUSTOM_ADDRESS, 
+    CUSTOM_LINKMAN_NAME, CUSTOM_LINKMAN_PHONE, CUSTOM_LINKMAN_POST, CUSTOM_LINKMAN_REMARK
   </sql>
   <select id="selectByExample" parameterType="cn.com.noomn.po.CustomExample" resultMap="BaseResultMap">
     select
@@ -102,11 +107,13 @@
   </delete>
   <insert id="insert" parameterType="cn.com.noomn.po.Custom">
     insert into custom (CUSTOM_ID, CUSTOM_RANK_ID, CUSTOM_STATE_ID, 
-      DEPARTMENT_ID, CUSTOM_NAME, CUSTOM_ADDRESS
-      )
+      DEPARTMENT_ID, CUSTOM_NAME, CUSTOM_ADDRESS, 
+      CUSTOM_LINKMAN_NAME, CUSTOM_LINKMAN_PHONE, 
+      CUSTOM_LINKMAN_POST, CUSTOM_LINKMAN_REMARK)
     values (#{customId,jdbcType=VARCHAR}, #{customRankId,jdbcType=VARCHAR}, #{customStateId,jdbcType=VARCHAR}, 
-      #{departmentId,jdbcType=VARCHAR}, #{customName,jdbcType=VARCHAR}, #{customAddress,jdbcType=VARCHAR}
-      )
+      #{departmentId,jdbcType=VARCHAR}, #{customName,jdbcType=VARCHAR}, #{customAddress,jdbcType=VARCHAR}, 
+      #{customLinkmanName,jdbcType=VARCHAR}, #{customLinkmanPhone,jdbcType=VARCHAR}, 
+      #{customLinkmanPost,jdbcType=VARCHAR}, #{customLinkmanRemark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.com.noomn.po.Custom">
     insert into custom
@@ -129,6 +136,18 @@
       <if test="customAddress != null">
         CUSTOM_ADDRESS,
       </if>
+      <if test="customLinkmanName != null">
+        CUSTOM_LINKMAN_NAME,
+      </if>
+      <if test="customLinkmanPhone != null">
+        CUSTOM_LINKMAN_PHONE,
+      </if>
+      <if test="customLinkmanPost != null">
+        CUSTOM_LINKMAN_POST,
+      </if>
+      <if test="customLinkmanRemark != null">
+        CUSTOM_LINKMAN_REMARK,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="customId != null">
@@ -148,6 +167,18 @@
       </if>
       <if test="customAddress != null">
         #{customAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="customLinkmanName != null">
+        #{customLinkmanName,jdbcType=VARCHAR},
+      </if>
+      <if test="customLinkmanPhone != null">
+        #{customLinkmanPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="customLinkmanPost != null">
+        #{customLinkmanPost,jdbcType=VARCHAR},
+      </if>
+      <if test="customLinkmanRemark != null">
+        #{customLinkmanRemark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -178,6 +209,18 @@
       <if test="record.customAddress != null">
         CUSTOM_ADDRESS = #{record.customAddress,jdbcType=VARCHAR},
       </if>
+      <if test="record.customLinkmanName != null">
+        CUSTOM_LINKMAN_NAME = #{record.customLinkmanName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customLinkmanPhone != null">
+        CUSTOM_LINKMAN_PHONE = #{record.customLinkmanPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customLinkmanPost != null">
+        CUSTOM_LINKMAN_POST = #{record.customLinkmanPost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customLinkmanRemark != null">
+        CUSTOM_LINKMAN_REMARK = #{record.customLinkmanRemark,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +233,11 @@
       CUSTOM_STATE_ID = #{record.customStateId,jdbcType=VARCHAR},
       DEPARTMENT_ID = #{record.departmentId,jdbcType=VARCHAR},
       CUSTOM_NAME = #{record.customName,jdbcType=VARCHAR},
-      CUSTOM_ADDRESS = #{record.customAddress,jdbcType=VARCHAR}
+      CUSTOM_ADDRESS = #{record.customAddress,jdbcType=VARCHAR},
+      CUSTOM_LINKMAN_NAME = #{record.customLinkmanName,jdbcType=VARCHAR},
+      CUSTOM_LINKMAN_PHONE = #{record.customLinkmanPhone,jdbcType=VARCHAR},
+      CUSTOM_LINKMAN_POST = #{record.customLinkmanPost,jdbcType=VARCHAR},
+      CUSTOM_LINKMAN_REMARK = #{record.customLinkmanRemark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +260,18 @@
       <if test="customAddress != null">
         CUSTOM_ADDRESS = #{customAddress,jdbcType=VARCHAR},
       </if>
+      <if test="customLinkmanName != null">
+        CUSTOM_LINKMAN_NAME = #{customLinkmanName,jdbcType=VARCHAR},
+      </if>
+      <if test="customLinkmanPhone != null">
+        CUSTOM_LINKMAN_PHONE = #{customLinkmanPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="customLinkmanPost != null">
+        CUSTOM_LINKMAN_POST = #{customLinkmanPost,jdbcType=VARCHAR},
+      </if>
+      <if test="customLinkmanRemark != null">
+        CUSTOM_LINKMAN_REMARK = #{customLinkmanRemark,jdbcType=VARCHAR},
+      </if>
     </set>
     where CUSTOM_ID = #{customId,jdbcType=VARCHAR}
   </update>
@@ -222,7 +281,11 @@
       CUSTOM_STATE_ID = #{customStateId,jdbcType=VARCHAR},
       DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR},
       CUSTOM_NAME = #{customName,jdbcType=VARCHAR},
-      CUSTOM_ADDRESS = #{customAddress,jdbcType=VARCHAR}
+      CUSTOM_ADDRESS = #{customAddress,jdbcType=VARCHAR},
+      CUSTOM_LINKMAN_NAME = #{customLinkmanName,jdbcType=VARCHAR},
+      CUSTOM_LINKMAN_PHONE = #{customLinkmanPhone,jdbcType=VARCHAR},
+      CUSTOM_LINKMAN_POST = #{customLinkmanPost,jdbcType=VARCHAR},
+      CUSTOM_LINKMAN_REMARK = #{customLinkmanRemark,jdbcType=VARCHAR}
     where CUSTOM_ID = #{customId,jdbcType=VARCHAR}
   </update>
 </mapper>

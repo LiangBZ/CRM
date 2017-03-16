@@ -5,7 +5,11 @@ import java.sql.Timestamp;
 public class Task {
     private String taskId;
 
-    private String taskSponsorId;
+    private String businessOpportunityIdTask;
+
+    private String sponsorIdTask;
+
+    private String receiveIdTask;
 
     private String customIdTask;
 
@@ -21,6 +25,12 @@ public class Task {
 
     private Timestamp taskEndTime;
 
+    private Integer taskIsoutside;
+
+    private String taskFeedback;
+
+    private Integer taskCompletionStatus;
+
     public String getTaskId() {
         return taskId;
     }
@@ -29,12 +39,28 @@ public class Task {
         this.taskId = taskId == null ? null : taskId.trim();
     }
 
-    public String getTaskSponsorId() {
-        return taskSponsorId;
+    public String getBusinessOpportunityIdTask() {
+        return businessOpportunityIdTask;
     }
 
-    public void setTaskSponsorId(String taskSponsorId) {
-        this.taskSponsorId = taskSponsorId == null ? null : taskSponsorId.trim();
+    public void setBusinessOpportunityIdTask(String businessOpportunityIdTask) {
+        this.businessOpportunityIdTask = businessOpportunityIdTask == null ? null : businessOpportunityIdTask.trim();
+    }
+
+    public String getSponsorIdTask() {
+        return sponsorIdTask;
+    }
+
+    public void setSponsorIdTask(String sponsorIdTask) {
+        this.sponsorIdTask = sponsorIdTask == null ? null : sponsorIdTask.trim();
+    }
+
+    public String getReceiveIdTask() {
+        return receiveIdTask;
+    }
+
+    public void setReceiveIdTask(String receiveIdTask) {
+        this.receiveIdTask = receiveIdTask == null ? null : receiveIdTask.trim();
     }
 
     public String getCustomIdTask() {
@@ -91,5 +117,29 @@ public class Task {
 
     public void setTaskEndTime(Timestamp taskEndTime) {
         this.taskEndTime = taskEndTime;
+    }
+
+    public Integer getTaskIsoutside() {
+        return taskIsoutside;
+    }
+
+    public void setTaskIsoutside(Integer taskIsoutside) {
+        this.taskIsoutside = taskIsoutside;
+    }
+
+    public String getTaskFeedback() {
+        return taskFeedback;
+    }
+
+    public void setTaskFeedback(String taskFeedback) {
+        this.taskFeedback = taskFeedback == null ? null : taskFeedback.trim();
+    }
+
+    public Integer getTaskCompletionStatus() {
+        return taskCompletionStatus;
+    }
+
+    public void setTaskCompletionStatus(Integer taskCompletionStatus) {
+        this.taskCompletionStatus = taskCompletionStatus;
     }
 }

@@ -3,8 +3,8 @@
 <mapper namespace="cn.com.noomn.mapper.vo.AuthorityVoMapper">
 	<resultMap id="BaseResultMap" type="cn.com.noomn.vo.AuthorityVo">
 		<id column="AUTHORITY_ID" jdbcType="VARCHAR" property="authorityId" />
-		<result column="AUTHORITY_NAME" jdbcType="VARCHAR" property="authorityName" />
-		<result column="AUTHORITY_EXPLAIN" jdbcType="VARCHAR" property="authorityExplain" />
+	    <result column="AUTHORITY_NAME" jdbcType="VARCHAR" property="authorityName" />
+	    <result column="AUTHORITY_EXPLAIN" jdbcType="VARCHAR" property="authorityExplain" />
 	</resultMap>
 
 	<sql id="authorityIDIn">

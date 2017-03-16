@@ -62,8 +62,6 @@ public class DepartmentServiceImpl implements DepartmentService {
 				treeLeaf3.setName(employeeVo.getEmployeeRealName());
 				treeDatasourceList.add(treeLeaf3);
 				j++;
-				System.err.println(j);
-				System.err.println(j<size);
 			}
 		}
 		
@@ -116,7 +114,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 	@Override
 	public Infos updateDepartment(DepartmentVo departmentVo) {
-		int updateCount = departmentMapper.updateByPrimaryKey(departmentVo);
+		int updateCount = departmentMapper.updateByPrimaryKeySelective(departmentVo);
 		Infos infos = Infos.getInfosInstance();
 		if(updateCount == 1) {
 			infos.setMessage(Message.SUCCESS);

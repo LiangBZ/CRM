@@ -5,18 +5,13 @@
     <id column="EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
     <result column="DEPARTMENT_ID_EMPLOYEE" jdbcType="VARCHAR" property="departmentIdEmployee" />
     <result column="USERROLE_ID_EMPLOYEE" jdbcType="VARCHAR" property="userroleIdEmployee" />
-    <result column="EMPLOYEE_ENTRYDATE" jdbcType="TIMESTAMP" property="employeeEntrydate" />
-    <result column="EMPLOYEE_NUMBER" jdbcType="VARCHAR" property="employeeNumber" />
-    <result column="EMPLOYEE_REAL_NAME" jdbcType="CHAR" property="employeeRealName" />
-    <result column="EMPLOYEE_SEX" jdbcType="CHAR" property="employeeSex" />
-    <result column="EMPLOYEE_EMAIL" jdbcType="VARCHAR" property="employeeEmail" />
-    <result column="EMPLOYEE_PHONE" jdbcType="VARCHAR" property="employeePhone" />
-    <result column="EMPLOYEE_ADDRESS" jdbcType="VARCHAR" property="employeeAddress" />
-    <result column="EMPLOYEE_BIRTHDAY" jdbcType="TIMESTAMP" property="employeeBirthday" />
-    <result column="EMPLOYEE_IDNUMBER" jdbcType="VARCHAR" property="employeeIdnumber" />
-    <result column="EMPLOYEE_STATE" jdbcType="CHAR" property="employeeState" />
     <result column="EMPLOYEE_USERNAME" jdbcType="VARCHAR" property="employeeUsername" />
     <result column="EMPLOYEE_PASSWORD" jdbcType="VARCHAR" property="employeePassword" />
+    <result column="EMPLOYEE_NUMBER" jdbcType="VARCHAR" property="employeeNumber" />
+    <result column="EMPLOYEE_REAL_NAME" jdbcType="VARCHAR" property="employeeRealName" />
+    <result column="EMPLOYEE_EMAIL" jdbcType="VARCHAR" property="employeeEmail" />
+    <result column="EMPLOYEE_PHONE" jdbcType="VARCHAR" property="employeePhone" />
+    <result column="EMPLOYEE_INIT" jdbcType="INTEGER" property="employeeInit" />
     <result column="EMPLOYEE_INSTRUCT" jdbcType="VARCHAR" property="employeeInstruct" />
     <result column="EMPLOYEE_USEFUL_TIME" jdbcType="TIMESTAMP" property="employeeUsefulTime" />
   </resultMap>
@@ -79,9 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    EMPLOYEE_ID, DEPARTMENT_ID_EMPLOYEE, USERROLE_ID_EMPLOYEE, EMPLOYEE_ENTRYDATE, EMPLOYEE_NUMBER, 
-    EMPLOYEE_REAL_NAME, EMPLOYEE_SEX, EMPLOYEE_EMAIL, EMPLOYEE_PHONE, EMPLOYEE_ADDRESS, 
-    EMPLOYEE_BIRTHDAY, EMPLOYEE_IDNUMBER, EMPLOYEE_STATE, EMPLOYEE_USERNAME, EMPLOYEE_PASSWORD, 
+    EMPLOYEE_ID, DEPARTMENT_ID_EMPLOYEE, USERROLE_ID_EMPLOYEE, EMPLOYEE_USERNAME, EMPLOYEE_PASSWORD, 
+    EMPLOYEE_NUMBER, EMPLOYEE_REAL_NAME, EMPLOYEE_EMAIL, EMPLOYEE_PHONE, EMPLOYEE_INIT, 
     EMPLOYEE_INSTRUCT, EMPLOYEE_USEFUL_TIME
   </sql>
   <select id="selectByExample" parameterType="cn.com.noomn.po.EmployeeExample" resultMap="BaseResultMap">
@@ -116,18 +110,14 @@
   </delete>
   <insert id="insert" parameterType="cn.com.noomn.po.Employee">
     insert into employee (EMPLOYEE_ID, DEPARTMENT_ID_EMPLOYEE, 
-      USERROLE_ID_EMPLOYEE, EMPLOYEE_ENTRYDATE, 
-      EMPLOYEE_NUMBER, EMPLOYEE_REAL_NAME, EMPLOYEE_SEX, 
-      EMPLOYEE_EMAIL, EMPLOYEE_PHONE, EMPLOYEE_ADDRESS, 
-      EMPLOYEE_BIRTHDAY, EMPLOYEE_IDNUMBER, EMPLOYEE_STATE, 
-      EMPLOYEE_USERNAME, EMPLOYEE_PASSWORD, EMPLOYEE_INSTRUCT, 
+      USERROLE_ID_EMPLOYEE, EMPLOYEE_USERNAME, EMPLOYEE_PASSWORD, 
+      EMPLOYEE_NUMBER, EMPLOYEE_REAL_NAME, EMPLOYEE_EMAIL, 
+      EMPLOYEE_PHONE, EMPLOYEE_INIT, EMPLOYEE_INSTRUCT, 
       EMPLOYEE_USEFUL_TIME)
     values (#{employeeId,jdbcType=VARCHAR}, #{departmentIdEmployee,jdbcType=VARCHAR}, 
-      #{userroleIdEmployee,jdbcType=VARCHAR}, #{employeeEntrydate,jdbcType=TIMESTAMP}, 
-      #{employeeNumber,jdbcType=VARCHAR}, #{employeeRealName,jdbcType=CHAR}, #{employeeSex,jdbcType=CHAR}, 
-      #{employeeEmail,jdbcType=VARCHAR}, #{employeePhone,jdbcType=VARCHAR}, #{employeeAddress,jdbcType=VARCHAR}, 
-      #{employeeBirthday,jdbcType=TIMESTAMP}, #{employeeIdnumber,jdbcType=VARCHAR}, #{employeeState,jdbcType=CHAR}, 
-      #{employeeUsername,jdbcType=VARCHAR}, #{employeePassword,jdbcType=VARCHAR}, #{employeeInstruct,jdbcType=VARCHAR}, 
+      #{userroleIdEmployee,jdbcType=VARCHAR}, #{employeeUsername,jdbcType=VARCHAR}, #{employeePassword,jdbcType=VARCHAR}, 
+      #{employeeNumber,jdbcType=VARCHAR}, #{employeeRealName,jdbcType=VARCHAR}, #{employeeEmail,jdbcType=VARCHAR}, 
+      #{employeePhone,jdbcType=VARCHAR}, #{employeeInit,jdbcType=INTEGER}, #{employeeInstruct,jdbcType=VARCHAR}, 
       #{employeeUsefulTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cn.com.noomn.po.Employee">
@@ -142,8 +132,11 @@
       <if test="userroleIdEmployee != null">
         USERROLE_ID_EMPLOYEE,
       </if>
-      <if test="employeeEntrydate != null">
-        EMPLOYEE_ENTRYDATE,
+      <if test="employeeUsername != null">
+        EMPLOYEE_USERNAME,
+      </if>
+      <if test="employeePassword != null">
+        EMPLOYEE_PASSWORD,
       </if>
       <if test="employeeNumber != null">
         EMPLOYEE_NUMBER,
@@ -151,32 +144,14 @@
       <if test="employeeRealName != null">
         EMPLOYEE_REAL_NAME,
       </if>
-      <if test="employeeSex != null">
-        EMPLOYEE_SEX,
-      </if>
       <if test="employeeEmail != null">
         EMPLOYEE_EMAIL,
       </if>
       <if test="employeePhone != null">
         EMPLOYEE_PHONE,
       </if>
-      <if test="employeeAddress != null">
-        EMPLOYEE_ADDRESS,
-      </if>
-      <if test="employeeBirthday != null">
-        EMPLOYEE_BIRTHDAY,
-      </if>
-      <if test="employeeIdnumber != null">
-        EMPLOYEE_IDNUMBER,
-      </if>
-      <if test="employeeState != null">
-        EMPLOYEE_STATE,
-      </if>
-      <if test="employeeUsername != null">
-        EMPLOYEE_USERNAME,
-      </if>
-      <if test="employeePassword != null">
-        EMPLOYEE_PASSWORD,
+      <if test="employeeInit != null">
+        EMPLOYEE_INIT,
       </if>
       <if test="employeeInstruct != null">
         EMPLOYEE_INSTRUCT,
@@ -195,17 +170,17 @@
       <if test="userroleIdEmployee != null">
         #{userroleIdEmployee,jdbcType=VARCHAR},
       </if>
-      <if test="employeeEntrydate != null">
-        #{employeeEntrydate,jdbcType=TIMESTAMP},
+      <if test="employeeUsername != null">
+        #{employeeUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="employeePassword != null">
+        #{employeePassword,jdbcType=VARCHAR},
       </if>
       <if test="employeeNumber != null">
         #{employeeNumber,jdbcType=VARCHAR},
       </if>
       <if test="employeeRealName != null">
-        #{employeeRealName,jdbcType=CHAR},
-      </if>
-      <if test="employeeSex != null">
-        #{employeeSex,jdbcType=CHAR},
+        #{employeeRealName,jdbcType=VARCHAR},
       </if>
       <if test="employeeEmail != null">
         #{employeeEmail,jdbcType=VARCHAR},
@@ -213,23 +188,8 @@
       <if test="employeePhone != null">
         #{employeePhone,jdbcType=VARCHAR},
       </if>
-      <if test="employeeAddress != null">
-        #{employeeAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="employeeBirthday != null">
-        #{employeeBirthday,jdbcType=TIMESTAMP},
-      </if>
-      <if test="employeeIdnumber != null">
-        #{employeeIdnumber,jdbcType=VARCHAR},
-      </if>
-      <if test="employeeState != null">
-        #{employeeState,jdbcType=CHAR},
-      </if>
-      <if test="employeeUsername != null">
-        #{employeeUsername,jdbcType=VARCHAR},
-      </if>
-      <if test="employeePassword != null">
-        #{employeePassword,jdbcType=VARCHAR},
+      <if test="employeeInit != null">
+        #{employeeInit,jdbcType=INTEGER},
       </if>
       <if test="employeeInstruct != null">
         #{employeeInstruct,jdbcType=VARCHAR},
@@ -257,17 +217,17 @@
       <if test="record.userroleIdEmployee != null">
         USERROLE_ID_EMPLOYEE = #{record.userroleIdEmployee,jdbcType=VARCHAR},
       </if>
-      <if test="record.employeeEntrydate != null">
-        EMPLOYEE_ENTRYDATE = #{record.employeeEntrydate,jdbcType=TIMESTAMP},
+      <if test="record.employeeUsername != null">
+        EMPLOYEE_USERNAME = #{record.employeeUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeePassword != null">
+        EMPLOYEE_PASSWORD = #{record.employeePassword,jdbcType=VARCHAR},
       </if>
       <if test="record.employeeNumber != null">
         EMPLOYEE_NUMBER = #{record.employeeNumber,jdbcType=VARCHAR},
       </if>
       <if test="record.employeeRealName != null">
-        EMPLOYEE_REAL_NAME = #{record.employeeRealName,jdbcType=CHAR},
-      </if>
-      <if test="record.employeeSex != null">
-        EMPLOYEE_SEX = #{record.employeeSex,jdbcType=CHAR},
+        EMPLOYEE_REAL_NAME = #{record.employeeRealName,jdbcType=VARCHAR},
       </if>
       <if test="record.employeeEmail != null">
         EMPLOYEE_EMAIL = #{record.employeeEmail,jdbcType=VARCHAR},
@@ -275,23 +235,8 @@
       <if test="record.employeePhone != null">
         EMPLOYEE_PHONE = #{record.employeePhone,jdbcType=VARCHAR},
       </if>
-      <if test="record.employeeAddress != null">
-        EMPLOYEE_ADDRESS = #{record.employeeAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="record.employeeBirthday != null">
-        EMPLOYEE_BIRTHDAY = #{record.employeeBirthday,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.employeeIdnumber != null">
-        EMPLOYEE_IDNUMBER = #{record.employeeIdnumber,jdbcType=VARCHAR},
-      </if>
-      <if test="record.employeeState != null">
-        EMPLOYEE_STATE = #{record.employeeState,jdbcType=CHAR},
-      </if>
-      <if test="record.employeeUsername != null">
-        EMPLOYEE_USERNAME = #{record.employeeUsername,jdbcType=VARCHAR},
-      </if>
-      <if test="record.employeePassword != null">
-        EMPLOYEE_PASSWORD = #{record.employeePassword,jdbcType=VARCHAR},
+      <if test="record.employeeInit != null">
+        EMPLOYEE_INIT = #{record.employeeInit,jdbcType=INTEGER},
       </if>
       <if test="record.employeeInstruct != null">
         EMPLOYEE_INSTRUCT = #{record.employeeInstruct,jdbcType=VARCHAR},
@@ -309,18 +254,13 @@
     set EMPLOYEE_ID = #{record.employeeId,jdbcType=VARCHAR},
       DEPARTMENT_ID_EMPLOYEE = #{record.departmentIdEmployee,jdbcType=VARCHAR},
       USERROLE_ID_EMPLOYEE = #{record.userroleIdEmployee,jdbcType=VARCHAR},
-      EMPLOYEE_ENTRYDATE = #{record.employeeEntrydate,jdbcType=TIMESTAMP},
-      EMPLOYEE_NUMBER = #{record.employeeNumber,jdbcType=VARCHAR},
-      EMPLOYEE_REAL_NAME = #{record.employeeRealName,jdbcType=CHAR},
-      EMPLOYEE_SEX = #{record.employeeSex,jdbcType=CHAR},
-      EMPLOYEE_EMAIL = #{record.employeeEmail,jdbcType=VARCHAR},
-      EMPLOYEE_PHONE = #{record.employeePhone,jdbcType=VARCHAR},
-      EMPLOYEE_ADDRESS = #{record.employeeAddress,jdbcType=VARCHAR},
-      EMPLOYEE_BIRTHDAY = #{record.employeeBirthday,jdbcType=TIMESTAMP},
-      EMPLOYEE_IDNUMBER = #{record.employeeIdnumber,jdbcType=VARCHAR},
-      EMPLOYEE_STATE = #{record.employeeState,jdbcType=CHAR},
       EMPLOYEE_USERNAME = #{record.employeeUsername,jdbcType=VARCHAR},
       EMPLOYEE_PASSWORD = #{record.employeePassword,jdbcType=VARCHAR},
+      EMPLOYEE_NUMBER = #{record.employeeNumber,jdbcType=VARCHAR},
+      EMPLOYEE_REAL_NAME = #{record.employeeRealName,jdbcType=VARCHAR},
+      EMPLOYEE_EMAIL = #{record.employeeEmail,jdbcType=VARCHAR},
+      EMPLOYEE_PHONE = #{record.employeePhone,jdbcType=VARCHAR},
+      EMPLOYEE_INIT = #{record.employeeInit,jdbcType=INTEGER},
       EMPLOYEE_INSTRUCT = #{record.employeeInstruct,jdbcType=VARCHAR},
       EMPLOYEE_USEFUL_TIME = #{record.employeeUsefulTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -336,17 +276,17 @@
       <if test="userroleIdEmployee != null">
         USERROLE_ID_EMPLOYEE = #{userroleIdEmployee,jdbcType=VARCHAR},
       </if>
-      <if test="employeeEntrydate != null">
-        EMPLOYEE_ENTRYDATE = #{employeeEntrydate,jdbcType=TIMESTAMP},
+      <if test="employeeUsername != null">
+        EMPLOYEE_USERNAME = #{employeeUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="employeePassword != null">
+        EMPLOYEE_PASSWORD = #{employeePassword,jdbcType=VARCHAR},
       </if>
       <if test="employeeNumber != null">
         EMPLOYEE_NUMBER = #{employeeNumber,jdbcType=VARCHAR},
       </if>
       <if test="employeeRealName != null">
-        EMPLOYEE_REAL_NAME = #{employeeRealName,jdbcType=CHAR},
-      </if>
-      <if test="employeeSex != null">
-        EMPLOYEE_SEX = #{employeeSex,jdbcType=CHAR},
+        EMPLOYEE_REAL_NAME = #{employeeRealName,jdbcType=VARCHAR},
       </if>
       <if test="employeeEmail != null">
         EMPLOYEE_EMAIL = #{employeeEmail,jdbcType=VARCHAR},
@@ -354,23 +294,8 @@
       <if test="employeePhone != null">
         EMPLOYEE_PHONE = #{employeePhone,jdbcType=VARCHAR},
       </if>
-      <if test="employeeAddress != null">
-        EMPLOYEE_ADDRESS = #{employeeAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="employeeBirthday != null">
-        EMPLOYEE_BIRTHDAY = #{employeeBirthday,jdbcType=TIMESTAMP},
-      </if>
-      <if test="employeeIdnumber != null">
-        EMPLOYEE_IDNUMBER = #{employeeIdnumber,jdbcType=VARCHAR},
-      </if>
-      <if test="employeeState != null">
-        EMPLOYEE_STATE = #{employeeState,jdbcType=CHAR},
-      </if>
-      <if test="employeeUsername != null">
-        EMPLOYEE_USERNAME = #{employeeUsername,jdbcType=VARCHAR},
-      </if>
-      <if test="employeePassword != null">
-        EMPLOYEE_PASSWORD = #{employeePassword,jdbcType=VARCHAR},
+      <if test="employeeInit != null">
+        EMPLOYEE_INIT = #{employeeInit,jdbcType=INTEGER},
       </if>
       <if test="employeeInstruct != null">
         EMPLOYEE_INSTRUCT = #{employeeInstruct,jdbcType=VARCHAR},
@@ -385,18 +310,13 @@
     update employee
     set DEPARTMENT_ID_EMPLOYEE = #{departmentIdEmployee,jdbcType=VARCHAR},
       USERROLE_ID_EMPLOYEE = #{userroleIdEmployee,jdbcType=VARCHAR},
-      EMPLOYEE_ENTRYDATE = #{employeeEntrydate,jdbcType=TIMESTAMP},
-      EMPLOYEE_NUMBER = #{employeeNumber,jdbcType=VARCHAR},
-      EMPLOYEE_REAL_NAME = #{employeeRealName,jdbcType=CHAR},
-      EMPLOYEE_SEX = #{employeeSex,jdbcType=CHAR},
-      EMPLOYEE_EMAIL = #{employeeEmail,jdbcType=VARCHAR},
-      EMPLOYEE_PHONE = #{employeePhone,jdbcType=VARCHAR},
-      EMPLOYEE_ADDRESS = #{employeeAddress,jdbcType=VARCHAR},
-      EMPLOYEE_BIRTHDAY = #{employeeBirthday,jdbcType=TIMESTAMP},
-      EMPLOYEE_IDNUMBER = #{employeeIdnumber,jdbcType=VARCHAR},
-      EMPLOYEE_STATE = #{employeeState,jdbcType=CHAR},
       EMPLOYEE_USERNAME = #{employeeUsername,jdbcType=VARCHAR},
       EMPLOYEE_PASSWORD = #{employeePassword,jdbcType=VARCHAR},
+      EMPLOYEE_NUMBER = #{employeeNumber,jdbcType=VARCHAR},
+      EMPLOYEE_REAL_NAME = #{employeeRealName,jdbcType=VARCHAR},
+      EMPLOYEE_EMAIL = #{employeeEmail,jdbcType=VARCHAR},
+      EMPLOYEE_PHONE = #{employeePhone,jdbcType=VARCHAR},
+      EMPLOYEE_INIT = #{employeeInit,jdbcType=INTEGER},
       EMPLOYEE_INSTRUCT = #{employeeInstruct,jdbcType=VARCHAR},
       EMPLOYEE_USEFUL_TIME = #{employeeUsefulTime,jdbcType=TIMESTAMP}
     where EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR}

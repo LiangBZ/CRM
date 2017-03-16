@@ -5,6 +5,8 @@ public class Department {
 
     private String departmentName;
 
+    private Integer departmentInit;
+
     public String getDepartmentId() {
         return departmentId;
     }
@@ -19,5 +21,13 @@ public class Department {
 
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName == null ? null : departmentName.trim();
+    }
+
+    public Integer getDepartmentInit() {
+        return departmentInit;
+    }
+
+    public void setDepartmentInit(Integer departmentInit) {
+        this.departmentInit = departmentInit;
     }
 }

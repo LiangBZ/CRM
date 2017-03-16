@@ -3,16 +3,14 @@
 <mapper namespace="cn.com.noomn.mapper.dao.ProcessMapper">
   <resultMap id="BaseResultMap" type="cn.com.noomn.po.Process">
     <id column="PROCESS_ID" jdbcType="VARCHAR" property="processId" />
+    <result column="TASK_ID_PROCESS" jdbcType="VARCHAR" property="taskIdProcess" />
     <result column="PROCESS_EMPLOYEE_ID" jdbcType="VARCHAR" property="processEmployeeId" />
-    <result column="CUSTOM_ID" jdbcType="VARCHAR" property="customId" />
-    <result column="PROCESS_TEMPLET_ID" jdbcType="VARCHAR" property="processTempletId" />
-    <result column="STEP_DETAILE_ID" jdbcType="VARCHAR" property="stepDetaileId" />
+    <result column="PROCESS_APPROVER" jdbcType="VARCHAR" property="processApprover" />
     <result column="PROCESS_DATE" jdbcType="TIMESTAMP" property="processDate" />
+    <result column="PROCESS_TITLE" jdbcType="VARCHAR" property="processTitle" />
     <result column="PROCESS_CONTENT" jdbcType="VARCHAR" property="processContent" />
-    <result column="PROCESS_START_TIME" jdbcType="TIMESTAMP" property="processStartTime" />
-    <result column="PROCESS_END_TIME" jdbcType="TIMESTAMP" property="processEndTime" />
-    <result column="PROCESS_MONEY" jdbcType="DECIMAL" property="processMoney" />
-    <result column="PROCESS_STATE" jdbcType="CHAR" property="processState" />
+    <result column="PROCESS_STATE" jdbcType="INTEGER" property="processState" />
+    <result column="PROCESS_APPROVAL_DEADLINE" jdbcType="TIMESTAMP" property="processApprovalDeadline" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,9 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    PROCESS_ID, PROCESS_EMPLOYEE_ID, CUSTOM_ID, PROCESS_TEMPLET_ID, STEP_DETAILE_ID, 
-    PROCESS_DATE, PROCESS_CONTENT, PROCESS_START_TIME, PROCESS_END_TIME, PROCESS_MONEY, 
-    PROCESS_STATE
+    PROCESS_ID, TASK_ID_PROCESS, PROCESS_EMPLOYEE_ID, PROCESS_APPROVER, PROCESS_DATE, 
+    PROCESS_TITLE, PROCESS_CONTENT, PROCESS_STATE, PROCESS_APPROVAL_DEADLINE
   </sql>
   <select id="selectByExample" parameterType="cn.com.noomn.po.ProcessExample" resultMap="BaseResultMap">
     select
@@ -108,14 +105,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.com.noomn.po.Process">
-    insert into process (PROCESS_ID, PROCESS_EMPLOYEE_ID, CUSTOM_ID, 
-      PROCESS_TEMPLET_ID, STEP_DETAILE_ID, PROCESS_DATE, 
-      PROCESS_CONTENT, PROCESS_START_TIME, PROCESS_END_TIME, 
-      PROCESS_MONEY, PROCESS_STATE)
-    values (#{processId,jdbcType=VARCHAR}, #{processEmployeeId,jdbcType=VARCHAR}, #{customId,jdbcType=VARCHAR}, 
-      #{processTempletId,jdbcType=VARCHAR}, #{stepDetaileId,jdbcType=VARCHAR}, #{processDate,jdbcType=TIMESTAMP}, 
-      #{processContent,jdbcType=VARCHAR}, #{processStartTime,jdbcType=TIMESTAMP}, #{processEndTime,jdbcType=TIMESTAMP}, 
-      #{processMoney,jdbcType=DECIMAL}, #{processState,jdbcType=CHAR})
+    insert into process (PROCESS_ID, TASK_ID_PROCESS, PROCESS_EMPLOYEE_ID, 
+      PROCESS_APPROVER, PROCESS_DATE, PROCESS_TITLE, 
+      PROCESS_CONTENT, PROCESS_STATE, PROCESS_APPROVAL_DEADLINE
+      )
+    values (#{processId,jdbcType=VARCHAR}, #{taskIdProcess,jdbcType=VARCHAR}, #{processEmployeeId,jdbcType=VARCHAR}, 
+      #{processApprover,jdbcType=VARCHAR}, #{processDate,jdbcType=TIMESTAMP}, #{processTitle,jdbcType=VARCHAR}, 
+      #{processContent,jdbcType=VARCHAR}, #{processState,jdbcType=INTEGER}, #{processApprovalDeadline,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.com.noomn.po.Process">
     insert into process
@@ -123,70 +120,58 @@
       <if test="processId != null">
         PROCESS_ID,
       </if>
+      <if test="taskIdProcess != null">
+        TASK_ID_PROCESS,
+      </if>
       <if test="processEmployeeId != null">
         PROCESS_EMPLOYEE_ID,
       </if>
-      <if test="customId != null">
-        CUSTOM_ID,
-      </if>
-      <if test="processTempletId != null">
-        PROCESS_TEMPLET_ID,
-      </if>
-      <if test="stepDetaileId != null">
-        STEP_DETAILE_ID,
+      <if test="processApprover != null">
+        PROCESS_APPROVER,
       </if>
       <if test="processDate != null">
         PROCESS_DATE,
       </if>
+      <if test="processTitle != null">
+        PROCESS_TITLE,
+      </if>
       <if test="processContent != null">
         PROCESS_CONTENT,
       </if>
-      <if test="processStartTime != null">
-        PROCESS_START_TIME,
-      </if>
-      <if test="processEndTime != null">
-        PROCESS_END_TIME,
-      </if>
-      <if test="processMoney != null">
-        PROCESS_MONEY,
-      </if>
       <if test="processState != null">
         PROCESS_STATE,
+      </if>
+      <if test="processApprovalDeadline != null">
+        PROCESS_APPROVAL_DEADLINE,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="processId != null">
         #{processId,jdbcType=VARCHAR},
       </if>
+      <if test="taskIdProcess != null">
+        #{taskIdProcess,jdbcType=VARCHAR},
+      </if>
       <if test="processEmployeeId != null">
         #{processEmployeeId,jdbcType=VARCHAR},
       </if>
-      <if test="customId != null">
-        #{customId,jdbcType=VARCHAR},
-      </if>
-      <if test="processTempletId != null">
-        #{processTempletId,jdbcType=VARCHAR},
-      </if>
-      <if test="stepDetaileId != null">
-        #{stepDetaileId,jdbcType=VARCHAR},
+      <if test="processApprover != null">
+        #{processApprover,jdbcType=VARCHAR},
       </if>
       <if test="processDate != null">
         #{processDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="processTitle != null">
+        #{processTitle,jdbcType=VARCHAR},
+      </if>
       <if test="processContent != null">
         #{processContent,jdbcType=VARCHAR},
       </if>
-      <if test="processStartTime != null">
-        #{processStartTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="processEndTime != null">
-        #{processEndTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="processMoney != null">
-        #{processMoney,jdbcType=DECIMAL},
-      </if>
       <if test="processState != null">
-        #{processState,jdbcType=CHAR},
+        #{processState,jdbcType=INTEGER},
+      </if>
+      <if test="processApprovalDeadline != null">
+        #{processApprovalDeadline,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -202,35 +187,29 @@
       <if test="record.processId != null">
         PROCESS_ID = #{record.processId,jdbcType=VARCHAR},
       </if>
+      <if test="record.taskIdProcess != null">
+        TASK_ID_PROCESS = #{record.taskIdProcess,jdbcType=VARCHAR},
+      </if>
       <if test="record.processEmployeeId != null">
         PROCESS_EMPLOYEE_ID = #{record.processEmployeeId,jdbcType=VARCHAR},
       </if>
-      <if test="record.customId != null">
-        CUSTOM_ID = #{record.customId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.processTempletId != null">
-        PROCESS_TEMPLET_ID = #{record.processTempletId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.stepDetaileId != null">
-        STEP_DETAILE_ID = #{record.stepDetaileId,jdbcType=VARCHAR},
+      <if test="record.processApprover != null">
+        PROCESS_APPROVER = #{record.processApprover,jdbcType=VARCHAR},
       </if>
       <if test="record.processDate != null">
         PROCESS_DATE = #{record.processDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.processTitle != null">
+        PROCESS_TITLE = #{record.processTitle,jdbcType=VARCHAR},
+      </if>
       <if test="record.processContent != null">
         PROCESS_CONTENT = #{record.processContent,jdbcType=VARCHAR},
       </if>
-      <if test="record.processStartTime != null">
-        PROCESS_START_TIME = #{record.processStartTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.processEndTime != null">
-        PROCESS_END_TIME = #{record.processEndTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.processMoney != null">
-        PROCESS_MONEY = #{record.processMoney,jdbcType=DECIMAL},
-      </if>
       <if test="record.processState != null">
-        PROCESS_STATE = #{record.processState,jdbcType=CHAR},
+        PROCESS_STATE = #{record.processState,jdbcType=INTEGER},
+      </if>
+      <if test="record.processApprovalDeadline != null">
+        PROCESS_APPROVAL_DEADLINE = #{record.processApprovalDeadline,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -240,16 +219,14 @@
   <update id="updateByExample" parameterType="map">
     update process
     set PROCESS_ID = #{record.processId,jdbcType=VARCHAR},
+      TASK_ID_PROCESS = #{record.taskIdProcess,jdbcType=VARCHAR},
       PROCESS_EMPLOYEE_ID = #{record.processEmployeeId,jdbcType=VARCHAR},
-      CUSTOM_ID = #{record.customId,jdbcType=VARCHAR},
-      PROCESS_TEMPLET_ID = #{record.processTempletId,jdbcType=VARCHAR},
-      STEP_DETAILE_ID = #{record.stepDetaileId,jdbcType=VARCHAR},
+      PROCESS_APPROVER = #{record.processApprover,jdbcType=VARCHAR},
       PROCESS_DATE = #{record.processDate,jdbcType=TIMESTAMP},
+      PROCESS_TITLE = #{record.processTitle,jdbcType=VARCHAR},
       PROCESS_CONTENT = #{record.processContent,jdbcType=VARCHAR},
-      PROCESS_START_TIME = #{record.processStartTime,jdbcType=TIMESTAMP},
-      PROCESS_END_TIME = #{record.processEndTime,jdbcType=TIMESTAMP},
-      PROCESS_MONEY = #{record.processMoney,jdbcType=DECIMAL},
-      PROCESS_STATE = #{record.processState,jdbcType=CHAR}
+      PROCESS_STATE = #{record.processState,jdbcType=INTEGER},
+      PROCESS_APPROVAL_DEADLINE = #{record.processApprovalDeadline,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -257,51 +234,43 @@
   <update id="updateByPrimaryKeySelective" parameterType="cn.com.noomn.po.Process">
     update process
     <set>
+      <if test="taskIdProcess != null">
+        TASK_ID_PROCESS = #{taskIdProcess,jdbcType=VARCHAR},
+      </if>
       <if test="processEmployeeId != null">
         PROCESS_EMPLOYEE_ID = #{processEmployeeId,jdbcType=VARCHAR},
       </if>
-      <if test="customId != null">
-        CUSTOM_ID = #{customId,jdbcType=VARCHAR},
-      </if>
-      <if test="processTempletId != null">
-        PROCESS_TEMPLET_ID = #{processTempletId,jdbcType=VARCHAR},
-      </if>
-      <if test="stepDetaileId != null">
-        STEP_DETAILE_ID = #{stepDetaileId,jdbcType=VARCHAR},
+      <if test="processApprover != null">
+        PROCESS_APPROVER = #{processApprover,jdbcType=VARCHAR},
       </if>
       <if test="processDate != null">
         PROCESS_DATE = #{processDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="processTitle != null">
+        PROCESS_TITLE = #{processTitle,jdbcType=VARCHAR},
+      </if>
       <if test="processContent != null">
         PROCESS_CONTENT = #{processContent,jdbcType=VARCHAR},
       </if>
-      <if test="processStartTime != null">
-        PROCESS_START_TIME = #{processStartTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="processEndTime != null">
-        PROCESS_END_TIME = #{processEndTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="processMoney != null">
-        PROCESS_MONEY = #{processMoney,jdbcType=DECIMAL},
-      </if>
       <if test="processState != null">
-        PROCESS_STATE = #{processState,jdbcType=CHAR},
+        PROCESS_STATE = #{processState,jdbcType=INTEGER},
+      </if>
+      <if test="processApprovalDeadline != null">
+        PROCESS_APPROVAL_DEADLINE = #{processApprovalDeadline,jdbcType=TIMESTAMP},
       </if>
     </set>
     where PROCESS_ID = #{processId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.com.noomn.po.Process">
     update process
-    set PROCESS_EMPLOYEE_ID = #{processEmployeeId,jdbcType=VARCHAR},
-      CUSTOM_ID = #{customId,jdbcType=VARCHAR},
-      PROCESS_TEMPLET_ID = #{processTempletId,jdbcType=VARCHAR},
-      STEP_DETAILE_ID = #{stepDetaileId,jdbcType=VARCHAR},
+    set TASK_ID_PROCESS = #{taskIdProcess,jdbcType=VARCHAR},
+      PROCESS_EMPLOYEE_ID = #{processEmployeeId,jdbcType=VARCHAR},
+      PROCESS_APPROVER = #{processApprover,jdbcType=VARCHAR},
       PROCESS_DATE = #{processDate,jdbcType=TIMESTAMP},
+      PROCESS_TITLE = #{processTitle,jdbcType=VARCHAR},
       PROCESS_CONTENT = #{processContent,jdbcType=VARCHAR},
-      PROCESS_START_TIME = #{processStartTime,jdbcType=TIMESTAMP},
-      PROCESS_END_TIME = #{processEndTime,jdbcType=TIMESTAMP},
-      PROCESS_MONEY = #{processMoney,jdbcType=DECIMAL},
-      PROCESS_STATE = #{processState,jdbcType=CHAR}
+      PROCESS_STATE = #{processState,jdbcType=INTEGER},
+      PROCESS_APPROVAL_DEADLINE = #{processApprovalDeadline,jdbcType=TIMESTAMP}
     where PROCESS_ID = #{processId,jdbcType=VARCHAR}
   </update>
 </mapper>

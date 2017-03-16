@@ -523,6 +523,286 @@ public class CustomExample {
             addCriterion("CUSTOM_ADDRESS not between", value1, value2, "customAddress");
             return (Criteria) this;
         }
+
+        public Criteria andCustomLinkmanNameIsNull() {
+            addCriterion("CUSTOM_LINKMAN_NAME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanNameIsNotNull() {
+            addCriterion("CUSTOM_LINKMAN_NAME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanNameEqualTo(String value) {
+            addCriterion("CUSTOM_LINKMAN_NAME =", value, "customLinkmanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanNameNotEqualTo(String value) {
+            addCriterion("CUSTOM_LINKMAN_NAME <>", value, "customLinkmanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanNameGreaterThan(String value) {
+            addCriterion("CUSTOM_LINKMAN_NAME >", value, "customLinkmanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanNameGreaterThanOrEqualTo(String value) {
+            addCriterion("CUSTOM_LINKMAN_NAME >=", value, "customLinkmanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanNameLessThan(String value) {
+            addCriterion("CUSTOM_LINKMAN_NAME <", value, "customLinkmanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanNameLessThanOrEqualTo(String value) {
+            addCriterion("CUSTOM_LINKMAN_NAME <=", value, "customLinkmanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanNameLike(String value) {
+            addCriterion("CUSTOM_LINKMAN_NAME like", value, "customLinkmanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanNameNotLike(String value) {
+            addCriterion("CUSTOM_LINKMAN_NAME not like", value, "customLinkmanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanNameIn(List<String> values) {
+            addCriterion("CUSTOM_LINKMAN_NAME in", values, "customLinkmanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanNameNotIn(List<String> values) {
+            addCriterion("CUSTOM_LINKMAN_NAME not in", values, "customLinkmanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanNameBetween(String value1, String value2) {
+            addCriterion("CUSTOM_LINKMAN_NAME between", value1, value2, "customLinkmanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanNameNotBetween(String value1, String value2) {
+            addCriterion("CUSTOM_LINKMAN_NAME not between", value1, value2, "customLinkmanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPhoneIsNull() {
+            addCriterion("CUSTOM_LINKMAN_PHONE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPhoneIsNotNull() {
+            addCriterion("CUSTOM_LINKMAN_PHONE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPhoneEqualTo(String value) {
+            addCriterion("CUSTOM_LINKMAN_PHONE =", value, "customLinkmanPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPhoneNotEqualTo(String value) {
+            addCriterion("CUSTOM_LINKMAN_PHONE <>", value, "customLinkmanPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPhoneGreaterThan(String value) {
+            addCriterion("CUSTOM_LINKMAN_PHONE >", value, "customLinkmanPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPhoneGreaterThanOrEqualTo(String value) {
+            addCriterion("CUSTOM_LINKMAN_PHONE >=", value, "customLinkmanPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPhoneLessThan(String value) {
+            addCriterion("CUSTOM_LINKMAN_PHONE <", value, "customLinkmanPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPhoneLessThanOrEqualTo(String value) {
+            addCriterion("CUSTOM_LINKMAN_PHONE <=", value, "customLinkmanPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPhoneLike(String value) {
+            addCriterion("CUSTOM_LINKMAN_PHONE like", value, "customLinkmanPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPhoneNotLike(String value) {
+            addCriterion("CUSTOM_LINKMAN_PHONE not like", value, "customLinkmanPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPhoneIn(List<String> values) {
+            addCriterion("CUSTOM_LINKMAN_PHONE in", values, "customLinkmanPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPhoneNotIn(List<String> values) {
+            addCriterion("CUSTOM_LINKMAN_PHONE not in", values, "customLinkmanPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPhoneBetween(String value1, String value2) {
+            addCriterion("CUSTOM_LINKMAN_PHONE between", value1, value2, "customLinkmanPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPhoneNotBetween(String value1, String value2) {
+            addCriterion("CUSTOM_LINKMAN_PHONE not between", value1, value2, "customLinkmanPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPostIsNull() {
+            addCriterion("CUSTOM_LINKMAN_POST is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPostIsNotNull() {
+            addCriterion("CUSTOM_LINKMAN_POST is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPostEqualTo(String value) {
+            addCriterion("CUSTOM_LINKMAN_POST =", value, "customLinkmanPost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPostNotEqualTo(String value) {
+            addCriterion("CUSTOM_LINKMAN_POST <>", value, "customLinkmanPost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPostGreaterThan(String value) {
+            addCriterion("CUSTOM_LINKMAN_POST >", value, "customLinkmanPost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPostGreaterThanOrEqualTo(String value) {
+            addCriterion("CUSTOM_LINKMAN_POST >=", value, "customLinkmanPost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPostLessThan(String value) {
+            addCriterion("CUSTOM_LINKMAN_POST <", value, "customLinkmanPost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPostLessThanOrEqualTo(String value) {
+            addCriterion("CUSTOM_LINKMAN_POST <=", value, "customLinkmanPost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPostLike(String value) {
+            addCriterion("CUSTOM_LINKMAN_POST like", value, "customLinkmanPost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPostNotLike(String value) {
+            addCriterion("CUSTOM_LINKMAN_POST not like", value, "customLinkmanPost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPostIn(List<String> values) {
+            addCriterion("CUSTOM_LINKMAN_POST in", values, "customLinkmanPost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPostNotIn(List<String> values) {
+            addCriterion("CUSTOM_LINKMAN_POST not in", values, "customLinkmanPost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPostBetween(String value1, String value2) {
+            addCriterion("CUSTOM_LINKMAN_POST between", value1, value2, "customLinkmanPost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanPostNotBetween(String value1, String value2) {
+            addCriterion("CUSTOM_LINKMAN_POST not between", value1, value2, "customLinkmanPost");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanRemarkIsNull() {
+            addCriterion("CUSTOM_LINKMAN_REMARK is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanRemarkIsNotNull() {
+            addCriterion("CUSTOM_LINKMAN_REMARK is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanRemarkEqualTo(String value) {
+            addCriterion("CUSTOM_LINKMAN_REMARK =", value, "customLinkmanRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanRemarkNotEqualTo(String value) {
+            addCriterion("CUSTOM_LINKMAN_REMARK <>", value, "customLinkmanRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanRemarkGreaterThan(String value) {
+            addCriterion("CUSTOM_LINKMAN_REMARK >", value, "customLinkmanRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanRemarkGreaterThanOrEqualTo(String value) {
+            addCriterion("CUSTOM_LINKMAN_REMARK >=", value, "customLinkmanRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanRemarkLessThan(String value) {
+            addCriterion("CUSTOM_LINKMAN_REMARK <", value, "customLinkmanRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanRemarkLessThanOrEqualTo(String value) {
+            addCriterion("CUSTOM_LINKMAN_REMARK <=", value, "customLinkmanRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanRemarkLike(String value) {
+            addCriterion("CUSTOM_LINKMAN_REMARK like", value, "customLinkmanRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanRemarkNotLike(String value) {
+            addCriterion("CUSTOM_LINKMAN_REMARK not like", value, "customLinkmanRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanRemarkIn(List<String> values) {
+            addCriterion("CUSTOM_LINKMAN_REMARK in", values, "customLinkmanRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanRemarkNotIn(List<String> values) {
+            addCriterion("CUSTOM_LINKMAN_REMARK not in", values, "customLinkmanRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanRemarkBetween(String value1, String value2) {
+            addCriterion("CUSTOM_LINKMAN_REMARK between", value1, value2, "customLinkmanRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomLinkmanRemarkNotBetween(String value1, String value2) {
+            addCriterion("CUSTOM_LINKMAN_REMARK not between", value1, value2, "customLinkmanRemark");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

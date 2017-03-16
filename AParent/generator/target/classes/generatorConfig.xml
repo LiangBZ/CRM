@@ -48,48 +48,24 @@
         <table tableName="business_opportunity">
         	<columnOverride column="PRE_DEAL_TIME" javaType="java.sql.Timestamp"></columnOverride>
         </table>  
-        <table tableName="comment">
-        	<columnOverride column="COMMENT_DATE" javaType="java.sql.Timestamp"></columnOverride>
-        </table>  
         <table tableName="custom"></table>  
         <table tableName="custom_rank"></table>  
         <table tableName="custom_state"></table>  
         <table tableName="department"></table>  
         <table tableName="employee"></table>  
-        <table tableName="follow_up"></table>  
-        <table tableName="follow_up_record">
-        	<columnOverride column="FOLLOW_UP_RECORD_DATE" javaType="java.sql.Timestamp"></columnOverride>
-        </table>  
-        <table tableName="linkman"></table>  
-        <table tableName="notify">
-        	<columnOverride column="NOTIFY_REPORT_DATE" javaType="java.sql.Timestamp"></columnOverride>
-        </table>  
-        <table tableName="notify_employee">
-        	<columnOverride column="REPLY_DATE" javaType="java.sql.Timestamp"></columnOverride>
-        </table>  
         <table tableName="process">
         	<columnOverride column="PROCESS_DATE" javaType="java.sql.Timestamp"></columnOverride>
-        	<columnOverride column="PROCESS_START_TIME" javaType="java.sql.Timestamp"></columnOverride>
-        	<columnOverride column="PROCESS_END_TIME" javaType="java.sql.Timestamp"></columnOverride>
+        	<columnOverride column="PROCESS_APPROVAL_DEADLINE" javaType="java.sql.Timestamp"></columnOverride>
         </table>  
-        <table tableName="process_templet"></table>  
         <table tableName="product"></table>  
-        <table tableName="report">
-        	<columnOverride column="REPORT_DATE" javaType="java.sql.Timestamp"></columnOverride>
-        </table>  
         <table tableName="sales_stage"></table>  
-        <table tableName="step"></table>  
-        <table tableName="step_detaile"></table>  
         <table tableName="task">
         	<columnOverride column="TASK_REPORT_DATE" javaType="java.sql.Timestamp"></columnOverride>
         	<columnOverride column="TASK_START_TIME" javaType="java.sql.Timestamp"></columnOverride>
         	<columnOverride column="TASK_END_TIME" javaType="java.sql.Timestamp"></columnOverride>
         </table>  
-        <table tableName="task_member"></table>  
-        <table tableName="templet_type"></table>  
         <table tableName="userrole"></table>  
         <table tableName="userrole_authority"></table>  
-        <table tableName="workoutside"></table>  
  
     </context>  
 </generatorConfiguration>

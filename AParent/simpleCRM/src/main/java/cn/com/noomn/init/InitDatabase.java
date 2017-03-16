@@ -16,7 +16,7 @@ import cn.com.noomn.vo.UserroleVo;
 public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> {
 
 	@Autowired
-	private cn.com.noomn.util.ResolveXMLUtil resolveXMLUtil;
+	private cn.com.noomn.util.AuthorityXMLResolveUtil resolveXMLUtil;
 	@Autowired
 	private InitXMLResolve initXMLResolve;
 	
@@ -35,8 +35,6 @@ public class InitDatabase implements ApplicationListener<ContextRefreshedEvent> 
 			System.out.println(departmentXMLByXPathExpression);
 			List<UserroleVo> userroleXMLByXPathExpression = initXMLResolve.getUserroleXMLByXPathExpression();
 			System.out.println(userroleXMLByXPathExpression);
-			boolean loaded = initXMLResolve.isLoaded();
-			System.out.println(loaded);
 		}
 	}
 

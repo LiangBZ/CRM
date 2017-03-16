@@ -15,18 +15,18 @@ import org.dom4j.io.SAXReader;
 
 import cn.com.noomn.vo.AuthorityVo;
 
-public final class ResolveXMLUtil {
+public final class AuthorityXMLResolveUtil {
 	
 	public SAXReader reader;
 	public final Document document;
 	public final Element rootElement;
 
-	public ResolveXMLUtil() {
+	public AuthorityXMLResolveUtil() {
 		//默认路径
 		this("authority.xml");
 	}
 	
-	public ResolveXMLUtil(String resourceURL) {
+	public AuthorityXMLResolveUtil(String resourceURL) {
 		try {
 			reader = new SAXReader();
 			document = reader.read(this.getClass().getClassLoader().getResourceAsStream(resourceURL));
@@ -169,23 +169,6 @@ public final class ResolveXMLUtil {
 		}
 		
 		return authorityVo;
-	}
-
-	
-	public static void main(String[] args) {
-		ResolveXMLUtil resolveXMLUtil = new ResolveXMLUtil();
-//		List<AuthorityVo> list = resolveXMLUtil.getAuthorityVoListByXPathExpression("//authority[@id='logins']");
-//		System.out.println(list);
-//		AuthorityVo authorityVo = resolveXMLUtil.getAuthorityVoSingleByXPathExpression("//key-value[@id='2222']");
-//		System.out.println(authorityVo);
-//		AuthorityVo authorityVo = resolveXMLUtil.getAuthorityFromElement(resolveXMLUtil.rootElement);
-//		System.out.println(authorityVo);
-//		List<AuthorityVo> authorityVoList = resolveXMLUtil.getAuthorityVoByXPathExpression("//authority");
-//		System.out.println(authorityVoList);
-//		Map<String, AuthorityVo> map = resolveXMLUtil.getAllLeafNodeByXPathExpression();
-//		System.out.println(map);
-//		List<String> keysList = resolveXMLUtil.getAllLeafNodeKeysByXPathExpression();
-//		System.out.println(keysList);
 	}
 
 }

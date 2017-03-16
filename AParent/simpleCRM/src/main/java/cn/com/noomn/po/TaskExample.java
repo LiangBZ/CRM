@@ -175,73 +175,213 @@ public class TaskExample {
             return (Criteria) this;
         }
 
-        public Criteria andTaskSponsorIdIsNull() {
-            addCriterion("TASK_SPONSOR_ID is null");
+        public Criteria andBusinessOpportunityIdTaskIsNull() {
+            addCriterion("BUSINESS_OPPORTUNITY_ID_TASK is null");
             return (Criteria) this;
         }
 
-        public Criteria andTaskSponsorIdIsNotNull() {
-            addCriterion("TASK_SPONSOR_ID is not null");
+        public Criteria andBusinessOpportunityIdTaskIsNotNull() {
+            addCriterion("BUSINESS_OPPORTUNITY_ID_TASK is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTaskSponsorIdEqualTo(String value) {
-            addCriterion("TASK_SPONSOR_ID =", value, "taskSponsorId");
+        public Criteria andBusinessOpportunityIdTaskEqualTo(String value) {
+            addCriterion("BUSINESS_OPPORTUNITY_ID_TASK =", value, "businessOpportunityIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andTaskSponsorIdNotEqualTo(String value) {
-            addCriterion("TASK_SPONSOR_ID <>", value, "taskSponsorId");
+        public Criteria andBusinessOpportunityIdTaskNotEqualTo(String value) {
+            addCriterion("BUSINESS_OPPORTUNITY_ID_TASK <>", value, "businessOpportunityIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andTaskSponsorIdGreaterThan(String value) {
-            addCriterion("TASK_SPONSOR_ID >", value, "taskSponsorId");
+        public Criteria andBusinessOpportunityIdTaskGreaterThan(String value) {
+            addCriterion("BUSINESS_OPPORTUNITY_ID_TASK >", value, "businessOpportunityIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andTaskSponsorIdGreaterThanOrEqualTo(String value) {
-            addCriterion("TASK_SPONSOR_ID >=", value, "taskSponsorId");
+        public Criteria andBusinessOpportunityIdTaskGreaterThanOrEqualTo(String value) {
+            addCriterion("BUSINESS_OPPORTUNITY_ID_TASK >=", value, "businessOpportunityIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andTaskSponsorIdLessThan(String value) {
-            addCriterion("TASK_SPONSOR_ID <", value, "taskSponsorId");
+        public Criteria andBusinessOpportunityIdTaskLessThan(String value) {
+            addCriterion("BUSINESS_OPPORTUNITY_ID_TASK <", value, "businessOpportunityIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andTaskSponsorIdLessThanOrEqualTo(String value) {
-            addCriterion("TASK_SPONSOR_ID <=", value, "taskSponsorId");
+        public Criteria andBusinessOpportunityIdTaskLessThanOrEqualTo(String value) {
+            addCriterion("BUSINESS_OPPORTUNITY_ID_TASK <=", value, "businessOpportunityIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andTaskSponsorIdLike(String value) {
-            addCriterion("TASK_SPONSOR_ID like", value, "taskSponsorId");
+        public Criteria andBusinessOpportunityIdTaskLike(String value) {
+            addCriterion("BUSINESS_OPPORTUNITY_ID_TASK like", value, "businessOpportunityIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andTaskSponsorIdNotLike(String value) {
-            addCriterion("TASK_SPONSOR_ID not like", value, "taskSponsorId");
+        public Criteria andBusinessOpportunityIdTaskNotLike(String value) {
+            addCriterion("BUSINESS_OPPORTUNITY_ID_TASK not like", value, "businessOpportunityIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andTaskSponsorIdIn(List<String> values) {
-            addCriterion("TASK_SPONSOR_ID in", values, "taskSponsorId");
+        public Criteria andBusinessOpportunityIdTaskIn(List<String> values) {
+            addCriterion("BUSINESS_OPPORTUNITY_ID_TASK in", values, "businessOpportunityIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andTaskSponsorIdNotIn(List<String> values) {
-            addCriterion("TASK_SPONSOR_ID not in", values, "taskSponsorId");
+        public Criteria andBusinessOpportunityIdTaskNotIn(List<String> values) {
+            addCriterion("BUSINESS_OPPORTUNITY_ID_TASK not in", values, "businessOpportunityIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andTaskSponsorIdBetween(String value1, String value2) {
-            addCriterion("TASK_SPONSOR_ID between", value1, value2, "taskSponsorId");
+        public Criteria andBusinessOpportunityIdTaskBetween(String value1, String value2) {
+            addCriterion("BUSINESS_OPPORTUNITY_ID_TASK between", value1, value2, "businessOpportunityIdTask");
             return (Criteria) this;
         }
 
-        public Criteria andTaskSponsorIdNotBetween(String value1, String value2) {
-            addCriterion("TASK_SPONSOR_ID not between", value1, value2, "taskSponsorId");
+        public Criteria andBusinessOpportunityIdTaskNotBetween(String value1, String value2) {
+            addCriterion("BUSINESS_OPPORTUNITY_ID_TASK not between", value1, value2, "businessOpportunityIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andSponsorIdTaskIsNull() {
+            addCriterion("SPONSOR_ID_TASK is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSponsorIdTaskIsNotNull() {
+            addCriterion("SPONSOR_ID_TASK is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSponsorIdTaskEqualTo(String value) {
+            addCriterion("SPONSOR_ID_TASK =", value, "sponsorIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andSponsorIdTaskNotEqualTo(String value) {
+            addCriterion("SPONSOR_ID_TASK <>", value, "sponsorIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andSponsorIdTaskGreaterThan(String value) {
+            addCriterion("SPONSOR_ID_TASK >", value, "sponsorIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andSponsorIdTaskGreaterThanOrEqualTo(String value) {
+            addCriterion("SPONSOR_ID_TASK >=", value, "sponsorIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andSponsorIdTaskLessThan(String value) {
+            addCriterion("SPONSOR_ID_TASK <", value, "sponsorIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andSponsorIdTaskLessThanOrEqualTo(String value) {
+            addCriterion("SPONSOR_ID_TASK <=", value, "sponsorIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andSponsorIdTaskLike(String value) {
+            addCriterion("SPONSOR_ID_TASK like", value, "sponsorIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andSponsorIdTaskNotLike(String value) {
+            addCriterion("SPONSOR_ID_TASK not like", value, "sponsorIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andSponsorIdTaskIn(List<String> values) {
+            addCriterion("SPONSOR_ID_TASK in", values, "sponsorIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andSponsorIdTaskNotIn(List<String> values) {
+            addCriterion("SPONSOR_ID_TASK not in", values, "sponsorIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andSponsorIdTaskBetween(String value1, String value2) {
+            addCriterion("SPONSOR_ID_TASK between", value1, value2, "sponsorIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andSponsorIdTaskNotBetween(String value1, String value2) {
+            addCriterion("SPONSOR_ID_TASK not between", value1, value2, "sponsorIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andReceiveIdTaskIsNull() {
+            addCriterion("RECEIVE_ID_TASK is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReceiveIdTaskIsNotNull() {
+            addCriterion("RECEIVE_ID_TASK is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReceiveIdTaskEqualTo(String value) {
+            addCriterion("RECEIVE_ID_TASK =", value, "receiveIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andReceiveIdTaskNotEqualTo(String value) {
+            addCriterion("RECEIVE_ID_TASK <>", value, "receiveIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andReceiveIdTaskGreaterThan(String value) {
+            addCriterion("RECEIVE_ID_TASK >", value, "receiveIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andReceiveIdTaskGreaterThanOrEqualTo(String value) {
+            addCriterion("RECEIVE_ID_TASK >=", value, "receiveIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andReceiveIdTaskLessThan(String value) {
+            addCriterion("RECEIVE_ID_TASK <", value, "receiveIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andReceiveIdTaskLessThanOrEqualTo(String value) {
+            addCriterion("RECEIVE_ID_TASK <=", value, "receiveIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andReceiveIdTaskLike(String value) {
+            addCriterion("RECEIVE_ID_TASK like", value, "receiveIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andReceiveIdTaskNotLike(String value) {
+            addCriterion("RECEIVE_ID_TASK not like", value, "receiveIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andReceiveIdTaskIn(List<String> values) {
+            addCriterion("RECEIVE_ID_TASK in", values, "receiveIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andReceiveIdTaskNotIn(List<String> values) {
+            addCriterion("RECEIVE_ID_TASK not in", values, "receiveIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andReceiveIdTaskBetween(String value1, String value2) {
+            addCriterion("RECEIVE_ID_TASK between", value1, value2, "receiveIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andReceiveIdTaskNotBetween(String value1, String value2) {
+            addCriterion("RECEIVE_ID_TASK not between", value1, value2, "receiveIdTask");
             return (Criteria) this;
         }
 
@@ -702,6 +842,196 @@ public class TaskExample {
 
         public Criteria andTaskEndTimeNotBetween(Timestamp value1, Timestamp value2) {
             addCriterion("TASK_END_TIME not between", value1, value2, "taskEndTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIsoutsideIsNull() {
+            addCriterion("TASK_ISOUTSIDE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIsoutsideIsNotNull() {
+            addCriterion("TASK_ISOUTSIDE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIsoutsideEqualTo(Integer value) {
+            addCriterion("TASK_ISOUTSIDE =", value, "taskIsoutside");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIsoutsideNotEqualTo(Integer value) {
+            addCriterion("TASK_ISOUTSIDE <>", value, "taskIsoutside");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIsoutsideGreaterThan(Integer value) {
+            addCriterion("TASK_ISOUTSIDE >", value, "taskIsoutside");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIsoutsideGreaterThanOrEqualTo(Integer value) {
+            addCriterion("TASK_ISOUTSIDE >=", value, "taskIsoutside");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIsoutsideLessThan(Integer value) {
+            addCriterion("TASK_ISOUTSIDE <", value, "taskIsoutside");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIsoutsideLessThanOrEqualTo(Integer value) {
+            addCriterion("TASK_ISOUTSIDE <=", value, "taskIsoutside");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIsoutsideIn(List<Integer> values) {
+            addCriterion("TASK_ISOUTSIDE in", values, "taskIsoutside");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIsoutsideNotIn(List<Integer> values) {
+            addCriterion("TASK_ISOUTSIDE not in", values, "taskIsoutside");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIsoutsideBetween(Integer value1, Integer value2) {
+            addCriterion("TASK_ISOUTSIDE between", value1, value2, "taskIsoutside");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIsoutsideNotBetween(Integer value1, Integer value2) {
+            addCriterion("TASK_ISOUTSIDE not between", value1, value2, "taskIsoutside");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskFeedbackIsNull() {
+            addCriterion("TASK_FEEDBACK is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskFeedbackIsNotNull() {
+            addCriterion("TASK_FEEDBACK is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskFeedbackEqualTo(String value) {
+            addCriterion("TASK_FEEDBACK =", value, "taskFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskFeedbackNotEqualTo(String value) {
+            addCriterion("TASK_FEEDBACK <>", value, "taskFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskFeedbackGreaterThan(String value) {
+            addCriterion("TASK_FEEDBACK >", value, "taskFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskFeedbackGreaterThanOrEqualTo(String value) {
+            addCriterion("TASK_FEEDBACK >=", value, "taskFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskFeedbackLessThan(String value) {
+            addCriterion("TASK_FEEDBACK <", value, "taskFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskFeedbackLessThanOrEqualTo(String value) {
+            addCriterion("TASK_FEEDBACK <=", value, "taskFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskFeedbackLike(String value) {
+            addCriterion("TASK_FEEDBACK like", value, "taskFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskFeedbackNotLike(String value) {
+            addCriterion("TASK_FEEDBACK not like", value, "taskFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskFeedbackIn(List<String> values) {
+            addCriterion("TASK_FEEDBACK in", values, "taskFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskFeedbackNotIn(List<String> values) {
+            addCriterion("TASK_FEEDBACK not in", values, "taskFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskFeedbackBetween(String value1, String value2) {
+            addCriterion("TASK_FEEDBACK between", value1, value2, "taskFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskFeedbackNotBetween(String value1, String value2) {
+            addCriterion("TASK_FEEDBACK not between", value1, value2, "taskFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCompletionStatusIsNull() {
+            addCriterion("TASK_COMPLETION_STATUS is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCompletionStatusIsNotNull() {
+            addCriterion("TASK_COMPLETION_STATUS is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCompletionStatusEqualTo(Integer value) {
+            addCriterion("TASK_COMPLETION_STATUS =", value, "taskCompletionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCompletionStatusNotEqualTo(Integer value) {
+            addCriterion("TASK_COMPLETION_STATUS <>", value, "taskCompletionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCompletionStatusGreaterThan(Integer value) {
+            addCriterion("TASK_COMPLETION_STATUS >", value, "taskCompletionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCompletionStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("TASK_COMPLETION_STATUS >=", value, "taskCompletionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCompletionStatusLessThan(Integer value) {
+            addCriterion("TASK_COMPLETION_STATUS <", value, "taskCompletionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCompletionStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("TASK_COMPLETION_STATUS <=", value, "taskCompletionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCompletionStatusIn(List<Integer> values) {
+            addCriterion("TASK_COMPLETION_STATUS in", values, "taskCompletionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCompletionStatusNotIn(List<Integer> values) {
+            addCriterion("TASK_COMPLETION_STATUS not in", values, "taskCompletionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCompletionStatusBetween(Integer value1, Integer value2) {
+            addCriterion("TASK_COMPLETION_STATUS between", value1, value2, "taskCompletionStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCompletionStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("TASK_COMPLETION_STATUS not between", value1, value2, "taskCompletionStatus");
             return (Criteria) this;
         }
     }

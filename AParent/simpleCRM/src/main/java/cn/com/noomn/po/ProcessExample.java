@@ -1,6 +1,5 @@
 package cn.com.noomn.po;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -176,6 +175,76 @@ public class ProcessExample {
             return (Criteria) this;
         }
 
+        public Criteria andTaskIdProcessIsNull() {
+            addCriterion("TASK_ID_PROCESS is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIdProcessIsNotNull() {
+            addCriterion("TASK_ID_PROCESS is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIdProcessEqualTo(String value) {
+            addCriterion("TASK_ID_PROCESS =", value, "taskIdProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIdProcessNotEqualTo(String value) {
+            addCriterion("TASK_ID_PROCESS <>", value, "taskIdProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIdProcessGreaterThan(String value) {
+            addCriterion("TASK_ID_PROCESS >", value, "taskIdProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIdProcessGreaterThanOrEqualTo(String value) {
+            addCriterion("TASK_ID_PROCESS >=", value, "taskIdProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIdProcessLessThan(String value) {
+            addCriterion("TASK_ID_PROCESS <", value, "taskIdProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIdProcessLessThanOrEqualTo(String value) {
+            addCriterion("TASK_ID_PROCESS <=", value, "taskIdProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIdProcessLike(String value) {
+            addCriterion("TASK_ID_PROCESS like", value, "taskIdProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIdProcessNotLike(String value) {
+            addCriterion("TASK_ID_PROCESS not like", value, "taskIdProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIdProcessIn(List<String> values) {
+            addCriterion("TASK_ID_PROCESS in", values, "taskIdProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIdProcessNotIn(List<String> values) {
+            addCriterion("TASK_ID_PROCESS not in", values, "taskIdProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIdProcessBetween(String value1, String value2) {
+            addCriterion("TASK_ID_PROCESS between", value1, value2, "taskIdProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskIdProcessNotBetween(String value1, String value2) {
+            addCriterion("TASK_ID_PROCESS not between", value1, value2, "taskIdProcess");
+            return (Criteria) this;
+        }
+
         public Criteria andProcessEmployeeIdIsNull() {
             addCriterion("PROCESS_EMPLOYEE_ID is null");
             return (Criteria) this;
@@ -246,213 +315,73 @@ public class ProcessExample {
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdIsNull() {
-            addCriterion("CUSTOM_ID is null");
+        public Criteria andProcessApproverIsNull() {
+            addCriterion("PROCESS_APPROVER is null");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdIsNotNull() {
-            addCriterion("CUSTOM_ID is not null");
+        public Criteria andProcessApproverIsNotNull() {
+            addCriterion("PROCESS_APPROVER is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdEqualTo(String value) {
-            addCriterion("CUSTOM_ID =", value, "customId");
+        public Criteria andProcessApproverEqualTo(String value) {
+            addCriterion("PROCESS_APPROVER =", value, "processApprover");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdNotEqualTo(String value) {
-            addCriterion("CUSTOM_ID <>", value, "customId");
+        public Criteria andProcessApproverNotEqualTo(String value) {
+            addCriterion("PROCESS_APPROVER <>", value, "processApprover");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdGreaterThan(String value) {
-            addCriterion("CUSTOM_ID >", value, "customId");
+        public Criteria andProcessApproverGreaterThan(String value) {
+            addCriterion("PROCESS_APPROVER >", value, "processApprover");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdGreaterThanOrEqualTo(String value) {
-            addCriterion("CUSTOM_ID >=", value, "customId");
+        public Criteria andProcessApproverGreaterThanOrEqualTo(String value) {
+            addCriterion("PROCESS_APPROVER >=", value, "processApprover");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdLessThan(String value) {
-            addCriterion("CUSTOM_ID <", value, "customId");
+        public Criteria andProcessApproverLessThan(String value) {
+            addCriterion("PROCESS_APPROVER <", value, "processApprover");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdLessThanOrEqualTo(String value) {
-            addCriterion("CUSTOM_ID <=", value, "customId");
+        public Criteria andProcessApproverLessThanOrEqualTo(String value) {
+            addCriterion("PROCESS_APPROVER <=", value, "processApprover");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdLike(String value) {
-            addCriterion("CUSTOM_ID like", value, "customId");
+        public Criteria andProcessApproverLike(String value) {
+            addCriterion("PROCESS_APPROVER like", value, "processApprover");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdNotLike(String value) {
-            addCriterion("CUSTOM_ID not like", value, "customId");
+        public Criteria andProcessApproverNotLike(String value) {
+            addCriterion("PROCESS_APPROVER not like", value, "processApprover");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdIn(List<String> values) {
-            addCriterion("CUSTOM_ID in", values, "customId");
+        public Criteria andProcessApproverIn(List<String> values) {
+            addCriterion("PROCESS_APPROVER in", values, "processApprover");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdNotIn(List<String> values) {
-            addCriterion("CUSTOM_ID not in", values, "customId");
+        public Criteria andProcessApproverNotIn(List<String> values) {
+            addCriterion("PROCESS_APPROVER not in", values, "processApprover");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdBetween(String value1, String value2) {
-            addCriterion("CUSTOM_ID between", value1, value2, "customId");
+        public Criteria andProcessApproverBetween(String value1, String value2) {
+            addCriterion("PROCESS_APPROVER between", value1, value2, "processApprover");
             return (Criteria) this;
         }
 
-        public Criteria andCustomIdNotBetween(String value1, String value2) {
-            addCriterion("CUSTOM_ID not between", value1, value2, "customId");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessTempletIdIsNull() {
-            addCriterion("PROCESS_TEMPLET_ID is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessTempletIdIsNotNull() {
-            addCriterion("PROCESS_TEMPLET_ID is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessTempletIdEqualTo(String value) {
-            addCriterion("PROCESS_TEMPLET_ID =", value, "processTempletId");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessTempletIdNotEqualTo(String value) {
-            addCriterion("PROCESS_TEMPLET_ID <>", value, "processTempletId");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessTempletIdGreaterThan(String value) {
-            addCriterion("PROCESS_TEMPLET_ID >", value, "processTempletId");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessTempletIdGreaterThanOrEqualTo(String value) {
-            addCriterion("PROCESS_TEMPLET_ID >=", value, "processTempletId");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessTempletIdLessThan(String value) {
-            addCriterion("PROCESS_TEMPLET_ID <", value, "processTempletId");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessTempletIdLessThanOrEqualTo(String value) {
-            addCriterion("PROCESS_TEMPLET_ID <=", value, "processTempletId");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessTempletIdLike(String value) {
-            addCriterion("PROCESS_TEMPLET_ID like", value, "processTempletId");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessTempletIdNotLike(String value) {
-            addCriterion("PROCESS_TEMPLET_ID not like", value, "processTempletId");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessTempletIdIn(List<String> values) {
-            addCriterion("PROCESS_TEMPLET_ID in", values, "processTempletId");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessTempletIdNotIn(List<String> values) {
-            addCriterion("PROCESS_TEMPLET_ID not in", values, "processTempletId");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessTempletIdBetween(String value1, String value2) {
-            addCriterion("PROCESS_TEMPLET_ID between", value1, value2, "processTempletId");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessTempletIdNotBetween(String value1, String value2) {
-            addCriterion("PROCESS_TEMPLET_ID not between", value1, value2, "processTempletId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepDetaileIdIsNull() {
-            addCriterion("STEP_DETAILE_ID is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepDetaileIdIsNotNull() {
-            addCriterion("STEP_DETAILE_ID is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepDetaileIdEqualTo(String value) {
-            addCriterion("STEP_DETAILE_ID =", value, "stepDetaileId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepDetaileIdNotEqualTo(String value) {
-            addCriterion("STEP_DETAILE_ID <>", value, "stepDetaileId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepDetaileIdGreaterThan(String value) {
-            addCriterion("STEP_DETAILE_ID >", value, "stepDetaileId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepDetaileIdGreaterThanOrEqualTo(String value) {
-            addCriterion("STEP_DETAILE_ID >=", value, "stepDetaileId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepDetaileIdLessThan(String value) {
-            addCriterion("STEP_DETAILE_ID <", value, "stepDetaileId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepDetaileIdLessThanOrEqualTo(String value) {
-            addCriterion("STEP_DETAILE_ID <=", value, "stepDetaileId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepDetaileIdLike(String value) {
-            addCriterion("STEP_DETAILE_ID like", value, "stepDetaileId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepDetaileIdNotLike(String value) {
-            addCriterion("STEP_DETAILE_ID not like", value, "stepDetaileId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepDetaileIdIn(List<String> values) {
-            addCriterion("STEP_DETAILE_ID in", values, "stepDetaileId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepDetaileIdNotIn(List<String> values) {
-            addCriterion("STEP_DETAILE_ID not in", values, "stepDetaileId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepDetaileIdBetween(String value1, String value2) {
-            addCriterion("STEP_DETAILE_ID between", value1, value2, "stepDetaileId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepDetaileIdNotBetween(String value1, String value2) {
-            addCriterion("STEP_DETAILE_ID not between", value1, value2, "stepDetaileId");
+        public Criteria andProcessApproverNotBetween(String value1, String value2) {
+            addCriterion("PROCESS_APPROVER not between", value1, value2, "processApprover");
             return (Criteria) this;
         }
 
@@ -513,6 +442,76 @@ public class ProcessExample {
 
         public Criteria andProcessDateNotBetween(Timestamp value1, Timestamp value2) {
             addCriterion("PROCESS_DATE not between", value1, value2, "processDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessTitleIsNull() {
+            addCriterion("PROCESS_TITLE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessTitleIsNotNull() {
+            addCriterion("PROCESS_TITLE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessTitleEqualTo(String value) {
+            addCriterion("PROCESS_TITLE =", value, "processTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessTitleNotEqualTo(String value) {
+            addCriterion("PROCESS_TITLE <>", value, "processTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessTitleGreaterThan(String value) {
+            addCriterion("PROCESS_TITLE >", value, "processTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessTitleGreaterThanOrEqualTo(String value) {
+            addCriterion("PROCESS_TITLE >=", value, "processTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessTitleLessThan(String value) {
+            addCriterion("PROCESS_TITLE <", value, "processTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessTitleLessThanOrEqualTo(String value) {
+            addCriterion("PROCESS_TITLE <=", value, "processTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessTitleLike(String value) {
+            addCriterion("PROCESS_TITLE like", value, "processTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessTitleNotLike(String value) {
+            addCriterion("PROCESS_TITLE not like", value, "processTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessTitleIn(List<String> values) {
+            addCriterion("PROCESS_TITLE in", values, "processTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessTitleNotIn(List<String> values) {
+            addCriterion("PROCESS_TITLE not in", values, "processTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessTitleBetween(String value1, String value2) {
+            addCriterion("PROCESS_TITLE between", value1, value2, "processTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessTitleNotBetween(String value1, String value2) {
+            addCriterion("PROCESS_TITLE not between", value1, value2, "processTitle");
             return (Criteria) this;
         }
 
@@ -586,186 +585,6 @@ public class ProcessExample {
             return (Criteria) this;
         }
 
-        public Criteria andProcessStartTimeIsNull() {
-            addCriterion("PROCESS_START_TIME is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessStartTimeIsNotNull() {
-            addCriterion("PROCESS_START_TIME is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessStartTimeEqualTo(Timestamp value) {
-            addCriterion("PROCESS_START_TIME =", value, "processStartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessStartTimeNotEqualTo(Timestamp value) {
-            addCriterion("PROCESS_START_TIME <>", value, "processStartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessStartTimeGreaterThan(Timestamp value) {
-            addCriterion("PROCESS_START_TIME >", value, "processStartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessStartTimeGreaterThanOrEqualTo(Timestamp value) {
-            addCriterion("PROCESS_START_TIME >=", value, "processStartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessStartTimeLessThan(Timestamp value) {
-            addCriterion("PROCESS_START_TIME <", value, "processStartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessStartTimeLessThanOrEqualTo(Timestamp value) {
-            addCriterion("PROCESS_START_TIME <=", value, "processStartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessStartTimeIn(List<Timestamp> values) {
-            addCriterion("PROCESS_START_TIME in", values, "processStartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessStartTimeNotIn(List<Timestamp> values) {
-            addCriterion("PROCESS_START_TIME not in", values, "processStartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessStartTimeBetween(Timestamp value1, Timestamp value2) {
-            addCriterion("PROCESS_START_TIME between", value1, value2, "processStartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessStartTimeNotBetween(Timestamp value1, Timestamp value2) {
-            addCriterion("PROCESS_START_TIME not between", value1, value2, "processStartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessEndTimeIsNull() {
-            addCriterion("PROCESS_END_TIME is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessEndTimeIsNotNull() {
-            addCriterion("PROCESS_END_TIME is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessEndTimeEqualTo(Timestamp value) {
-            addCriterion("PROCESS_END_TIME =", value, "processEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessEndTimeNotEqualTo(Timestamp value) {
-            addCriterion("PROCESS_END_TIME <>", value, "processEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessEndTimeGreaterThan(Timestamp value) {
-            addCriterion("PROCESS_END_TIME >", value, "processEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessEndTimeGreaterThanOrEqualTo(Timestamp value) {
-            addCriterion("PROCESS_END_TIME >=", value, "processEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessEndTimeLessThan(Timestamp value) {
-            addCriterion("PROCESS_END_TIME <", value, "processEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessEndTimeLessThanOrEqualTo(Timestamp value) {
-            addCriterion("PROCESS_END_TIME <=", value, "processEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessEndTimeIn(List<Timestamp> values) {
-            addCriterion("PROCESS_END_TIME in", values, "processEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessEndTimeNotIn(List<Timestamp> values) {
-            addCriterion("PROCESS_END_TIME not in", values, "processEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessEndTimeBetween(Timestamp value1, Timestamp value2) {
-            addCriterion("PROCESS_END_TIME between", value1, value2, "processEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessEndTimeNotBetween(Timestamp value1, Timestamp value2) {
-            addCriterion("PROCESS_END_TIME not between", value1, value2, "processEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessMoneyIsNull() {
-            addCriterion("PROCESS_MONEY is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessMoneyIsNotNull() {
-            addCriterion("PROCESS_MONEY is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessMoneyEqualTo(BigDecimal value) {
-            addCriterion("PROCESS_MONEY =", value, "processMoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessMoneyNotEqualTo(BigDecimal value) {
-            addCriterion("PROCESS_MONEY <>", value, "processMoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessMoneyGreaterThan(BigDecimal value) {
-            addCriterion("PROCESS_MONEY >", value, "processMoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessMoneyGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("PROCESS_MONEY >=", value, "processMoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessMoneyLessThan(BigDecimal value) {
-            addCriterion("PROCESS_MONEY <", value, "processMoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessMoneyLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("PROCESS_MONEY <=", value, "processMoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessMoneyIn(List<BigDecimal> values) {
-            addCriterion("PROCESS_MONEY in", values, "processMoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessMoneyNotIn(List<BigDecimal> values) {
-            addCriterion("PROCESS_MONEY not in", values, "processMoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessMoneyBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("PROCESS_MONEY between", value1, value2, "processMoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessMoneyNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("PROCESS_MONEY not between", value1, value2, "processMoney");
-            return (Criteria) this;
-        }
-
         public Criteria andProcessStateIsNull() {
             addCriterion("PROCESS_STATE is null");
             return (Criteria) this;
@@ -776,63 +595,113 @@ public class ProcessExample {
             return (Criteria) this;
         }
 
-        public Criteria andProcessStateEqualTo(String value) {
+        public Criteria andProcessStateEqualTo(Integer value) {
             addCriterion("PROCESS_STATE =", value, "processState");
             return (Criteria) this;
         }
 
-        public Criteria andProcessStateNotEqualTo(String value) {
+        public Criteria andProcessStateNotEqualTo(Integer value) {
             addCriterion("PROCESS_STATE <>", value, "processState");
             return (Criteria) this;
         }
 
-        public Criteria andProcessStateGreaterThan(String value) {
+        public Criteria andProcessStateGreaterThan(Integer value) {
             addCriterion("PROCESS_STATE >", value, "processState");
             return (Criteria) this;
         }
 
-        public Criteria andProcessStateGreaterThanOrEqualTo(String value) {
+        public Criteria andProcessStateGreaterThanOrEqualTo(Integer value) {
             addCriterion("PROCESS_STATE >=", value, "processState");
             return (Criteria) this;
         }
 
-        public Criteria andProcessStateLessThan(String value) {
+        public Criteria andProcessStateLessThan(Integer value) {
             addCriterion("PROCESS_STATE <", value, "processState");
             return (Criteria) this;
         }
 
-        public Criteria andProcessStateLessThanOrEqualTo(String value) {
+        public Criteria andProcessStateLessThanOrEqualTo(Integer value) {
             addCriterion("PROCESS_STATE <=", value, "processState");
             return (Criteria) this;
         }
 
-        public Criteria andProcessStateLike(String value) {
-            addCriterion("PROCESS_STATE like", value, "processState");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessStateNotLike(String value) {
-            addCriterion("PROCESS_STATE not like", value, "processState");
-            return (Criteria) this;
-        }
-
-        public Criteria andProcessStateIn(List<String> values) {
+        public Criteria andProcessStateIn(List<Integer> values) {
             addCriterion("PROCESS_STATE in", values, "processState");
             return (Criteria) this;
         }
 
-        public Criteria andProcessStateNotIn(List<String> values) {
+        public Criteria andProcessStateNotIn(List<Integer> values) {
             addCriterion("PROCESS_STATE not in", values, "processState");
             return (Criteria) this;
         }
 
-        public Criteria andProcessStateBetween(String value1, String value2) {
+        public Criteria andProcessStateBetween(Integer value1, Integer value2) {
             addCriterion("PROCESS_STATE between", value1, value2, "processState");
             return (Criteria) this;
         }
 
-        public Criteria andProcessStateNotBetween(String value1, String value2) {
+        public Criteria andProcessStateNotBetween(Integer value1, Integer value2) {
             addCriterion("PROCESS_STATE not between", value1, value2, "processState");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessApprovalDeadlineIsNull() {
+            addCriterion("PROCESS_APPROVAL_DEADLINE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessApprovalDeadlineIsNotNull() {
+            addCriterion("PROCESS_APPROVAL_DEADLINE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessApprovalDeadlineEqualTo(Timestamp value) {
+            addCriterion("PROCESS_APPROVAL_DEADLINE =", value, "processApprovalDeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessApprovalDeadlineNotEqualTo(Timestamp value) {
+            addCriterion("PROCESS_APPROVAL_DEADLINE <>", value, "processApprovalDeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessApprovalDeadlineGreaterThan(Timestamp value) {
+            addCriterion("PROCESS_APPROVAL_DEADLINE >", value, "processApprovalDeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessApprovalDeadlineGreaterThanOrEqualTo(Timestamp value) {
+            addCriterion("PROCESS_APPROVAL_DEADLINE >=", value, "processApprovalDeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessApprovalDeadlineLessThan(Timestamp value) {
+            addCriterion("PROCESS_APPROVAL_DEADLINE <", value, "processApprovalDeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessApprovalDeadlineLessThanOrEqualTo(Timestamp value) {
+            addCriterion("PROCESS_APPROVAL_DEADLINE <=", value, "processApprovalDeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessApprovalDeadlineIn(List<Timestamp> values) {
+            addCriterion("PROCESS_APPROVAL_DEADLINE in", values, "processApprovalDeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessApprovalDeadlineNotIn(List<Timestamp> values) {
+            addCriterion("PROCESS_APPROVAL_DEADLINE not in", values, "processApprovalDeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessApprovalDeadlineBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("PROCESS_APPROVAL_DEADLINE between", value1, value2, "processApprovalDeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessApprovalDeadlineNotBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("PROCESS_APPROVAL_DEADLINE not between", value1, value2, "processApprovalDeadline");
             return (Criteria) this;
         }
     }

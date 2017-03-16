@@ -1,8 +1,6 @@
 package cn.com.noomn.util;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +9,6 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
-import org.dom4j.io.XMLWriter;
 
 import cn.com.noomn.vo.DepartmentVo;
 import cn.com.noomn.vo.EmployeeVo;
@@ -37,17 +34,6 @@ public class InitXMLResolve {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-	}
-	
-	/**
-	 * 判断是否加载过
-	 * @return
-	 */
-	public boolean isLoaded() {
-		Node selectNode = document.selectSingleNode("//init");
-		Element element = (Element)selectNode;
-		String inited =  element.attribute("inited").getStringValue();
-		return "1".equals(inited) ? true : false;
 	}
 	
 	/**
@@ -123,9 +109,7 @@ public class InitXMLResolve {
 	private EmployeeVo setEmployeeAttrFromElement(Element element) {
 		String employeeId = element.attribute("employeeId").getStringValue();
 		String departmentIdEmployee = element.attribute("departmentIdEmployee").getStringValue();
-		String employeePhone = element.attribute("employeePhone").getStringValue();
-		String employeeIdnumber = element.attribute("employeeIdnumber").getStringValue();
-		String employeeState = element.attribute("employeeState").getStringValue();
+		String userroleIdEmployee = element.attribute("userroleIdEmployee").getStringValue();
 		String employeeNumber = element.attribute("employeeNumber").getStringValue();
 		String employeeUsername = element.attribute("employeeUsername").getStringValue();
 		String employeePassword = element.attribute("employeePassword").getStringValue();
@@ -133,46 +117,19 @@ public class InitXMLResolve {
 		EmployeeVo employeeVo = new EmployeeVo();
 		employeeVo.setEmployeeId(employeeId);
 		employeeVo.setDepartmentIdEmployee(departmentIdEmployee);
-		employeeVo.setEmployeePhone(employeePhone);
-		employeeVo.setEmployeeIdnumber(employeeIdnumber);
-		employeeVo.setEmployeeState(employeeState);
+		employeeVo.setUserroleIdEmployee(userroleIdEmployee);
 		employeeVo.setEmployeeNumber(employeeNumber);
 		employeeVo.setEmployeeUsername(employeeUsername);
 		employeeVo.setEmployeePassword(employeePassword);
 		
 		return employeeVo;
 	}
-	
-	public void resetAttribute() {
-		XMLWriter writer = null;
-		try {
-			String path = InitXMLResolve.class.getClassLoader().getResource("init.xml").getPath();
-			writer = new XMLWriter(new FileWriter(path));
-			writer.write(document);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			if(writer != null)
-				try {
-					writer.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-					throw new RuntimeException(e);
-				}
-		}
-	}
 
 	public static void main(String[] args) {
 		InitXMLResolve initXMLResolve = new InitXMLResolve();
-		boolean loaded = initXMLResolve.isLoaded();
-		if(loaded) return;
 		
 		List<EmployeeVo> employeeList = initXMLResolve.getEmployeeXMLByXPathExpression();
 		List<UserroleVo> userroleList = initXMLResolve.getUserroleXMLByXPathExpression();
 		List<DepartmentVo> departmentList = initXMLResolve.getDepartmentXMLByXPathExpression();
-		System.out.println(departmentList);
-		initXMLResolve.rootElement.setAttributeValue("inited", "0");
-		initXMLResolve.resetAttribute();
 	}
 }

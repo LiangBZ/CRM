@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- xml读取权限 -->
-	<bean id="resolveXMLUtil" class="cn.com.noomn.util.ResolveXMLUtil">
+	<bean id="resolveXMLUtil" class="cn.com.noomn.util.AuthorityXMLResolveUtil">
 		<constructor-arg index="0" name="resourceURL" type="java.lang.String" value="authority.xml"></constructor-arg>
 	</bean>
 	<!-- xml读取权限 -->

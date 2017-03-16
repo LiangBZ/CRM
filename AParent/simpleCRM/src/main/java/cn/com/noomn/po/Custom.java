@@ -13,6 +13,14 @@ public class Custom {
 
     private String customAddress;
 
+    private String customLinkmanName;
+
+    private String customLinkmanPhone;
+
+    private String customLinkmanPost;
+
+    private String customLinkmanRemark;
+
     public String getCustomId() {
         return customId;
     }
@@ -59,5 +67,37 @@ public class Custom {
 
     public void setCustomAddress(String customAddress) {
         this.customAddress = customAddress == null ? null : customAddress.trim();
+    }
+
+    public String getCustomLinkmanName() {
+        return customLinkmanName;
+    }
+
+    public void setCustomLinkmanName(String customLinkmanName) {
+        this.customLinkmanName = customLinkmanName == null ? null : customLinkmanName.trim();
+    }
+
+    public String getCustomLinkmanPhone() {
+        return customLinkmanPhone;
+    }
+
+    public void setCustomLinkmanPhone(String customLinkmanPhone) {
+        this.customLinkmanPhone = customLinkmanPhone == null ? null : customLinkmanPhone.trim();
+    }
+
+    public String getCustomLinkmanPost() {
+        return customLinkmanPost;
+    }
+
+    public void setCustomLinkmanPost(String customLinkmanPost) {
+        this.customLinkmanPost = customLinkmanPost == null ? null : customLinkmanPost.trim();
+    }
+
+    public String getCustomLinkmanRemark() {
+        return customLinkmanRemark;
+    }
+
+    public void setCustomLinkmanRemark(String customLinkmanRemark) {
+        this.customLinkmanRemark = customLinkmanRemark == null ? null : customLinkmanRemark.trim();
     }
 }

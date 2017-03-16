@@ -300,23 +300,11 @@
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:void(0)" class="">
-                        <i class="icon-cogs"></i>
-                        <span>通知</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="javascript:void(0)">收到的通知</a></li>
-                        <li><a class="" href="javascript:void(0)">发出的通知</a></li>
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:void(0)" class="">
                         <i class="icon-tasks"></i>
                         <span>流程</span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="javascript:void(0)">创建流程</a></li>
                         <li><a class="" href="javascript:void(0)">申请流程</a></li>
                         <li><a class="" href="javascript:void(0)">需要我审批的流程</a></li>
                         <li><a class="" href="javascript:void(0)">历史流程</a></li>
@@ -334,26 +322,10 @@
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a href="javascript:void(0)" class="">
-                        <i class="icon-fire"></i>
-                        <span>工作汇报</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="javascript:void(0)">我的工作汇报</a></li>
-                        <li><a class="" href="javascript:void(0)">我可以查看的工作汇报</a></li>
-                    </ul>
-                </li>
-                <li class="sub-menu">
                     <a class="" href="javascript:void(0)">
                         <i class="icon-trophy"></i>
                         <span>客户管理</span>
-                        <span class="arrow"></span>
                     </a>
-                    <ul class="sub">
-                        <li><a href="javascript:void(0)" class="">我跟进的客户</a></li>
-                        <li><a href="javascript:void(0)" class="">我可以查看的客户</a></li>
-                    </ul>
                 </li>
                 <li class="sub-menu">
                     <a class="" href="javascript:void(0)">

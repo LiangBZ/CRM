@@ -9,29 +9,19 @@ public class Employee {
 
     private String userroleIdEmployee;
 
-    private Date employeeEntrydate;
+    private String employeeUsername;
+
+    private String employeePassword;
 
     private String employeeNumber;
 
     private String employeeRealName;
 
-    private String employeeSex;
-
     private String employeeEmail;
 
     private String employeePhone;
 
-    private String employeeAddress;
-
-    private Date employeeBirthday;
-
-    private String employeeIdnumber;
-
-    private String employeeState;
-
-    private String employeeUsername;
-
-    private String employeePassword;
+    private Integer employeeInit;
 
     private String employeeInstruct;
 
@@ -61,12 +51,20 @@ public class Employee {
         this.userroleIdEmployee = userroleIdEmployee == null ? null : userroleIdEmployee.trim();
     }
 
-    public Date getEmployeeEntrydate() {
-        return employeeEntrydate;
+    public String getEmployeeUsername() {
+        return employeeUsername;
     }
 
-    public void setEmployeeEntrydate(Date employeeEntrydate) {
-        this.employeeEntrydate = employeeEntrydate;
+    public void setEmployeeUsername(String employeeUsername) {
+        this.employeeUsername = employeeUsername == null ? null : employeeUsername.trim();
+    }
+
+    public String getEmployeePassword() {
+        return employeePassword;
+    }
+
+    public void setEmployeePassword(String employeePassword) {
+        this.employeePassword = employeePassword == null ? null : employeePassword.trim();
     }
 
     public String getEmployeeNumber() {
@@ -85,14 +83,6 @@ public class Employee {
         this.employeeRealName = employeeRealName == null ? null : employeeRealName.trim();
     }
 
-    public String getEmployeeSex() {
-        return employeeSex;
-    }
-
-    public void setEmployeeSex(String employeeSex) {
-        this.employeeSex = employeeSex == null ? null : employeeSex.trim();
-    }
-
     public String getEmployeeEmail() {
         return employeeEmail;
     }
@@ -109,52 +99,12 @@ public class Employee {
         this.employeePhone = employeePhone == null ? null : employeePhone.trim();
     }
 
-    public String getEmployeeAddress() {
-        return employeeAddress;
+    public Integer getEmployeeInit() {
+        return employeeInit;
     }
 
-    public void setEmployeeAddress(String employeeAddress) {
-        this.employeeAddress = employeeAddress == null ? null : employeeAddress.trim();
-    }
-
-    public Date getEmployeeBirthday() {
-        return employeeBirthday;
-    }
-
-    public void setEmployeeBirthday(Date employeeBirthday) {
-        this.employeeBirthday = employeeBirthday;
-    }
-
-    public String getEmployeeIdnumber() {
-        return employeeIdnumber;
-    }
-
-    public void setEmployeeIdnumber(String employeeIdnumber) {
-        this.employeeIdnumber = employeeIdnumber == null ? null : employeeIdnumber.trim();
-    }
-
-    public String getEmployeeState() {
-        return employeeState;
-    }
-
-    public void setEmployeeState(String employeeState) {
-        this.employeeState = employeeState == null ? null : employeeState.trim();
-    }
-
-    public String getEmployeeUsername() {
-        return employeeUsername;
-    }
-
-    public void setEmployeeUsername(String employeeUsername) {
-        this.employeeUsername = employeeUsername == null ? null : employeeUsername.trim();
-    }
-
-    public String getEmployeePassword() {
-        return employeePassword;
-    }
-
-    public void setEmployeePassword(String employeePassword) {
-        this.employeePassword = employeePassword == null ? null : employeePassword.trim();
+    public void setEmployeeInit(Integer employeeInit) {
+        this.employeeInit = employeeInit;
     }
 
     public String getEmployeeInstruct() {
