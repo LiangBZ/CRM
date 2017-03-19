@@ -1,6 +1,7 @@
 package cn.com.noomn.service.impl;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class LoginsServiceImpl implements LoginsService {
 	}
 
 	@Override
-	public EmployeeVo selectEmployee(EmployeeVo employeeVo) {
+	public List<EmployeeVo> selectEmployee(EmployeeVo employeeVo) {
 		try {
 			return employeeVoMapper.selectForNimble(employeeVo);
 		} catch (Exception e) {

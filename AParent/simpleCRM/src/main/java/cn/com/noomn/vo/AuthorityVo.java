@@ -9,6 +9,15 @@ public class AuthorityVo extends Authority {
 	private boolean isFatherNode = false;
 	private String fatherNodeId;
 	private List<AuthorityVo> AuthorityVoList = new ArrayList<AuthorityVo>();
+	private boolean isContain = false;
+
+	public boolean isContain() {
+		return isContain;
+	}
+
+	public void setContain(boolean isContain) {
+		this.isContain = isContain;
+	}
 
 	public String getFatherNodeId() {
 		return fatherNodeId;

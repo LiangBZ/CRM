@@ -1,11 +1,14 @@
 package cn.com.noomn.controller;
 
+import java.io.File;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -13,24 +16,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.com.noomn.service.LoginsService;
+import cn.com.noomn.service.UserroleAuthorityVoService;
 import cn.com.noomn.util.Infos;
 import cn.com.noomn.util.Message;
 import cn.com.noomn.util.RSAModel;
 import cn.com.noomn.vo.EmployeeVo;
+import cn.com.noomn.vo.UserroleAuthorityVo;
 
 @Controller
 @RequestMapping(value="/logins/")
 public class LoginsController {
 	
+	@Value("${project.url}")
+	private String projectURL;
+	
 	@Autowired
-	private cn.com.noomn.service.LoginsService loginsService;
+	private LoginsService loginsService;
+	@Autowired
+	private UserroleAuthorityVoService userroleAuthorityVoService;
 	
 	@ModelAttribute
 	private void getModel (
 			Map<String, Object> map,
 			EmployeeVo employeeVo) {
-		employeeVo = loginsService.selectEmployee(employeeVo);
-		if(employeeVo != null) {
+		List<EmployeeVo> employeeList = loginsService.selectEmployee(employeeVo);
+		if(employeeList.size() != 0) {
+			employeeVo = employeeList.get(0);
 			map.put("employeeVo", employeeVo);
 			map.put("instruct", employeeVo.getEmployeeInstruct());
 		}
@@ -72,6 +84,23 @@ public class LoginsController {
 		try {
 			boolean isExist = loginsService.selectForlogin(employeeVo);
 			if(isExist) {
+				session.setAttribute("employeeId", employeeVo.getEmployeeId());
+				session.setAttribute("employeeRealName", employeeVo.getEmployeeRealName());
+				
+				String webInf = this.getClass().getClassLoader().getResource("/").getPath().replace("classes/", "");
+				String imgPath = webInf + "mainBody/img/png/" + employeeVo.getEmployeeId() + ".png";
+				File file = new File(imgPath);
+				boolean exists = file.exists();
+				if(exists)
+					session.setAttribute("employeeImgPath", projectURL + "/mainBody/img/png/" + employeeVo.getEmployeeId() + ".png");
+				else
+					session.setAttribute("employeeImgPath", projectURL + "/mainBody/img/png/no_image.png");
+				
+				UserroleAuthorityVo userroleAuthorityVo = new UserroleAuthorityVo();
+				userroleAuthorityVo.setUserroleId(employeeVo.getUserroleIdEmployee());
+				Map<String, String> authorityMap = userroleAuthorityVoService.selectAuthorityToMap(userroleAuthorityVo);
+				session.setAttribute("authorityMap", authorityMap);
+				
 				return "mainBody/jsp/container";
 			}
 		} catch (Exception e) {
@@ -84,6 +113,7 @@ public class LoginsController {
 		infos.setMessage(Message.ERROR);
 		infos.setObj("用户名或者密码错误");
 		map.put("infos", infos);
+		
 		return "login/index";
 	}
 	

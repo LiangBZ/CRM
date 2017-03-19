@@ -31,4 +31,10 @@ public interface DepartmentVoMapper {
 	 * @return
 	 */
 	List<String> selectBeUsedDepartmentId();
+	
+	/**
+	 * 获取已经存在的DepartmentId
+	 * @return
+	 */
+	List<String> selectDepartmentId();
 }

@@ -27,4 +27,20 @@
 		</foreach>
 	</where>
   </delete>
+
+  <select id="selectForNimble" parameterType="cn.com.noomn.vo.UserroleAuthorityVo"
+		resultMap="BaseResultMap">
+		select * from userrole_authority
+		<where>
+			<if test="userroleAuthorityId != null">
+				and USERROLE_AUTHORITY_ID = #{userroleAuthorityId,jdbcType=VARCHAR}
+			</if>
+			<if test="userroleId != null">
+				and USERROLE_ID = #{userroleId,jdbcType=VARCHAR}
+			</if>
+			<if test="authorityId != null">
+				and AUTHORITY_ID = #{authorityId,jdbcType=VARCHAR}
+			</if>
+		</where>
+  </select>
 </mapper>

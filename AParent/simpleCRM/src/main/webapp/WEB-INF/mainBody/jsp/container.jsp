@@ -1,11 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<% 
+response.setHeader("Pragma","No-cache");
+response.setHeader("Cache-Control","no-cache");
+response.setDateHeader("Expires", -10);
+%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>container</title>
 	<!-- jquery -->
+   <%--  <script src="${pageContext.request.contextPath}/mainBody/js/jquery-1.8.2.min.js"></script> --%>
     <script src="${pageContext.request.contextPath}/Util/js/jquery/jquery.2.1.1.min.js"></script>
+	<link href="${pageContext.request.contextPath}/mainBody/css/bootstrap-fileupload.css" rel="stylesheet"/>
 	<link href="${pageContext.request.contextPath}/mainBody/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/mainBody/css/bootstrap-responsive.min.css" rel="stylesheet"/>
    	<link href="${pageContext.request.contextPath}/mainBody/css/font-awesome.css" rel="stylesheet"/>
@@ -21,6 +29,12 @@
 	<%@ include file="/WEB-INF/Util/jsp/alertModal.jsp" %>
 	<%@ include file="/WEB-INF/Util/jsp/organizing_editDepartment.jsp" %>
 	<%@ include file="/WEB-INF/Util/jsp/organizing_addDepartment.jsp" %>
+	
+	<script type="text/javascript">
+		$.ajaxSetup({
+			cache:false
+		});
+	</script>
 </head>
 
 <body class="fixed-top">
@@ -34,7 +48,7 @@
             </div>
 
 
-            <a class="brand" href="${pageContext.request.contextPath}">
+            <a class="brand" href="${pageContext.request.contextPath}/logout/removeSession">
                 <img src="${pageContext.request.contextPath}/mainBody/img/png/logo.png" alt="Metro Lab"/>
             </a>
 
@@ -245,15 +259,13 @@
                 <ul class="nav pull-right top-menu">
 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="${pageContext.request.contextPath}/mainBody/img/jpg/avatar1_small.jpg" alt="">
-                            <span class="username">Jhon Doe</span>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-userInfo="userInfo">
+                            <img src="${employeeImgPath}"  style="width:29px;height:29px;">
+                            <span class="username">${sessionScope.employeeRealName}</span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
-                            <li><a href="#"><i class="icon-user"></i>我的资料</a></li>
-                            <li><a href="#"><i class="icon-cog"></i>我的设置</a></li>
-                            <li><a href="${pageContext.request.contextPath}"><i class="icon-key"></i>退出</a></li>
+                            <li><a href="${pageContext.request.contextPath}/logout/removeSession"><i class="icon-key"></i>退出</a></li>
                         </ul>
                     </li>
 
@@ -294,8 +306,13 @@
                     </a>
                     <ul class="sub">
                         <li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/organizingTheStructure')">组织结构</a></li>
-                        <li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/test')">职务权限</a></li>
-                        <li><a class="" href="javascript:void(0)">成员信息</a></li>
+                        <c:if test="${authorityMap['8d1bacfa-0ac3-11e7-991c-28d2444b860a'] eq 1 and empty authorityMap['8699fb77-0ace-11e7-a1cf-28d2444b860a']}">
+                        	<li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/officialAuthority')">职务权限</a></li>
+                        </c:if>
+                        <c:if test="${authorityMap['8699fb77-0ace-11e7-a1cf-28d2444b860a'] eq 1}">
+                        	<li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/officialAuthorityManager')">职务权限</a></li>
+                        </c:if>
+                        <li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/memberInformation')">成员信息</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -362,11 +379,17 @@
                     </ul>
                 </li>
 
-                <li>
+                <li class="sub-menu">
                     <a class="" href="javascript:void(0)">
                         <i class="icon-user"></i>
                         <span>个人资料</span>
+                        <span class="arrow"></span>
                     </a>
+                    <ul class="sub">
+                        <li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/profile')">我的资料</a></li>
+                        <li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/editProfile')">修改个人资料</a></li>
+                        <li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/resetPassword')">修改密码</a></li>
+                    </ul>
                 </li>
             </ul>
 
@@ -389,6 +412,7 @@
 
 </body>
 
+<script src="${pageContext.request.contextPath}/mainBody/js/bootstrap-fileupload.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/mainBody/js/jquery.nicescroll.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/mainBody/js/jquery.scrollto.min.js"></script>
 <script src="${pageContext.request.contextPath}/mainBody/js/common-scripts.js"></script>
@@ -400,16 +424,21 @@
 <script src="${pageContext.request.contextPath}/mainBody/js/dt_bootstrap.js"></script>
 <script src="${pageContext.request.contextPath}/Util/js/zTree_v3-master/js/jquery.ztree.all.js"></script>
 <script src="${pageContext.request.contextPath}/Util/js/myTree.js"></script>
-<script src="${pageContext.request.contextPath}/Util/js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/Util/js/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+
+<!-- 校验 -->
+<script src="${pageContext.request.contextPath}/mainBody/js/bootstrap-inputmask.min.js"></script>
 
 <script src="${pageContext.request.contextPath}/Util/js/util.js"></script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/Util/js/craftpip-jquery-confirm-e3e217e/css/jquery-confirm.css">
 <script src="${pageContext.request.contextPath}/Util/js/craftpip-jquery-confirm-e3e217e/js/jquery-confirm.js"></script>
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/mainBody/js/jquery.bootstrap.wizard.min.js"></script>
+
 <script type="text/javascript">
 	var loadMainBody = function(jspURL) {
-		$('#main-content').load("${pageContext.request.contextPath}/mainBodys/loadMainBody", {jspURL: jspURL});
+		$('#main-content').load("${pageContext.request.contextPath}/mainBodys/loadMainBody/", {jspURL: jspURL});
 	}
  	$(function() {
 		loadMainBody('mainBody/jsp/consoleDesk');

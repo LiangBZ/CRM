@@ -54,10 +54,12 @@ public class InitXMLResolve {
 	private DepartmentVo setDepartmentAttrFromElement(Element element) {
 		String departmentId = element.attribute("departmentId").getStringValue();
 		String departmentName = element.attribute("departmentName").getStringValue();
+		int departmentInit = Integer.valueOf(element.attribute("departmentInit").getStringValue());
 		
 		DepartmentVo departmentVo = new DepartmentVo();
 		departmentVo.setDepartmentId(departmentId);
 		departmentVo.setDepartmentName(departmentName);
+		departmentVo.setDepartmentInit(departmentInit);
 		
 		return departmentVo;
 	}
@@ -110,17 +112,23 @@ public class InitXMLResolve {
 		String employeeId = element.attribute("employeeId").getStringValue();
 		String departmentIdEmployee = element.attribute("departmentIdEmployee").getStringValue();
 		String userroleIdEmployee = element.attribute("userroleIdEmployee").getStringValue();
+		String employeeRealName = element.attribute("employeeRealName").getStringValue();
 		String employeeNumber = element.attribute("employeeNumber").getStringValue();
 		String employeeUsername = element.attribute("employeeUsername").getStringValue();
 		String employeePassword = element.attribute("employeePassword").getStringValue();
+		String employeeEmail = element.attribute("employeeEmail").getStringValue();
+		int employeeInit = Integer.valueOf(element.attribute("employeeInit").getStringValue());
 		
 		EmployeeVo employeeVo = new EmployeeVo();
 		employeeVo.setEmployeeId(employeeId);
 		employeeVo.setDepartmentIdEmployee(departmentIdEmployee);
 		employeeVo.setUserroleIdEmployee(userroleIdEmployee);
+		employeeVo.setEmployeeRealName(employeeRealName);
 		employeeVo.setEmployeeNumber(employeeNumber);
 		employeeVo.setEmployeeUsername(employeeUsername);
 		employeeVo.setEmployeePassword(employeePassword);
+		employeeVo.setEmployeeInit(employeeInit);
+		employeeVo.setEmployeeEmail(employeeEmail);
 		
 		return employeeVo;
 	}

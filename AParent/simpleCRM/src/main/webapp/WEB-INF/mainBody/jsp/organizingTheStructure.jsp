@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="container-fluid">
 
 	<div class="row-fluid">
@@ -44,16 +44,20 @@
 					<!-- 编辑处理 -->
 					
 						<div class="clearfix">
-							<div class="btn-group">
-								<button id="editable-sample_new" class="btn green" onclick='addDepartment();'>
-									添加部门 <i class="icon-plus"></i>
-								</button>
-							</div>
-							<div class="btn-group">
-								<button id="editable-sample_new" class="btn green" onclick='deleteDepartmentList(this, "${pageContext.request.contextPath}/mainBodys/deleteDepartmentVoList");'>
-									删除部门 <i class="icon-plus"></i>
-								</button>
-							</div>
+							<c:if test="${authorityMap['346093a3-0a3d-11e7-8d42-28d2444b860a'] eq 1}">
+								<div class="btn-group">
+									<button id="editable-sample_new" class="btn green" onclick='addDepartment();'>
+										添加部门 <i class="icon-plus"></i>
+									</button>
+								</div>
+							</c:if>
+							<c:if test="${authorityMap['6fb1f7c9-0a3d-11e7-8d42-28d2444b860a'] eq 1}">
+								<div class="btn-group">
+									<button id="editable-sample_new" class="btn green" onclick='deleteDepartmentList(this, "${pageContext.request.contextPath}/mainBodys/deleteDepartmentVoList");'>
+										删除部门 <i class="icon-plus"></i>
+									</button>
+								</div>
+							</c:if>
 						</div>
 						
 						
@@ -63,9 +67,15 @@
                                     <th style="width:8px;"></th>
                                     <th>部门名称</th>
                                     <th>员工数量</th>
-                                    <th>添加员工</th>
-                                    <th>编辑部门</th>
-                                    <th>删除部门</th>
+                                   <%--  <c:if test="${authorityMap['c4d93348-0a44-11e7-8d42-28d2444b860a'] eq 1}">
+	                                	<th>添加员工</th>
+	                                </c:if> --%>
+	                                <c:if test="${authorityMap['4d8a6d36-0a3d-11e7-8d42-28d2444b860a'] eq 1}">
+                                    	<th>编辑部门</th>
+                                    </c:if>
+                                    <c:if test="${authorityMap['6fb1f7c9-0a3d-11e7-8d42-28d2444b860a'] eq 1}">
+                                    	<th>删除部门</th>
+                                    </c:if>
                                 </tr>
                             </thead>
                             <tbody>

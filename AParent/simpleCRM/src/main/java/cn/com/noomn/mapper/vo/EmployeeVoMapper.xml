@@ -15,11 +15,29 @@
     <result column="EMPLOYEE_INSTRUCT" jdbcType="VARCHAR" property="employeeInstruct" />
     <result column="EMPLOYEE_USEFUL_TIME" jdbcType="TIMESTAMP" property="employeeUsefulTime" />
   </resultMap>
+  
+  <resultMap id="roleEmployeeDepartment" type="cn.com.noomn.vo.EmployeeVo">
+    <id column="EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
+    <result column="DEPARTMENT_ID_EMPLOYEE" jdbcType="VARCHAR" property="departmentIdEmployee" />
+    <result column="USERROLE_ID_EMPLOYEE" jdbcType="VARCHAR" property="userroleIdEmployee" />
+    <result column="EMPLOYEE_USERNAME" jdbcType="VARCHAR" property="employeeUsername" />
+    <result column="EMPLOYEE_PASSWORD" jdbcType="VARCHAR" property="employeePassword" />
+    <result column="EMPLOYEE_NUMBER" jdbcType="VARCHAR" property="employeeNumber" />
+    <result column="EMPLOYEE_REAL_NAME" jdbcType="VARCHAR" property="employeeRealName" />
+    <result column="EMPLOYEE_EMAIL" jdbcType="VARCHAR" property="employeeEmail" />
+    <result column="EMPLOYEE_PHONE" jdbcType="VARCHAR" property="employeePhone" />
+    <result column="EMPLOYEE_INIT" jdbcType="INTEGER" property="employeeInit" />
+    <result column="EMPLOYEE_INSTRUCT" jdbcType="VARCHAR" property="employeeInstruct" />
+    <result column="EMPLOYEE_USEFUL_TIME" jdbcType="TIMESTAMP" property="employeeUsefulTime" />
+    
+    <association property="userroleVo" javaType="cn.com.noomn.vo.UserroleVo" resultMap="cn.com.noomn.mapper.vo.UserroleVoMapper.BaseResultMap"></association>
+    <association property="departmentVo" javaType="cn.com.noomn.vo.DepartmentVo" resultMap="cn.com.noomn.mapper.vo.DepartmentVoMapper.BaseResultMap"></association>
+  </resultMap>
 
 	<select id="selectForlogin" parameterType="cn.com.noomn.vo.EmployeeVo"
 		resultMap="BaseResultMap">
 		select * from employee where EMPLOYEE_USERNAME = #{employeeUsername} and
-		EMPLOYEE_PASSWORD = #{employeePassword}
+		EMPLOYEE_PASSWORD = #{employeePassword} and (EMPLOYEE_INIT > 0 or EMPLOYEE_INIT = 0)
 	</select>
 
 	<!-- 根据vo已经赋值的属性（所有已经赋值的属性）查询 -->
@@ -75,6 +93,75 @@
 				EMPLOYEE_USEFUL_TIME = #{employeeUsefulTime,jdbcType=TIMESTAMP}
 			</if>
 		</where>
+	</select>
+	
+	<select id="selectEmployeeVoId" resultType="java.lang.String">
+		select employee.EMPLOYEE_ID from employee
+	</select>
+	
+	<select id="selectRoleRightEmployeeLeftDepartment" parameterType="cn.com.noomn.vo.EmployeeVo" resultMap="roleEmployeeDepartment">
+		select * from 
+		userrole 
+			RIGHT JOIN 
+		employee 
+				on userrole.USERROLE_ID = employee.USERROLE_ID_EMPLOYEE  
+			LEFT JOIN 
+		department 
+				on employee.DEPARTMENT_ID_EMPLOYEE = department.DEPARTMENT_ID 
+		<where>
+			<if test="employeeId != null">
+				and
+				EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR}
+			</if>
+			<if test="departmentIdEmployee != null">
+				and
+				DEPARTMENT_ID_EMPLOYEE = #{departmentIdEmployee,jdbcType=VARCHAR}
+			</if>
+			<if test="userroleIdEmployee != null">
+				and
+				USERROLE_ID_EMPLOYEE = #{userroleIdEmployee,jdbcType=VARCHAR}
+			</if>
+			<if test="employeeUsername != null">
+				and
+				EMPLOYEE_USERNAME = #{employeeUsername,jdbcType=VARCHAR}
+			</if>
+			<if test="employeePassword != null">
+				and
+				EMPLOYEE_PASSWORD = #{employeePassword,jdbcType=VARCHAR}
+			</if>
+			<if test="employeeNumber != null">
+				and
+				EMPLOYEE_NUMBER = #{employeeNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="employeeRealName != null">
+				and
+				EMPLOYEE_REAL_NAME = #{employeeRealName,jdbcType=VARCHAR}
+			</if>
+			<if test="employeeEmail != null">
+				and
+				EMPLOYEE_EMAIL = #{employeeEmail,jdbcType=VARCHAR}
+			</if>
+			<if test="employeePhone != null">
+				and
+				EMPLOYEE_PHONE = #{employeePhone,jdbcType=VARCHAR}
+			</if>
+			<if test="employeeInit != null">
+				and
+				EMPLOYEE_INIT = #{employeeInit,jdbcType=INTEGER}
+			</if>
+			<if test="employeeInstruct != null">
+				and
+				EMPLOYEE_INSTRUCT = #{employeeInstruct,jdbcType=VARCHAR}
+			</if>
+			<if test="employeeUsefulTime != null">
+				and
+				EMPLOYEE_USEFUL_TIME = #{employeeUsefulTime,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectMaxEmployeeNumber" resultType="java.lang.Integer">
+		select max(employee.EMPLOYEE_NUMBER) from employee
 	</select>
 </mapper>
     

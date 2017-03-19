@@ -17,16 +17,16 @@
 	<div class="row-fluid">
 
 		<div class="metro-nav">
-			<div class="metro-nav-block nav-block-orange double">
+			<div class="metro-nav-block nav-block-red">
+				<a data-original-title="" href="javascript:void(0);"> <i class="icon-fire"></i>
+					<div class="info">2</div>
+					<div class="status">控制台</div>
+				</a>
+			</div>
+			<div class="metro-nav-block nav-block-orange">
 				<a data-original-title="" href="javascript:void(0);"> <i class="icon-book"></i>
 					<div class="info">3</div>
 					<div class="status">成员管理</div>
-				</a>
-			</div>
-			<div class="metro-nav-block nav-olive">
-				<a data-original-title="" href="javascript:void(0);"> <i class="icon-cogs"></i>
-					<div class="info">2</div>
-					<div class="status">通知</div>
 				</a>
 			</div>
 			<div class="metro-nav-block nav-block-yellow">
@@ -41,7 +41,7 @@
 					<div class="status">任务</div>
 				</a>
 			</div>
-			<div class="metro-nav-block nav-block-red">
+			<div class="metro-nav-block nav-block-red double">
 				<a data-original-title="" href="javascript:void(0);"> <i class="icon-fire"></i>
 					<div class="info">2</div>
 					<div class="status">工作汇报</div>

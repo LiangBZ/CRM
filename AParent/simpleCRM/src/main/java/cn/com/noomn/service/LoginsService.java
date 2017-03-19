@@ -1,5 +1,7 @@
 package cn.com.noomn.service;
 
+import java.util.List;
+
 import cn.com.noomn.util.Infos;
 
 /**
@@ -21,7 +23,7 @@ public interface LoginsService {
 	 * @return
 	 * @throws Exception
 	 */
-	cn.com.noomn.vo.EmployeeVo selectEmployee(final cn.com.noomn.vo.EmployeeVo employeeVo);
+	List<cn.com.noomn.vo.EmployeeVo> selectEmployee(final cn.com.noomn.vo.EmployeeVo employeeVo);
 	
 	/**
 	 * 发送邮件

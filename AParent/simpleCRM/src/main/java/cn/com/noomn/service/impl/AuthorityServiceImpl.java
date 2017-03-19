@@ -1,5 +1,6 @@
 package cn.com.noomn.service.impl;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import cn.com.noomn.mapper.vo.UserroleAuthorityVoMapper;
 import cn.com.noomn.service.AuthorityService;
 import cn.com.noomn.util.AuthorityXMLResolveUtil;
 import cn.com.noomn.vo.AuthorityVo;
+import cn.com.noomn.vo.UserroleAuthorityVo;
 
 @Service
 public class AuthorityServiceImpl implements AuthorityService {
@@ -79,7 +81,61 @@ public class AuthorityServiceImpl implements AuthorityService {
 		}else {
 			System.err.println("===================" + "更新成功");
 		}
+	}
+
+	@Override
+	public List<AuthorityVo> getAllAuthorityManager(UserroleAuthorityVo userroleAuthorityVo) {
+		String userroleId = userroleAuthorityVo.getUserroleId();
+		List<AuthorityVo> authorityVoList = new ArrayList<AuthorityVo>();
+		switch(userroleId) {
+		case "6566dff0-0987-11e7-b918-28d2444b860a":	//总经理
+			AuthorityVo authorityVo = new AuthorityVo();
+			authorityVo.setAuthorityId("8699fb77-0ace-11e7-a1cf-28d2444b860a");
+			authorityVoList.add(authorityVo);
+			AuthorityVo authorityVo8 = new AuthorityVo();
+			authorityVo8.setAuthorityId("fb9ccbab-0ac3-11e7-991c-28d2444b860a");
+			authorityVoList.add(authorityVo8);
+			break;
+		case "5e8d627f-0987-11e7-b918-28d2444b860a":	//部门经理
+			AuthorityVo authorityVo2 = new AuthorityVo();
+			authorityVo2.setAuthorityId("8d1bacfa-0ac3-11e7-991c-28d2444b860a");
+			authorityVoList.add(authorityVo2);
+			AuthorityVo authorityVo3 = new AuthorityVo();
+			authorityVo3.setAuthorityId("8699fb77-0ace-11e7-a1cf-28d2444b860a");
+			authorityVoList.add(authorityVo3);
+			AuthorityVo authorityVo4 = new AuthorityVo();
+			authorityVo4.setAuthorityId("fb9ccbab-0ac3-11e7-991c-28d2444b860a");
+			authorityVoList.add(authorityVo4);
+			break;	
+		case "57695387-0987-11e7-b918-28d2444b860a":	//销售人员
+			AuthorityVo authorityVo5 = new AuthorityVo();
+			authorityVo5.setAuthorityId("8d1bacfa-0ac3-11e7-991c-28d2444b860a");
+			authorityVoList.add(authorityVo5);
+			AuthorityVo authorityVo6 = new AuthorityVo();
+			authorityVo6.setAuthorityId("8699fb77-0ace-11e7-a1cf-28d2444b860a");
+			authorityVoList.add(authorityVo6);
+			AuthorityVo authorityVo7 = new AuthorityVo();
+			authorityVo7.setAuthorityId("fb9ccbab-0ac3-11e7-991c-28d2444b860a");
+			authorityVoList.add(authorityVo7);
+			break;	
+		}
+		List<AuthorityVo> authorityManager = authorityVoMapper.getAllAuthorityManager(authorityVoList);
 		
+		//查询该角色已有的权限
+		List<UserroleAuthorityVo> selectForNimble = userroleAuthorityVoMapper.selectForNimble(userroleAuthorityVo);
+		Iterator<UserroleAuthorityVo> iterator = selectForNimble.iterator();
+		List<String> authorityIdListHas = new ArrayList<String>();
+		while(iterator.hasNext()) {
+			UserroleAuthorityVo next = iterator.next();
+			authorityIdListHas.add(next.getAuthorityId());
+		}
+		
+		for(int i=0; i<authorityManager.size(); i++) {
+			boolean isContains = authorityIdListHas.contains(authorityManager.get(i).getAuthorityId());
+			authorityManager.get(i).setContain(isContains);
+		}
+		
+		return authorityManager;
 	}
 
 }

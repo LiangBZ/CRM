@@ -1,6 +1,7 @@
 package cn.com.noomn.service.impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import cn.com.noomn.mapper.vo.DepartmentVoMapper;
 import cn.com.noomn.mapper.vo.EmployeeVoMapper;
 import cn.com.noomn.service.DepartmentService;
 import cn.com.noomn.util.Infos;
+import cn.com.noomn.util.InitXMLResolve;
 import cn.com.noomn.util.Message;
 import cn.com.noomn.util.TreeLeaf;
 import cn.com.noomn.vo.DepartmentVo;
@@ -25,6 +27,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 	private DepartmentMapper departmentMapper;
 	@Autowired
 	private EmployeeVoMapper employeeVoMapper;
+	@Autowired
+	private InitXMLResolve initXMLResolve;
 	
 	@Override
 	public String selectDepartmentJson() {
@@ -88,15 +92,16 @@ public class DepartmentServiceImpl implements DepartmentService {
 		EmployeeVo employeeVo = new EmployeeVo();
 		employeeVo.setDepartmentIdEmployee(departmentVo.getDepartmentId());
 
+		List<EmployeeVo> employeeVoList = null;
 		try {
-			employeeVo = employeeVoMapper.selectForNimble(employeeVo);
+			employeeVoList = employeeVoMapper.selectForNimble(employeeVo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 		
 		Infos infos = Infos.getInfosInstance();
-		if(employeeVo != null) {
+		if(employeeVoList.size() != 0) {
 			infos.message = Message.ERROR;
 			infos.obj = "部门已被使用，无法删除";
 			return infos;
@@ -164,5 +169,29 @@ public class DepartmentServiceImpl implements DepartmentService {
 			infos.obj = "成功删除" + deleteCount +"条，删除失败" + (departmentVoList.size()-deleteCount) + "条";
 		}
 		return infos;
+	}
+
+	@Override
+	public Infos initDepartment() {
+		List<DepartmentVo> departmentList = initXMLResolve.getDepartmentXMLByXPathExpression();
+		int insertCount = 0;
+		List<String> selectDepartmentId = departmentVoMapper.selectDepartmentId();
+		Iterator<DepartmentVo> iterator = departmentList.iterator();
+		while(iterator.hasNext()) {
+			DepartmentVo departmentVo = iterator.next();
+			boolean isContains = selectDepartmentId.contains(departmentVo.getDepartmentId());
+			if(isContains) continue;
+			insertCount += departmentMapper.insertSelective(departmentVo);
+		}
+		Infos infos = Infos.getInfosInstance();
+		if(insertCount == departmentList.size()) {
+			infos.setMessage(Message.SUCCESS);
+			infos.setObj("添加成功");
+			return infos;
+		}else {
+			infos.setMessage(Message.WARN);
+			infos.setObj("添加成功"+ insertCount + "条，添加失败" + (departmentList.size()-insertCount) + "条");
+			return infos;
+		}
 	}
 }

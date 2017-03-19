@@ -54,4 +54,15 @@
   	authority.AUTHORITY_ID
   	from authority
   </select>
+  
+  <select id="getAllAuthorityManager" parameterType="cn.com.noomn.vo.AuthorityVo" resultMap="BaseResultMap">
+  	select * from authority 
+	<where>
+		authority.AUTHORITY_ID 
+		not IN
+		<foreach collection="list" open="(" close=")" separator="," item="authorityVo">
+			#{authorityVo.authorityId}
+		</foreach>
+	</where>	
+  </select>
 </mapper>

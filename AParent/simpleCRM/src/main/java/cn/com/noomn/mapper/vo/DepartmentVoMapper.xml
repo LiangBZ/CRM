@@ -59,4 +59,8 @@
   <select id="selectBeUsedDepartmentId" resultType="java.lang.String">
   	select DISTINCT employee.DEPARTMENT_ID_EMPLOYEE from employee
   </select>
+  
+  <select id="selectDepartmentId" resultType="java.lang.String">
+  	select department.DEPARTMENT_ID from department
+  </select>
 </mapper>

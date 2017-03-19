@@ -53,4 +53,10 @@ public interface DepartmentService {
 	 * @return
 	 */
 	public Infos deleteDepartmentList(List<cn.com.noomn.vo.DepartmentVo> departmentVoList);
+	
+	/**
+	 * 初始化部门表
+	 * @return
+	 */
+	public Infos initDepartment();
 }

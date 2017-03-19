@@ -402,9 +402,53 @@ a.icon.huge i {
     font-size: 16px !important;
 }
 
+.space1 {
+    display: block;
+    height: 1px !important;
+    clear: both;
+}
+
+.space2 {
+    display: block;
+    height: 2px !important;
+    clear: both;
+}
+
+.space3 {
+    display: block;
+    height: 3px !important;
+    clear: both;
+}
+
+.space4 {
+    display: block;
+    height: 3px !important;
+    clear: both;
+}
+
 .space5 {
     display: block;
     height: 5px !important;
+    clear: both;
+}
+
+.space6 {
+    height: 6px !important;
+    clear: both;
+}
+
+.space7 {
+    height: 7px !important;
+    clear: both;
+}
+
+.space8 {
+    height: 8px !important;
+    clear: both;
+}
+
+.space9 {
+    height: 9px !important;
     clear: both;
 }
 

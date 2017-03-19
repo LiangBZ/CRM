@@ -3,6 +3,7 @@ package cn.com.noomn.mapper.vo;
 import java.util.List;
 
 import cn.com.noomn.vo.AuthorityVo;
+import cn.com.noomn.vo.UserroleVo;
 
 public interface AuthorityVoMapper {
 	
@@ -31,4 +32,11 @@ public interface AuthorityVoMapper {
 	 * @return
 	 */
 	public List<String> selectAllPrimaryKey();
+	
+	/**
+	 * 获取管理员可以设置(员工)的权限
+	 * @return
+	 */
+	public List<AuthorityVo> getAllAuthorityManager(List<AuthorityVo> authorityVoList);
+	
 }
