@@ -7,6 +7,7 @@
     <result column="SPONSOR_ID_TASK" jdbcType="VARCHAR" property="sponsorIdTask" />
     <result column="RECEIVE_ID_TASK" jdbcType="VARCHAR" property="receiveIdTask" />
     <result column="CUSTOM_ID_TASK" jdbcType="VARCHAR" property="customIdTask" />
+    <result column="FEEDBACK_ID" jdbcType="VARCHAR" property="feedbackId" />
     <result column="TASK_CONTENT" jdbcType="VARCHAR" property="taskContent" />
     <result column="TASK_PHOTO" jdbcType="VARCHAR" property="taskPhoto" />
     <result column="TASK_ENCLOSURE" jdbcType="VARCHAR" property="taskEnclosure" />
@@ -14,7 +15,6 @@
     <result column="TASK_START_TIME" jdbcType="TIMESTAMP" property="taskStartTime" />
     <result column="TASK_END_TIME" jdbcType="TIMESTAMP" property="taskEndTime" />
     <result column="TASK_ISOUTSIDE" jdbcType="INTEGER" property="taskIsoutside" />
-    <result column="TASK_FEEDBACK" jdbcType="VARCHAR" property="taskFeedback" />
     <result column="TASK_COMPLETION_STATUS" jdbcType="INTEGER" property="taskCompletionStatus" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -77,8 +77,8 @@
   </sql>
   <sql id="Base_Column_List">
     TASK_ID, BUSINESS_OPPORTUNITY_ID_TASK, SPONSOR_ID_TASK, RECEIVE_ID_TASK, CUSTOM_ID_TASK, 
-    TASK_CONTENT, TASK_PHOTO, TASK_ENCLOSURE, TASK_REPORT_DATE, TASK_START_TIME, TASK_END_TIME, 
-    TASK_ISOUTSIDE, TASK_FEEDBACK, TASK_COMPLETION_STATUS
+    FEEDBACK_ID, TASK_CONTENT, TASK_PHOTO, TASK_ENCLOSURE, TASK_REPORT_DATE, TASK_START_TIME, 
+    TASK_END_TIME, TASK_ISOUTSIDE, TASK_COMPLETION_STATUS
   </sql>
   <select id="selectByExample" parameterType="cn.com.noomn.po.TaskExample" resultMap="BaseResultMap">
     select
@@ -113,15 +113,15 @@
   <insert id="insert" parameterType="cn.com.noomn.po.Task">
     insert into task (TASK_ID, BUSINESS_OPPORTUNITY_ID_TASK, 
       SPONSOR_ID_TASK, RECEIVE_ID_TASK, CUSTOM_ID_TASK, 
-      TASK_CONTENT, TASK_PHOTO, TASK_ENCLOSURE, 
-      TASK_REPORT_DATE, TASK_START_TIME, TASK_END_TIME, 
-      TASK_ISOUTSIDE, TASK_FEEDBACK, TASK_COMPLETION_STATUS
+      FEEDBACK_ID, TASK_CONTENT, TASK_PHOTO, 
+      TASK_ENCLOSURE, TASK_REPORT_DATE, TASK_START_TIME, 
+      TASK_END_TIME, TASK_ISOUTSIDE, TASK_COMPLETION_STATUS
       )
     values (#{taskId,jdbcType=VARCHAR}, #{businessOpportunityIdTask,jdbcType=VARCHAR}, 
       #{sponsorIdTask,jdbcType=VARCHAR}, #{receiveIdTask,jdbcType=VARCHAR}, #{customIdTask,jdbcType=VARCHAR}, 
-      #{taskContent,jdbcType=VARCHAR}, #{taskPhoto,jdbcType=VARCHAR}, #{taskEnclosure,jdbcType=VARCHAR}, 
-      #{taskReportDate,jdbcType=TIMESTAMP}, #{taskStartTime,jdbcType=TIMESTAMP}, #{taskEndTime,jdbcType=TIMESTAMP}, 
-      #{taskIsoutside,jdbcType=INTEGER}, #{taskFeedback,jdbcType=VARCHAR}, #{taskCompletionStatus,jdbcType=INTEGER}
+      #{feedbackId,jdbcType=VARCHAR}, #{taskContent,jdbcType=VARCHAR}, #{taskPhoto,jdbcType=VARCHAR}, 
+      #{taskEnclosure,jdbcType=VARCHAR}, #{taskReportDate,jdbcType=TIMESTAMP}, #{taskStartTime,jdbcType=TIMESTAMP}, 
+      #{taskEndTime,jdbcType=TIMESTAMP}, #{taskIsoutside,jdbcType=INTEGER}, #{taskCompletionStatus,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.com.noomn.po.Task">
@@ -141,6 +141,9 @@
       </if>
       <if test="customIdTask != null">
         CUSTOM_ID_TASK,
+      </if>
+      <if test="feedbackId != null">
+        FEEDBACK_ID,
       </if>
       <if test="taskContent != null">
         TASK_CONTENT,
@@ -163,9 +166,6 @@
       <if test="taskIsoutside != null">
         TASK_ISOUTSIDE,
       </if>
-      <if test="taskFeedback != null">
-        TASK_FEEDBACK,
-      </if>
       <if test="taskCompletionStatus != null">
         TASK_COMPLETION_STATUS,
       </if>
@@ -185,6 +185,9 @@
       </if>
       <if test="customIdTask != null">
         #{customIdTask,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackId != null">
+        #{feedbackId,jdbcType=VARCHAR},
       </if>
       <if test="taskContent != null">
         #{taskContent,jdbcType=VARCHAR},
@@ -206,9 +209,6 @@
       </if>
       <if test="taskIsoutside != null">
         #{taskIsoutside,jdbcType=INTEGER},
-      </if>
-      <if test="taskFeedback != null">
-        #{taskFeedback,jdbcType=VARCHAR},
       </if>
       <if test="taskCompletionStatus != null">
         #{taskCompletionStatus,jdbcType=INTEGER},
@@ -239,6 +239,9 @@
       <if test="record.customIdTask != null">
         CUSTOM_ID_TASK = #{record.customIdTask,jdbcType=VARCHAR},
       </if>
+      <if test="record.feedbackId != null">
+        FEEDBACK_ID = #{record.feedbackId,jdbcType=VARCHAR},
+      </if>
       <if test="record.taskContent != null">
         TASK_CONTENT = #{record.taskContent,jdbcType=VARCHAR},
       </if>
@@ -260,9 +263,6 @@
       <if test="record.taskIsoutside != null">
         TASK_ISOUTSIDE = #{record.taskIsoutside,jdbcType=INTEGER},
       </if>
-      <if test="record.taskFeedback != null">
-        TASK_FEEDBACK = #{record.taskFeedback,jdbcType=VARCHAR},
-      </if>
       <if test="record.taskCompletionStatus != null">
         TASK_COMPLETION_STATUS = #{record.taskCompletionStatus,jdbcType=INTEGER},
       </if>
@@ -278,6 +278,7 @@
       SPONSOR_ID_TASK = #{record.sponsorIdTask,jdbcType=VARCHAR},
       RECEIVE_ID_TASK = #{record.receiveIdTask,jdbcType=VARCHAR},
       CUSTOM_ID_TASK = #{record.customIdTask,jdbcType=VARCHAR},
+      FEEDBACK_ID = #{record.feedbackId,jdbcType=VARCHAR},
       TASK_CONTENT = #{record.taskContent,jdbcType=VARCHAR},
       TASK_PHOTO = #{record.taskPhoto,jdbcType=VARCHAR},
       TASK_ENCLOSURE = #{record.taskEnclosure,jdbcType=VARCHAR},
@@ -285,7 +286,6 @@
       TASK_START_TIME = #{record.taskStartTime,jdbcType=TIMESTAMP},
       TASK_END_TIME = #{record.taskEndTime,jdbcType=TIMESTAMP},
       TASK_ISOUTSIDE = #{record.taskIsoutside,jdbcType=INTEGER},
-      TASK_FEEDBACK = #{record.taskFeedback,jdbcType=VARCHAR},
       TASK_COMPLETION_STATUS = #{record.taskCompletionStatus,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -305,6 +305,9 @@
       </if>
       <if test="customIdTask != null">
         CUSTOM_ID_TASK = #{customIdTask,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackId != null">
+        FEEDBACK_ID = #{feedbackId,jdbcType=VARCHAR},
       </if>
       <if test="taskContent != null">
         TASK_CONTENT = #{taskContent,jdbcType=VARCHAR},
@@ -327,9 +330,6 @@
       <if test="taskIsoutside != null">
         TASK_ISOUTSIDE = #{taskIsoutside,jdbcType=INTEGER},
       </if>
-      <if test="taskFeedback != null">
-        TASK_FEEDBACK = #{taskFeedback,jdbcType=VARCHAR},
-      </if>
       <if test="taskCompletionStatus != null">
         TASK_COMPLETION_STATUS = #{taskCompletionStatus,jdbcType=INTEGER},
       </if>
@@ -342,6 +342,7 @@
       SPONSOR_ID_TASK = #{sponsorIdTask,jdbcType=VARCHAR},
       RECEIVE_ID_TASK = #{receiveIdTask,jdbcType=VARCHAR},
       CUSTOM_ID_TASK = #{customIdTask,jdbcType=VARCHAR},
+      FEEDBACK_ID = #{feedbackId,jdbcType=VARCHAR},
       TASK_CONTENT = #{taskContent,jdbcType=VARCHAR},
       TASK_PHOTO = #{taskPhoto,jdbcType=VARCHAR},
       TASK_ENCLOSURE = #{taskEnclosure,jdbcType=VARCHAR},
@@ -349,7 +350,6 @@
       TASK_START_TIME = #{taskStartTime,jdbcType=TIMESTAMP},
       TASK_END_TIME = #{taskEndTime,jdbcType=TIMESTAMP},
       TASK_ISOUTSIDE = #{taskIsoutside,jdbcType=INTEGER},
-      TASK_FEEDBACK = #{taskFeedback,jdbcType=VARCHAR},
       TASK_COMPLETION_STATUS = #{taskCompletionStatus,jdbcType=INTEGER}
     where TASK_ID = #{taskId,jdbcType=VARCHAR}
   </update>

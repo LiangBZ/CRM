@@ -10,8 +10,11 @@ import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
+import cn.com.noomn.vo.CustomRankVo;
+import cn.com.noomn.vo.CustomStateVo;
 import cn.com.noomn.vo.DepartmentVo;
 import cn.com.noomn.vo.EmployeeVo;
+import cn.com.noomn.vo.SalesStageVo;
 import cn.com.noomn.vo.UserroleVo;
 
 public class InitXMLResolve {
@@ -117,6 +120,7 @@ public class InitXMLResolve {
 		String employeeUsername = element.attribute("employeeUsername").getStringValue();
 		String employeePassword = element.attribute("employeePassword").getStringValue();
 		String employeeEmail = element.attribute("employeeEmail").getStringValue();
+		String employeePhone = element.attribute("employeePhone").getStringValue();
 		int employeeInit = Integer.valueOf(element.attribute("employeeInit").getStringValue());
 		
 		EmployeeVo employeeVo = new EmployeeVo();
@@ -129,8 +133,87 @@ public class InitXMLResolve {
 		employeeVo.setEmployeePassword(employeePassword);
 		employeeVo.setEmployeeInit(employeeInit);
 		employeeVo.setEmployeeEmail(employeeEmail);
+		employeeVo.setEmployeePhone(employeePhone);
 		
 		return employeeVo;
+	}
+	
+	/**
+	 * xml客户级别
+	 * @return
+	 */
+	public List<CustomRankVo> getCustomRankXMLByXPathExpression() {
+		List<Node> selectNodes = document.selectNodes("//customRank");
+		List<CustomRankVo> customRankVoList = new ArrayList<CustomRankVo>();
+		for(int i=0; i<selectNodes.size(); i++) {
+			Element element = ((Element)selectNodes.get(i));
+			CustomRankVo customRankVo = this.setCustomRankAttrFromElement(element);
+			customRankVoList.add(customRankVo);
+		}
+		return customRankVoList;
+	}
+	
+	private CustomRankVo setCustomRankAttrFromElement(Element element) {
+		String customRankId = element.attribute("customRankId").getStringValue();
+		String customRankName = element.attribute("customRankName").getStringValue();
+		
+		CustomRankVo customRankVo = new CustomRankVo();
+		customRankVo.setCustomRankId(customRankId);
+		customRankVo.setCustomRankName(customRankName);
+		
+		return customRankVo;
+	}
+	
+	/**
+	 * xml客户状态
+	 * @return
+	 */
+	public List<CustomStateVo> getCustomStateXMLByXPathExpression() {
+		List<Node> selectNodes = document.selectNodes("//customState");
+		List<CustomStateVo> customStateVoList = new ArrayList<CustomStateVo>();
+		for(int i=0; i<selectNodes.size(); i++) {
+			Element element = ((Element)selectNodes.get(i));
+			CustomStateVo customStateVo = this.setCustomStateVoAttrFromElement(element);
+			customStateVoList.add(customStateVo);
+		}
+		return customStateVoList;
+	}
+	
+	private CustomStateVo setCustomStateVoAttrFromElement(Element element) {
+		String customStateId = element.attribute("customStateId").getStringValue();
+		String customStateName = element.attribute("customStateName").getStringValue();
+		
+		CustomStateVo customStateVo = new CustomStateVo();
+		customStateVo.setCustomStateId(customStateId);
+		customStateVo.setCustomStateName(customStateName);
+		
+		return customStateVo;
+	}
+	
+	/**
+	 * xml销售阶段
+	 * @return
+	 */
+	public List<SalesStageVo> getSalesStageXMLByXPathExpression() {
+		List<Node> selectNodes = document.selectNodes("//salesStage");
+		List<SalesStageVo> salesStageVoList = new ArrayList<SalesStageVo>();
+		for(int i=0; i<selectNodes.size(); i++) {
+			Element element = ((Element)selectNodes.get(i));
+			SalesStageVo salesStageVo = this.setSalesStageVoAttrFromElement(element);
+			salesStageVoList.add(salesStageVo);
+		}
+		return salesStageVoList;
+	}
+	
+	private SalesStageVo setSalesStageVoAttrFromElement(Element element) {
+		String salesStageId = element.attribute("salesStageId").getStringValue();
+		String salesStageName = element.attribute("salesStageName").getStringValue();
+		
+		SalesStageVo salesStageVo = new SalesStageVo();
+		salesStageVo.setSalesStageId(salesStageId);
+		salesStageVo.setSalesStageName(salesStageName);
+		
+		return salesStageVo;
 	}
 
 	public static void main(String[] args) {

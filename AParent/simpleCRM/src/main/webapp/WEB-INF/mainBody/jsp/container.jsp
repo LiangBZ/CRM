@@ -339,7 +339,7 @@ response.setDateHeader("Expires", -10);
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a class="" href="javascript:void(0)">
+                    <a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/customInformation')">
                         <i class="icon-trophy"></i>
                         <span>客户管理</span>
                     </a>
@@ -362,21 +362,16 @@ response.setDateHeader("Expires", -10);
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="javascript:void(0)">我的商机</a></li>
-                        <li><a class="" href="javascript:void(0)">我可以查看的商机</a></li>
+                        <li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/showCustom')">查看商机</a></li>
+                        <li><a class="" href="javascript:void(0)">添加商机</a></li>
                         <li><a class="" href="javascript:void(0)">商机分析</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a href="javascript:void(0)" class="">
+                    <a href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/productInformation')" class="">
                         <i class="icon-glass"></i>
                         <span>产品</span>
-                        <span class="arrow"></span>
                     </a>
-                    <ul class="sub">
-                        <li><a class="" href="javascript:void(0)">产品列表</a></li>
-                        <li><a class="" href="javascript:void(0)">修改产品信息</a></li>
-                    </ul>
                 </li>
 
                 <li class="sub-menu">

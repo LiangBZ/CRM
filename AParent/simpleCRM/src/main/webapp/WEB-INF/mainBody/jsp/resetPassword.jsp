@@ -34,7 +34,7 @@
 									<div class="control-group">
 										<label class="control-label">原密码</label>
 										<div class="controls">
-											<input type="text" name="employeePassword1" class="span6"> 
+											<input type="password" name="employeePassword1" class="span6"> 
 											<span class="help-inline">请输入您的登录密码</span>
 										</div>
 									</div>
@@ -48,7 +48,7 @@
 									<div class="control-group">
 										<label class="control-label">新密码</label>
 										<div class="controls">
-											<input type="text" name="employeePassword2" class="span6" /> 
+											<input type="password" name="employeePassword2" class="span6" /> 
 											<span class="help-inline">请输入新密码</span>
 										</div>
 									</div>

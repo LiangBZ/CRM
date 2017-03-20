@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.noomn.mapper.vo.CustomStateVoMapper">
+  <resultMap id="BaseResultMap" type="cn.com.noomn.vo.CustomStateVo">
+    <id column="CUSTOM_STATE_ID" jdbcType="VARCHAR" property="customStateId" />
+    <result column="CUSTOM_STATE_NAME" jdbcType="VARCHAR" property="customStateName" />
+  </resultMap>
+</mapper>

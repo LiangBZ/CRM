@@ -455,6 +455,76 @@ public class TaskExample {
             return (Criteria) this;
         }
 
+        public Criteria andFeedbackIdIsNull() {
+            addCriterion("FEEDBACK_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedbackIdIsNotNull() {
+            addCriterion("FEEDBACK_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedbackIdEqualTo(String value) {
+            addCriterion("FEEDBACK_ID =", value, "feedbackId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedbackIdNotEqualTo(String value) {
+            addCriterion("FEEDBACK_ID <>", value, "feedbackId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedbackIdGreaterThan(String value) {
+            addCriterion("FEEDBACK_ID >", value, "feedbackId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedbackIdGreaterThanOrEqualTo(String value) {
+            addCriterion("FEEDBACK_ID >=", value, "feedbackId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedbackIdLessThan(String value) {
+            addCriterion("FEEDBACK_ID <", value, "feedbackId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedbackIdLessThanOrEqualTo(String value) {
+            addCriterion("FEEDBACK_ID <=", value, "feedbackId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedbackIdLike(String value) {
+            addCriterion("FEEDBACK_ID like", value, "feedbackId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedbackIdNotLike(String value) {
+            addCriterion("FEEDBACK_ID not like", value, "feedbackId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedbackIdIn(List<String> values) {
+            addCriterion("FEEDBACK_ID in", values, "feedbackId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedbackIdNotIn(List<String> values) {
+            addCriterion("FEEDBACK_ID not in", values, "feedbackId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedbackIdBetween(String value1, String value2) {
+            addCriterion("FEEDBACK_ID between", value1, value2, "feedbackId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeedbackIdNotBetween(String value1, String value2) {
+            addCriterion("FEEDBACK_ID not between", value1, value2, "feedbackId");
+            return (Criteria) this;
+        }
+
         public Criteria andTaskContentIsNull() {
             addCriterion("TASK_CONTENT is null");
             return (Criteria) this;
@@ -902,76 +972,6 @@ public class TaskExample {
 
         public Criteria andTaskIsoutsideNotBetween(Integer value1, Integer value2) {
             addCriterion("TASK_ISOUTSIDE not between", value1, value2, "taskIsoutside");
-            return (Criteria) this;
-        }
-
-        public Criteria andTaskFeedbackIsNull() {
-            addCriterion("TASK_FEEDBACK is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTaskFeedbackIsNotNull() {
-            addCriterion("TASK_FEEDBACK is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTaskFeedbackEqualTo(String value) {
-            addCriterion("TASK_FEEDBACK =", value, "taskFeedback");
-            return (Criteria) this;
-        }
-
-        public Criteria andTaskFeedbackNotEqualTo(String value) {
-            addCriterion("TASK_FEEDBACK <>", value, "taskFeedback");
-            return (Criteria) this;
-        }
-
-        public Criteria andTaskFeedbackGreaterThan(String value) {
-            addCriterion("TASK_FEEDBACK >", value, "taskFeedback");
-            return (Criteria) this;
-        }
-
-        public Criteria andTaskFeedbackGreaterThanOrEqualTo(String value) {
-            addCriterion("TASK_FEEDBACK >=", value, "taskFeedback");
-            return (Criteria) this;
-        }
-
-        public Criteria andTaskFeedbackLessThan(String value) {
-            addCriterion("TASK_FEEDBACK <", value, "taskFeedback");
-            return (Criteria) this;
-        }
-
-        public Criteria andTaskFeedbackLessThanOrEqualTo(String value) {
-            addCriterion("TASK_FEEDBACK <=", value, "taskFeedback");
-            return (Criteria) this;
-        }
-
-        public Criteria andTaskFeedbackLike(String value) {
-            addCriterion("TASK_FEEDBACK like", value, "taskFeedback");
-            return (Criteria) this;
-        }
-
-        public Criteria andTaskFeedbackNotLike(String value) {
-            addCriterion("TASK_FEEDBACK not like", value, "taskFeedback");
-            return (Criteria) this;
-        }
-
-        public Criteria andTaskFeedbackIn(List<String> values) {
-            addCriterion("TASK_FEEDBACK in", values, "taskFeedback");
-            return (Criteria) this;
-        }
-
-        public Criteria andTaskFeedbackNotIn(List<String> values) {
-            addCriterion("TASK_FEEDBACK not in", values, "taskFeedback");
-            return (Criteria) this;
-        }
-
-        public Criteria andTaskFeedbackBetween(String value1, String value2) {
-            addCriterion("TASK_FEEDBACK between", value1, value2, "taskFeedback");
-            return (Criteria) this;
-        }
-
-        public Criteria andTaskFeedbackNotBetween(String value1, String value2) {
-            addCriterion("TASK_FEEDBACK not between", value1, value2, "taskFeedback");
             return (Criteria) this;
         }
 

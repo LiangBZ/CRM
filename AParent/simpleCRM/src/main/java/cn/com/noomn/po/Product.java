@@ -11,6 +11,10 @@ public class Product {
 
     private String productPdf;
 
+    private String productNum;
+
+    private String productDetail;
+
     public String getProductId() {
         return productId;
     }
@@ -41,5 +45,21 @@ public class Product {
 
     public void setProductPdf(String productPdf) {
         this.productPdf = productPdf == null ? null : productPdf.trim();
+    }
+
+    public String getProductNum() {
+        return productNum;
+    }
+
+    public void setProductNum(String productNum) {
+        this.productNum = productNum == null ? null : productNum.trim();
+    }
+
+    public String getProductDetail() {
+        return productDetail;
+    }
+
+    public void setProductDetail(String productDetail) {
+        this.productDetail = productDetail == null ? null : productDetail.trim();
     }
 }

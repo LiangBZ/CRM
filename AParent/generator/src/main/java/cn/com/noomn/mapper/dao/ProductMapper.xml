@@ -6,6 +6,8 @@
     <result column="PRODUCT_NAME" jdbcType="VARCHAR" property="productName" />
     <result column="PRODUCT_PRICE" jdbcType="DECIMAL" property="productPrice" />
     <result column="PRODUCT_PDF" jdbcType="VARCHAR" property="productPdf" />
+    <result column="PRODUCT_NUM" jdbcType="VARCHAR" property="productNum" />
+    <result column="PRODUCT_DETAIL" jdbcType="VARCHAR" property="productDetail" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    PRODUCT_ID, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_PDF
+    PRODUCT_ID, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_PDF, PRODUCT_NUM, PRODUCT_DETAIL
   </sql>
   <select id="selectByExample" parameterType="cn.com.noomn.po.ProductExample" resultMap="BaseResultMap">
     select
@@ -100,9 +102,11 @@
   </delete>
   <insert id="insert" parameterType="cn.com.noomn.po.Product">
     insert into product (PRODUCT_ID, PRODUCT_NAME, PRODUCT_PRICE, 
-      PRODUCT_PDF)
+      PRODUCT_PDF, PRODUCT_NUM, PRODUCT_DETAIL
+      )
     values (#{productId,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{productPrice,jdbcType=DECIMAL}, 
-      #{productPdf,jdbcType=VARCHAR})
+      #{productPdf,jdbcType=VARCHAR}, #{productNum,jdbcType=VARCHAR}, #{productDetail,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.com.noomn.po.Product">
     insert into product
@@ -119,6 +123,12 @@
       <if test="productPdf != null">
         PRODUCT_PDF,
       </if>
+      <if test="productNum != null">
+        PRODUCT_NUM,
+      </if>
+      <if test="productDetail != null">
+        PRODUCT_DETAIL,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="productId != null">
@@ -132,6 +142,12 @@
       </if>
       <if test="productPdf != null">
         #{productPdf,jdbcType=VARCHAR},
+      </if>
+      <if test="productNum != null">
+        #{productNum,jdbcType=VARCHAR},
+      </if>
+      <if test="productDetail != null">
+        #{productDetail,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -156,6 +172,12 @@
       <if test="record.productPdf != null">
         PRODUCT_PDF = #{record.productPdf,jdbcType=VARCHAR},
       </if>
+      <if test="record.productNum != null">
+        PRODUCT_NUM = #{record.productNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productDetail != null">
+        PRODUCT_DETAIL = #{record.productDetail,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,7 +188,9 @@
     set PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
       PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
       PRODUCT_PRICE = #{record.productPrice,jdbcType=DECIMAL},
-      PRODUCT_PDF = #{record.productPdf,jdbcType=VARCHAR}
+      PRODUCT_PDF = #{record.productPdf,jdbcType=VARCHAR},
+      PRODUCT_NUM = #{record.productNum,jdbcType=VARCHAR},
+      PRODUCT_DETAIL = #{record.productDetail,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,6 +207,12 @@
       <if test="productPdf != null">
         PRODUCT_PDF = #{productPdf,jdbcType=VARCHAR},
       </if>
+      <if test="productNum != null">
+        PRODUCT_NUM = #{productNum,jdbcType=VARCHAR},
+      </if>
+      <if test="productDetail != null">
+        PRODUCT_DETAIL = #{productDetail,jdbcType=VARCHAR},
+      </if>
     </set>
     where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
   </update>
@@ -190,7 +220,9 @@
     update product
     set PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
       PRODUCT_PRICE = #{productPrice,jdbcType=DECIMAL},
-      PRODUCT_PDF = #{productPdf,jdbcType=VARCHAR}
+      PRODUCT_PDF = #{productPdf,jdbcType=VARCHAR},
+      PRODUCT_NUM = #{productNum,jdbcType=VARCHAR},
+      PRODUCT_DETAIL = #{productDetail,jdbcType=VARCHAR}
     where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
   </update>
 </mapper>

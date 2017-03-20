@@ -12,6 +12,23 @@
 <department departmentId="7fc51cfa-0986-11e7-b918-28d2444b860a" departmentName="待分配" departmentInit="1"/>
 <department departmentId="85ef362e-0987-11e7-b918-28d2444b860a" departmentName="离职员工" departmentInit="1"/>
 
+<!-- 客户级别 -->
+<customRank customRankId="84084e44-0d45-11e7-9e9d-28d2444b860a" customRankName="小型客户"></customRank>
+<customRank customRankId="8ac12910-0d45-11e7-9e9d-28d2444b860a" customRankName="中型客户"></customRank>
+<customRank customRankId="8efeffc1-0d45-11e7-9e9d-28d2444b860a" customRankName="大型客户"></customRank>
+
+<!-- 客户状态 -->
+<customState customStateId="31b14919-0d46-11e7-9e9d-28d2444b860a" customStateName="普通"></customState>
+<customState customStateId="373c6373-0d46-11e7-9e9d-28d2444b860a" customStateName="重要"></customState>
+<customState customStateId="72c10457-0d46-11e7-9e9d-28d2444b860a" customStateName="非常重要"></customState>
+
+<!-- 销售阶段 -->
+<salesStage salesStageId="ddc2e328-0d4b-11e7-9e9d-28d2444b860a" salesStageName="初步沟通(10%)"></salesStage>
+<salesStage salesStageId="fbf40d99-0d4b-11e7-9e9d-28d2444b860a" salesStageName="方案报价(50%)"></salesStage>
+<salesStage salesStageId="011bc899-0d4c-11e7-9e9d-28d2444b860a" salesStageName="谈判协商(80%)"></salesStage>
+<salesStage salesStageId="053bd26b-0d4c-11e7-9e9d-28d2444b860a" salesStageName="赢单(100%)"></salesStage>
+<salesStage salesStageId="0b16581b-0d4c-11e7-9e9d-28d2444b860a" salesStageName="输单(0%)"></salesStage>
+
 <!-- 管理员 -->
 <user 
 	employeeId="5e2bf358-0985-11e7-b918-28d2444b860a" 
@@ -22,6 +39,7 @@
 	employeeUsername="liangbozhao" 
 	employeePassword="123456"
 	employeeEmail="1175194928@qq.com"
+	employeePhone="15605925286"
 	employeeInit="1"/>
 <user 
 	employeeId="7256db2e-0a1e-11e7-8d42-28d2444b860a" 
@@ -32,6 +50,7 @@
 	employeeUsername="huanghesen" 
 	employeePassword="123456"
 	employeeEmail="463973919@qq.com"
+	employeePhone="120"
 	employeeInit="1"/>
 <user 
 	employeeId="9256db2e-0a1e-11e7-8d42-28d2444b860a" 
@@ -42,6 +61,7 @@
 	employeeUsername="jiangyanzeng" 
 	employeePassword="123456"
 	employeeEmail="834866279@qq.com"
+	employeePhone="119"
 	employeeInit="1"/>
 <user 
 	employeeId="1236db2e-0a1e-11e7-8d42-28d2444b860a" 
@@ -52,6 +72,7 @@
 	employeeUsername="jiangyanzeng" 
 	employeePassword="123456"
 	employeeEmail="834866279@qq.com"
+	employeePhone="122"
 	employeeInit="1"/>
 	
 <!-- 销售人员 -->
@@ -63,7 +84,8 @@
 	employeeNumber="004" 
 	employeeUsername="huangzhiyan" 
 	employeePassword="123456"
-	employeeEmail=""
+	employeeEmail="110@163.com"
+	employeePhone="110"
 	employeeInit="1"/>
 <!-- 离职员工 -->
 <user 
@@ -74,6 +96,7 @@
 	employeeNumber="005" 
 	employeeUsername="hongqingmao" 
 	employeePassword="123456"
-	employeeEmail=""
+	employeeEmail="114@qq.com"
+	employeePhone="114"
 	employeeInit="-1"/>
 </init>

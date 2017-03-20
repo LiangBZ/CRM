@@ -849,3 +849,406 @@ var updatePassword = function() {
 
 /**  /个人信息 /end **/
 /************************************************************/
+
+/************************************************************/
+/**  产品信息 begin **/
+
+var initProductInfos = function() {
+	var dataTableURL = projectURL + "mainBodys/getAllProduct";
+	dataTables = $('table[data-table="productInformation"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });
+	
+	$('form[data-product="addProduct"]').submit(function() {  
+		addProduct();
+		return false;  
+	}); 
+	$('form[data-product="editProduct"]').submit(function() {  
+		updateProduct();
+		return false;  
+	}); 
+	
+	$('div[data-product="addProduct"]').hide(500);
+	$('div[data-product="showProduct"]').hide(500);
+	$('div[data-product="editProduct"]').hide(500);
+	$('div[data-product="information"]').show(1000);
+}
+
+var refreshProductInfos = function() {
+	dataTables.fnDestroy();
+	initProductInfos();
+	$('form[data-product="addProduct"]').find(':input[type="reset"]').click();
+}
+
+var addProductShow = function() {
+	$('div[data-product="information"]').hide(500);
+	$('div[data-product="showProduct"]').hide(500);
+	$('div[data-product="addProduct"]').show(1000);
+}
+
+var addProduct = function() {
+	var $form = $('form[data-product="addProduct"]');
+	var formData = new FormData($('form[data-product="addProduct"]')[0]);
+	var url = projectURL + "/mainBodys/addProduct";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : formData,
+		cache : false,
+		contentType : false,
+		processData : false,
+		success : function(data) {
+			setAlertModalTitleAndBody("提示", data.obj);
+			$('div[data-Modal="alertModal"]').modal('show');
+			if(data.message == "SUCCESS") {
+				$form.find(':input[type="reset"]').click();
+			}
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+var downloadPDF = function(_this) {
+	var productId = $(_this).data("id");
+	var url = projectURL + "mainBodys/downLoadPDF";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			productId : productId
+		},
+		success : function(data) {
+			if(data != null) {
+				setAlertModalTitleAndBody("提示", data.obj);
+				$('div[data-Modal="alertModal"]').modal('show');
+			}
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+var datailProduct = function(_this) {
+	var url = projectURL + "mainBodys/detailproduct";
+	var productId = $(_this).data("id");
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			productId : productId,
+		},
+		success : function(data) {
+			var productVo = data;
+			var $form = $('form[data-product="showProduct"]');
+			$form.find(':input[name="productId"]').val(productVo.productId);
+			$form.find(':input[name="productName"]').val(productVo.productName);
+			$form.find(':input[name="productPrice"]').val(productVo.productPrice);
+			$form.find(':input[name="productDetail"]').val(productVo.productDetail);
+			if(productVo.productPdf != null) {
+				$form.find('a[data-button="downloadPDF"]').removeClass("disabled");
+				$form.find('a[data-button="downloadPDF"]').attr("data-id",productVo.productId).attr("href",projectURL + "mainBodys/downLoadPDF?productId= "+ productVo.productId);
+			}else {
+				$form.find('a[data-button="downloadPDF"]').addClass("disabled");
+				$form.find('a[data-button="downloadPDF"]').attr("href","javasvript:void(0);");
+			}
+			$('div[data-product="addProduct"]').hide(500);
+			$('div[data-product="information"]').hide(500);
+			$('div[data-product="showProduct"]').show(1000);
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+var editProduct = function(_this) {
+	var url = projectURL + "mainBodys/detailproduct";
+	var productId = $(_this).data("id");
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			productId : productId,
+		},
+		success : function(data) {
+			var productVo = data;
+			var $form = $('form[data-product="editProduct"]');
+			$form.find(':input[name="productId"]').val(productVo.productId);
+			$form.find(':input[name="productNum"]').val(productVo.productNum);
+			$form.find(':input[name="productName"]').val(productVo.productName);
+			$form.find(':input[name="productPrice"]').val(productVo.productPrice);
+			$form.find('textarea[name="productDetail"]').val(productVo.productDetail);
+			if(productVo.productPdf != null) {
+				$form.find('a[data-button="downloadPDF"]').removeClass("disabled");
+				$form.find('a[data-button="downloadPDF"]').attr("data-id",productVo.productId).attr("href",projectURL + "mainBodys/downLoadPDF?productId= "+ productVo.productId);
+			}else {
+				$form.find('a[data-button="downloadPDF"]').addClass("disabled");
+				$form.find('a[data-button="downloadPDF"]').attr("href","javasvript:void(0);");
+			}
+			$('div[data-product="information"]').hide(500);
+			$('div[data-product="addProduct"]').hide(500);
+			$('div[data-product="showProduct"]').hide(500);
+			$('div[data-product="editProduct"]').show(1000);
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+var updateProduct = function(_this) {
+	var $form = $('form[data-product="editProduct"]');
+	var formData = new FormData($('form[data-product="editProduct"]')[0]);
+	var url = projectURL + "/mainBodys/updateProduct";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : formData,
+		cache : false,
+		contentType : false,
+		processData : false,
+		success : function(data) {
+			setAlertModalTitleAndBody("提示", data.obj);
+			$('div[data-Modal="alertModal"]').modal('show');
+			if(data.message == "SUCCESS") {
+				$form.find(':input[type="reset"]').click();
+				refreshProductInfos();
+			}
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+/**  /产品信息 /end **/
+/************************************************************/
+
+/************************************************************/
+/**  /客户信息 begin **/
+
+var initCustomInfos = function() {
+	var dataTableURL = projectURL + "mainBodys/getAllCustom";
+	dataTables = $('table[data-custom="information"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });
+	
+	$('form[data-custom="addCustom"]').submit(function() {  
+		addCustom();
+		return false;
+	}); 
+	$('form[data-custom="editCustom"]').submit(function() {  
+		editCustom();
+		return false;
+	}); 
+	
+	$('div[data-custom="addCustom"]').hide(500);
+	$('div[data-custom="editCustom"]').hide(500);
+	$('div[data-custom="information"]').show(1000);
+}
+
+var refreshCustomInfos = function() {
+	dataTables.fnDestroy();
+	initCustomInfos();
+	$('form[data-custom="addCustom"]').find(':input[type="reset"]').click();
+}
+
+var addCustomShow = function() {
+	$('div[data-custom="addCustom"]').show(1000);
+	$('div[data-custom="information"]').hide(500);
+	if($('form[data-custom="addCustom"]').find('select[name="departmentId"]').length == 0) return;
+	var url = projectURL + "mainBodys/getCustomDepartmentVoList";
+	$.ajax({
+		url : url,
+		type : "POST",
+		success : function(data) {
+			var option = '';
+			for(var i=0 ;i<data.length; i++) {
+				var department = data[i];
+				option += '<option value="'+ department.departmentId + '">'+ department.departmentName +'</option>';
+			}
+			var $select = $('form[data-custom="addCustom"]').find('select[name="departmentId"]');
+			$select.html(option);
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+var addCustom = function() {
+	$.confirm({
+	    title: '提示',
+	    content: '确认保存吗？',
+	    buttons: {
+	        "确定": function () {
+	        	var data;
+	        	var customName = $(':input[name="customName"]').val();
+	        	var customAddress = $(':input[name="customAddress"]').val();
+	        	var customLinkmanName = $(':input[name="customLinkmanName"]').val();
+	        	var customLinkmanPhone = $(':input[name="customLinkmanPhone"]').val();
+	        	var customLinkmanPost = $(':input[name="customLinkmanPost"]').val();
+	        	var customLinkmanRemark = $('textarea[name="customLinkmanRemark"]').val();
+	        	var $selectDepartmentId = $('select[name=departmentId]');
+	        	var departmentId = "";
+	        	var customRankId = $('select[name=customRankId]').val();
+	        	var customStateId = $('select[name="customStateId"]').val();
+	        	if($selectDepartmentId.length != 0) {
+	        		departmentId = $('select[name=departmentId]').val();
+	        		data = {
+	        				customName : customName,
+	        				customAddress : customAddress,
+	        				customLinkmanName : customLinkmanName,
+	        				customLinkmanPhone : customLinkmanPhone,
+	        				customLinkmanPost : customLinkmanPost,
+	        				customLinkmanRemark : customLinkmanRemark,
+	        				departmentId : departmentId,
+	        				customRankId : customRankId,
+	        				customStateId : customStateId
+	        		}
+	        	}else {
+	        		data = {
+	        				customName : customName,
+	        				customAddress : customAddress,
+	        				customLinkmanName : customLinkmanName,
+	        				customLinkmanPhone : customLinkmanPhone,
+	        				customLinkmanPost : customLinkmanPost,
+	        				customLinkmanRemark : customLinkmanRemark,
+	        				customRankId : customRankId,
+	        				customStateId : customStateId
+	        		}
+	        	}
+	        	
+	        	var url = projectURL + "/mainBodys/addCustomVo";
+	        	$.ajax({
+	        		url : url,
+	        		type : "POST",
+	        		data : data,
+	        		success : function(data) {
+	        			$('button[data-dismiss="modal"]').click();
+	        			
+	        			setAlertModalTitleAndBody("提示", data.obj);
+	        			$('div[data-Modal="alertModal"]').modal('show');
+	        			
+	        			$('div[data-member="addMember"]').find(':input[type="reset"]').click();
+	        		},
+	        		error : function() {
+	        			setAlertModalTitleAndBody("提示", "添加客户失败，请重试");
+	        			$('div[data-Modal="alertModal"]').modal('show');
+	        		}
+	        	});
+	        },
+	        "取消": function () {
+	        }
+	    }
+	});
+}
+
+var editCustomShow = function(customId) {
+	var url = projectURL + "mainBodys/editCustomShow";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			customId : customId
+		},
+		success : function(data) {
+			var custom = data;
+			var $form = $('form[data-custom="editCustom"]');
+			$form.find(':input[name="customId"]').val(custom.customId);
+			$form.find(':input[name="customName"]').val(custom.customName);
+			$form.find(':input[name="customAddress"]').val(custom.customAddress);
+			$form.find(':input[name="customLinkmanName"]').val(custom.customLinkmanName);
+			$form.find(':input[name="customLinkmanPhone"]').val(custom.customLinkmanPhone);
+			$form.find(':input[name="customLinkmanPost"]').val(custom.customLinkmanPost);
+			$form.find('textarea[name="customLinkmanRemark"]').val(custom.customLinkmanRemark);
+			$form.find('select[name="customRankId"]').val(custom.customRankId);
+			$form.find('select[name="customStateId"]').val(custom.customStateId);
+			
+			$('div[data-custom="information"]').hide(500);
+			$('div[data-custom="addCustom"]').hide(500);
+			$('div[data-custom="editCustom"]').show(1000);
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+var editCustom = function() {
+	var url = projectURL + "mainBodys/editCustom";
+	
+	var $form = $('form[data-custom="editCustom"]');
+	var customId = $form.find(':input[name="customId"]').val();
+	var customName = $form.find(':input[name="customName"]').val();
+	var customAddress = $form.find(':input[name="customAddress"]').val();
+	var customLinkmanName =$form.find(':input[name="customLinkmanName"]').val();
+	var customLinkmanPhone =$form.find(':input[name="customLinkmanPhone"]').val();
+	var customLinkmanPost =$form.find(':input[name="customLinkmanPost"]').val();
+	var customLinkmanRemark =$form.find('textarea[name="customLinkmanRemark"]').val();
+	var customRankId =$form.find('select[name="customRankId"]').val();
+	var customStateId =$form.find('select[name="customStateId"]').val();
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			customId : customId,
+			customName : customName ,
+			customAddress : customAddress ,
+			customLinkmanName : customLinkmanName ,
+			customLinkmanPhone : customLinkmanPhone ,
+			customLinkmanPost : customLinkmanPost ,
+			customLinkmanRemark : customLinkmanRemark ,
+			customRankId : customRankId ,
+			customStateId : customStateId ,
+		},
+		success : function(data) {
+			
+			setAlertModalTitleAndBody("提示", data.obj);
+			$('div[data-Modal="alertModal"]').modal('show');
+			
+			refreshCustomInfos();
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+/**  /客户信息 /end **/
+/************************************************************/

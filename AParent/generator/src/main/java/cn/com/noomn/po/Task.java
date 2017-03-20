@@ -13,6 +13,8 @@ public class Task {
 
     private String customIdTask;
 
+    private String feedbackId;
+
     private String taskContent;
 
     private String taskPhoto;
@@ -26,8 +28,6 @@ public class Task {
     private Timestamp taskEndTime;
 
     private Integer taskIsoutside;
-
-    private String taskFeedback;
 
     private Integer taskCompletionStatus;
 
@@ -69,6 +69,14 @@ public class Task {
 
     public void setCustomIdTask(String customIdTask) {
         this.customIdTask = customIdTask == null ? null : customIdTask.trim();
+    }
+
+    public String getFeedbackId() {
+        return feedbackId;
+    }
+
+    public void setFeedbackId(String feedbackId) {
+        this.feedbackId = feedbackId == null ? null : feedbackId.trim();
     }
 
     public String getTaskContent() {
@@ -125,14 +133,6 @@ public class Task {
 
     public void setTaskIsoutside(Integer taskIsoutside) {
         this.taskIsoutside = taskIsoutside;
-    }
-
-    public String getTaskFeedback() {
-        return taskFeedback;
-    }
-
-    public void setTaskFeedback(String taskFeedback) {
-        this.taskFeedback = taskFeedback == null ? null : taskFeedback.trim();
     }
 
     public Integer getTaskCompletionStatus() {
