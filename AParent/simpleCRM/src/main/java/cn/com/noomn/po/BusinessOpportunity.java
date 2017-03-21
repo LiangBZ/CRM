@@ -6,8 +6,6 @@ import java.sql.Timestamp;
 public class BusinessOpportunity {
     private String businessOpportunityId;
 
-    private String followEmployeeId;
-
     private String customId;
 
     private String salesStageId;
@@ -22,20 +20,14 @@ public class BusinessOpportunity {
 
     private String remark;
 
+    private BigDecimal realWages;
+
     public String getBusinessOpportunityId() {
         return businessOpportunityId;
     }
 
     public void setBusinessOpportunityId(String businessOpportunityId) {
         this.businessOpportunityId = businessOpportunityId == null ? null : businessOpportunityId.trim();
-    }
-
-    public String getFollowEmployeeId() {
-        return followEmployeeId;
-    }
-
-    public void setFollowEmployeeId(String followEmployeeId) {
-        this.followEmployeeId = followEmployeeId == null ? null : followEmployeeId.trim();
     }
 
     public String getCustomId() {
@@ -92,5 +84,13 @@ public class BusinessOpportunity {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public BigDecimal getRealWages() {
+        return realWages;
+    }
+
+    public void setRealWages(BigDecimal realWages) {
+        this.realWages = realWages;
     }
 }

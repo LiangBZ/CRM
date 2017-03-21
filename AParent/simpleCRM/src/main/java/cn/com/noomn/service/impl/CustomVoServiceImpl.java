@@ -21,8 +21,8 @@ public class CustomVoServiceImpl implements CustomVoService {
 	private CustomVoMapper customVoMapper;
 	
 	@Override
-	public List<CustomVo> getAllCustomVo() {
-		List<CustomVo> customVoList = customVoMapper.selectForNimble(null);
+	public List<CustomVo> getAllCustomVo(CustomVo customVo) {
+		List<CustomVo> customVoList = customVoMapper.selectForNimble(customVo);
 		return customVoList;
 	}
 
@@ -57,6 +57,12 @@ public class CustomVoServiceImpl implements CustomVoService {
 			infos.obj = "更新失败";
 		}
 		return infos;
+	}
+
+	@Override
+	public CustomVo selectDetailed(CustomVo customVo) {
+		customVo = customVoMapper.selectDetailed(customVo);
+		return customVo;
 	}
 
 }

@@ -6,6 +6,7 @@
     <result column="CUSTOM_RANK_ID" jdbcType="VARCHAR" property="customRankId" />
     <result column="CUSTOM_STATE_ID" jdbcType="VARCHAR" property="customStateId" />
     <result column="DEPARTMENT_ID" jdbcType="VARCHAR" property="departmentId" />
+    <result column="FOLLOW_EMPLOYEE_ID" jdbcType="VARCHAR" property="followEmployeeId" />
     <result column="CUSTOM_NAME" jdbcType="VARCHAR" property="customName" />
     <result column="CUSTOM_ADDRESS" jdbcType="VARCHAR" property="customAddress" />
     <result column="CUSTOM_LINKMAN_NAME" jdbcType="VARCHAR" property="customLinkmanName" />
@@ -19,6 +20,7 @@
     <result column="CUSTOM_RANK_ID" jdbcType="VARCHAR" property="customRankId" />
     <result column="CUSTOM_STATE_ID" jdbcType="VARCHAR" property="customStateId" />
     <result column="DEPARTMENT_ID" jdbcType="VARCHAR" property="departmentId" />
+    <result column="FOLLOW_EMPLOYEE_ID" jdbcType="VARCHAR" property="followEmployeeId" />
     <result column="CUSTOM_NAME" jdbcType="VARCHAR" property="customName" />
     <result column="CUSTOM_ADDRESS" jdbcType="VARCHAR" property="customAddress" />
     <result column="CUSTOM_LINKMAN_NAME" jdbcType="VARCHAR" property="customLinkmanName" />
@@ -28,8 +30,28 @@
     <association property="customRankVo" javaType="cn.com.noomn.vo.CustomRankVo" resultMap="cn.com.noomn.mapper.vo.CustomRankVoMapper.BaseResultMap"></association>
     <association property="customStateVo" javaType="cn.com.noomn.vo.CustomStateVo" resultMap="cn.com.noomn.mapper.vo.CustomStateVoMapper.BaseResultMap"></association>
   </resultMap>
+  
+  <resultMap id="selectDetailedResult" type="cn.com.noomn.vo.CustomVo">
+    <id column="CUSTOM_ID" jdbcType="VARCHAR" property="customId" />
+    <result column="CUSTOM_RANK_ID" jdbcType="VARCHAR" property="customRankId" />
+    <result column="CUSTOM_STATE_ID" jdbcType="VARCHAR" property="customStateId" />
+    <result column="DEPARTMENT_ID" jdbcType="VARCHAR" property="departmentId" />
+    <result column="FOLLOW_EMPLOYEE_ID" jdbcType="VARCHAR" property="followEmployeeId" />
+    <result column="CUSTOM_NAME" jdbcType="VARCHAR" property="customName" />
+    <result column="CUSTOM_ADDRESS" jdbcType="VARCHAR" property="customAddress" />
+    <result column="CUSTOM_LINKMAN_NAME" jdbcType="VARCHAR" property="customLinkmanName" />
+    <result column="CUSTOM_LINKMAN_PHONE" jdbcType="VARCHAR" property="customLinkmanPhone" />
+    <result column="CUSTOM_LINKMAN_POST" jdbcType="VARCHAR" property="customLinkmanPost" />
+    <result column="CUSTOM_LINKMAN_REMARK" jdbcType="VARCHAR" property="customLinkmanRemark" />
+    <association property="receiver" javaType="cn.com.noomn.vo.EmployeeVo" resultMap="cn.com.noomn.mapper.vo.EmployeeVoMapper.ReceiveResultMap"></association>
+    <association property="customRankVo" javaType="cn.com.noomn.vo.CustomRankVo" resultMap="cn.com.noomn.mapper.vo.CustomRankVoMapper.BaseResultMap"></association>
+    <association property="customStateVo" javaType="cn.com.noomn.vo.CustomStateVo" resultMap="cn.com.noomn.mapper.vo.CustomStateVoMapper.BaseResultMap"></association>
+    <association property="departmentVo" javaType="cn.com.noomn.vo.DepartmentVo" resultMap="cn.com.noomn.mapper.vo.DepartmentVoMapper.BaseResultMap"></association>
+  	<collection property="businessOpportunityVoList" ofType="cn.com.noomn.vo.BusinessOpportunityVo" resultMap="cn.com.noomn.mapper.vo.BusinessOpportunityVoMapper.BaseResultMap"></collection>
+  
+  </resultMap>
 
-	<select id="selectForNimble" parameterType="cn.com.noomn.vo.CustomVo" resultMap="CustomCustomRankCustomState">
+	<!-- <select id="selectForNimble" parameterType="cn.com.noomn.vo.CustomVo" resultMap="CustomCustomRankCustomState">
 		select
 		custom.CUSTOM_ID,
 		custom.CUSTOM_LINKMAN_NAME,
@@ -90,6 +112,213 @@
 			<if test="customLinkmanRemark != null">
 				and
 				CUSTOM_LINKMAN_REMARK = #{customLinkmanRemark,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select> -->
+	
+	
+	<select id="selectForNimble" parameterType="cn.com.noomn.vo.CustomVo" resultMap="CustomCustomRankCustomState">
+		select 
+		a.CUSTOM_ID,
+		a.CUSTOM_LINKMAN_NAME,
+		a.CUSTOM_LINKMAN_PHONE,
+		a.CUSTOM_LINKMAN_POST,
+		a.CUSTOM_LINKMAN_REMARK,
+		a.CUSTOM_NAME,
+		a.CUSTOM_RANK_ID,
+		a.CUSTOM_STATE_ID,
+		a.DEPARTMENT_ID,
+		a.CUSTOM_ADDRESS,
+		a.CUSTOM_RANK_NAME,
+		a.CUSTOM_STATE_NAME,
+		a.FOLLOW_EMPLOYEE_ID,
+		a.DEPARTMENT_NAME,
+		a.DEPARTMENT_INIT,
+		business_opportunity.BUSINESS_OPPORTUNITY_ID,
+		business_opportunity.COST,
+		business_opportunity.PRE_DEAL_TIME,
+		business_opportunity.PRE_SALES_AMOUNT,
+		business_opportunity.PRODUCT_ID,
+		business_opportunity.REAL_WAGES,
+		business_opportunity.REMARK,
+		business_opportunity.SALES_STAGE_ID
+		from
+		(
+			select
+			custom.CUSTOM_ID,
+			custom.CUSTOM_LINKMAN_NAME,
+			custom.CUSTOM_LINKMAN_PHONE,
+			custom.CUSTOM_LINKMAN_POST,
+			custom.CUSTOM_LINKMAN_REMARK,
+			custom.CUSTOM_NAME,
+			custom.CUSTOM_RANK_ID,
+			custom.CUSTOM_STATE_ID,
+			custom.DEPARTMENT_ID,
+			custom.CUSTOM_ADDRESS,
+			custom.FOLLOW_EMPLOYEE_ID,
+			custom_rank.CUSTOM_RANK_NAME,
+			custom_state.CUSTOM_STATE_NAME,
+			department.DEPARTMENT_NAME,
+			department.DEPARTMENT_INIT
+			from
+			custom join department on custom.DEPARTMENT_ID = department.DEPARTMENT_ID
+			join custom_rank on custom.CUSTOM_RANK_ID = custom_rank.CUSTOM_RANK_ID
+			join custom_state on custom.CUSTOM_STATE_ID =
+			custom_state.CUSTOM_STATE_ID
+		)	as a
+		left JOIN
+		business_opportunity 
+		on a.CUSTOM_ID = business_opportunity.CUSTOM_ID
+		<where>
+			<if test="customId != null">
+				and
+				a.CUSTOM_ID = #{customId,jdbcType=VARCHAR}
+			</if>
+			<if test="customRankId != null">
+				and
+				a.CUSTOM_RANK_ID = #{customRankId,jdbcType=VARCHAR}
+			</if>
+			<if test="customStateId != null">
+				and
+				a.CUSTOM_STATE_ID = #{customStateId,jdbcType=VARCHAR}
+			</if>
+			<if test="departmentId != null">
+				and
+				a.DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR}
+			</if>
+			<if test="followEmployeeId != null">
+				and
+				a.FOLLOW_EMPLOYEE_ID = #{followEmployeeId,jdbcType=VARCHAR}
+			</if>
+			<if test="customName != null">
+				and
+				a.CUSTOM_NAME = #{customName,jdbcType=VARCHAR}
+			</if>
+			<if test="customAddress != null">
+				and
+				a.CUSTOM_ADDRESS = #{customAddress,jdbcType=VARCHAR}
+			</if>
+			<if test="customLinkmanName != null">
+				and
+				a.CUSTOM_LINKMAN_NAME = #{customLinkmanName,jdbcType=VARCHAR}
+			</if>
+			<if test="customLinkmanPhone != null">
+				and
+				a.CUSTOM_LINKMAN_PHONE = #{customLinkmanPhone,jdbcType=VARCHAR}
+			</if>
+			<if test="customLinkmanPost != null">
+				and
+				a.CUSTOM_LINKMAN_POST = #{customLinkmanPost,jdbcType=VARCHAR}
+			</if>
+			<if test="customLinkmanRemark != null">
+				and
+				a.CUSTOM_LINKMAN_REMARK = #{customLinkmanRemark,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectDetailed" parameterType="cn.com.noomn.vo.CustomVo" resultMap="selectDetailedResult">
+		select 
+			a.CUSTOM_ID,
+			a.DEPARTMENT_ID,
+			a.CUSTOM_LINKMAN_NAME,
+			a.CUSTOM_LINKMAN_PHONE,
+			a.CUSTOM_LINKMAN_POST,
+			a.CUSTOM_LINKMAN_REMARK,
+			a.CUSTOM_NAME,
+			a.CUSTOM_RANK_ID,
+			a.CUSTOM_STATE_ID,
+			a.CUSTOM_ADDRESS,
+			a.FOLLOW_EMPLOYEE_ID,
+			a.DEPARTMENT_NAME,
+			a.DEPARTMENT_INIT,
+			a.CUSTOM_RANK_NAME,
+			a.CUSTOM_STATE_NAME,
+			b.BUSINESS_OPPORTUNITY_ID,
+			b.COST,
+			b.CUSTOM_ID,
+			b.PRE_DEAL_TIME,
+			b.PRE_SALES_AMOUNT,
+			b.PRODUCT_ID,
+			b.REMARK,
+			b.REAL_WAGES,
+			b.SALES_STAGE_ID,
+			b.SALES_STAGE_NAME,
+			b.RATE_OF_PROGRESS,
+			b.PRODUCT_DETAIL,
+			b.PRODUCT_NAME,
+			b.PRODUCT_NUM,
+			b.PRODUCT_PDF,
+			b.PRODUCT_PRICE,
+			employee.EMPLOYEE_REAL_NAME as RE_EMPLOYEE_REAL_NAME,
+			employee.DEPARTMENT_ID_EMPLOYEE as RE_DEPARTMENT_ID_EMPLOYEE,
+			employee.EMPLOYEE_EMAIL as RE_EMPLOYEE_EMAIL,
+			employee.EMPLOYEE_ID as RE_EMPLOYEE_ID,
+			employee.EMPLOYEE_INIT as RE_EMPLOYEE_INIT,
+			employee.EMPLOYEE_NUMBER as RE_EMPLOYEE_NUMBER,
+			employee.EMPLOYEE_PHONE as RE_EMPLOYEE_PHONE,
+			employee.EMPLOYEE_USERNAME as RE_EMPLOYEE_USERNAME,
+			employee.USERROLE_ID_EMPLOYEE as RE_USERROLE_ID_EMPLOYEE
+		FROM
+		employee join
+		(
+		SELECT
+		custom.CUSTOM_ID,
+		custom.DEPARTMENT_ID,
+		custom.CUSTOM_LINKMAN_NAME,
+		custom.CUSTOM_LINKMAN_PHONE,
+		custom.CUSTOM_LINKMAN_POST,
+		custom.CUSTOM_LINKMAN_REMARK,
+		custom.CUSTOM_NAME,
+		custom.CUSTOM_RANK_ID,
+		custom.CUSTOM_STATE_ID,
+		custom.CUSTOM_ADDRESS,
+		custom.FOLLOW_EMPLOYEE_ID,
+		department.DEPARTMENT_NAME,
+		department.DEPARTMENT_INIT,
+		custom_rank.CUSTOM_RANK_NAME,
+		custom_state.CUSTOM_STATE_NAME
+		FROM
+		custom
+		JOIN department ON custom.DEPARTMENT_ID = department.DEPARTMENT_ID
+		JOIN custom_rank ON custom.CUSTOM_RANK_ID = custom_rank.CUSTOM_RANK_ID
+		JOIN custom_state ON custom.CUSTOM_STATE_ID = custom_state.CUSTOM_STATE_ID
+		) as a
+		on a.FOLLOW_EMPLOYEE_ID = employee.EMPLOYEE_ID
+		left JOIN
+		(
+		select 
+		business_opportunity.BUSINESS_OPPORTUNITY_ID,
+		business_opportunity.COST,
+		business_opportunity.CUSTOM_ID,
+		business_opportunity.PRE_DEAL_TIME,
+		business_opportunity.PRE_SALES_AMOUNT,
+		business_opportunity.PRODUCT_ID,
+		business_opportunity.REMARK,
+		business_opportunity.SALES_STAGE_ID,
+		business_opportunity.REAL_WAGES,
+		sales_stage.SALES_STAGE_NAME,
+		sales_stage.RATE_OF_PROGRESS,
+		product.PRODUCT_DETAIL,
+		product.PRODUCT_NAME,
+		product.PRODUCT_NUM,
+		product.PRODUCT_PDF,
+		product.PRODUCT_PRICE
+		from
+		sales_stage
+		join business_opportunity on business_opportunity.SALES_STAGE_ID = sales_stage.SALES_STAGE_ID
+		join product on business_opportunity.PRODUCT_ID = product.PRODUCT_ID
+		) as b
+		on a.CUSTOM_ID = b.CUSTOM_ID
+		<where>
+			<if test="customId != null">
+				and a.CUSTOM_ID = #{customId,jdbcType=VARCHAR}
+			</if>
+			<if test="followEmployeeId != null">
+				and a.FOLLOW_EMPLOYEE_ID = #{followEmployeeId}
+			</if>
+			<if test="departmentId != null">
+				and a.DEPARTMENT_ID = = #{departmentId}
 			</if>
 		</where>
 	</select>

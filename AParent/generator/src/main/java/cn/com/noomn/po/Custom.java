@@ -9,6 +9,8 @@ public class Custom {
 
     private String departmentId;
 
+    private String followEmployeeId;
+
     private String customName;
 
     private String customAddress;
@@ -51,6 +53,14 @@ public class Custom {
 
     public void setDepartmentId(String departmentId) {
         this.departmentId = departmentId == null ? null : departmentId.trim();
+    }
+
+    public String getFollowEmployeeId() {
+        return followEmployeeId;
+    }
+
+    public void setFollowEmployeeId(String followEmployeeId) {
+        this.followEmployeeId = followEmployeeId == null ? null : followEmployeeId.trim();
     }
 
     public String getCustomName() {

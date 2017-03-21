@@ -132,4 +132,10 @@ public class EmployeeVoServiceImpl implements EmployeeVoService {
 		return infos;
 	}
 
+	@Override
+	public List<EmployeeVo> selectForNimble(EmployeeVo employeeVo) {
+		List<EmployeeVo> employeeVoList = employeeVoMapper.selectForNimble(employeeVo);
+		return employeeVoList;
+	}
+
 }

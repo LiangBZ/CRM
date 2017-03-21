@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.com.noomn.mapper.dao.SalesStageMapper">
-  <resultMap id="BaseResultMap" type="cn.com.noomn.po.SalesStage">
-    <id column="SALES_STAGE_ID" jdbcType="VARCHAR" property="salesStageId" />
-    <result column="SALES_STAGE_NAME" jdbcType="VARCHAR" property="salesStageName" />
-    <result column="RATE_OF_PROGRESS" jdbcType="INTEGER" property="rateOfProgress" />
+<mapper namespace="cn.com.noomn.mapper.dao.FeedbackMapper">
+  <resultMap id="BaseResultMap" type="cn.com.noomn.po.Feedback">
+    <id column="FEEDBACK_ID" jdbcType="VARCHAR" property="feedbackId" />
+    <result column="TASK_ID" jdbcType="VARCHAR" property="taskId" />
+    <result column="FEEDBACK_DETAIL" jdbcType="VARCHAR" property="feedbackDetail" />
+    <result column="FEEDBACK_TIME" jdbcType="TIMESTAMP" property="feedbackTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,15 +66,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    SALES_STAGE_ID, SALES_STAGE_NAME, RATE_OF_PROGRESS
+    FEEDBACK_ID, TASK_ID, FEEDBACK_DETAIL, FEEDBACK_TIME
   </sql>
-  <select id="selectByExample" parameterType="cn.com.noomn.po.SalesStageExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.com.noomn.po.FeedbackExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from sales_stage
+    from feedback
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,67 +85,76 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sales_stage
-    where SALES_STAGE_ID = #{salesStageId,jdbcType=VARCHAR}
+    from feedback
+    where FEEDBACK_ID = #{feedbackId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from sales_stage
-    where SALES_STAGE_ID = #{salesStageId,jdbcType=VARCHAR}
+    delete from feedback
+    where FEEDBACK_ID = #{feedbackId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="cn.com.noomn.po.SalesStageExample">
-    delete from sales_stage
+  <delete id="deleteByExample" parameterType="cn.com.noomn.po.FeedbackExample">
+    delete from feedback
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.com.noomn.po.SalesStage">
-    insert into sales_stage (SALES_STAGE_ID, SALES_STAGE_NAME, RATE_OF_PROGRESS
-      )
-    values (#{salesStageId,jdbcType=VARCHAR}, #{salesStageName,jdbcType=VARCHAR}, #{rateOfProgress,jdbcType=INTEGER}
-      )
+  <insert id="insert" parameterType="cn.com.noomn.po.Feedback">
+    insert into feedback (FEEDBACK_ID, TASK_ID, FEEDBACK_DETAIL, 
+      FEEDBACK_TIME)
+    values (#{feedbackId,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR}, #{feedbackDetail,jdbcType=VARCHAR}, 
+      #{feedbackTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="cn.com.noomn.po.SalesStage">
-    insert into sales_stage
+  <insert id="insertSelective" parameterType="cn.com.noomn.po.Feedback">
+    insert into feedback
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="salesStageId != null">
-        SALES_STAGE_ID,
+      <if test="feedbackId != null">
+        FEEDBACK_ID,
       </if>
-      <if test="salesStageName != null">
-        SALES_STAGE_NAME,
+      <if test="taskId != null">
+        TASK_ID,
       </if>
-      <if test="rateOfProgress != null">
-        RATE_OF_PROGRESS,
+      <if test="feedbackDetail != null">
+        FEEDBACK_DETAIL,
+      </if>
+      <if test="feedbackTime != null">
+        FEEDBACK_TIME,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="salesStageId != null">
-        #{salesStageId,jdbcType=VARCHAR},
+      <if test="feedbackId != null">
+        #{feedbackId,jdbcType=VARCHAR},
       </if>
-      <if test="salesStageName != null">
-        #{salesStageName,jdbcType=VARCHAR},
+      <if test="taskId != null">
+        #{taskId,jdbcType=VARCHAR},
       </if>
-      <if test="rateOfProgress != null">
-        #{rateOfProgress,jdbcType=INTEGER},
+      <if test="feedbackDetail != null">
+        #{feedbackDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackTime != null">
+        #{feedbackTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.com.noomn.po.SalesStageExample" resultType="java.lang.Integer">
-    select count(*) from sales_stage
+  <select id="countByExample" parameterType="cn.com.noomn.po.FeedbackExample" resultType="java.lang.Integer">
+    select count(*) from feedback
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update sales_stage
+    update feedback
     <set>
-      <if test="record.salesStageId != null">
-        SALES_STAGE_ID = #{record.salesStageId,jdbcType=VARCHAR},
+      <if test="record.feedbackId != null">
+        FEEDBACK_ID = #{record.feedbackId,jdbcType=VARCHAR},
       </if>
-      <if test="record.salesStageName != null">
-        SALES_STAGE_NAME = #{record.salesStageName,jdbcType=VARCHAR},
+      <if test="record.taskId != null">
+        TASK_ID = #{record.taskId,jdbcType=VARCHAR},
       </if>
-      <if test="record.rateOfProgress != null">
-        RATE_OF_PROGRESS = #{record.rateOfProgress,jdbcType=INTEGER},
+      <if test="record.feedbackDetail != null">
+        FEEDBACK_DETAIL = #{record.feedbackDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbackTime != null">
+        FEEDBACK_TIME = #{record.feedbackTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -152,30 +162,35 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update sales_stage
-    set SALES_STAGE_ID = #{record.salesStageId,jdbcType=VARCHAR},
-      SALES_STAGE_NAME = #{record.salesStageName,jdbcType=VARCHAR},
-      RATE_OF_PROGRESS = #{record.rateOfProgress,jdbcType=INTEGER}
+    update feedback
+    set FEEDBACK_ID = #{record.feedbackId,jdbcType=VARCHAR},
+      TASK_ID = #{record.taskId,jdbcType=VARCHAR},
+      FEEDBACK_DETAIL = #{record.feedbackDetail,jdbcType=VARCHAR},
+      FEEDBACK_TIME = #{record.feedbackTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.com.noomn.po.SalesStage">
-    update sales_stage
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.noomn.po.Feedback">
+    update feedback
     <set>
-      <if test="salesStageName != null">
-        SALES_STAGE_NAME = #{salesStageName,jdbcType=VARCHAR},
+      <if test="taskId != null">
+        TASK_ID = #{taskId,jdbcType=VARCHAR},
       </if>
-      <if test="rateOfProgress != null">
-        RATE_OF_PROGRESS = #{rateOfProgress,jdbcType=INTEGER},
+      <if test="feedbackDetail != null">
+        FEEDBACK_DETAIL = #{feedbackDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackTime != null">
+        FEEDBACK_TIME = #{feedbackTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where SALES_STAGE_ID = #{salesStageId,jdbcType=VARCHAR}
+    where FEEDBACK_ID = #{feedbackId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.com.noomn.po.SalesStage">
-    update sales_stage
-    set SALES_STAGE_NAME = #{salesStageName,jdbcType=VARCHAR},
-      RATE_OF_PROGRESS = #{rateOfProgress,jdbcType=INTEGER}
-    where SALES_STAGE_ID = #{salesStageId,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="cn.com.noomn.po.Feedback">
+    update feedback
+    set TASK_ID = #{taskId,jdbcType=VARCHAR},
+      FEEDBACK_DETAIL = #{feedbackDetail,jdbcType=VARCHAR},
+      FEEDBACK_TIME = #{feedbackTime,jdbcType=TIMESTAMP}
+    where FEEDBACK_ID = #{feedbackId,jdbcType=VARCHAR}
   </update>
 </mapper>

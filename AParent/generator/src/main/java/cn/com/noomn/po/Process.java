@@ -11,15 +11,15 @@ public class Process {
 
     private String processApprover;
 
-    private Timestamp processDate;
-
-    private String processTitle;
-
     private String processContent;
 
     private Integer processState;
 
     private Timestamp processApprovalDeadline;
+
+    private Timestamp processStartTime;
+
+    private Timestamp processEndTime;
 
     public String getProcessId() {
         return processId;
@@ -53,22 +53,6 @@ public class Process {
         this.processApprover = processApprover == null ? null : processApprover.trim();
     }
 
-    public Timestamp getProcessDate() {
-        return processDate;
-    }
-
-    public void setProcessDate(Timestamp processDate) {
-        this.processDate = processDate;
-    }
-
-    public String getProcessTitle() {
-        return processTitle;
-    }
-
-    public void setProcessTitle(String processTitle) {
-        this.processTitle = processTitle == null ? null : processTitle.trim();
-    }
-
     public String getProcessContent() {
         return processContent;
     }
@@ -91,5 +75,21 @@ public class Process {
 
     public void setProcessApprovalDeadline(Timestamp processApprovalDeadline) {
         this.processApprovalDeadline = processApprovalDeadline;
+    }
+
+    public Timestamp getProcessStartTime() {
+        return processStartTime;
+    }
+
+    public void setProcessStartTime(Timestamp processStartTime) {
+        this.processStartTime = processStartTime;
+    }
+
+    public Timestamp getProcessEndTime() {
+        return processEndTime;
+    }
+
+    public void setProcessEndTime(Timestamp processEndTime) {
+        this.processEndTime = processEndTime;
     }
 }

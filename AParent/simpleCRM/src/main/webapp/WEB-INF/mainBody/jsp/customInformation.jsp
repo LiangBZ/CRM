@@ -157,19 +157,16 @@
 							</div>
 						</div>
 						
-						<c:if test="${authorityMap['72621594-0d83-11e7-9e9d-28d2444b860a'] eq 1}">
-							<div class="control-group">
-								<label class="control-label">所属部门(*)</label>
-								<div class="controls">
-									<select name=departmentId required
-										class="chzn-select-deselect span4" >
-										<option value="1">待分配</option>
-										<option value="2">总裁办</option>
-										<option value="3">技术部</option>
-									</select>
-								</div>
+						<div class="control-group">
+							<label class="control-label">跟进人(*)</label>
+							<div class="controls">
+								<select name="followEmployeeId" required
+									class="chzn-select-deselect span4" >
+									<option value="1">张三</option>
+									<option value="2">李四</option>
+								</select>
 							</div>
-						</c:if>
+						</div>
 						
 						<div class="control-group">
 							<label class="control-label">客户级别(*)</label>

@@ -10,6 +10,19 @@
 			</ul>
 		</div>
 	</div>
+	
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="clearfix">
+				<div class="btn-group">
+					<button class="btn btn-info" style="width:80px;">
+						返回 <i class="icon-plus"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="space15"></div>
+	</div>
 
 	<div class="row-fluid">
 		<div class="row-fluid">

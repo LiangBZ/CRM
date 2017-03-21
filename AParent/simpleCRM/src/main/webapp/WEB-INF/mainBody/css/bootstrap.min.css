@@ -3517,6 +3517,7 @@ button.btn.btn-mini, input[type="submit"].btn.btn-mini {
 }
 
 .nav-tabs > li > a, .nav-pills > li > a {
+	width: 90px;
     padding-right: 0px;
     padding-left: 30px;
     margin-right: 2px;

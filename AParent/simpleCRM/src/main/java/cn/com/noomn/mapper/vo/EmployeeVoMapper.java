@@ -38,4 +38,5 @@ public interface EmployeeVoMapper {
 	 * @return
 	 */
 	int selectMaxEmployeeNumber();
+	
 }

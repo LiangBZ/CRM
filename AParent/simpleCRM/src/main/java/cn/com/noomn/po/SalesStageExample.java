@@ -243,6 +243,66 @@ public class SalesStageExample {
             addCriterion("SALES_STAGE_NAME not between", value1, value2, "salesStageName");
             return (Criteria) this;
         }
+
+        public Criteria andRateOfProgressIsNull() {
+            addCriterion("RATE_OF_PROGRESS is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRateOfProgressIsNotNull() {
+            addCriterion("RATE_OF_PROGRESS is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRateOfProgressEqualTo(Integer value) {
+            addCriterion("RATE_OF_PROGRESS =", value, "rateOfProgress");
+            return (Criteria) this;
+        }
+
+        public Criteria andRateOfProgressNotEqualTo(Integer value) {
+            addCriterion("RATE_OF_PROGRESS <>", value, "rateOfProgress");
+            return (Criteria) this;
+        }
+
+        public Criteria andRateOfProgressGreaterThan(Integer value) {
+            addCriterion("RATE_OF_PROGRESS >", value, "rateOfProgress");
+            return (Criteria) this;
+        }
+
+        public Criteria andRateOfProgressGreaterThanOrEqualTo(Integer value) {
+            addCriterion("RATE_OF_PROGRESS >=", value, "rateOfProgress");
+            return (Criteria) this;
+        }
+
+        public Criteria andRateOfProgressLessThan(Integer value) {
+            addCriterion("RATE_OF_PROGRESS <", value, "rateOfProgress");
+            return (Criteria) this;
+        }
+
+        public Criteria andRateOfProgressLessThanOrEqualTo(Integer value) {
+            addCriterion("RATE_OF_PROGRESS <=", value, "rateOfProgress");
+            return (Criteria) this;
+        }
+
+        public Criteria andRateOfProgressIn(List<Integer> values) {
+            addCriterion("RATE_OF_PROGRESS in", values, "rateOfProgress");
+            return (Criteria) this;
+        }
+
+        public Criteria andRateOfProgressNotIn(List<Integer> values) {
+            addCriterion("RATE_OF_PROGRESS not in", values, "rateOfProgress");
+            return (Criteria) this;
+        }
+
+        public Criteria andRateOfProgressBetween(Integer value1, Integer value2) {
+            addCriterion("RATE_OF_PROGRESS between", value1, value2, "rateOfProgress");
+            return (Criteria) this;
+        }
+
+        public Criteria andRateOfProgressNotBetween(Integer value1, Integer value2) {
+            addCriterion("RATE_OF_PROGRESS not between", value1, value2, "rateOfProgress");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

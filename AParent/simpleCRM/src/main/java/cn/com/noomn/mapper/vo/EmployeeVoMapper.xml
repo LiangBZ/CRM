@@ -16,6 +16,21 @@
     <result column="EMPLOYEE_USEFUL_TIME" jdbcType="TIMESTAMP" property="employeeUsefulTime" />
   </resultMap>
   
+  <resultMap id="ReceiveResultMap" type="cn.com.noomn.vo.EmployeeVo">
+    <id column="RE_EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
+    <result column="RE_DEPARTMENT_ID_EMPLOYEE" jdbcType="VARCHAR" property="departmentIdEmployee" />
+    <result column="RE_USERROLE_ID_EMPLOYEE" jdbcType="VARCHAR" property="userroleIdEmployee" />
+    <result column="RE_EMPLOYEE_USERNAME" jdbcType="VARCHAR" property="employeeUsername" />
+    <result column="RE_EMPLOYEE_PASSWORD" jdbcType="VARCHAR" property="employeePassword" />
+    <result column="RE_EMPLOYEE_NUMBER" jdbcType="VARCHAR" property="employeeNumber" />
+    <result column="RE_EMPLOYEE_REAL_NAME" jdbcType="VARCHAR" property="employeeRealName" />
+    <result column="RE_EMPLOYEE_EMAIL" jdbcType="VARCHAR" property="employeeEmail" />
+    <result column="RE_EMPLOYEE_PHONE" jdbcType="VARCHAR" property="employeePhone" />
+    <result column="RE_EMPLOYEE_INIT" jdbcType="INTEGER" property="employeeInit" />
+    <result column="RE_EMPLOYEE_INSTRUCT" jdbcType="VARCHAR" property="employeeInstruct" />
+    <result column="RE_EMPLOYEE_USEFUL_TIME" jdbcType="TIMESTAMP" property="employeeUsefulTime" />
+  </resultMap>
+  
   <resultMap id="roleEmployeeDepartment" type="cn.com.noomn.vo.EmployeeVo">
     <id column="EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
     <result column="DEPARTMENT_ID_EMPLOYEE" jdbcType="VARCHAR" property="departmentIdEmployee" />
@@ -163,5 +178,6 @@
 	<select id="selectMaxEmployeeNumber" resultType="java.lang.Integer">
 		select max(employee.EMPLOYEE_NUMBER) from employee
 	</select>
+	
 </mapper>
     

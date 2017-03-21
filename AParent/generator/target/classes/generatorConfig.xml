@@ -54,8 +54,9 @@
         <table tableName="department"></table>  
         <table tableName="employee"></table>  
         <table tableName="process">
-        	<columnOverride column="PROCESS_DATE" javaType="java.sql.Timestamp"></columnOverride>
         	<columnOverride column="PROCESS_APPROVAL_DEADLINE" javaType="java.sql.Timestamp"></columnOverride>
+        	<columnOverride column="PROCESS_START_TIME" javaType="java.sql.Timestamp"></columnOverride>
+        	<columnOverride column="PROCESS_END_TIME" javaType="java.sql.Timestamp"></columnOverride>
         </table>  
         <table tableName="product"></table>  
         <table tableName="sales_stage"></table>  
@@ -66,6 +67,9 @@
         </table>  
         <table tableName="userrole"></table>  
         <table tableName="userrole_authority"></table>  
+        <table tableName="feedback">
+        	<columnOverride column="FEEDBACK_TIME" javaType="java.sql.Timestamp"></columnOverride>
+        </table>  
  
     </context>  
 </generatorConfiguration>

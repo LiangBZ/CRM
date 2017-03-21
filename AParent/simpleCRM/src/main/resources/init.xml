@@ -23,11 +23,11 @@
 <customState customStateId="72c10457-0d46-11e7-9e9d-28d2444b860a" customStateName="非常重要"></customState>
 
 <!-- 销售阶段 -->
-<salesStage salesStageId="ddc2e328-0d4b-11e7-9e9d-28d2444b860a" salesStageName="初步沟通(10%)"></salesStage>
-<salesStage salesStageId="fbf40d99-0d4b-11e7-9e9d-28d2444b860a" salesStageName="方案报价(50%)"></salesStage>
-<salesStage salesStageId="011bc899-0d4c-11e7-9e9d-28d2444b860a" salesStageName="谈判协商(80%)"></salesStage>
-<salesStage salesStageId="053bd26b-0d4c-11e7-9e9d-28d2444b860a" salesStageName="赢单(100%)"></salesStage>
-<salesStage salesStageId="0b16581b-0d4c-11e7-9e9d-28d2444b860a" salesStageName="输单(0%)"></salesStage>
+<salesStage salesStageId="ddc2e328-0d4b-11e7-9e9d-28d2444b860a" rateOfProgress="10" salesStageName="初步沟通(10%)"></salesStage>
+<salesStage salesStageId="fbf40d99-0d4b-11e7-9e9d-28d2444b860a" rateOfProgress="50" salesStageName="方案报价(50%)"></salesStage>
+<salesStage salesStageId="011bc899-0d4c-11e7-9e9d-28d2444b860a" rateOfProgress="80" salesStageName="谈判协商(80%)"></salesStage>
+<salesStage salesStageId="053bd26b-0d4c-11e7-9e9d-28d2444b860a" rateOfProgress="100" salesStageName="赢单(100%)"></salesStage>
+<salesStage salesStageId="0b16581b-0d4c-11e7-9e9d-28d2444b860a" rateOfProgress="0" salesStageName="输单(0%)"></salesStage>
 
 <!-- 管理员 -->
 <user 

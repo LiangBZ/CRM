@@ -384,6 +384,76 @@ public class CustomExample {
             return (Criteria) this;
         }
 
+        public Criteria andFollowEmployeeIdIsNull() {
+            addCriterion("FOLLOW_EMPLOYEE_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdIsNotNull() {
+            addCriterion("FOLLOW_EMPLOYEE_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdEqualTo(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID =", value, "followEmployeeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdNotEqualTo(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID <>", value, "followEmployeeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdGreaterThan(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID >", value, "followEmployeeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdGreaterThanOrEqualTo(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID >=", value, "followEmployeeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdLessThan(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID <", value, "followEmployeeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdLessThanOrEqualTo(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID <=", value, "followEmployeeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdLike(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID like", value, "followEmployeeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdNotLike(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID not like", value, "followEmployeeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdIn(List<String> values) {
+            addCriterion("FOLLOW_EMPLOYEE_ID in", values, "followEmployeeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdNotIn(List<String> values) {
+            addCriterion("FOLLOW_EMPLOYEE_ID not in", values, "followEmployeeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdBetween(String value1, String value2) {
+            addCriterion("FOLLOW_EMPLOYEE_ID between", value1, value2, "followEmployeeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdNotBetween(String value1, String value2) {
+            addCriterion("FOLLOW_EMPLOYEE_ID not between", value1, value2, "followEmployeeId");
+            return (Criteria) this;
+        }
+
         public Criteria andCustomNameIsNull() {
             addCriterion("CUSTOM_NAME is null");
             return (Criteria) this;

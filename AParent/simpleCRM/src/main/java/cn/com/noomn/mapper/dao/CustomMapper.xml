@@ -6,6 +6,7 @@
     <result column="CUSTOM_RANK_ID" jdbcType="VARCHAR" property="customRankId" />
     <result column="CUSTOM_STATE_ID" jdbcType="VARCHAR" property="customStateId" />
     <result column="DEPARTMENT_ID" jdbcType="VARCHAR" property="departmentId" />
+    <result column="FOLLOW_EMPLOYEE_ID" jdbcType="VARCHAR" property="followEmployeeId" />
     <result column="CUSTOM_NAME" jdbcType="VARCHAR" property="customName" />
     <result column="CUSTOM_ADDRESS" jdbcType="VARCHAR" property="customAddress" />
     <result column="CUSTOM_LINKMAN_NAME" jdbcType="VARCHAR" property="customLinkmanName" />
@@ -72,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    CUSTOM_ID, CUSTOM_RANK_ID, CUSTOM_STATE_ID, DEPARTMENT_ID, CUSTOM_NAME, CUSTOM_ADDRESS, 
-    CUSTOM_LINKMAN_NAME, CUSTOM_LINKMAN_PHONE, CUSTOM_LINKMAN_POST, CUSTOM_LINKMAN_REMARK
+    CUSTOM_ID, CUSTOM_RANK_ID, CUSTOM_STATE_ID, DEPARTMENT_ID, FOLLOW_EMPLOYEE_ID, CUSTOM_NAME, 
+    CUSTOM_ADDRESS, CUSTOM_LINKMAN_NAME, CUSTOM_LINKMAN_PHONE, CUSTOM_LINKMAN_POST, CUSTOM_LINKMAN_REMARK
   </sql>
   <select id="selectByExample" parameterType="cn.com.noomn.po.CustomExample" resultMap="BaseResultMap">
     select
@@ -107,12 +108,12 @@
   </delete>
   <insert id="insert" parameterType="cn.com.noomn.po.Custom">
     insert into custom (CUSTOM_ID, CUSTOM_RANK_ID, CUSTOM_STATE_ID, 
-      DEPARTMENT_ID, CUSTOM_NAME, CUSTOM_ADDRESS, 
-      CUSTOM_LINKMAN_NAME, CUSTOM_LINKMAN_PHONE, 
+      DEPARTMENT_ID, FOLLOW_EMPLOYEE_ID, CUSTOM_NAME, 
+      CUSTOM_ADDRESS, CUSTOM_LINKMAN_NAME, CUSTOM_LINKMAN_PHONE, 
       CUSTOM_LINKMAN_POST, CUSTOM_LINKMAN_REMARK)
     values (#{customId,jdbcType=VARCHAR}, #{customRankId,jdbcType=VARCHAR}, #{customStateId,jdbcType=VARCHAR}, 
-      #{departmentId,jdbcType=VARCHAR}, #{customName,jdbcType=VARCHAR}, #{customAddress,jdbcType=VARCHAR}, 
-      #{customLinkmanName,jdbcType=VARCHAR}, #{customLinkmanPhone,jdbcType=VARCHAR}, 
+      #{departmentId,jdbcType=VARCHAR}, #{followEmployeeId,jdbcType=VARCHAR}, #{customName,jdbcType=VARCHAR}, 
+      #{customAddress,jdbcType=VARCHAR}, #{customLinkmanName,jdbcType=VARCHAR}, #{customLinkmanPhone,jdbcType=VARCHAR}, 
       #{customLinkmanPost,jdbcType=VARCHAR}, #{customLinkmanRemark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.com.noomn.po.Custom">
@@ -129,6 +130,9 @@
       </if>
       <if test="departmentId != null">
         DEPARTMENT_ID,
+      </if>
+      <if test="followEmployeeId != null">
+        FOLLOW_EMPLOYEE_ID,
       </if>
       <if test="customName != null">
         CUSTOM_NAME,
@@ -161,6 +165,9 @@
       </if>
       <if test="departmentId != null">
         #{departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="followEmployeeId != null">
+        #{followEmployeeId,jdbcType=VARCHAR},
       </if>
       <if test="customName != null">
         #{customName,jdbcType=VARCHAR},
@@ -203,6 +210,9 @@
       <if test="record.departmentId != null">
         DEPARTMENT_ID = #{record.departmentId,jdbcType=VARCHAR},
       </if>
+      <if test="record.followEmployeeId != null">
+        FOLLOW_EMPLOYEE_ID = #{record.followEmployeeId,jdbcType=VARCHAR},
+      </if>
       <if test="record.customName != null">
         CUSTOM_NAME = #{record.customName,jdbcType=VARCHAR},
       </if>
@@ -232,6 +242,7 @@
       CUSTOM_RANK_ID = #{record.customRankId,jdbcType=VARCHAR},
       CUSTOM_STATE_ID = #{record.customStateId,jdbcType=VARCHAR},
       DEPARTMENT_ID = #{record.departmentId,jdbcType=VARCHAR},
+      FOLLOW_EMPLOYEE_ID = #{record.followEmployeeId,jdbcType=VARCHAR},
       CUSTOM_NAME = #{record.customName,jdbcType=VARCHAR},
       CUSTOM_ADDRESS = #{record.customAddress,jdbcType=VARCHAR},
       CUSTOM_LINKMAN_NAME = #{record.customLinkmanName,jdbcType=VARCHAR},
@@ -253,6 +264,9 @@
       </if>
       <if test="departmentId != null">
         DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="followEmployeeId != null">
+        FOLLOW_EMPLOYEE_ID = #{followEmployeeId,jdbcType=VARCHAR},
       </if>
       <if test="customName != null">
         CUSTOM_NAME = #{customName,jdbcType=VARCHAR},
@@ -280,6 +294,7 @@
     set CUSTOM_RANK_ID = #{customRankId,jdbcType=VARCHAR},
       CUSTOM_STATE_ID = #{customStateId,jdbcType=VARCHAR},
       DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR},
+      FOLLOW_EMPLOYEE_ID = #{followEmployeeId,jdbcType=VARCHAR},
       CUSTOM_NAME = #{customName,jdbcType=VARCHAR},
       CUSTOM_ADDRESS = #{customAddress,jdbcType=VARCHAR},
       CUSTOM_LINKMAN_NAME = #{customLinkmanName,jdbcType=VARCHAR},

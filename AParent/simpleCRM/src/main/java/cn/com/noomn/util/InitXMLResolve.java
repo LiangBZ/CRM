@@ -208,10 +208,12 @@ public class InitXMLResolve {
 	private SalesStageVo setSalesStageVoAttrFromElement(Element element) {
 		String salesStageId = element.attribute("salesStageId").getStringValue();
 		String salesStageName = element.attribute("salesStageName").getStringValue();
+		int rateOfProgress = Integer.valueOf(element.attribute("rateOfProgress").getStringValue());
 		
 		SalesStageVo salesStageVo = new SalesStageVo();
 		salesStageVo.setSalesStageId(salesStageId);
 		salesStageVo.setSalesStageName(salesStageName);
+		salesStageVo.setRateOfProgress(rateOfProgress);
 		
 		return salesStageVo;
 	}

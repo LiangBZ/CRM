@@ -18,6 +18,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +34,7 @@ import cn.com.noomn.service.UserroleAuthorityVoService;
 import cn.com.noomn.util.Infos;
 import cn.com.noomn.util.Message;
 import cn.com.noomn.vo.AuthorityVo;
+import cn.com.noomn.vo.BusinessOpportunityVo;
 import cn.com.noomn.vo.CustomVo;
 import cn.com.noomn.vo.DepartmentVo;
 import cn.com.noomn.vo.EmployeeVo;
@@ -284,6 +286,11 @@ public class MainBodys {
 			String imgPath = webInf + "mainBody/img/png/" + employeeVo.getEmployeeId() + ".png";
 			employeeVo.setEmployeeImgPath(imgPath);
 		}
+		if(employeeVo.getDepartmentIdEmployee().equals("85ef362e-0987-11e7-b918-28d2444b860a")) {
+			employeeVo.setEmployeeInit(-1);
+		}else {
+			employeeVo.setEmployeeInit(0);
+		}
 		Infos infos = employeeVoService.updateEmployeeVo(employeeVo);
 		return infos;
 	}
@@ -490,8 +497,19 @@ public class MainBodys {
 	
 	@RequestMapping(value="getAllCustom")
 	@ResponseBody
-	private String getAllCustom() {
-		List<CustomVo> allCustomVo = customVoService.getAllCustomVo();
+	private String getAllCustom(HttpSession session) {
+		String employeeId = (String)session.getAttribute("employeeId");
+		String userroleIdEmployee = (String)session.getAttribute("userroleIdEmployee");
+		String departmentIdEmployee = (String)session.getAttribute("departmentIdEmployee");
+		CustomVo customVo1 = new CustomVo();
+		switch(userroleIdEmployee ) {
+		case "10988d26-0986-11e7-b918-28d2444b860a":break;
+		case "6566dff0-0987-11e7-b918-28d2444b860a":break;
+		case "5e8d627f-0987-11e7-b918-28d2444b860a":customVo1.setDepartmentId(departmentIdEmployee); break;
+		case "57695387-0987-11e7-b918-28d2444b860a":customVo1.setFollowEmployeeId(employeeId);; break;
+		}
+		
+		List<CustomVo> allCustomVo = customVoService.getAllCustomVo(customVo1);
 		if(allCustomVo.size() == 0) return "{\"data\": []}";
 		StringBuilder dataArrayString = new StringBuilder();
 		dataArrayString.append("{").append("\"data\": [");
@@ -548,6 +566,44 @@ public class MainBodys {
 	}
 	
 	/**
+	 * 获取可以选择的销售人员
+	 * @return
+	 */
+	@RequestMapping(value="getSalesmanList")
+	@ResponseBody
+	private List<EmployeeVo> getalesmanList(HttpSession session) {
+		String employeeId = (String) session.getAttribute("employeeId");
+		String employeeRealName = (String)session.getAttribute("employeeRealName");
+		String departmentIdEmployee = (String)session.getAttribute("departmentIdEmployee");
+		String userroleIdEmployee = (String)session.getAttribute("userroleIdEmployee");
+		List<EmployeeVo> employeeVoList = new ArrayList<EmployeeVo>();
+		EmployeeVo employeeVo = new EmployeeVo();
+		employeeVo.setEmployeeInit(0);
+		switch(userroleIdEmployee ) {
+		case "10988d26-0986-11e7-b918-28d2444b860a": //管理员
+			employeeVo.setUserroleIdEmployee("57695387-0987-11e7-b918-28d2444b860a");
+			employeeVoList = employeeVoService.selectForNimble(employeeVo);
+			break; 
+		case "6566dff0-0987-11e7-b918-28d2444b860a": //总经理
+			employeeVo.setUserroleIdEmployee("57695387-0987-11e7-b918-28d2444b860a");
+			employeeVoList = employeeVoService.selectForNimble(employeeVo);
+			break; 
+		case "5e8d627f-0987-11e7-b918-28d2444b860a":	//部门经理
+			employeeVo.setDepartmentIdEmployee(departmentIdEmployee);
+			employeeVo.setUserroleIdEmployee("57695387-0987-11e7-b918-28d2444b860a");
+			employeeVoList = employeeVoService.selectForNimble(employeeVo);
+			break; 
+		case "57695387-0987-11e7-b918-28d2444b860a": //销售人员
+			employeeVo.setEmployeeId(employeeId);
+			employeeVo.setEmployeeRealName(employeeRealName);
+			employeeVoList.add(employeeVo); 
+			break; 
+		}
+		
+		return employeeVoList;
+	}
+	
+	/**
 	 * 添加新客户
 	 * @param customVo
 	 * @param session
@@ -588,5 +644,69 @@ public class MainBodys {
 		Infos infos = customVoService.updateCustomVo(customVo);
 		return infos;
 	}
+	
+	/**
+	 * 获取客户的详细信息，包含客户表、客户级别表、客户状态表、商机表、销售阶段表、产品表、员工表
+	 * @param customVo
+	 * @return
+	 */
+	@RequestMapping(value="selectCustomDetailed")
+	@ResponseBody
+	private CustomVo selectCustomDetailed(CustomVo customVo) {
+		customVo = customVoService.selectDetailed(customVo);
+		return customVo;
+	}
+	
+	@RequestMapping(value="selectCustomDetailedTable/{customId}")
+	@ResponseBody
+	private String selectCustomDetailedTable(@PathVariable(value="customId") String customId) {
+		CustomVo customVo = new CustomVo();
+		customVo.setCustomId(customId);
+		customVo = customVoService.selectDetailed(customVo);
+		if(customVo == null) return "{\"data\": []}";
+		List<BusinessOpportunityVo> businessOpportunityVoList = customVo.getBusinessOpportunityVoList();
+		if(businessOpportunityVoList.size() == 0 
+				|| businessOpportunityVoList.size() == 1 && businessOpportunityVoList.get(0).getBusinessOpportunityId()==null) 
+			return "{\"data\": []}";
+		StringBuilder dataArrayString = new StringBuilder();
+		dataArrayString.append("{").append("\"data\": [");
+		for(int i=0; i<businessOpportunityVoList.size(); i++) {
+			BusinessOpportunityVo businessOpportunityVo = businessOpportunityVoList.get(i);
+			
+			dataArrayString
+			.append("[")
+				.append("\""+ businessOpportunityVo.getProductVo().getProductName() +"\"")
+				.append(",")
+				.append("\""+ businessOpportunityVo.getPreSalesAmount() +"\"")
+				.append(",")
+				.append("\""+ businessOpportunityVo.getPreDealTime() +"\"")
+				.append(",")
+				.append("\""+ businessOpportunityVo.getRealWages() +"\"")
+				.append(",");
+			
+			switch(businessOpportunityVo.getSalesStageVo().getSalesStageId()) {
+			case "ddc2e328-0d4b-11e7-9e9d-28d2444b860a" : dataArrayString.append("\"<span class='label label-info'>"+ businessOpportunityVo.getSalesStageVo().getSalesStageName() +"</span>\"");break;
+			case "fbf40d99-0d4b-11e7-9e9d-28d2444b860a" : dataArrayString.append("\"<span class='label label-warning'>"+ businessOpportunityVo.getSalesStageVo().getSalesStageName() +"</span>\"");break;
+			case "011bc899-0d4c-11e7-9e9d-28d2444b860a" : dataArrayString.append("\"<span class='label label-inverse'>"+ businessOpportunityVo.getSalesStageVo().getSalesStageName() +"</span>\"");break;
+			case "053bd26b-0d4c-11e7-9e9d-28d2444b860a" : dataArrayString.append("\"<span class='label label-success'>"+ businessOpportunityVo.getSalesStageVo().getSalesStageName() +"</span>\"");break;
+			case "0b16581b-0d4c-11e7-9e9d-28d2444b860a" : dataArrayString.append("\"<span class='label label-danger'>"+ businessOpportunityVo.getSalesStageVo().getSalesStageName() +"</span>\"");break;
+			}
+			dataArrayString
+				.append(",")
+				.append("\""+ customVo.getReceiver().getEmployeeRealName() +"\"")
+				.append(",")
+				.append("\""+ businessOpportunityVo.getRemark() +"\"")
+				.append(",")
+				.append("\"<button class='btn btn-info'  data-id='"+ businessOpportunityVo.getBusinessOpportunityId() + "' onclick='showCustomBusinessOpportunity(\\\""+ businessOpportunityVo.getBusinessOpportunityId() +"\\\");' ><i class='icon-tags'></i></button>\"")
+			.append("],");
+		}
+		String substring = dataArrayString.substring(0, dataArrayString.toString().length()-1);
+		substring += 
+					"]" +
+						"}";
+		
+		return substring;
+	} 
+	
 /*** 客户管理 /end ***/
 }

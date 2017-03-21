@@ -9,27 +9,13 @@ public class Task {
 
     private String sponsorIdTask;
 
-    private String receiveIdTask;
-
-    private String customIdTask;
-
-    private String feedbackId;
-
     private String taskContent;
-
-    private String taskPhoto;
-
-    private String taskEnclosure;
 
     private Timestamp taskReportDate;
 
     private Timestamp taskStartTime;
 
     private Timestamp taskEndTime;
-
-    private Integer taskIsoutside;
-
-    private Integer taskCompletionStatus;
 
     public String getTaskId() {
         return taskId;
@@ -55,52 +41,12 @@ public class Task {
         this.sponsorIdTask = sponsorIdTask == null ? null : sponsorIdTask.trim();
     }
 
-    public String getReceiveIdTask() {
-        return receiveIdTask;
-    }
-
-    public void setReceiveIdTask(String receiveIdTask) {
-        this.receiveIdTask = receiveIdTask == null ? null : receiveIdTask.trim();
-    }
-
-    public String getCustomIdTask() {
-        return customIdTask;
-    }
-
-    public void setCustomIdTask(String customIdTask) {
-        this.customIdTask = customIdTask == null ? null : customIdTask.trim();
-    }
-
-    public String getFeedbackId() {
-        return feedbackId;
-    }
-
-    public void setFeedbackId(String feedbackId) {
-        this.feedbackId = feedbackId == null ? null : feedbackId.trim();
-    }
-
     public String getTaskContent() {
         return taskContent;
     }
 
     public void setTaskContent(String taskContent) {
         this.taskContent = taskContent == null ? null : taskContent.trim();
-    }
-
-    public String getTaskPhoto() {
-        return taskPhoto;
-    }
-
-    public void setTaskPhoto(String taskPhoto) {
-        this.taskPhoto = taskPhoto == null ? null : taskPhoto.trim();
-    }
-
-    public String getTaskEnclosure() {
-        return taskEnclosure;
-    }
-
-    public void setTaskEnclosure(String taskEnclosure) {
-        this.taskEnclosure = taskEnclosure == null ? null : taskEnclosure.trim();
     }
 
     public Timestamp getTaskReportDate() {
@@ -125,21 +71,5 @@ public class Task {
 
     public void setTaskEndTime(Timestamp taskEndTime) {
         this.taskEndTime = taskEndTime;
-    }
-
-    public Integer getTaskIsoutside() {
-        return taskIsoutside;
-    }
-
-    public void setTaskIsoutside(Integer taskIsoutside) {
-        this.taskIsoutside = taskIsoutside;
-    }
-
-    public Integer getTaskCompletionStatus() {
-        return taskCompletionStatus;
-    }
-
-    public void setTaskCompletionStatus(Integer taskCompletionStatus) {
-        this.taskCompletionStatus = taskCompletionStatus;
     }
 }

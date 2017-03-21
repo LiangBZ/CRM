@@ -86,6 +86,8 @@ public class LoginsController {
 			if(isExist) {
 				session.setAttribute("employeeId", employeeVo.getEmployeeId());
 				session.setAttribute("employeeRealName", employeeVo.getEmployeeRealName());
+				session.setAttribute("departmentIdEmployee", employeeVo.getDepartmentIdEmployee());
+				session.setAttribute("userroleIdEmployee", employeeVo.getUserroleIdEmployee());
 				
 				String webInf = this.getClass().getClassLoader().getResource("/").getPath().replace("classes/", "");
 				String imgPath = webInf + "mainBody/img/png/" + employeeVo.getEmployeeId() + ".png";

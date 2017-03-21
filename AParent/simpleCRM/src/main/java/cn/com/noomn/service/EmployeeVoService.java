@@ -37,4 +37,11 @@ public interface EmployeeVoService {
 	 * @return
 	 */
 	public Infos updateEmployeeVo(EmployeeVo employeeVo);
+	
+	/**
+	 * 根据已有的条件来查询
+	 * @param employeeVo
+	 * @return
+	 */
+	public List<EmployeeVo> selectForNimble(EmployeeVo employeeVo);
 }

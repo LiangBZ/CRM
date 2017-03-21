@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.noomn.mapper.vo.BusinessOpportunityVoMapper">
+  <resultMap id="BaseResultMap" type="cn.com.noomn.vo.BusinessOpportunityVo">
+    <id column="BUSINESS_OPPORTUNITY_ID" jdbcType="VARCHAR" property="businessOpportunityId" />
+    <result column="CUSTOM_ID" jdbcType="VARCHAR" property="customId" />
+    <result column="SALES_STAGE_ID" jdbcType="VARCHAR" property="salesStageId" />
+    <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <result column="PRE_SALES_AMOUNT" jdbcType="DECIMAL" property="preSalesAmount" />
+    <result column="PRE_DEAL_TIME" jdbcType="TIMESTAMP" property="preDealTime" />
+    <result column="COST" jdbcType="DECIMAL" property="cost" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="REAL_WAGES" jdbcType="DECIMAL" property="realWages" />
+    
+    <association property="productVo" javaType="cn.com.noomn.vo.ProductVo" resultMap="cn.com.noomn.mapper.vo.ProductVoMapper.BaseResultMap"></association>
+    <association property="salesStageVo" javaType="cn.com.noomn.vo.SalesStageVo" resultMap="cn.com.noomn.mapper.vo.SalesStageVoMapper.BaseResultMap"></association>
+  </resultMap>
+</mapper>

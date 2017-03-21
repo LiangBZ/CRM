@@ -1088,6 +1088,29 @@ var refreshCustomInfos = function() {
 var addCustomShow = function() {
 	$('div[data-custom="addCustom"]').show(1000);
 	$('div[data-custom="information"]').hide(500);
+	if($('form[data-custom="addCustom"]').find('select[name="followEmployeeId"]').length == 0) return;
+	var url = projectURL + "mainBodys/getSalesmanList";
+	$.ajax({
+		url : url,
+		type : "POST",
+		success : function(data) {
+			var option = '';
+			for(var i=0 ;i<data.length; i++) {
+				var employeeVo = data[i];
+				option += '<option value="'+ employeeVo.employeeId + '">'+ employeeVo.employeeRealName +'</option>';
+			}
+			var $select = $('form[data-custom="addCustom"]').find('select[name="followEmployeeId"]');
+			$select.html(option);
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+/*var addCustomShow = function() {
+	$('div[data-custom="addCustom"]').show(1000);
+	$('div[data-custom="information"]').hide(500);
 	if($('form[data-custom="addCustom"]').find('select[name="departmentId"]').length == 0) return;
 	var url = projectURL + "mainBodys/getCustomDepartmentVoList";
 	$.ajax({
@@ -1108,7 +1131,7 @@ var addCustomShow = function() {
 		}
 	});
 }
-
+*/
 var addCustom = function() {
 	$.confirm({
 	    title: '提示',
@@ -1122,35 +1145,20 @@ var addCustom = function() {
 	        	var customLinkmanPhone = $(':input[name="customLinkmanPhone"]').val();
 	        	var customLinkmanPost = $(':input[name="customLinkmanPost"]').val();
 	        	var customLinkmanRemark = $('textarea[name="customLinkmanRemark"]').val();
-	        	var $selectDepartmentId = $('select[name=departmentId]');
-	        	var departmentId = "";
+	        	var followEmployeeId = $('select[name="followEmployeeId"]').val();
 	        	var customRankId = $('select[name=customRankId]').val();
 	        	var customStateId = $('select[name="customStateId"]').val();
-	        	if($selectDepartmentId.length != 0) {
-	        		departmentId = $('select[name=departmentId]').val();
-	        		data = {
-	        				customName : customName,
-	        				customAddress : customAddress,
-	        				customLinkmanName : customLinkmanName,
-	        				customLinkmanPhone : customLinkmanPhone,
-	        				customLinkmanPost : customLinkmanPost,
-	        				customLinkmanRemark : customLinkmanRemark,
-	        				departmentId : departmentId,
-	        				customRankId : customRankId,
-	        				customStateId : customStateId
-	        		}
-	        	}else {
-	        		data = {
-	        				customName : customName,
-	        				customAddress : customAddress,
-	        				customLinkmanName : customLinkmanName,
-	        				customLinkmanPhone : customLinkmanPhone,
-	        				customLinkmanPost : customLinkmanPost,
-	        				customLinkmanRemark : customLinkmanRemark,
-	        				customRankId : customRankId,
-	        				customStateId : customStateId
-	        		}
-	        	}
+        		data = {
+        				customName : customName,
+        				customAddress : customAddress,
+        				customLinkmanName : customLinkmanName,
+        				customLinkmanPhone : customLinkmanPhone,
+        				customLinkmanPost : customLinkmanPost,
+        				customLinkmanRemark : customLinkmanRemark,
+        				followEmployeeId : followEmployeeId,
+        				customRankId : customRankId,
+        				customStateId : customStateId
+        		}
 	        	
 	        	var url = projectURL + "/mainBodys/addCustomVo";
 	        	$.ajax({
@@ -1247,6 +1255,70 @@ var editCustom = function() {
 			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
 			$('div[data-Modal="alertModal"]').modal('show');
 		}
+	});
+}
+
+var datailCustom = function(customId) {
+	$('#main-content').load(projectURL + "mainBodys/loadMainBody/", {jspURL: 'mainBody/jsp/detailCustom'},function() {
+		$(':input[name="customId"]').val(customId);
+		datailCustomShow();
+	});
+}
+
+var datailCustomShow = function() {
+	var customId = $(':input[name="customId"]').val();
+	var url = projectURL + "mainBodys/selectCustomDetailed";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			customId : customId
+		},
+		success : function(data) {
+			$('span[name="customName"]').html(data.customName);
+			$('span[name="customAddress"]').html(data.customAddress);
+			$('span[name="customLinkmanName"]').html(data.customLinkmanName);
+			$('span[name="customLinkmanPost"]').html(data.customLinkmanPost);
+			$('span[name="customLinkmanPhone"]').html(data.customLinkmanPhone);
+			$('span[name="departmentName"]').html(data.departmentVo.departmentName);
+			$('span[name="customRankName"]').html(data.customRankVo.customRankName);
+			$('span[name="customStateName"]').html(data.customStateVo.customStateName);
+			$('span[name="customLinkmanRemark"]').html(data.customLinkmanRemark);
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+var getCustomBusinessOpportunity = function() {
+	var customId = $(':input[name="customId"]').val();
+	var dataTableURL = projectURL + "mainBodys/selectCustomDetailedTable/"+customId;
+	
+	dataTables.fnDestroy();
+	
+	dataTables = $('table[data-custom="businessOpportunityInfos"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });
+	$('table[data-custom="businessOpportunityInfos"]').removeAttr("style");
+}
+
+var showCustomBusinessOpportunity = function(customId) {
+	$('#main-content').load(projectURL + "mainBodys/loadMainBody/", {jspURL: 'mainBody/jsp/showCustom'},function() {
+		
 	});
 }
 

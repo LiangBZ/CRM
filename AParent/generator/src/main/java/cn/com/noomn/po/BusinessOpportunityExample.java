@@ -176,76 +176,6 @@ public class BusinessOpportunityExample {
             return (Criteria) this;
         }
 
-        public Criteria andFollowEmployeeIdIsNull() {
-            addCriterion("FOLLOW_EMPLOYEE_ID is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFollowEmployeeIdIsNotNull() {
-            addCriterion("FOLLOW_EMPLOYEE_ID is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFollowEmployeeIdEqualTo(String value) {
-            addCriterion("FOLLOW_EMPLOYEE_ID =", value, "followEmployeeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFollowEmployeeIdNotEqualTo(String value) {
-            addCriterion("FOLLOW_EMPLOYEE_ID <>", value, "followEmployeeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFollowEmployeeIdGreaterThan(String value) {
-            addCriterion("FOLLOW_EMPLOYEE_ID >", value, "followEmployeeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFollowEmployeeIdGreaterThanOrEqualTo(String value) {
-            addCriterion("FOLLOW_EMPLOYEE_ID >=", value, "followEmployeeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFollowEmployeeIdLessThan(String value) {
-            addCriterion("FOLLOW_EMPLOYEE_ID <", value, "followEmployeeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFollowEmployeeIdLessThanOrEqualTo(String value) {
-            addCriterion("FOLLOW_EMPLOYEE_ID <=", value, "followEmployeeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFollowEmployeeIdLike(String value) {
-            addCriterion("FOLLOW_EMPLOYEE_ID like", value, "followEmployeeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFollowEmployeeIdNotLike(String value) {
-            addCriterion("FOLLOW_EMPLOYEE_ID not like", value, "followEmployeeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFollowEmployeeIdIn(List<String> values) {
-            addCriterion("FOLLOW_EMPLOYEE_ID in", values, "followEmployeeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFollowEmployeeIdNotIn(List<String> values) {
-            addCriterion("FOLLOW_EMPLOYEE_ID not in", values, "followEmployeeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFollowEmployeeIdBetween(String value1, String value2) {
-            addCriterion("FOLLOW_EMPLOYEE_ID between", value1, value2, "followEmployeeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFollowEmployeeIdNotBetween(String value1, String value2) {
-            addCriterion("FOLLOW_EMPLOYEE_ID not between", value1, value2, "followEmployeeId");
-            return (Criteria) this;
-        }
-
         public Criteria andCustomIdIsNull() {
             addCriterion("CUSTOM_ID is null");
             return (Criteria) this;
@@ -703,6 +633,66 @@ public class BusinessOpportunityExample {
 
         public Criteria andRemarkNotBetween(String value1, String value2) {
             addCriterion("REMARK not between", value1, value2, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRealWagesIsNull() {
+            addCriterion("REAL_WAGES is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRealWagesIsNotNull() {
+            addCriterion("REAL_WAGES is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRealWagesEqualTo(BigDecimal value) {
+            addCriterion("REAL_WAGES =", value, "realWages");
+            return (Criteria) this;
+        }
+
+        public Criteria andRealWagesNotEqualTo(BigDecimal value) {
+            addCriterion("REAL_WAGES <>", value, "realWages");
+            return (Criteria) this;
+        }
+
+        public Criteria andRealWagesGreaterThan(BigDecimal value) {
+            addCriterion("REAL_WAGES >", value, "realWages");
+            return (Criteria) this;
+        }
+
+        public Criteria andRealWagesGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("REAL_WAGES >=", value, "realWages");
+            return (Criteria) this;
+        }
+
+        public Criteria andRealWagesLessThan(BigDecimal value) {
+            addCriterion("REAL_WAGES <", value, "realWages");
+            return (Criteria) this;
+        }
+
+        public Criteria andRealWagesLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("REAL_WAGES <=", value, "realWages");
+            return (Criteria) this;
+        }
+
+        public Criteria andRealWagesIn(List<BigDecimal> values) {
+            addCriterion("REAL_WAGES in", values, "realWages");
+            return (Criteria) this;
+        }
+
+        public Criteria andRealWagesNotIn(List<BigDecimal> values) {
+            addCriterion("REAL_WAGES not in", values, "realWages");
+            return (Criteria) this;
+        }
+
+        public Criteria andRealWagesBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("REAL_WAGES between", value1, value2, "realWages");
+            return (Criteria) this;
+        }
+
+        public Criteria andRealWagesNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("REAL_WAGES not between", value1, value2, "realWages");
             return (Criteria) this;
         }
     }

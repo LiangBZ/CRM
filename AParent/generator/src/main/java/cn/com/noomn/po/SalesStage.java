@@ -5,6 +5,8 @@ public class SalesStage {
 
     private String salesStageName;
 
+    private Integer rateOfProgress;
+
     public String getSalesStageId() {
         return salesStageId;
     }
@@ -19,5 +21,13 @@ public class SalesStage {
 
     public void setSalesStageName(String salesStageName) {
         this.salesStageName = salesStageName == null ? null : salesStageName.trim();
+    }
+
+    public Integer getRateOfProgress() {
+        return rateOfProgress;
+    }
+
+    public void setRateOfProgress(Integer rateOfProgress) {
+        this.rateOfProgress = rateOfProgress;
     }
 }
