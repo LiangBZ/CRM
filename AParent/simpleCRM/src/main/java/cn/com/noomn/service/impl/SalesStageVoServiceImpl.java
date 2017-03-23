@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.com.noomn.mapper.dao.SalesStageMapper;
+import cn.com.noomn.mapper.vo.SalesStageVoMapper;
 import cn.com.noomn.po.SalesStage;
 import cn.com.noomn.service.SalesStageVoService;
 import cn.com.noomn.util.InitXMLResolve;
@@ -19,6 +20,8 @@ public class SalesStageVoServiceImpl implements SalesStageVoService {
 	private InitXMLResolve initXMLResolve;
 	@Autowired
 	private SalesStageMapper salesStageMapper;
+	@Autowired
+	private SalesStageVoMapper salesStageVoMapper;
 	
 	@Override
 	public void initSalesStageVo() {
@@ -36,6 +39,13 @@ public class SalesStageVoServiceImpl implements SalesStageVoService {
 			insertCount += salesStageMapper.insertSelective(salesStageVo);
 		}
 		System.err.println("插入" + insertCount + "条数据");
+	}
+
+	@Override
+	public List<SalesStageVo> selectUpOrZeroSalesStageVo(
+			SalesStageVo salesStageVo) {
+		List<SalesStageVo> selectUpOrZeroSalesStageVo = salesStageVoMapper.selectUpOrZeroSalesStageVo(salesStageVo);
+		return selectUpOrZeroSalesStageVo;
 	}
 
 }

@@ -245,6 +245,76 @@ public class FeedbackExample {
             return (Criteria) this;
         }
 
+        public Criteria andFollowEmployeeIdFeedbackIsNull() {
+            addCriterion("FOLLOW_EMPLOYEE_ID_FEEDBACK is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdFeedbackIsNotNull() {
+            addCriterion("FOLLOW_EMPLOYEE_ID_FEEDBACK is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdFeedbackEqualTo(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_FEEDBACK =", value, "followEmployeeIdFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdFeedbackNotEqualTo(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_FEEDBACK <>", value, "followEmployeeIdFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdFeedbackGreaterThan(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_FEEDBACK >", value, "followEmployeeIdFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdFeedbackGreaterThanOrEqualTo(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_FEEDBACK >=", value, "followEmployeeIdFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdFeedbackLessThan(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_FEEDBACK <", value, "followEmployeeIdFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdFeedbackLessThanOrEqualTo(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_FEEDBACK <=", value, "followEmployeeIdFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdFeedbackLike(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_FEEDBACK like", value, "followEmployeeIdFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdFeedbackNotLike(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_FEEDBACK not like", value, "followEmployeeIdFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdFeedbackIn(List<String> values) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_FEEDBACK in", values, "followEmployeeIdFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdFeedbackNotIn(List<String> values) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_FEEDBACK not in", values, "followEmployeeIdFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdFeedbackBetween(String value1, String value2) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_FEEDBACK between", value1, value2, "followEmployeeIdFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdFeedbackNotBetween(String value1, String value2) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_FEEDBACK not between", value1, value2, "followEmployeeIdFeedback");
+            return (Criteria) this;
+        }
+
         public Criteria andFeedbackDetailIsNull() {
             addCriterion("FEEDBACK_DETAIL is null");
             return (Criteria) this;

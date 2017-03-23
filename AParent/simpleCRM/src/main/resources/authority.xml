@@ -17,5 +17,6 @@
 		<key-value id="34a71c5d-0d3b-11e7-9e9d-28d2444b860a" name="添加客户" explain="添加新客户到部门" fatherNodeId="department" isFatherNode="false"></key-value>
 		<key-value id="72621594-0d83-11e7-9e9d-28d2444b860a" name="选择客户所属部门" explain="选择客户所属部门，默认为创建者所在的部门" fatherNodeId="department" isFatherNode="false"></key-value>
 		<key-value id="10c42c6f-0d91-11e7-9e9d-28d2444b860a" name="编辑客户" explain="编辑客户信息" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="06765f5e-0f9e-11e7-8663-28d2444b860a" name="发布任务" explain="根据商机给跟进人发布任务" fatherNodeId="department" isFatherNode="false"></key-value>
 	</authority>
 </authoritys>

@@ -11,7 +11,7 @@ response.setDateHeader("Expires", -10);
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>container</title>
 	<!-- jquery -->
-   <%--  <script src="${pageContext.request.contextPath}/mainBody/js/jquery-1.8.2.min.js"></script> --%>
+    <%-- <script src="${pageContext.request.contextPath}/mainBody/js/jquery-1.8.2.min.js"></script> --%>
     <script src="${pageContext.request.contextPath}/Util/js/jquery/jquery.2.1.1.min.js"></script>
 	<link href="${pageContext.request.contextPath}/mainBody/css/bootstrap-fileupload.css" rel="stylesheet"/>
 	<link href="${pageContext.request.contextPath}/mainBody/css/bootstrap.min.css" rel="stylesheet"/>
@@ -26,9 +26,14 @@ response.setDateHeader("Expires", -10);
 	<link href="${pageContext.request.contextPath}/Util/Font-Awesome-master/css/font-awesome.css" rel="stylesheet" />
 	<link href="${pageContext.request.contextPath}/Util/js/zTree_v3-master/css/metroStyle/metroStyle.css" rel="stylesheet" />
 	
-	<%@ include file="/WEB-INF/Util/jsp/alertModal.jsp" %>
+	<!-- 日期 -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/Util/js/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.css" />
+	
+<%-- 	
+	<%@ include file="/WEB-INF/Util/jsp/alertModal.jsp" %> 
 	<%@ include file="/WEB-INF/Util/jsp/organizing_editDepartment.jsp" %>
 	<%@ include file="/WEB-INF/Util/jsp/organizing_addDepartment.jsp" %>
+--%>
 	
 	<script type="text/javascript">
 		$.ajaxSetup({
@@ -334,8 +339,8 @@ response.setDateHeader("Expires", -10);
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="javascript:void(0)">收到的任务</a></li>
-                        <li><a class="" href="javascript:void(0)">发布任务</a></li>
+                        <li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/receiveTaskInformation')">收到的任务</a></li>
+                        <li><a class="" href="javascript:void(0)">往期任务</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -362,8 +367,7 @@ response.setDateHeader("Expires", -10);
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/showCustom')">查看商机</a></li>
-                        <li><a class="" href="javascript:void(0)">添加商机</a></li>
+                        <li><a class="" href="javascript:void(0)"  onclick="loadMainBody('mainBody/jsp/businessOpportunityInformation')">所有商机</a></li>
                         <li><a class="" href="javascript:void(0)">商机分析</a></li>
                     </ul>
                 </li>
@@ -421,7 +425,8 @@ response.setDateHeader("Expires", -10);
 <script src="${pageContext.request.contextPath}/Util/js/myTree.js"></script>
 
 
-<script src="${pageContext.request.contextPath}/Util/js/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/Util/js/bootstrap-3.3.7-dist/js/bootstrap.js"></script> --%>
+<script src="${pageContext.request.contextPath}/mainBody/js/bootstrap.min.js"></script>
 
 <!-- 校验 -->
 <script src="${pageContext.request.contextPath}/mainBody/js/bootstrap-inputmask.min.js"></script>
@@ -432,6 +437,19 @@ response.setDateHeader("Expires", -10);
 <script src="${pageContext.request.contextPath}/Util/js/craftpip-jquery-confirm-e3e217e/js/jquery-confirm.js"></script>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/mainBody/js/jquery.bootstrap.wizard.min.js"></script>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/mainBody/js/chosen.jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/mainBody/js/clockface.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/mainBody/js/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/mainBody/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/mainBody/js/date.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/mainBody/js/daterangepicker.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/mainBody/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/mainBody/js/bootstrap-timepicker.js"></script>
+
+<!-- 日期 -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/Util/js/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/Util/js/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 
 <script type="text/javascript">
 	var loadMainBody = function(jspURL) {

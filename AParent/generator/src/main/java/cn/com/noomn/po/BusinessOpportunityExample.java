@@ -506,66 +506,6 @@ public class BusinessOpportunityExample {
             return (Criteria) this;
         }
 
-        public Criteria andCostIsNull() {
-            addCriterion("COST is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostIsNotNull() {
-            addCriterion("COST is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostEqualTo(BigDecimal value) {
-            addCriterion("COST =", value, "cost");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostNotEqualTo(BigDecimal value) {
-            addCriterion("COST <>", value, "cost");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostGreaterThan(BigDecimal value) {
-            addCriterion("COST >", value, "cost");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("COST >=", value, "cost");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostLessThan(BigDecimal value) {
-            addCriterion("COST <", value, "cost");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("COST <=", value, "cost");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostIn(List<BigDecimal> values) {
-            addCriterion("COST in", values, "cost");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostNotIn(List<BigDecimal> values) {
-            addCriterion("COST not in", values, "cost");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("COST between", value1, value2, "cost");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("COST not between", value1, value2, "cost");
-            return (Criteria) this;
-        }
-
         public Criteria andRemarkIsNull() {
             addCriterion("REMARK is null");
             return (Criteria) this;
@@ -633,66 +573,6 @@ public class BusinessOpportunityExample {
 
         public Criteria andRemarkNotBetween(String value1, String value2) {
             addCriterion("REMARK not between", value1, value2, "remark");
-            return (Criteria) this;
-        }
-
-        public Criteria andRealWagesIsNull() {
-            addCriterion("REAL_WAGES is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRealWagesIsNotNull() {
-            addCriterion("REAL_WAGES is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRealWagesEqualTo(BigDecimal value) {
-            addCriterion("REAL_WAGES =", value, "realWages");
-            return (Criteria) this;
-        }
-
-        public Criteria andRealWagesNotEqualTo(BigDecimal value) {
-            addCriterion("REAL_WAGES <>", value, "realWages");
-            return (Criteria) this;
-        }
-
-        public Criteria andRealWagesGreaterThan(BigDecimal value) {
-            addCriterion("REAL_WAGES >", value, "realWages");
-            return (Criteria) this;
-        }
-
-        public Criteria andRealWagesGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("REAL_WAGES >=", value, "realWages");
-            return (Criteria) this;
-        }
-
-        public Criteria andRealWagesLessThan(BigDecimal value) {
-            addCriterion("REAL_WAGES <", value, "realWages");
-            return (Criteria) this;
-        }
-
-        public Criteria andRealWagesLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("REAL_WAGES <=", value, "realWages");
-            return (Criteria) this;
-        }
-
-        public Criteria andRealWagesIn(List<BigDecimal> values) {
-            addCriterion("REAL_WAGES in", values, "realWages");
-            return (Criteria) this;
-        }
-
-        public Criteria andRealWagesNotIn(List<BigDecimal> values) {
-            addCriterion("REAL_WAGES not in", values, "realWages");
-            return (Criteria) this;
-        }
-
-        public Criteria andRealWagesBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("REAL_WAGES between", value1, value2, "realWages");
-            return (Criteria) this;
-        }
-
-        public Criteria andRealWagesNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("REAL_WAGES not between", value1, value2, "realWages");
             return (Criteria) this;
         }
     }

@@ -8,17 +8,28 @@ function isTrue(isTrue) {
 	return isTrue;
 }
 
-function setConfirmModalTitleAndBody(title, body) {
+
+/*function setConfirmModalTitleAndBody(title, body) {
 	$confirmModal = $('div[data-Modal="confirmModal"]');
 	$confirmModal.find('h4[data-modalPart="modalTitle"]').html(title);
 	$confirmModal.find('div[data-modalPart="modalBody"]').html(body);
-}
+}*/
 
-function setAlertModalTitleAndBody(title, body) {
+/*function setAlertModalTitleAndBody(title, body) {
 	$alertModal = $('div[data-Modal="alertModal"]');
 	$alertModal.find('h4[data-modalPart="modalTitle"]').html(title);
 	$alertModal.find('div[data-modalPart="modalBody"]').html(body);
+}*/
+
+
+function setAlertModalTitleAndBody(title, body) {
+	$.alert({
+	    title: title,
+	    content: body,
+	});
 }
+
+
 
 function showInfos(infos, message, obj, url) {
 	if(infos !== null && infos !== "") {
@@ -27,6 +38,129 @@ function showInfos(infos, message, obj, url) {
 	}
 }
 
+/************************************************************/
+/** yyyy-mm-ss转为date begin**/
+function converDateFromString(dataString) {
+	if(dataString) {
+		var date = new Date(dateString.replace(/-/,"/"));
+		return date;
+	}
+}
+
+/** /yyyy-mm-ss转为date /end **/
+
+/** 返回yyyy-MM-dd格式日期 begin **/
+
+function dateFormat_1(longTypeDate){  
+    var dateType = "";  
+    var date = new Date();  
+    date.setTime(longTypeDate);  
+    dateType += date.getFullYear();   //年  
+    dateType += "-" + getMonth(date); //月   
+    dateType += "-" + getDay(date);   //日  
+    return dateType;
+} 
+//返回 01-12 的月份值   
+function getMonth(date){  
+    var month = "";  
+    month = date.getMonth() + 1; //getMonth()得到的月份是0-11  
+    if(month<10){  
+        month = "0" + month;  
+    }  
+    return month;  
+}  
+//返回01-30的日期  
+function getDay(date){  
+    var day = "";  
+    day = date.getDate();  
+    if(day<10){  
+        day = "0" + day;  
+    }  
+    return day;  
+}
+
+function dateFormat_2(longTypeDate){  
+    var dateType = "";  
+    var date = new Date();  
+    date.setTime(longTypeDate); 
+    dateType = date.getFullYear()+"-"+getMonth(date)+"-"+getDay(date);//yyyy-MM-dd格式日期
+    return dateType;
+} 
+
+/**  /返回yyyy-MM-dd格式日期 /end **/
+/************************************************************/
+/** 返回yyyy-MM-dd 00:00:00格式日期 begin **/
+
+
+function datetimeFormat_1(longTypeDate){  
+    var datetimeType = "";  
+    var date = new Date();  
+    date.setTime(longTypeDate);  
+    datetimeType+= date.getFullYear();   //年  
+    datetimeType+= "-" + getMonth(date); //月   
+    datetimeType += "-" + getDay(date);   //日  
+    datetimeType+= "&nbsp;&nbsp;" + getHours(date);   //时  
+    datetimeType+= ":" + getMinutes(date);      //分
+    datetimeType+= ":" + getSeconds(date);      //分
+    return datetimeType;
+} 
+//返回 01-12 的月份值   
+function getMonth(date){  
+    var month = "";  
+    month = date.getMonth() + 1; //getMonth()得到的月份是0-11  
+    if(month<10){  
+        month = "0" + month;  
+    }  
+    return month;  
+}  
+//返回01-30的日期  
+function getDay(date){  
+    var day = "";  
+    day = date.getDate();  
+    if(day<10){  
+        day = "0" + day;  
+    }  
+    return day;  
+}
+//返回小时
+function getHours(date){
+    var hours = "";
+    hours = date.getHours();
+    if(hours<10){  
+        hours = "0" + hours;  
+    }  
+    return hours;  
+}
+//返回分
+function getMinutes(date){
+    var minute = "";
+    minute = date.getMinutes();
+    if(minute<10){  
+        minute = "0" + minute;  
+    }  
+    return minute;  
+}
+//返回秒
+function getSeconds(date){
+    var second = "";
+    second = date.getSeconds();
+    if(second<10){  
+        second = "0" + second;  
+    }  
+    return second;  
+}
+
+
+function datetimeFormat_2(longTypeDate){  
+    var datetimeType = "";  
+    var date = new Date();  
+    date.setTime(longTypeDate);
+    datetimeType = date.getFullYear()+"-"+getMonth(date)+"-"+getDay(date)+" "+getHours(date)+":"+getMinutes(date)+":"+getSeconds(date);//yyyy-MM-dd 00:00:00格式日期
+    return datetimeType;
+}
+
+
+/** /返回yyyy-MM-dd 00:00:00格式日期 /end **/
 /************************************************************/
 /** 组织管理 begin **/
 
@@ -77,17 +211,46 @@ var script = function (_dataTableURL,_treeURL) {
 	jQuery('#sample_1_wrapper .dataTables_length select').addClass("input-mini"); // modify table per page dropdown
 };
 
-var addDepartment = function() {
+/*
+ 	var addDepartment = function() {
 	$modal = $('div[data-Modal="organizing_addDepartment"]');
 	$modal.modal('show');
+}*/
+var addDepartment = function() {
+	$.confirm({
+	    title: '添加部门',
+	    content: 
+	    	'<form class="form-horizontal" role="form" data-Modal="organizing_addDepartment">' +
+			    '<div class="form-group">' +
+			        '<label for="inputEmail3" class="col-sm-2 control-label">部门名称:</label>' +
+			        '<div class="col-sm-10">' +
+			            '<input name="departmentName" type="text" class="form-control" placeholder="请输入名称">'+
+			        '</div>' +
+			    '</div>' +
+			    '<button type="submit" class="btn btn-default hidden">保存</button>' +
+			'</form>'
+	    	,
+	    buttons: {
+	        确定: {
+	            text: '保存',
+	            btnClass: 'btn-blue',
+	            action: function () {
+	            	addDepartmentClick( projectURL + "mainBodys/insertDepartmentVo");
+	            }
+	        },
+	        取消: function () {
+	            //close
+	        },
+	    }
+	});
 }
 
 var addDepartmentClick = function(url) {
-	$modal = $('div[data-Modal="organizing_addDepartment"]');
-	$form = $modal.find("form");
+	$form = $('form[data-Modal="organizing_addDepartment"]');
 	$form.bootstrapValidator(option);
 	$form.data("bootstrapValidator").validateField('departmentName');
-	isTrue = $modal.find("form").data("bootstrapValidator").isValidField('departmentName');
+	isTrue = $form.data("bootstrapValidator").isValidField('departmentName');
+//	isTrue = $modal.find("form").data("bootstrapValidator").isValidField('departmentName');
 	if (isTrue == false) return;
 	
 	var departmentName = $form.find(':input[name="departmentName"]').val();
@@ -99,8 +262,7 @@ var addDepartmentClick = function(url) {
 		},
 		
 		success : function(data) {
-			$('button[data-dismiss="modal"]').click();
-			
+
 			setAlertModalTitleAndBody("添加部门", data.obj);
 			$('div[data-Modal="alertModal"]').modal('show');
 			
@@ -121,11 +283,6 @@ var addDepartmentClick = function(url) {
 	});
 }
 
-
-var addEmployee = function(_this) {
-	alert("add..");
-}
-
 var editDepartment = function(_this, projectURL) {
 	var dataId = $(_this).data("id");
 	$.ajax({
@@ -136,9 +293,37 @@ var editDepartment = function(_this, projectURL) {
 		},
 		success : function(data) {
 			var department = data[0];
-			$('div[data-Modal="organizing_editDepartment"]').find(':input[name="departmentName"]').val(department.departmentName);
-			$('div[data-Modal="organizing_editDepartment"]').find(':input[name="departmentId"]').val(department.departmentId);
-			$('div[data-Modal="organizing_editDepartment"]').modal('show');
+//			$('div[data-Modal="organizing_editDepartment"]').find(':input[name="departmentName"]').val(department.departmentName);
+//			$('div[data-Modal="organizing_editDepartment"]').find(':input[name="departmentId"]').val(department.departmentId);
+//			$('div[data-Modal="organizing_editDepartment"]').modal('show');
+			
+			$.confirm({
+			    title: '编辑部门',
+			    content: 
+			    	'<form class="form-horizontal" role="form" data-Modal="organizing_editDepartment">' +
+					    '<div class="form-group">' +
+					        '<label for="inputEmail3" class="col-sm-2 control-label">部门名称:</label>' +
+					        '<div class="col-sm-10">' +
+					            '<input name="departmentName" type="text" class="form-control" placeholder="请输入名称" value="'+ department.departmentName +'">' +
+					        '</div>' +
+					    '</div>' +
+					    '<input name="departmentId" type="hidden" value="'+ department.departmentId + '">' +
+					    '<button type="submit" class="btn btn-default hidden">保存</button>' +
+					'</form>'
+			    	,
+			    buttons: {
+			        确定: {
+			            text: '保存',
+			            btnClass: 'btn-blue',
+			            action: function () {
+			            	saveClick( projectURL + "/mainBodys/updateDepartmentVo");
+			            }
+			        },
+			        取消: function () {
+			            //close
+			        },
+			    }
+			});
 		},
 		error : function() {
 			alert("查询部门失败");
@@ -147,11 +332,13 @@ var editDepartment = function(_this, projectURL) {
 }
 
 var saveClick = function(url) {
-	$modal = $('div[data-Modal="organizing_editDepartment"]');
-	$form = $modal.find("form");
+//	$modal = $('div[data-Modal="organizing_editDepartment"]');
+//	$form = $modal.find("form");
+	$form = $('form[data-Modal="organizing_editDepartment"]');
 	$form.bootstrapValidator(option);
 	$form.data("bootstrapValidator").validateField('departmentName');
-	isTrue = $modal.find("form").data("bootstrapValidator").isValidField('departmentName');
+//	isTrue = $modal.find("form").data("bootstrapValidator").isValidField('departmentName');
+	isTrue = $form.data("bootstrapValidator").isValidField('departmentName');
 	if (isTrue == false) return;
 	
 	var departmentId = $form.find(':input[name="departmentId"]').val();
@@ -1073,14 +1260,20 @@ var initCustomInfos = function() {
 		editCustom();
 		return false;
 	}); 
+	$('form[data-BusinessOpportunity="addBusinessOpportunity"]').submit(function() {  
+		if(income()) addBusinessOpportunity();
+		return false;
+	}); 
 	
 	$('div[data-custom="addCustom"]').hide(500);
 	$('div[data-custom="editCustom"]').hide(500);
+	$('div[data-BusinessOpportunity="addBusinessOpportunity"]').hide(500);
 	$('div[data-custom="information"]').show(1000);
 }
 
 var refreshCustomInfos = function() {
-	dataTables.fnDestroy();
+	if(dataTables != null)
+		dataTables.fnDestroy();
 	initCustomInfos();
 	$('form[data-custom="addCustom"]').find(':input[type="reset"]').click();
 }
@@ -1088,6 +1281,7 @@ var refreshCustomInfos = function() {
 var addCustomShow = function() {
 	$('div[data-custom="addCustom"]').show(1000);
 	$('div[data-custom="information"]').hide(500);
+	$('div[data-BusinessOpportunity="addBusinessOpportunity"]').hide(500);
 	if($('form[data-custom="addCustom"]').find('select[name="followEmployeeId"]').length == 0) return;
 	var url = projectURL + "mainBodys/getSalesmanList";
 	$.ajax({
@@ -1108,30 +1302,7 @@ var addCustomShow = function() {
 		}
 	});
 }
-/*var addCustomShow = function() {
-	$('div[data-custom="addCustom"]').show(1000);
-	$('div[data-custom="information"]').hide(500);
-	if($('form[data-custom="addCustom"]').find('select[name="departmentId"]').length == 0) return;
-	var url = projectURL + "mainBodys/getCustomDepartmentVoList";
-	$.ajax({
-		url : url,
-		type : "POST",
-		success : function(data) {
-			var option = '';
-			for(var i=0 ;i<data.length; i++) {
-				var department = data[i];
-				option += '<option value="'+ department.departmentId + '">'+ department.departmentName +'</option>';
-			}
-			var $select = $('form[data-custom="addCustom"]').find('select[name="departmentId"]');
-			$select.html(option);
-		},
-		error : function() {
-			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
-			$('div[data-Modal="alertModal"]').modal('show');
-		}
-	});
-}
-*/
+
 var addCustom = function() {
 	$.confirm({
 	    title: '提示',
@@ -1186,29 +1357,50 @@ var addCustom = function() {
 }
 
 var editCustomShow = function(customId) {
-	var url = projectURL + "mainBodys/editCustomShow";
+	var $form = $('form[data-custom="editCustom"]');
+	var url = projectURL + "mainBodys/getSalesmanList";
 	$.ajax({
 		url : url,
 		type : "POST",
-		data : {
-			customId : customId
-		},
 		success : function(data) {
-			var custom = data;
-			var $form = $('form[data-custom="editCustom"]');
-			$form.find(':input[name="customId"]').val(custom.customId);
-			$form.find(':input[name="customName"]').val(custom.customName);
-			$form.find(':input[name="customAddress"]').val(custom.customAddress);
-			$form.find(':input[name="customLinkmanName"]').val(custom.customLinkmanName);
-			$form.find(':input[name="customLinkmanPhone"]').val(custom.customLinkmanPhone);
-			$form.find(':input[name="customLinkmanPost"]').val(custom.customLinkmanPost);
-			$form.find('textarea[name="customLinkmanRemark"]').val(custom.customLinkmanRemark);
-			$form.find('select[name="customRankId"]').val(custom.customRankId);
-			$form.find('select[name="customStateId"]').val(custom.customStateId);
+			var option = '';
+			for(var i=0 ;i<data.length; i++) {
+				var employeeVo = data[i];
+				option += '<option value="'+ employeeVo.employeeId + '">'+ employeeVo.employeeRealName +'</option>';
+			}
+			var $select = $form.find('select[name="followEmployeeId"]');
+			$select.html(option);
 			
-			$('div[data-custom="information"]').hide(500);
-			$('div[data-custom="addCustom"]').hide(500);
-			$('div[data-custom="editCustom"]').show(1000);
+			var url = projectURL + "mainBodys/editCustomShow";
+			$.ajax({
+				url : url,
+				type : "POST",
+				data : {
+					customId : customId
+				},
+				success : function(data) {
+					var custom = data;
+					$form.find(':input[name="customId"]').val(custom.customId);
+					$form.find(':input[name="customName"]').val(custom.customName);
+					$form.find(':input[name="customAddress"]').val(custom.customAddress);
+					$form.find(':input[name="customLinkmanName"]').val(custom.customLinkmanName);
+					$form.find(':input[name="customLinkmanPhone"]').val(custom.customLinkmanPhone);
+					$form.find(':input[name="customLinkmanPost"]').val(custom.customLinkmanPost);
+					$form.find('textarea[name="customLinkmanRemark"]').val(custom.customLinkmanRemark);
+					$form.find('select[name="customRankId"]').val(custom.customRankId);
+					$form.find('select[name="customStateId"]').val(custom.customStateId);
+					$form.find('select[name="followEmployeeId"]').val(custom.followEmployeeId);
+					
+					$('div[data-custom="information"]').hide(500);
+					$('div[data-custom="addCustom"]').hide(500);
+					$('div[data-BusinessOpportunity="addBusinessOpportunity"]').hide(500);
+					$('div[data-custom="editCustom"]').show(1000);
+				},
+				error : function() {
+					setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+					$('div[data-Modal="alertModal"]').modal('show');
+				}
+			});
 		},
 		error : function() {
 			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
@@ -1230,6 +1422,7 @@ var editCustom = function() {
 	var customLinkmanRemark =$form.find('textarea[name="customLinkmanRemark"]').val();
 	var customRankId =$form.find('select[name="customRankId"]').val();
 	var customStateId =$form.find('select[name="customStateId"]').val();
+	var followEmployeeId = $form.find('select[name="followEmployeeId"]').val();
 	$.ajax({
 		url : url,
 		type : "POST",
@@ -1243,6 +1436,7 @@ var editCustom = function() {
 			customLinkmanRemark : customLinkmanRemark ,
 			customRankId : customRankId ,
 			customStateId : customStateId ,
+			followEmployeeId : followEmployeeId
 		},
 		success : function(data) {
 			
@@ -1316,11 +1510,545 @@ var getCustomBusinessOpportunity = function() {
 	$('table[data-custom="businessOpportunityInfos"]').removeAttr("style");
 }
 
-var showCustomBusinessOpportunity = function(customId) {
-	$('#main-content').load(projectURL + "mainBodys/loadMainBody/", {jspURL: 'mainBody/jsp/showCustom'},function() {
-		
+//加载添加商机页面
+var showAddBusinessOpportunity = function(customId) {
+	$('form[data-BusinessOpportunity="addBusinessOpportunity"]').find(':input[name="customId"]').val(customId);
+	var url = projectURL + "mainBodys/getAllProductList";
+	$.ajax({
+		url : url,
+		type : "POST",
+		success : function(data) {
+			var $form = $('form[data-BusinessOpportunity="addBusinessOpportunity"]');
+			
+			var option = '';
+			for(var i=0 ;i<data.length; i++) {
+				var productVo = data[i];
+				option += '<option value="'+ productVo.productId + '">'+ productVo.productName + "(" + productVo.productNum + ")" +'</option>';
+			}
+			var $select = $form.find('select[name="productId"]');
+			$select.html(option);
+			
+			var option = '';
+			for(var i=0 ;i<data.length; i++) {
+				var productVo = data[i];
+				option += '<option value="'+ productVo.productId + '">'+ productVo.productPrice +'</option>';
+			}
+			var $select = $form.find('select[name="productPrice"]');
+			$select.html(option);
+			
+			$('div[data-custom="addCustom"]').hide(500);
+			$('div[data-custom="editCustom"]').hide(500);
+			$('div[data-custom="information"]').hide(1000);
+			$('div[data-BusinessOpportunity="addBusinessOpportunity"]').show(1000);
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
 	});
 }
 
+var addBusinessOpportunity = function() {
+	var url = projectURL + "mainBodys/addBusinessOpportunityVo";
+	
+	var $form = $('form[data-BusinessOpportunity="addBusinessOpportunity"]');
+	var customId = $form.find(':input[name="customId"]').val();
+	var productId =$form.find('select[name="productId"]').val();
+	var preSalesAmount = $form.find(':input[name="preSalesAmount"]').val();
+	var preDealTime = $form.find(':input[name="preDealTime"]').val();
+	var remark =$form.find('textarea[name="remark"]').val();
+	var salesStageId =$form.find('select[name="salesStageId"]').val();
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			customId : customId,
+			productId : productId ,
+			preSalesAmount : preSalesAmount ,
+			preDealTime : preDealTime ,
+			remark : remark ,
+			salesStageId : salesStageId
+		},
+		success : function(data) {
+			
+			setAlertModalTitleAndBody("提示", data.obj);
+			$('div[data-Modal="alertModal"]').modal('show');
+			
+			refreshCustomInfos();
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+var productIdSelect = function(_this) {
+	var productId = $(_this).val();
+	$('select[name="productPrice"]').val(productId);
+}
+
+var income = function() {
+	var $form = $('form[data-BusinessOpportunity="addBusinessOpportunity"]');
+	
+	var productPrice =$form.find('select[name="productPrice"]').val();
+	productPrice = $('select[name="productPrice"]').find("option[value='"+ productPrice +"']").html();
+	var preSalesAmount = $form.find(':input[name="preSalesAmount"]').val();
+	
+	if(preSalesAmount < productPrice) {
+		setAlertModalTitleAndBody("提示", "低于产品价格，无法创建商机");
+		$('div[data-Modal="alertModal"]').modal('show');
+		return false;
+	}else {
+		return true;
+	}
+	
+}
+
 /**  /客户信息 /end **/
+/************************************************************/
+
+
+/************************************************************/
+/**   商机 begin **/
+var initBusinessOpportunityInfos = function() {
+	var dataTableURL = projectURL + "mainBodys/getBusinessOpportunityVoByFollwer";
+	dataTables = $('table[data-businessOpportunity="allBusinessOpportunityInfos"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });
+	
+	$('form[data-BusinessOpportunity="editBusinessOpportunity"]').submit(function() {  
+		editBusinessOpportunity();
+		return false;
+	}); 
+	
+	$('form[data-Task="addTask"]').submit(function() {
+		addTask();
+	});
+	
+	//任务开始时间
+	$('div[name="taskStartTime"]').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0,
+		format: 'yyyy-mm-dd',
+		startDate : new Date() 
+    }).on('changeDate',function() {
+    	var date = Date.parse($('div[name="taskStartTime"]').data().date);
+    	date.setDate(date.getDate() + 1);
+    	$(':input[name="taskEndTime"]').val("");
+    	$('div[name="taskEndTime"]').datetimepicker('setStartDate',date);
+    	
+    	var taskStartTime = Date.parse($('div[name="taskStartTime"]').data().date);
+    	var taskEndTime = Date.parse($('div[name="taskEndTime"]').data().date);
+    	var dataTime = taskEndTime.getTime() - taskStartTime.getTime();
+    	var days = Math.floor(dataTime/(24*3600*1000))
+    	if(days < 1) 
+    		$(':input[name="taskEndTime"]').val(dateFormat_2(date));
+    });
+	
+	//任务截止时间
+	$('div[name="taskEndTime"]').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0,
+		format: 'yyyy-mm-dd'
+    }).on('changeDate',function() {
+    	var taskStartTime = Date.parse($('div[name="taskStartTime"]').data().date);
+    	var taskEndTime = Date.parse($('div[name="taskEndTime"]').data().date);
+    	var dataTime = taskEndTime.getTime() - taskStartTime.getTime();
+    	var days = Math.floor(dataTime/(24*3600*1000))
+    	if(days < 1) 
+    		$(':input[name="taskStartTime"]').val("");
+    });
+
+	$('div[data-BusinessOpportunity="editBusinessOpportunity"]').hide(500);
+	$('div[data-Task="addTask"]').hide(500);
+	$('div[data-businessOpportunity="allBusinessOpportunityInfos"]').show(1000);
+}
+
+var refreshBusinessOpportunityInfos = function() {
+	if(dataTables != null)
+		dataTables.fnDestroy();
+	var dataTableURL = projectURL + "mainBodys/getBusinessOpportunityVoByFollwer";
+	dataTables = $('table[data-businessOpportunity="allBusinessOpportunityInfos"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });
+	$('div[data-BusinessOpportunity="editBusinessOpportunity"]').hide(500);
+	$('div[data-Task="addTask"]').hide(500);
+	$('div[data-businessOpportunity="allBusinessOpportunityInfos"]').show(1000);
+	
+	$('form[data-BusinessOpportunity="editBusinessOpportunity"]').find(':input[type="reset"]').click();
+}
+
+var editBusinessOpportunityShow = function(businessOpportunityId) {
+	var url = projectURL + "mainBodys/selectBusinessOpportunityVoByPrimaryKey";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			businessOpportunityId : businessOpportunityId
+		},
+		success : function(data) {
+			//获取商机信息
+			
+			var url = projectURL + "mainBodys/canChooseSalesStageVo";
+			$.ajax({
+				url : url,
+				type : "POST",
+				data : {
+					rateOfProgress : data.salesStageVo.rateOfProgress
+				},
+				success : function(dataNow) {
+					//获取可选的销售阶段
+					$form = $('form[data-BusinessOpportunity="editBusinessOpportunity"]');
+					var option = '';
+					for(var i=0 ;i<dataNow.length; i++) {
+						var salesStageVo = dataNow[i];
+						option += '<option value="'+ salesStageVo.salesStageId + '">'+ salesStageVo.salesStageName +'</option>';
+					}
+					var $select = $form.find('select[name="salesStageId"]');
+					$select.html(option);
+					
+					$form.find(':input[name="businessOpportunityId"]').val(data.businessOpportunityId);
+					$form.find(':input[name="productName"]').val(data.productVo.productName);
+					$form.find('select[name="salesStageId"]').val(data.salesStageVo.salesStageId);
+					$form.find(':input[name="productPrice"]').val(data.productVo.productPrice);
+					$form.find(':input[name="preSalesAmount"]').val(data.preSalesAmount);
+					$form.find(':input[name="preDealTime"]').val(dateFormat_2(data.preDealTime));
+					$form.find('textarea[name="remark"]').val(data.remark);
+					
+					$('div[data-BusinessOpportunity="editBusinessOpportunity"]').show(1000);
+					$('div[data-businessOpportunity="allBusinessOpportunityInfos"]').hide(500);
+				},
+				error : function() {
+					setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+					$('div[data-Modal="alertModal"]').modal('show');
+				}
+			});
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+var editBusinessOpportunity = function() {
+	if(income2() == false) return;
+	
+	$form = $('form[data-BusinessOpportunity="editBusinessOpportunity"]');
+	
+	var businessOpportunityId = $form.find(':input[name="businessOpportunityId"]').val();
+	var salesStageId = $form.find('select[name="salesStageId"]').val();
+	var preSalesAmount = $form.find(':input[name="preSalesAmount"]').val();
+	var preDealTime = $form.find(':input[name="preDealTime"]').val();
+	var remark = $form.find('textarea[name="remark"]').val();
+	var salesStageId = $form.find('select[name="salesStageId"]').val();
+	
+	var url = projectURL + "mainBodys/updateBusinessOpportunityVoByPrimaryKey";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			businessOpportunityId : businessOpportunityId,
+			salesStageId : salesStageId ,
+			preSalesAmount : preSalesAmount ,
+			preDealTime : preDealTime ,
+			remark : remark ,
+			salesStageId : salesStageId
+		},
+		success : function(data) {
+			
+			setAlertModalTitleAndBody("提示", data.obj);
+			$('div[data-Modal="alertModal"]').modal('show');
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+var income2 = function() {
+	var $form = $('form[data-BusinessOpportunity="editBusinessOpportunity"]');
+	//如果已经输单
+	if($('select[name="salesStageId"]').val() == "0b16581b-0d4c-11e7-9e9d-28d2444b860a") {
+		$form = $('form[data-BusinessOpportunity="editBusinessOpportunity"]');
+		$form.find(':input[name="preSalesAmount"]').val(0);
+		$form.find(':input[name="preDealTime"]').val("3000-01-01");
+		return true;
+	}
+	
+	var productPrice =$form.find(':input[name="productPrice"]').val();
+	var preSalesAmount = $form.find(':input[name="preSalesAmount"]').val();
+	
+	if(preSalesAmount < productPrice) {
+		setAlertModalTitleAndBody("提示", "出售价格小于产品价格，无法创建商机");
+		$('div[data-Modal="alertModal"]').modal('show');
+		return false;
+	}else {
+		return true;
+	}
+}
+
+var showCustomBusinessOpportunity = function(businessOpportunityId) {
+	$('#main-content').load(projectURL + "mainBodys/loadMainBody/", {jspURL: 'mainBody/jsp/customBusinessOpportunity'},function() {
+		$(':input[name="businessOpportunityId"]').val(businessOpportunityId);
+		showCustomAndBusinessOpportunity();
+	});
+}
+
+var showCustomAndBusinessOpportunity = function() {
+	var url = projectURL + "mainBodys/selectBusinessOpportunityVoDeatailNoTask";
+	
+	var businessOpportunityId = $(':input[name="businessOpportunityId"]').val();
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			businessOpportunityId : businessOpportunityId
+		},
+		success : function(data) {
+			$('span[name="customName"]').html(data.customVo.customName);
+			$('div[name="customLinkmanName"]').html(data.customVo.customLinkmanName);
+			$('div[name="customLinkmanPost"]').html(data.customVo.customLinkmanPost);
+			$('div[name="customLinkmanPhone"]').html(data.customVo.customLinkmanPhone);
+			$('div[name="customAddress"]').html(data.customVo.customAddress);
+			$('div[name="customLinkmanRemark"]').html(data.customVo.customLinkmanRemark);
+			$('span[name="productName"]').html(data.productVo.productName);
+			$('span[name="employeeRealName"]').html(data.customVo.receiver.employeeRealName);
+			$('span[name="departmentName"]').html(data.customVo.departmentVo.departmentName);
+			$('span[name="preSalesAmount"]').html(data.preSalesAmount);
+			$('span[name="preDealTime"]').html(data.preDealTime);
+			$('span[name="salesStageName"]').html(data.salesStageVo.salesStageName);
+			$('span[name="remark"]').html(data.remark);
+			$('span[name="rateOfProgress"]').html(data.salesStageVo.rateOfProgress);
+			$('div[data-rateOfProgress="rateOfProgress"]').css("width",data.salesStageVo.rateOfProgress + "%");
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+var addTaskShow = function(businessOpportunityId, followEmployeeIdTask, employeeRealName) {
+	var $form = $('form[data-Task="addTask"]');
+	$form.find(':input[name="businessOpportunityIdTask"]').val(businessOpportunityId);
+	$form.find(':input[name="followEmployeeIdTask"]').val(followEmployeeIdTask);
+	$form.find(':input[name="employeeRealName"]').val(employeeRealName);
+	
+	$('div[data-BusinessOpportunity="editBusinessOpportunity"]').hide(500);
+	$('div[data-businessOpportunity="allBusinessOpportunityInfos"]').hide(500);
+	$('div[data-Task="addTask"]').show(1000);
+}
+
+var addTask = function() {
+	var $form = $('form[data-Task="addTask"]');
+	var businessOpportunityId = $form.find(':input[name="businessOpportunityIdTask"]').val();
+	var followEmployeeIdTask = $form.find(':input[name="followEmployeeIdTask"]').val();
+	var taskContent = $form.find('textarea[name="taskContent"]').val();
+	var taskStartTime = $form.find(':input[name="taskStartTime"]').val();
+	var taskEndTime = $form.find(':input[name="taskEndTime"]').val();
+	
+	
+	var url = projectURL + "mainBodys/addTask";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			businessOpportunityIdTask : businessOpportunityId,
+			followEmployeeIdTask : followEmployeeIdTask ,
+			taskContent : taskContent ,
+			taskStartTime : taskStartTime ,
+			taskEndTime : taskEndTime
+		},
+		success : function(data) {
+			setAlertModalTitleAndBody("提示", data.obj);
+			$('div[data-Modal="alertModal"]').modal('show');
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+/**   /商机 /end **/
+/************************************************************/
+
+/************************************************************/
+/**   任务 begin **/
+
+var initReceiveTaskInfo = function() {
+	var dataTableURL = projectURL + "mainBodys/getReceiveTask";
+	
+	if(dataTables != null) dataTables.fnDestroy();
+	
+	dataTables = $('table[data-task="receiveTask"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });
+	
+	$('form[data-feedback="addFeedback"]').submit(function() {  
+		addFeedback();
+		return false;
+	}); 
+	
+	$('div[data-feedback="addFeedback"]').hide(500);
+	$('div[data-task="receiveTask"]').show();
+}
+
+
+var refreshTaskInfos = function() {
+	if(dataTables != null) dataTables.fnDestroy();
+	var dataTableURL = projectURL + "mainBodys/getReceiveTask";
+	dataTables = $('table[data-task="receiveTask"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });
+	$('div[data-feedback="addFeedback"]').hide(500);
+	$('div[data-task="receiveTask"]').show();
+	
+	$('form[data-feedback="addFeedback"]').find(':input[type="reset"]').click();
+}
+
+var addFeedBackShow = function(taskId, taskContent, taskReportDate, taskStartTime, taskEndTime, spEmployeeRealName, reEmployeeRealName, reEmployeeId) {
+	$form = $('form[data-feedback="addFeedback"]');
+	$form.find(':input[name="taskId"]').val(taskId);
+	$form.find('textarea[name="taskContent"]').val(taskContent);
+	$form.find(':input[name="taskStartTime"]').val(taskStartTime);
+	$form.find(':input[name="taskEndTime"]').val(taskEndTime);
+	$form.find(':input[name="spEmployeeRealName"]').val(spEmployeeRealName);
+	$form.find(':input[name="reEmployeeRealName"]').val(reEmployeeRealName);
+	$form.find(':input[name="reEmployeeId"]').val(reEmployeeId);
+	
+	var url = projectURL + "mainBodys/selectFeedbackVoByTaskId";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			taskId : taskId
+		},
+		success : function(data) {
+			var html = "";
+			for(var i=0; i<data.length; i++) {
+				var dataNow = data[i];
+				html += 
+					'<div class="msg-time-chat">' +
+						'<a class="message-img" href="#">' +
+							'<img alt="" src="' + dataNow.employeeVo.employeeImgPath + '" class="avatar"> '+
+						'</a>' +
+						'<div class="message-body msg-in">' +
+							'<span class="arrow"></span>' +
+							'<div class="text">' +
+								'<p class="attribution">' +
+									'<a href="javascript:void(0)" >' + dataNow.employeeVo.employeeRealName + '</a>' +
+										datetimeFormat_2(dataNow.feedbackTime) +
+								'</p>' +
+								'<p>' + dataNow.feedbackDetail + '</p>' +
+							'</div>' +
+						'</div>' +
+					'</div>';
+			}
+			
+			$('div[data-timeLine="feedback"]').html(html);	
+			
+			
+			$('div[data-task="receiveTask"]').hide(500);
+			$('div[data-feedback="addFeedback"]').show(1000);
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+var addFeedback = function() {
+	$form = $('form[data-feedback="addFeedback"]');
+	var taskId = $form.find(':input[name="taskId"]').val();
+	var followEmployeeIdFeedback = $form.find(':input[name="reEmployeeId"]').val();
+	var feedbackDetail = $form.find('textarea[name="feedbackDetail"]').val();
+	
+	var url = projectURL + "mainBodys/insertFeedback";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			taskId : taskId,
+			followEmployeeIdFeedback : followEmployeeIdFeedback ,
+			feedbackDetail : feedbackDetail
+		},
+		success : function(data) {
+			setAlertModalTitleAndBody("提示", data.obj);
+			$('div[data-Modal="alertModal"]').modal('show');
+			refreshTaskInfos();
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+
+/**   /任务 /end **/
 /************************************************************/

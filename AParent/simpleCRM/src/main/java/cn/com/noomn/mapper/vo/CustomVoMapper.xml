@@ -48,75 +48,26 @@
     <association property="customStateVo" javaType="cn.com.noomn.vo.CustomStateVo" resultMap="cn.com.noomn.mapper.vo.CustomStateVoMapper.BaseResultMap"></association>
     <association property="departmentVo" javaType="cn.com.noomn.vo.DepartmentVo" resultMap="cn.com.noomn.mapper.vo.DepartmentVoMapper.BaseResultMap"></association>
   	<collection property="businessOpportunityVoList" ofType="cn.com.noomn.vo.BusinessOpportunityVo" resultMap="cn.com.noomn.mapper.vo.BusinessOpportunityVoMapper.BaseResultMap"></collection>
+  </resultMap>
   
+  <resultMap id="BusinessOpportunityVoByFollwerResult" type="cn.com.noomn.vo.CustomVo">
+    <id column="CUSTOM_ID" jdbcType="VARCHAR" property="customId" />
+    <result column="CUSTOM_RANK_ID" jdbcType="VARCHAR" property="customRankId" />
+    <result column="CUSTOM_STATE_ID" jdbcType="VARCHAR" property="customStateId" />
+    <result column="DEPARTMENT_ID" jdbcType="VARCHAR" property="departmentId" />
+    <result column="FOLLOW_EMPLOYEE_ID" jdbcType="VARCHAR" property="followEmployeeId" />
+    <result column="CUSTOM_NAME" jdbcType="VARCHAR" property="customName" />
+    <result column="CUSTOM_ADDRESS" jdbcType="VARCHAR" property="customAddress" />
+    <result column="CUSTOM_LINKMAN_NAME" jdbcType="VARCHAR" property="customLinkmanName" />
+    <result column="CUSTOM_LINKMAN_PHONE" jdbcType="VARCHAR" property="customLinkmanPhone" />
+    <result column="CUSTOM_LINKMAN_POST" jdbcType="VARCHAR" property="customLinkmanPost" />
+    <result column="CUSTOM_LINKMAN_REMARK" jdbcType="VARCHAR" property="customLinkmanRemark" />
+    <association property="receiver" javaType="cn.com.noomn.vo.EmployeeVo" resultMap="cn.com.noomn.mapper.vo.EmployeeVoMapper.ReceiveResultMap"></association>
+    <association property="customRankVo" javaType="cn.com.noomn.vo.CustomRankVo" resultMap="cn.com.noomn.mapper.vo.CustomRankVoMapper.BaseResultMap"></association>
+    <association property="customStateVo" javaType="cn.com.noomn.vo.CustomStateVo" resultMap="cn.com.noomn.mapper.vo.CustomStateVoMapper.BaseResultMap"></association>
+    <association property="departmentVo" javaType="cn.com.noomn.vo.DepartmentVo" resultMap="cn.com.noomn.mapper.vo.DepartmentVoMapper.BaseResultMap"></association>
   </resultMap>
 
-	<!-- <select id="selectForNimble" parameterType="cn.com.noomn.vo.CustomVo" resultMap="CustomCustomRankCustomState">
-		select
-		custom.CUSTOM_ID,
-		custom.CUSTOM_LINKMAN_NAME,
-		custom.CUSTOM_LINKMAN_PHONE,
-		custom.CUSTOM_LINKMAN_POST,
-		custom.CUSTOM_LINKMAN_REMARK,
-		custom.CUSTOM_NAME,
-		custom.CUSTOM_RANK_ID,
-		custom.CUSTOM_STATE_ID,
-		custom.DEPARTMENT_ID,
-		custom.CUSTOM_ADDRESS,
-		custom_rank.CUSTOM_RANK_NAME,
-		custom_state.CUSTOM_STATE_NAME,
-		department.DEPARTMENT_NAME,
-		department.DEPARTMENT_INIT
-		from
-		custom join department on custom.DEPARTMENT_ID = department.DEPARTMENT_ID
-		join custom_rank on custom.CUSTOM_RANK_ID = custom_rank.CUSTOM_RANK_ID
-		join custom_state on custom.CUSTOM_STATE_ID =
-		custom_state.CUSTOM_STATE_ID
-		<where>
-			<if test="customId != null">
-				and
-				CUSTOM_ID = #{customId,jdbcType=VARCHAR}
-			</if>
-			<if test="customRankId != null">
-				and
-				CUSTOM_RANK_ID = #{customRankId,jdbcType=VARCHAR}
-			</if>
-			<if test="customStateId != null">
-				and
-				CUSTOM_STATE_ID = #{customStateId,jdbcType=VARCHAR}
-			</if>
-			<if test="departmentId != null">
-				and
-				DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR}
-			</if>
-			<if test="customName != null">
-				and
-				CUSTOM_NAME = #{customName,jdbcType=VARCHAR}
-			</if>
-			<if test="customAddress != null">
-				and
-				CUSTOM_ADDRESS = #{customAddress,jdbcType=VARCHAR}
-			</if>
-			<if test="customLinkmanName != null">
-				and
-				CUSTOM_LINKMAN_NAME = #{customLinkmanName,jdbcType=VARCHAR}
-			</if>
-			<if test="customLinkmanPhone != null">
-				and
-				CUSTOM_LINKMAN_PHONE = #{customLinkmanPhone,jdbcType=VARCHAR}
-			</if>
-			<if test="customLinkmanPost != null">
-				and
-				CUSTOM_LINKMAN_POST = #{customLinkmanPost,jdbcType=VARCHAR}
-			</if>
-			<if test="customLinkmanRemark != null">
-				and
-				CUSTOM_LINKMAN_REMARK = #{customLinkmanRemark,jdbcType=VARCHAR}
-			</if>
-		</where>
-	</select> -->
-	
-	
 	<select id="selectForNimble" parameterType="cn.com.noomn.vo.CustomVo" resultMap="CustomCustomRankCustomState">
 		select 
 		a.CUSTOM_ID,
@@ -135,11 +86,9 @@
 		a.DEPARTMENT_NAME,
 		a.DEPARTMENT_INIT,
 		business_opportunity.BUSINESS_OPPORTUNITY_ID,
-		business_opportunity.COST,
 		business_opportunity.PRE_DEAL_TIME,
 		business_opportunity.PRE_SALES_AMOUNT,
 		business_opportunity.PRODUCT_ID,
-		business_opportunity.REAL_WAGES,
 		business_opportunity.REMARK,
 		business_opportunity.SALES_STAGE_ID
 		from
@@ -235,13 +184,11 @@
 			a.CUSTOM_RANK_NAME,
 			a.CUSTOM_STATE_NAME,
 			b.BUSINESS_OPPORTUNITY_ID,
-			b.COST,
 			b.CUSTOM_ID,
 			b.PRE_DEAL_TIME,
 			b.PRE_SALES_AMOUNT,
 			b.PRODUCT_ID,
 			b.REMARK,
-			b.REAL_WAGES,
 			b.SALES_STAGE_ID,
 			b.SALES_STAGE_NAME,
 			b.RATE_OF_PROGRESS,
@@ -289,14 +236,12 @@
 		(
 		select 
 		business_opportunity.BUSINESS_OPPORTUNITY_ID,
-		business_opportunity.COST,
 		business_opportunity.CUSTOM_ID,
 		business_opportunity.PRE_DEAL_TIME,
 		business_opportunity.PRE_SALES_AMOUNT,
 		business_opportunity.PRODUCT_ID,
 		business_opportunity.REMARK,
 		business_opportunity.SALES_STAGE_ID,
-		business_opportunity.REAL_WAGES,
 		sales_stage.SALES_STAGE_NAME,
 		sales_stage.RATE_OF_PROGRESS,
 		product.PRODUCT_DETAIL,

@@ -9,6 +9,8 @@ public class Task {
 
     private String sponsorIdTask;
 
+    private String followEmployeeIdTask;
+
     private String taskContent;
 
     private Timestamp taskReportDate;
@@ -16,6 +18,8 @@ public class Task {
     private Timestamp taskStartTime;
 
     private Timestamp taskEndTime;
+
+    private Integer taskStop;
 
     public String getTaskId() {
         return taskId;
@@ -39,6 +43,14 @@ public class Task {
 
     public void setSponsorIdTask(String sponsorIdTask) {
         this.sponsorIdTask = sponsorIdTask == null ? null : sponsorIdTask.trim();
+    }
+
+    public String getFollowEmployeeIdTask() {
+        return followEmployeeIdTask;
+    }
+
+    public void setFollowEmployeeIdTask(String followEmployeeIdTask) {
+        this.followEmployeeIdTask = followEmployeeIdTask == null ? null : followEmployeeIdTask.trim();
     }
 
     public String getTaskContent() {
@@ -71,5 +83,13 @@ public class Task {
 
     public void setTaskEndTime(Timestamp taskEndTime) {
         this.taskEndTime = taskEndTime;
+    }
+
+    public Integer getTaskStop() {
+        return taskStop;
+    }
+
+    public void setTaskStop(Integer taskStop) {
+        this.taskStop = taskStop;
     }
 }

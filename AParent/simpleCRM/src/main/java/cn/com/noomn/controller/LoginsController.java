@@ -98,6 +98,10 @@ public class LoginsController {
 				else
 					session.setAttribute("employeeImgPath", projectURL + "/mainBody/img/png/no_image.png");
 				
+//				webInf = webInf.substring(1, webInf.length());
+				session.setAttribute("imgFilePath", webInf + "mainBody/img/png/");
+				session.setAttribute("imgPath", projectURL + "/mainBody/img/png/");
+				
 				UserroleAuthorityVo userroleAuthorityVo = new UserroleAuthorityVo();
 				userroleAuthorityVo.setUserroleId(employeeVo.getUserroleIdEmployee());
 				Map<String, String> authorityMap = userroleAuthorityVoService.selectAuthorityToMap(userroleAuthorityVo);

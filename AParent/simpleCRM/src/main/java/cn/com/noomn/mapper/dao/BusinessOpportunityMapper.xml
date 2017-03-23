@@ -8,9 +8,7 @@
     <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
     <result column="PRE_SALES_AMOUNT" jdbcType="DECIMAL" property="preSalesAmount" />
     <result column="PRE_DEAL_TIME" jdbcType="TIMESTAMP" property="preDealTime" />
-    <result column="COST" jdbcType="DECIMAL" property="cost" />
     <result column="REMARK" jdbcType="VARCHAR" property="remark" />
-    <result column="REAL_WAGES" jdbcType="DECIMAL" property="realWages" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,7 +70,7 @@
   </sql>
   <sql id="Base_Column_List">
     BUSINESS_OPPORTUNITY_ID, CUSTOM_ID, SALES_STAGE_ID, PRODUCT_ID, PRE_SALES_AMOUNT, 
-    PRE_DEAL_TIME, COST, REMARK, REAL_WAGES
+    PRE_DEAL_TIME, REMARK
   </sql>
   <select id="selectByExample" parameterType="cn.com.noomn.po.BusinessOpportunityExample" resultMap="BaseResultMap">
     select
@@ -107,12 +105,10 @@
   <insert id="insert" parameterType="cn.com.noomn.po.BusinessOpportunity">
     insert into business_opportunity (BUSINESS_OPPORTUNITY_ID, CUSTOM_ID, 
       SALES_STAGE_ID, PRODUCT_ID, PRE_SALES_AMOUNT, 
-      PRE_DEAL_TIME, COST, REMARK, 
-      REAL_WAGES)
+      PRE_DEAL_TIME, REMARK)
     values (#{businessOpportunityId,jdbcType=VARCHAR}, #{customId,jdbcType=VARCHAR}, 
       #{salesStageId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{preSalesAmount,jdbcType=DECIMAL}, 
-      #{preDealTime,jdbcType=TIMESTAMP}, #{cost,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
-      #{realWages,jdbcType=DECIMAL})
+      #{preDealTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.com.noomn.po.BusinessOpportunity">
     insert into business_opportunity
@@ -135,14 +131,8 @@
       <if test="preDealTime != null">
         PRE_DEAL_TIME,
       </if>
-      <if test="cost != null">
-        COST,
-      </if>
       <if test="remark != null">
         REMARK,
-      </if>
-      <if test="realWages != null">
-        REAL_WAGES,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -164,14 +154,8 @@
       <if test="preDealTime != null">
         #{preDealTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="cost != null">
-        #{cost,jdbcType=DECIMAL},
-      </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="realWages != null">
-        #{realWages,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -202,14 +186,8 @@
       <if test="record.preDealTime != null">
         PRE_DEAL_TIME = #{record.preDealTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.cost != null">
-        COST = #{record.cost,jdbcType=DECIMAL},
-      </if>
       <if test="record.remark != null">
         REMARK = #{record.remark,jdbcType=VARCHAR},
-      </if>
-      <if test="record.realWages != null">
-        REAL_WAGES = #{record.realWages,jdbcType=DECIMAL},
       </if>
     </set>
     <if test="_parameter != null">
@@ -224,9 +202,7 @@
       PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
       PRE_SALES_AMOUNT = #{record.preSalesAmount,jdbcType=DECIMAL},
       PRE_DEAL_TIME = #{record.preDealTime,jdbcType=TIMESTAMP},
-      COST = #{record.cost,jdbcType=DECIMAL},
-      REMARK = #{record.remark,jdbcType=VARCHAR},
-      REAL_WAGES = #{record.realWages,jdbcType=DECIMAL}
+      REMARK = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -249,14 +225,8 @@
       <if test="preDealTime != null">
         PRE_DEAL_TIME = #{preDealTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="cost != null">
-        COST = #{cost,jdbcType=DECIMAL},
-      </if>
       <if test="remark != null">
         REMARK = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="realWages != null">
-        REAL_WAGES = #{realWages,jdbcType=DECIMAL},
       </if>
     </set>
     where BUSINESS_OPPORTUNITY_ID = #{businessOpportunityId,jdbcType=VARCHAR}
@@ -268,9 +238,7 @@
       PRODUCT_ID = #{productId,jdbcType=VARCHAR},
       PRE_SALES_AMOUNT = #{preSalesAmount,jdbcType=DECIMAL},
       PRE_DEAL_TIME = #{preDealTime,jdbcType=TIMESTAMP},
-      COST = #{cost,jdbcType=DECIMAL},
-      REMARK = #{remark,jdbcType=VARCHAR},
-      REAL_WAGES = #{realWages,jdbcType=DECIMAL}
+      REMARK = #{remark,jdbcType=VARCHAR}
     where BUSINESS_OPPORTUNITY_ID = #{businessOpportunityId,jdbcType=VARCHAR}
   </update>
 </mapper>

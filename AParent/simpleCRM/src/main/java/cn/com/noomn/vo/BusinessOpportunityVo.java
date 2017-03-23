@@ -10,6 +10,9 @@ public class BusinessOpportunityVo extends BusinessOpportunity {
 	//销售阶段
 	private SalesStageVo salesStageVo;
 	
+	//客户
+	private CustomVo customVo;
+	
 	public ProductVo getProductVo() {
 		return productVo;
 	}
@@ -22,9 +25,17 @@ public class BusinessOpportunityVo extends BusinessOpportunity {
 	public void setSalesStageVo(SalesStageVo salesStageVo) {
 		this.salesStageVo = salesStageVo;
 	}
+	
+	public CustomVo getCustomVo() {
+		return customVo;
+	}
+	public void setCustomVo(CustomVo customVo) {
+		this.customVo = customVo;
+	}
 	@Override
 	public String toString() {
 		return "BusinessOpportunityVo [productVo=" + productVo
-				+ ", salesStageVo=" + salesStageVo + "]";
+				+ ", salesStageVo=" + salesStageVo + ", customVo=" + customVo
+				+ "]";
 	}
 }

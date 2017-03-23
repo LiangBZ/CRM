@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<div class="container-fluid">
 
+<input type="hidden" name="customId" value="">
+<input type="hidden" name="businessOpportunityId" value="">
+
+<div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
 			<h3 class="page-title">客户商机</h3>
@@ -15,8 +18,13 @@
 		<div class="span12">
 			<div class="clearfix">
 				<div class="btn-group">
-					<button class="btn btn-info" style="width:80px;">
-						返回 <i class="icon-plus"></i>
+					<button class="btn btn-info" style="width:100px;">
+						所有商机 <i class="icon-plus"></i>
+					</button>
+				</div>
+				<div class="btn-group">
+					<button class="btn btn-success" style="width:100px;">
+						客户商机 <i class="icon-plus"></i>
 					</button>
 				</div>
 			</div>
@@ -46,28 +54,30 @@
 								<div class="span1"></div>
 								<div class="span8">
 									<div class="row-fluid">
-										<div class="span8 bio">
-											<h2>${sessionScope.employeeRealName}</h2>
-											<p>
-												<label style="width:60px;">登录名 </label>: <span name="employeeUsername">liangbozhao</span>
-											</p>
+										<div class="span12 bio">
+											<h2><span name="customName">天阳宏业科技股份有限公司厦门分公司</span></h2>
 											<div>
-												<p>
-													<label style="width:60px;">工号 </label>: <span name="employeeNumber">employeeNumber</span>
-												</p>
-												<p>
-													<label style="width:60px;">邮箱 </label>: <span name="employeeEmail">employeeEmail</span>
-												</p>
-												<p>
-													<label style="width:60px;">手机 </label>: <span name="employeePhone">employeePhone</span>
-												</p>
-												<p>
-													<label style="width:60px;">部门 </label>: <span name="departmentName">departmentName</span>
-												</p>
-												<p>
-													<label style="width:60px;">职务 </label>: <span name="userroleName">userroleName</span>
-												</p>
-												<div class="space5"></div>
+												<div class="space10"></div>
+												<div style="margin-bottom:15px;">
+													<div style="width:60px;display:block;float:left;">联系人 : </div> <div name="customLinkmanName" style="width:240px; display:block;float:left;"> 白植伟</div>
+												</div>
+												<div class="space10"></div>
+												<div style="margin-bottom:15px;">
+													<div style="width:60px;display:block;float:left;">职务 : </div> <div name="customLinkmanPost" style="width:240px; display:block;float:left;">业务部经理</div>
+												</div>
+												<div class="space10"></div>
+												<div style="margin-bottom:15px;">
+													<div style="width:60px;display:block;float:left;">手机 : </div> <div name="customLinkmanPhone" style="width:240px; display:block;float:left;"> 18820331121</div>
+												</div>
+												<div class="space10"></div>
+												<div style="margin-bottom:15px;">
+													<div style="width:60px;display:block;float:left;">住址 : </div> <div name="customAddress" style="width:240px; display:block;float:left;">福建省厦门市软件园二期望海路59号之二701室</div>
+												</div>
+												<div class="space10"></div>
+												<div style="margin-bottom:15px;">
+													<div style="width:60px;display:block;float:left;">备注 : </div> <div name="customLinkmanRemark" style="width:240px; display:block;float:left;">软件公司，主要做金融业务。业务广，客户多。需要CRM管理客户关系。</div>
+												</div>
+												<div class="space10"></div>
 												<hr>
 											</div>
 										</div>
@@ -99,31 +109,31 @@
 							<tbody>
 								<tr class="odd gradex">
 									<td>产品名称</td>
-									<td>一米软件</td>
+									<td><span name="productName">一米软件</span></td>
 								</tr>
 								<tr class="odd gradex">
 									<td>跟进人</td>
-									<td><span name="">梁伯昭</span></td>
+									<td><span name="employeeRealName">梁伯昭</span></td>
 								</tr>
 								<tr class="odd gradex">
 									<td>所属部门</td>
-									<td>销售1部</td>
+									<td><span name="departmentName">销售1部</span></td>
 								</tr>
 								<tr class="odd gradex">
 									<td>预计销售金额(￥)</td>
-									<td>99921.00</td>
+									<td><span name="preSalesAmount">99921.00</span></td>
 								</tr>
 								<tr class="odd gradex">
 									<td>预计成交时间</td>
-									<td>2017/5</td>
+									<td><span name="preDealTime">2017/5</span></td>
 								</tr>
 								<tr class="odd gradex">
 									<td>销售阶段</td>
-									<td>初步沟通(10%)</td>
+									<td><span name="salesStageName">初步沟通(10%)</span></td>
 								</tr>
 								<tr class="odd gradex">
 									<td>备注</td>
-									<td>该公司需要定制一些新的功能，需要少许的改动。</td>
+									<td><span name="remark">该公司需要定制一些新的功能，需要少许的改动。</span></td>
 								</tr>
 							</tbody>
 						</table>
@@ -148,10 +158,10 @@
 						<span class="btn btn-inverse"> 
 							<i class="icon-check"></i>
 						</span> 
-						任务已经完成 <strong class="label label-info"> 85%</strong>
+						任务已经完成 <strong class="label label-info"><span name="rateOfProgress">85%</span></strong>
 						<div class="space10"></div>
 						<div class="progress progress-success progress-striped active">
-							<div style="width: 85%;" class="bar"></div>
+							<div data-rateOfProgress="rateOfProgress" style="width: 85%;" class="bar"></div>
 						</div></li>
 				</ul>
 			</div>
@@ -173,7 +183,7 @@
 
 						<div class="msg-time-chat">
 							<a class="message-img" href="#">
-								<img alt="" src="../img/jpg/avatar1.jpg" class="avatar">
+								<img alt="" src="${pageContext.request.contextPath}/mainBody/img/jpg/avatar1.jpg" class="avatar">
 							</a>
 							<div class="message-body msg-in">
 								<span class="arrow"></span>
@@ -189,7 +199,7 @@
 
 						<div class="msg-time-chat">
 							<a class="message-img" href="#">
-								<img alt="" src="../img/jpg/avatar2.jpg" class="avatar"></a>
+								<img alt="" src="${pageContext.request.contextPath}/mainBody/img/jpg/avatar2.jpg" class="avatar"></a>
 							<div class="message-body msg-out">
 								<span class="arrow"></span>
 								<div class="text">
@@ -205,7 +215,7 @@
 
 						<div class="msg-time-chat">
 							<a class="message-img" href="#">
-							<img alt="" src="../img/jpg/avatar1.jpg" class="avatar"></a>
+							<img alt="" src="${pageContext.request.contextPath}/mainBody/img/jpg/avatar1.jpg" class="avatar"></a>
 							<div class="message-body msg-in">
 								<span class="arrow"></span>
 								<div class="text">
@@ -221,7 +231,7 @@
 
 						<div class="msg-time-chat">
 							<a class="message-img" href="#">
-							<img alt="" src="../img/jpg/avatar2.jpg" class="avatar"></a>
+							<img alt="" src="${pageContext.request.contextPath}/mainBody/img/jpg/avatar2.jpg" class="avatar"></a>
 							<div class="message-body msg-out">
 								<span class="arrow"></span>
 								<div class="text">

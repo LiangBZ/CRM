@@ -31,6 +31,21 @@
     <result column="RE_EMPLOYEE_USEFUL_TIME" jdbcType="TIMESTAMP" property="employeeUsefulTime" />
   </resultMap>
   
+  <resultMap id="SenderResultMap" type="cn.com.noomn.vo.EmployeeVo">
+    <id column="SP_EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
+    <result column="SP_DEPARTMENT_ID_EMPLOYEE" jdbcType="VARCHAR" property="departmentIdEmployee" />
+    <result column="SP_USERROLE_ID_EMPLOYEE" jdbcType="VARCHAR" property="userroleIdEmployee" />
+    <result column="SP_EMPLOYEE_USERNAME" jdbcType="VARCHAR" property="employeeUsername" />
+    <result column="SP_EMPLOYEE_PASSWORD" jdbcType="VARCHAR" property="employeePassword" />
+    <result column="SP_EMPLOYEE_NUMBER" jdbcType="VARCHAR" property="employeeNumber" />
+    <result column="SP_EMPLOYEE_REAL_NAME" jdbcType="VARCHAR" property="employeeRealName" />
+    <result column="SP_EMPLOYEE_EMAIL" jdbcType="VARCHAR" property="employeeEmail" />
+    <result column="SP_EMPLOYEE_PHONE" jdbcType="VARCHAR" property="employeePhone" />
+    <result column="SP_EMPLOYEE_INIT" jdbcType="INTEGER" property="employeeInit" />
+    <result column="SP_EMPLOYEE_INSTRUCT" jdbcType="VARCHAR" property="employeeInstruct" />
+    <result column="SP_EMPLOYEE_USEFUL_TIME" jdbcType="TIMESTAMP" property="employeeUsefulTime" />
+  </resultMap>
+  
   <resultMap id="roleEmployeeDepartment" type="cn.com.noomn.vo.EmployeeVo">
     <id column="EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
     <result column="DEPARTMENT_ID_EMPLOYEE" jdbcType="VARCHAR" property="departmentIdEmployee" />

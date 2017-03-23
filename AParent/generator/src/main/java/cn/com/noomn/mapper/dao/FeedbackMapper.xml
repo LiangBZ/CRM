@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="cn.com.noomn.po.Feedback">
     <id column="FEEDBACK_ID" jdbcType="VARCHAR" property="feedbackId" />
     <result column="TASK_ID" jdbcType="VARCHAR" property="taskId" />
+    <result column="FOLLOW_EMPLOYEE_ID_FEEDBACK" jdbcType="VARCHAR" property="followEmployeeIdFeedback" />
     <result column="FEEDBACK_DETAIL" jdbcType="VARCHAR" property="feedbackDetail" />
     <result column="FEEDBACK_TIME" jdbcType="TIMESTAMP" property="feedbackTime" />
   </resultMap>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    FEEDBACK_ID, TASK_ID, FEEDBACK_DETAIL, FEEDBACK_TIME
+    FEEDBACK_ID, TASK_ID, FOLLOW_EMPLOYEE_ID_FEEDBACK, FEEDBACK_DETAIL, FEEDBACK_TIME
   </sql>
   <select id="selectByExample" parameterType="cn.com.noomn.po.FeedbackExample" resultMap="BaseResultMap">
     select
@@ -99,10 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.com.noomn.po.Feedback">
-    insert into feedback (FEEDBACK_ID, TASK_ID, FEEDBACK_DETAIL, 
-      FEEDBACK_TIME)
-    values (#{feedbackId,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR}, #{feedbackDetail,jdbcType=VARCHAR}, 
-      #{feedbackTime,jdbcType=TIMESTAMP})
+    insert into feedback (FEEDBACK_ID, TASK_ID, FOLLOW_EMPLOYEE_ID_FEEDBACK, 
+      FEEDBACK_DETAIL, FEEDBACK_TIME)
+    values (#{feedbackId,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR}, #{followEmployeeIdFeedback,jdbcType=VARCHAR}, 
+      #{feedbackDetail,jdbcType=VARCHAR}, #{feedbackTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cn.com.noomn.po.Feedback">
     insert into feedback
@@ -112,6 +113,9 @@
       </if>
       <if test="taskId != null">
         TASK_ID,
+      </if>
+      <if test="followEmployeeIdFeedback != null">
+        FOLLOW_EMPLOYEE_ID_FEEDBACK,
       </if>
       <if test="feedbackDetail != null">
         FEEDBACK_DETAIL,
@@ -126,6 +130,9 @@
       </if>
       <if test="taskId != null">
         #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="followEmployeeIdFeedback != null">
+        #{followEmployeeIdFeedback,jdbcType=VARCHAR},
       </if>
       <if test="feedbackDetail != null">
         #{feedbackDetail,jdbcType=VARCHAR},
@@ -150,6 +157,9 @@
       <if test="record.taskId != null">
         TASK_ID = #{record.taskId,jdbcType=VARCHAR},
       </if>
+      <if test="record.followEmployeeIdFeedback != null">
+        FOLLOW_EMPLOYEE_ID_FEEDBACK = #{record.followEmployeeIdFeedback,jdbcType=VARCHAR},
+      </if>
       <if test="record.feedbackDetail != null">
         FEEDBACK_DETAIL = #{record.feedbackDetail,jdbcType=VARCHAR},
       </if>
@@ -165,6 +175,7 @@
     update feedback
     set FEEDBACK_ID = #{record.feedbackId,jdbcType=VARCHAR},
       TASK_ID = #{record.taskId,jdbcType=VARCHAR},
+      FOLLOW_EMPLOYEE_ID_FEEDBACK = #{record.followEmployeeIdFeedback,jdbcType=VARCHAR},
       FEEDBACK_DETAIL = #{record.feedbackDetail,jdbcType=VARCHAR},
       FEEDBACK_TIME = #{record.feedbackTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -176,6 +187,9 @@
     <set>
       <if test="taskId != null">
         TASK_ID = #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="followEmployeeIdFeedback != null">
+        FOLLOW_EMPLOYEE_ID_FEEDBACK = #{followEmployeeIdFeedback,jdbcType=VARCHAR},
       </if>
       <if test="feedbackDetail != null">
         FEEDBACK_DETAIL = #{feedbackDetail,jdbcType=VARCHAR},
@@ -189,6 +203,7 @@
   <update id="updateByPrimaryKey" parameterType="cn.com.noomn.po.Feedback">
     update feedback
     set TASK_ID = #{taskId,jdbcType=VARCHAR},
+      FOLLOW_EMPLOYEE_ID_FEEDBACK = #{followEmployeeIdFeedback,jdbcType=VARCHAR},
       FEEDBACK_DETAIL = #{feedbackDetail,jdbcType=VARCHAR},
       FEEDBACK_TIME = #{feedbackTime,jdbcType=TIMESTAMP}
     where FEEDBACK_ID = #{feedbackId,jdbcType=VARCHAR}

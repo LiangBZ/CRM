@@ -86,7 +86,6 @@
 										<th>产品名称</th>
 										<th>预计销售金额(￥)</th>
 										<th>预计成交时间</th>
-										<th>实际销售金额(￥)</th>
 										<th>销售阶段</th>
 										<th>跟进人</th>
 										<th style="width: 200px;overflow: hidden;">备注</th>
@@ -97,7 +96,6 @@
 											<td>一米软件</td>
 											<td>1908299.00</td>
 											<td>2017/3/30</td>
-											<td>0</td>
 											<td><span class="label label-success">初步沟通(10%)</span></td>
 											<td>张三</td>
 											<td>需要更改系统，添加新的功能</td>
@@ -111,7 +109,6 @@
 											<td>和兴农业系统</td>
 											<td>345231.00</td>
 											<td>2017/4/10</td>
-											<td>0</td>
 											<td><span class="label label-warning">谈判(50%)</span></td>
 											<td>李四</td>
 											<td>系统完善，部署维护即可 系统完善，部署维护即可系统完善，部署维护即可系统完善，部署维护即可</td>

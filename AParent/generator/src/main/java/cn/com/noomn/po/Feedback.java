@@ -7,6 +7,8 @@ public class Feedback {
 
     private String taskId;
 
+    private String followEmployeeIdFeedback;
+
     private String feedbackDetail;
 
     private Timestamp feedbackTime;
@@ -25,6 +27,14 @@ public class Feedback {
 
     public void setTaskId(String taskId) {
         this.taskId = taskId == null ? null : taskId.trim();
+    }
+
+    public String getFollowEmployeeIdFeedback() {
+        return followEmployeeIdFeedback;
+    }
+
+    public void setFollowEmployeeIdFeedback(String followEmployeeIdFeedback) {
+        this.followEmployeeIdFeedback = followEmployeeIdFeedback == null ? null : followEmployeeIdFeedback.trim();
     }
 
     public String getFeedbackDetail() {

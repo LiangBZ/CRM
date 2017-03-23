@@ -315,6 +315,76 @@ public class TaskExample {
             return (Criteria) this;
         }
 
+        public Criteria andFollowEmployeeIdTaskIsNull() {
+            addCriterion("FOLLOW_EMPLOYEE_ID_TASK is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdTaskIsNotNull() {
+            addCriterion("FOLLOW_EMPLOYEE_ID_TASK is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdTaskEqualTo(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_TASK =", value, "followEmployeeIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdTaskNotEqualTo(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_TASK <>", value, "followEmployeeIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdTaskGreaterThan(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_TASK >", value, "followEmployeeIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdTaskGreaterThanOrEqualTo(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_TASK >=", value, "followEmployeeIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdTaskLessThan(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_TASK <", value, "followEmployeeIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdTaskLessThanOrEqualTo(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_TASK <=", value, "followEmployeeIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdTaskLike(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_TASK like", value, "followEmployeeIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdTaskNotLike(String value) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_TASK not like", value, "followEmployeeIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdTaskIn(List<String> values) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_TASK in", values, "followEmployeeIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdTaskNotIn(List<String> values) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_TASK not in", values, "followEmployeeIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdTaskBetween(String value1, String value2) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_TASK between", value1, value2, "followEmployeeIdTask");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowEmployeeIdTaskNotBetween(String value1, String value2) {
+            addCriterion("FOLLOW_EMPLOYEE_ID_TASK not between", value1, value2, "followEmployeeIdTask");
+            return (Criteria) this;
+        }
+
         public Criteria andTaskContentIsNull() {
             addCriterion("TASK_CONTENT is null");
             return (Criteria) this;
@@ -562,6 +632,66 @@ public class TaskExample {
 
         public Criteria andTaskEndTimeNotBetween(Timestamp value1, Timestamp value2) {
             addCriterion("TASK_END_TIME not between", value1, value2, "taskEndTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskStopIsNull() {
+            addCriterion("TASK_STOP is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskStopIsNotNull() {
+            addCriterion("TASK_STOP is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskStopEqualTo(Integer value) {
+            addCriterion("TASK_STOP =", value, "taskStop");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskStopNotEqualTo(Integer value) {
+            addCriterion("TASK_STOP <>", value, "taskStop");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskStopGreaterThan(Integer value) {
+            addCriterion("TASK_STOP >", value, "taskStop");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskStopGreaterThanOrEqualTo(Integer value) {
+            addCriterion("TASK_STOP >=", value, "taskStop");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskStopLessThan(Integer value) {
+            addCriterion("TASK_STOP <", value, "taskStop");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskStopLessThanOrEqualTo(Integer value) {
+            addCriterion("TASK_STOP <=", value, "taskStop");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskStopIn(List<Integer> values) {
+            addCriterion("TASK_STOP in", values, "taskStop");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskStopNotIn(List<Integer> values) {
+            addCriterion("TASK_STOP not in", values, "taskStop");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskStopBetween(Integer value1, Integer value2) {
+            addCriterion("TASK_STOP between", value1, value2, "taskStop");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskStopNotBetween(Integer value1, Integer value2) {
+            addCriterion("TASK_STOP not between", value1, value2, "taskStop");
             return (Criteria) this;
         }
     }

@@ -10,13 +10,21 @@
 	<context:property-placeholder location="classpath:db.properties"/>
 	<context:component-scan base-package="cn.com.noomn.controller" />
 
-	<mvc:annotation-driven>
+	<mvc:annotation-driven conversion-service="conversionService">
 		<mvc:message-converters register-defaults="true">
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
 				<property name="supportedMediaTypes" value="text/plain;charset=UTF-8" />
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
+	
+	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="cn.com.noomn.util.TimestampConverter"></bean>
+			</list>
+		</property>
+	</bean>
 	
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

@@ -2,17 +2,259 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.com.noomn.mapper.vo.BusinessOpportunityVoMapper">
   <resultMap id="BaseResultMap" type="cn.com.noomn.vo.BusinessOpportunityVo">
-    <id column="BUSINESS_OPPORTUNITY_ID" jdbcType="VARCHAR" property="businessOpportunityId" />
+     <id column="BUSINESS_OPPORTUNITY_ID" jdbcType="VARCHAR" property="businessOpportunityId" />
     <result column="CUSTOM_ID" jdbcType="VARCHAR" property="customId" />
     <result column="SALES_STAGE_ID" jdbcType="VARCHAR" property="salesStageId" />
     <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
     <result column="PRE_SALES_AMOUNT" jdbcType="DECIMAL" property="preSalesAmount" />
     <result column="PRE_DEAL_TIME" jdbcType="TIMESTAMP" property="preDealTime" />
-    <result column="COST" jdbcType="DECIMAL" property="cost" />
     <result column="REMARK" jdbcType="VARCHAR" property="remark" />
-    <result column="REAL_WAGES" jdbcType="DECIMAL" property="realWages" />
     
     <association property="productVo" javaType="cn.com.noomn.vo.ProductVo" resultMap="cn.com.noomn.mapper.vo.ProductVoMapper.BaseResultMap"></association>
     <association property="salesStageVo" javaType="cn.com.noomn.vo.SalesStageVo" resultMap="cn.com.noomn.mapper.vo.SalesStageVoMapper.BaseResultMap"></association>
   </resultMap>
+  
+  <resultMap id="selectBusinessOpportunityVoByFollwerResultMap" type="cn.com.noomn.vo.BusinessOpportunityVo">
+     <id column="BUSINESS_OPPORTUNITY_ID" jdbcType="VARCHAR" property="businessOpportunityId" />
+    <result column="CUSTOM_ID" jdbcType="VARCHAR" property="customId" />
+    <result column="SALES_STAGE_ID" jdbcType="VARCHAR" property="salesStageId" />
+    <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <result column="PRE_SALES_AMOUNT" jdbcType="DECIMAL" property="preSalesAmount" />
+    <result column="PRE_DEAL_TIME" jdbcType="TIMESTAMP" property="preDealTime" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    
+    <association property="customVo" javaType="cn.com.noomn.vo.CustomVo" resultMap="cn.com.noomn.mapper.vo.CustomVoMapper.BusinessOpportunityVoByFollwerResult"></association>
+    <association property="productVo" javaType="cn.com.noomn.vo.ProductVo" resultMap="cn.com.noomn.mapper.vo.ProductVoMapper.BaseResultMap"></association>
+    <association property="salesStageVo" javaType="cn.com.noomn.vo.SalesStageVo" resultMap="cn.com.noomn.mapper.vo.SalesStageVoMapper.BaseResultMap"></association>
+  </resultMap>
+  
+  
+  <select id="selectBusinessOpportunityVoByFollwer" parameterType="cn.com.noomn.vo.CustomVo" resultMap="selectBusinessOpportunityVoByFollwerResultMap">
+  	select 
+			b.BUSINESS_OPPORTUNITY_ID,
+			b.CUSTOM_ID,
+			b.PRE_DEAL_TIME,
+			b.PRE_SALES_AMOUNT,
+			b.PRODUCT_ID,
+			b.REMARK,
+			b.SALES_STAGE_ID,
+			b.SALES_STAGE_NAME,
+			b.RATE_OF_PROGRESS,
+			b.PRODUCT_DETAIL,
+			b.PRODUCT_NAME,
+			b.PRODUCT_NUM,
+			b.PRODUCT_PDF,
+			b.PRODUCT_PRICE,
+			a.CUSTOM_ID,
+			a.DEPARTMENT_ID,
+			a.CUSTOM_LINKMAN_NAME,
+			a.CUSTOM_LINKMAN_PHONE,
+			a.CUSTOM_LINKMAN_POST,
+			a.CUSTOM_LINKMAN_REMARK,
+			a.CUSTOM_NAME,
+			a.CUSTOM_RANK_ID,
+			a.CUSTOM_STATE_ID,
+			a.CUSTOM_ADDRESS,
+			a.FOLLOW_EMPLOYEE_ID,
+			a.DEPARTMENT_NAME,
+			a.DEPARTMENT_INIT,
+			a.CUSTOM_RANK_NAME,
+			a.CUSTOM_STATE_NAME,
+			employee.EMPLOYEE_REAL_NAME as RE_EMPLOYEE_REAL_NAME,
+			employee.DEPARTMENT_ID_EMPLOYEE as RE_DEPARTMENT_ID_EMPLOYEE,
+			employee.EMPLOYEE_EMAIL as RE_EMPLOYEE_EMAIL,
+			employee.EMPLOYEE_ID as RE_EMPLOYEE_ID,
+			employee.EMPLOYEE_INIT as RE_EMPLOYEE_INIT,
+			employee.EMPLOYEE_NUMBER as RE_EMPLOYEE_NUMBER,
+			employee.EMPLOYEE_PHONE as RE_EMPLOYEE_PHONE,
+			employee.EMPLOYEE_USERNAME as RE_EMPLOYEE_USERNAME,
+			employee.USERROLE_ID_EMPLOYEE as RE_USERROLE_ID_EMPLOYEE
+		FROM
+		(
+			select 
+			business_opportunity.BUSINESS_OPPORTUNITY_ID,
+			business_opportunity.CUSTOM_ID,
+			business_opportunity.PRE_DEAL_TIME,
+			business_opportunity.PRE_SALES_AMOUNT,
+			business_opportunity.PRODUCT_ID,
+			business_opportunity.REMARK,
+			business_opportunity.SALES_STAGE_ID,
+			sales_stage.SALES_STAGE_NAME,
+			sales_stage.RATE_OF_PROGRESS,
+			product.PRODUCT_DETAIL,
+			product.PRODUCT_NAME,
+			product.PRODUCT_NUM,
+			product.PRODUCT_PDF,
+			product.PRODUCT_PRICE
+			from
+			sales_stage
+			join business_opportunity on business_opportunity.SALES_STAGE_ID = sales_stage.SALES_STAGE_ID
+			join product on business_opportunity.PRODUCT_ID = product.PRODUCT_ID
+		) as b
+		join 
+		(
+		SELECT
+			custom.CUSTOM_ID,
+			custom.DEPARTMENT_ID,
+			custom.CUSTOM_LINKMAN_NAME,
+			custom.CUSTOM_LINKMAN_PHONE,
+			custom.CUSTOM_LINKMAN_POST,
+			custom.CUSTOM_LINKMAN_REMARK,
+			custom.CUSTOM_NAME,
+			custom.CUSTOM_RANK_ID,
+			custom.CUSTOM_STATE_ID,
+			custom.CUSTOM_ADDRESS,
+			custom.FOLLOW_EMPLOYEE_ID,
+			department.DEPARTMENT_NAME,
+			department.DEPARTMENT_INIT,
+			custom_rank.CUSTOM_RANK_NAME,
+			custom_state.CUSTOM_STATE_NAME
+			FROM
+			custom
+			JOIN department ON custom.DEPARTMENT_ID = department.DEPARTMENT_ID
+			JOIN custom_rank ON custom.CUSTOM_RANK_ID = custom_rank.CUSTOM_RANK_ID
+			JOIN custom_state ON custom.CUSTOM_STATE_ID = custom_state.CUSTOM_STATE_ID
+		) as a
+		on a.CUSTOM_ID = b.CUSTOM_ID
+		join
+		employee 
+		on a.FOLLOW_EMPLOYEE_ID = employee.EMPLOYEE_ID
+		<where>
+			<if test="customId != null">
+				and a.CUSTOM_ID = #{customId,jdbcType=VARCHAR}
+			</if>
+			<if test="followEmployeeId != null">
+				and a.FOLLOW_EMPLOYEE_ID = #{followEmployeeId}
+			</if>
+			<if test="departmentId != null">
+				and a.DEPARTMENT_ID = #{departmentId}
+			</if>
+		</where>
+  </select>
+  
+  <select id="selectBusinessOpportunityVoByPrimaryKey" parameterType="cn.com.noomn.vo.BusinessOpportunityVo" resultMap="BaseResultMap">
+  	select 
+	business_opportunity.BUSINESS_OPPORTUNITY_ID,
+	business_opportunity.CUSTOM_ID,
+	business_opportunity.PRE_DEAL_TIME,
+	business_opportunity.PRE_SALES_AMOUNT,
+	business_opportunity.PRODUCT_ID,
+	business_opportunity.REMARK,
+	business_opportunity.SALES_STAGE_ID,
+	sales_stage.SALES_STAGE_NAME,
+	sales_stage.RATE_OF_PROGRESS,
+	product.PRODUCT_DETAIL,
+	product.PRODUCT_NAME,
+	product.PRODUCT_NUM,
+	product.PRODUCT_PDF,
+	product.PRODUCT_PRICE
+	from 
+	sales_stage join business_opportunity on sales_stage.SALES_STAGE_ID = business_opportunity.SALES_STAGE_ID
+	join product on business_opportunity.PRODUCT_ID = product.PRODUCT_ID
+	<where>
+		<if test="businessOpportunityId != null">
+        	BUSINESS_OPPORTUNITY_ID = #{businessOpportunityId,jdbcType=VARCHAR}
+      </if>
+	</where>
+  </select>
+  
+  
+  <select id="selectBusinessOpportunityVoDeatailNoTask" parameterType="cn.com.noomn.vo.BusinessOpportunityVo" resultMap="selectBusinessOpportunityVoByFollwerResultMap">
+  	select 
+			b.BUSINESS_OPPORTUNITY_ID,
+			b.CUSTOM_ID,
+			b.PRE_DEAL_TIME,
+			b.PRE_SALES_AMOUNT,
+			b.PRODUCT_ID,
+			b.REMARK,
+			b.SALES_STAGE_ID,
+			b.SALES_STAGE_NAME,
+			b.RATE_OF_PROGRESS,
+			b.PRODUCT_DETAIL,
+			b.PRODUCT_NAME,
+			b.PRODUCT_NUM,
+			b.PRODUCT_PDF,
+			b.PRODUCT_PRICE,
+			a.CUSTOM_ID,
+			a.DEPARTMENT_ID,
+			a.CUSTOM_LINKMAN_NAME,
+			a.CUSTOM_LINKMAN_PHONE,
+			a.CUSTOM_LINKMAN_POST,
+			a.CUSTOM_LINKMAN_REMARK,
+			a.CUSTOM_NAME,
+			a.CUSTOM_RANK_ID,
+			a.CUSTOM_STATE_ID,
+			a.CUSTOM_ADDRESS,
+			a.FOLLOW_EMPLOYEE_ID,
+			a.DEPARTMENT_NAME,
+			a.DEPARTMENT_INIT,
+			a.CUSTOM_RANK_NAME,
+			a.CUSTOM_STATE_NAME,
+			employee.EMPLOYEE_REAL_NAME as RE_EMPLOYEE_REAL_NAME,
+			employee.DEPARTMENT_ID_EMPLOYEE as RE_DEPARTMENT_ID_EMPLOYEE,
+			employee.EMPLOYEE_EMAIL as RE_EMPLOYEE_EMAIL,
+			employee.EMPLOYEE_ID as RE_EMPLOYEE_ID,
+			employee.EMPLOYEE_INIT as RE_EMPLOYEE_INIT,
+			employee.EMPLOYEE_NUMBER as RE_EMPLOYEE_NUMBER,
+			employee.EMPLOYEE_PHONE as RE_EMPLOYEE_PHONE,
+			employee.EMPLOYEE_USERNAME as RE_EMPLOYEE_USERNAME,
+			employee.USERROLE_ID_EMPLOYEE as RE_USERROLE_ID_EMPLOYEE
+		FROM
+		(
+			select 
+			business_opportunity.BUSINESS_OPPORTUNITY_ID,
+			business_opportunity.CUSTOM_ID,
+			business_opportunity.PRE_DEAL_TIME,
+			business_opportunity.PRE_SALES_AMOUNT,
+			business_opportunity.PRODUCT_ID,
+			business_opportunity.REMARK,
+			business_opportunity.SALES_STAGE_ID,
+			sales_stage.SALES_STAGE_NAME,
+			sales_stage.RATE_OF_PROGRESS,
+			product.PRODUCT_DETAIL,
+			product.PRODUCT_NAME,
+			product.PRODUCT_NUM,
+			product.PRODUCT_PDF,
+			product.PRODUCT_PRICE
+			from
+			sales_stage
+			join business_opportunity on business_opportunity.SALES_STAGE_ID = sales_stage.SALES_STAGE_ID
+			join product on business_opportunity.PRODUCT_ID = product.PRODUCT_ID
+		) as b
+		join 
+		(
+		SELECT
+			custom.CUSTOM_ID,
+			custom.DEPARTMENT_ID,
+			custom.CUSTOM_LINKMAN_NAME,
+			custom.CUSTOM_LINKMAN_PHONE,
+			custom.CUSTOM_LINKMAN_POST,
+			custom.CUSTOM_LINKMAN_REMARK,
+			custom.CUSTOM_NAME,
+			custom.CUSTOM_RANK_ID,
+			custom.CUSTOM_STATE_ID,
+			custom.CUSTOM_ADDRESS,
+			custom.FOLLOW_EMPLOYEE_ID,
+			department.DEPARTMENT_NAME,
+			department.DEPARTMENT_INIT,
+			custom_rank.CUSTOM_RANK_NAME,
+			custom_state.CUSTOM_STATE_NAME
+			FROM
+			custom
+			JOIN department ON custom.DEPARTMENT_ID = department.DEPARTMENT_ID
+			JOIN custom_rank ON custom.CUSTOM_RANK_ID = custom_rank.CUSTOM_RANK_ID
+			JOIN custom_state ON custom.CUSTOM_STATE_ID = custom_state.CUSTOM_STATE_ID
+		) as a
+		on a.CUSTOM_ID = b.CUSTOM_ID
+		join
+		employee 
+		on a.FOLLOW_EMPLOYEE_ID = employee.EMPLOYEE_ID
+		<where>
+			<if test="businessOpportunityId != null">
+				and b.BUSINESS_OPPORTUNITY_ID = #{businessOpportunityId,jdbcType=VARCHAR}
+			</if>
+		</where>
+  </select>
+  
+  
 </mapper>

@@ -5,7 +5,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,20 +31,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import cn.com.noomn.po.Feedback;
 import cn.com.noomn.service.AuthorityService;
+import cn.com.noomn.service.BusinessOpportunityVoService;
 import cn.com.noomn.service.CustomVoService;
 import cn.com.noomn.service.DepartmentService;
 import cn.com.noomn.service.EmployeeVoService;
+import cn.com.noomn.service.FeedbackVoService;
 import cn.com.noomn.service.ProductVoService;
+import cn.com.noomn.service.SalesStageVoService;
+import cn.com.noomn.service.TaskVoService;
 import cn.com.noomn.service.UserroleAuthorityVoService;
 import cn.com.noomn.util.Infos;
 import cn.com.noomn.util.Message;
+import cn.com.noomn.util.StringToTimestamp;
 import cn.com.noomn.vo.AuthorityVo;
 import cn.com.noomn.vo.BusinessOpportunityVo;
 import cn.com.noomn.vo.CustomVo;
 import cn.com.noomn.vo.DepartmentVo;
 import cn.com.noomn.vo.EmployeeVo;
+import cn.com.noomn.vo.FeedbackVo;
 import cn.com.noomn.vo.ProductVo;
+import cn.com.noomn.vo.SalesStageVo;
+import cn.com.noomn.vo.TaskVo;
 import cn.com.noomn.vo.UserroleAuthorityVo;
 import cn.com.noomn.vo.UserroleVo;
 
@@ -61,6 +76,14 @@ public class MainBodys {
 	private ProductVoService productVoService;
 	@Autowired
 	private CustomVoService customVoService;
+	@Autowired
+	private BusinessOpportunityVoService businessOpportunityVoService;
+	@Autowired
+	private SalesStageVoService salesStageVoService;
+	@Autowired
+	private TaskVoService taskVoService;
+	@Autowired
+	private FeedbackVoService feedbackVoService;
 	
 	@RequestMapping(value="loadMainBody")
 	private String loadMainBody(String jspURL) {
@@ -280,16 +303,19 @@ public class MainBodys {
 	
 	@RequestMapping(value="updateEmployeeVo")
 	@ResponseBody
-	private Infos updateEmployeeVo(EmployeeVo employeeVo) {
+	private Infos updateEmployeeVo(EmployeeVo employeeVo,HttpSession session) {
 		if(employeeVo.getEmployeeImg() != null) {
 			String webInf = this.getClass().getClassLoader().getResource("/").getPath().replace("classes/", "");
 			String imgPath = webInf + "mainBody/img/png/" + employeeVo.getEmployeeId() + ".png";
 			employeeVo.setEmployeeImgPath(imgPath);
 		}
-		if(employeeVo.getDepartmentIdEmployee().equals("85ef362e-0987-11e7-b918-28d2444b860a")) {
-			employeeVo.setEmployeeInit(-1);
-		}else {
-			employeeVo.setEmployeeInit(0);
+		
+		if(employeeVo.getDepartmentIdEmployee() != null) {
+			if(employeeVo.getDepartmentIdEmployee().equals("85ef362e-0987-11e7-b918-28d2444b860a")) {
+				employeeVo.setEmployeeInit(-1);
+			}else {
+				employeeVo.setEmployeeInit(0);
+			}
 		}
 		Infos infos = employeeVoService.updateEmployeeVo(employeeVo);
 		return infos;
@@ -390,6 +416,13 @@ public class MainBodys {
 						"}";
 		
 		return substring;
+	} 
+
+	@RequestMapping(value="getAllProductList")
+	@ResponseBody
+	private List<ProductVo> getAllProductList() {
+		List<ProductVo> productVoList = productVoService.selectProductVoList(null);
+		return productVoList;
 	} 
 	
 	/**
@@ -533,6 +566,8 @@ public class MainBodys {
 				dataArrayString
 				.append("\"<button class='btn btn-success'  data-id='"+ customVo.getCustomId() + "' onclick='datailCustom(\\\""+ customVo.getCustomId() +"\\\");' ><i class='icon-tags'></i></button>\"")
 				.append(",")
+				.append("\"<button class='btn btn-info'  data-id='"+ customVo.getCustomId() + "' onclick='showAddBusinessOpportunity(\\\""+ customVo.getCustomId() +"\\\");' ><i class='icon-glass'></i></button>\"")
+				.append(",")
 				.append("\"<button class='btn btn-info'  data-id='"+ customVo.getCustomId() + "' onclick='editCustomShow(\\\""+ customVo.getCustomId() +"\\\");' ><i class='icon-pencil'></i></button>\"")
 			.append("],");
 		}
@@ -603,6 +638,31 @@ public class MainBodys {
 		return employeeVoList;
 	}
 	
+	@RequestMapping(value="getCanChooseDepartmentsList")
+	@ResponseBody
+	private List<DepartmentVo> getCanChooseDepartmentsList(HttpSession session) {
+		String departmentIdEmployee = (String)session.getAttribute("departmentIdEmployee");
+		List<DepartmentVo> departmentList = new ArrayList<DepartmentVo>();
+		if(departmentIdEmployee.equals("cfd4baa2-0986-11e7-b918-28d2444b860a")) { //总裁办
+			List<DepartmentVo> selectDepartmentList = departmentService.selectDepartmentList(null);
+			for(int i=0; i<selectDepartmentList.size(); i++) {
+				DepartmentVo departmentVo = selectDepartmentList.get(i);
+				if(departmentVo.equals("cfd4baa2-0986-11e7-b918-28d2444b860a") || 
+				   departmentVo.equals("7fc51cfa-0986-11e7-b918-28d2444b860a") ||
+				   departmentVo.equals("85ef362e-0987-11e7-b918-28d2444b860a")){ 
+					continue; 
+				}else {
+					departmentList.add(departmentVo);
+				}
+			}
+		}else {
+			DepartmentVo departmentVo = new DepartmentVo();
+			departmentVo.setDepartmentId(departmentIdEmployee);
+			departmentList = departmentService.selectDepartmentList(departmentVo);
+		}
+		return departmentList;
+	}
+	
 	/**
 	 * 添加新客户
 	 * @param customVo
@@ -614,8 +674,10 @@ public class MainBodys {
 	private Infos addCustomVo(CustomVo customVo, HttpSession session ) {
 		customVo.setCustomId(UUID.randomUUID().toString());
 		if(customVo.getDepartmentId() == null) {
+			String followEmployeeId = customVo.getFollowEmployeeId();
 			EmployeeVo employeeVo = new EmployeeVo();
-			employeeVo.setEmployeeId((String)session.getAttribute("employeeId"));
+			employeeVo.setEmployeeId(followEmployeeId);
+//			employeeVo.setEmployeeId((String)session.getAttribute("employeeId"));
 			employeeVo = employeeVoService.getOneEmployeeVo(employeeVo);
 			customVo.setDepartmentId(employeeVo.getDepartmentIdEmployee());
 		}
@@ -679,9 +741,7 @@ public class MainBodys {
 				.append(",")
 				.append("\""+ businessOpportunityVo.getPreSalesAmount() +"\"")
 				.append(",")
-				.append("\""+ businessOpportunityVo.getPreDealTime() +"\"")
-				.append(",")
-				.append("\""+ businessOpportunityVo.getRealWages() +"\"")
+				.append("\""+ StringToTimestamp.fromLongToString(businessOpportunityVo.getPreDealTime().getTime(), "yyyy-MM-dd") +"\"")
 				.append(",");
 			
 			switch(businessOpportunityVo.getSalesStageVo().getSalesStageId()) {
@@ -709,4 +769,261 @@ public class MainBodys {
 	} 
 	
 /*** 客户管理 /end ***/
+	
+/*** 商机管理 begin ***/
+	/**
+	 * 添加一个商机
+	 * @param businessOpportunityVo
+	 * @return
+	 */
+	@RequestMapping(value="addBusinessOpportunityVo")
+	@ResponseBody
+	private Infos addBusinessOpportunityVo(BusinessOpportunityVo businessOpportunityVo) {
+		businessOpportunityVo.setBusinessOpportunityId(UUID.randomUUID().toString());
+		Infos infos = businessOpportunityVoService.addBusinessOpportunityVo(businessOpportunityVo);
+		return infos;
+	}
+	
+	/**
+	 * 根据跟进人查询商机
+	 * @return
+	 */
+	@RequestMapping(value="getBusinessOpportunityVoByFollwer")
+	@ResponseBody
+	private String getBusinessOpportunityVoByFollwer(HttpSession session) {
+		String followEmployeeId = (String)session.getAttribute("employeeId");
+		String departmentId = (String) session.getAttribute("departmentIdEmployee");
+		String userroleIdEmployee = (String) session.getAttribute("userroleIdEmployee");
+		List<BusinessOpportunityVo> businessOpportunityByfollowId = null;
+		CustomVo customVo = new CustomVo();
+		switch(userroleIdEmployee) {
+		case "10988d26-0986-11e7-b918-28d2444b860a": //管理员
+			businessOpportunityByfollowId = businessOpportunityVoService.selectBusinessOpportunityByfollowId(null);
+			break; 
+		case "6566dff0-0987-11e7-b918-28d2444b860a": //总经理
+			businessOpportunityByfollowId = businessOpportunityVoService.selectBusinessOpportunityByfollowId(null);
+			break; 
+		case "5e8d627f-0987-11e7-b918-28d2444b860a":	//部门经理
+			customVo.setDepartmentId(departmentId);
+			businessOpportunityByfollowId = businessOpportunityVoService.selectBusinessOpportunityByfollowId(customVo);
+			break; 
+		case "57695387-0987-11e7-b918-28d2444b860a": //销售人员
+			customVo.setFollowEmployeeId(followEmployeeId);
+			businessOpportunityByfollowId = businessOpportunityVoService.selectBusinessOpportunityByfollowId(customVo);
+			break; 
+		}
+		
+		//如果没有商机
+		String data = "";
+		if(businessOpportunityByfollowId.size() == 0) return "{\"data\": []}";
+		
+		BusinessOpportunityVo businessOpportunityVo = null;
+		StringBuilder dataArrayString = new StringBuilder();
+		dataArrayString.append("{").append("\"data\": [");
+		
+		for(int i=0; i<businessOpportunityByfollowId.size(); i++) {
+			businessOpportunityVo = businessOpportunityByfollowId.get(i);
+			dataArrayString
+			.append("[")
+			.append("\""+ businessOpportunityVo.getCustomVo().getCustomName() +"\"")
+			.append(",")
+			.append("\""+ businessOpportunityVo.getProductVo().getProductName() +"\"")
+			.append(",")
+			.append("\""+ businessOpportunityVo.getPreSalesAmount()  + "\"")
+			.append(",")
+			.append("\""+ StringToTimestamp.fromLongToString(businessOpportunityVo.getPreDealTime().getTime(), "yyyy-MM-dd") +"\"")
+			.append(",");
+			switch(businessOpportunityVo.getSalesStageVo().getSalesStageId()) {
+			case "ddc2e328-0d4b-11e7-9e9d-28d2444b860a" : dataArrayString.append("\"<span class='label label-info'>"+ businessOpportunityVo.getSalesStageVo().getSalesStageName() +"</span>\"");break;
+			case "fbf40d99-0d4b-11e7-9e9d-28d2444b860a" : dataArrayString.append("\"<span class='label label-warning'>"+ businessOpportunityVo.getSalesStageVo().getSalesStageName() +"</span>\"");break;
+			case "011bc899-0d4c-11e7-9e9d-28d2444b860a" : dataArrayString.append("\"<span class='label label-inverse'>"+ businessOpportunityVo.getSalesStageVo().getSalesStageName() +"</span>\"");break;
+			case "053bd26b-0d4c-11e7-9e9d-28d2444b860a" : dataArrayString.append("\"<span class='label label-success'>"+ businessOpportunityVo.getSalesStageVo().getSalesStageName() +"</span>\"");break;
+			case "0b16581b-0d4c-11e7-9e9d-28d2444b860a" : dataArrayString.append("\"<span class='label label-danger'>"+ businessOpportunityVo.getSalesStageVo().getSalesStageName() +"</span>\"");break;
+			}
+			dataArrayString
+			.append(",")
+			.append("\""+ businessOpportunityVo.getCustomVo().getReceiver().getEmployeeRealName() + "\"")
+			.append(",")
+			.append("\"<button class='btn btn-success'  data-id='"+ businessOpportunityVo.getBusinessOpportunityId() + "' onclick='showCustomBusinessOpportunity(\\\""+ businessOpportunityVo.getBusinessOpportunityId() +"\\\");' ><i class='icon-tags'></i></button>\"")
+			.append(",");
+			if(!"0b16581b-0d4c-11e7-9e9d-28d2444b860a".equals(businessOpportunityVo.getSalesStageVo().getSalesStageId()) && !"053bd26b-0d4c-11e7-9e9d-28d2444b860a".equals(businessOpportunityVo.getSalesStageVo().getSalesStageId())) {
+				dataArrayString
+				.append("\"<button class='btn btn-info'  data-id='"+ businessOpportunityVo.getBusinessOpportunityId() + "' onclick='editBusinessOpportunityShow(\\\""+ businessOpportunityVo.getBusinessOpportunityId() +"\\\");' ><i class='icon-pencil'></i></button>\"");
+			}else {
+				dataArrayString
+				.append("\"\"");
+			}
+			dataArrayString
+			.append(",")
+			.append("\"<button class='btn btn-info'  data-id='"+ businessOpportunityVo.getBusinessOpportunityId() + "' onclick='addTaskShow(\\\""+ businessOpportunityVo.getBusinessOpportunityId() +"\\\",\\\""+ businessOpportunityVo.getCustomVo().getReceiver().getEmployeeId() +"\\\",\\\""+ businessOpportunityVo.getCustomVo().getReceiver().getEmployeeRealName() +"\\\");' ><i class='icon-wrench'></i></button>\"")
+			.append("],");
+		}
+		String substring = dataArrayString.substring(0, dataArrayString.toString().length()-1);
+		substring += 
+					"]" +
+						"}";
+		
+		return substring;
+	}
+	
+	/**
+	 * 根据id查询商机
+	 * @param businessOpportunityVo
+	 * @return
+	 */
+	@RequestMapping(value="selectBusinessOpportunityVoByPrimaryKey")
+	@ResponseBody
+	private BusinessOpportunityVo selectBusinessOpportunityVoByPrimaryKey(BusinessOpportunityVo businessOpportunityVo) {
+		businessOpportunityVo = businessOpportunityVoService.selectBusinessOpportunityVoByPrimaryKey(businessOpportunityVo);
+		return businessOpportunityVo;
+	}
+	
+	/**
+	 * 获取可以选择的销售阶段
+	 * @param salesStageVo
+	 * @return
+	 */
+	@RequestMapping(value="canChooseSalesStageVo")
+	@ResponseBody
+	public List<SalesStageVo> canChooseSalesStageVo(SalesStageVo salesStageVo) {
+		List<SalesStageVo> salesStageVoList = salesStageVoService.selectUpOrZeroSalesStageVo(salesStageVo);
+		return salesStageVoList;
+	}
+	
+	@RequestMapping(value="updateBusinessOpportunityVoByPrimaryKey")
+	@ResponseBody
+	private Infos updateBusinessOpportunityVoByPrimaryKey(BusinessOpportunityVo businessOpportunityVo) {
+		Infos infos = businessOpportunityVoService.updateBusinessOpportunityVo(businessOpportunityVo);
+		return infos;
+	}
+	
+	@RequestMapping(value="selectBusinessOpportunityVoDeatailNoTask")
+	@ResponseBody
+	private BusinessOpportunityVo selectBusinessOpportunityVoDeatailNoTask(BusinessOpportunityVo businessOpportunityVo) {
+		businessOpportunityVo = businessOpportunityVoService.selectBusinessOpportunityVoDeatailNoTask(businessOpportunityVo);
+		return businessOpportunityVo;
+	}
+	
+/*** 商机管理 /end ***/
+	
+/*** 任务管理 begin ***/
+	@RequestMapping(value="addTask")
+	@ResponseBody
+	private Infos addTask(TaskVo taskVo, HttpSession session) {
+		taskVo.setTaskId(UUID.randomUUID().toString());
+		taskVo.setTaskStop(0);
+		taskVo.setSponsorIdTask((String)session.getAttribute("employeeId"));
+		
+		Calendar c = Calendar.getInstance();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			long longtime=df.parse(df.format(c.getTime())).getTime();
+			taskVo.setTaskReportDate(new Timestamp(longtime));
+		} catch (ParseException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
+		Infos infos = taskVoService.insertTaskVo(taskVo);
+		return infos;
+	}
+	
+	@RequestMapping(value="getReceiveTask")
+	@ResponseBody
+	private String getReceiveTask(TaskVo taskVo, HttpSession session) {
+		taskVo.setFollowEmployeeIdTask((String)session.getAttribute("employeeId"));
+		List<TaskVo> receiveTaskVoList = taskVoService.selectReceiveTaskVo(taskVo);
+		
+		taskVo = null;
+		StringBuilder dataArrayString = new StringBuilder();
+		if(receiveTaskVoList.size() == 0) {
+			dataArrayString.append("{").append("\"data\": []}");
+			return dataArrayString.toString();
+		}
+		dataArrayString.append("{").append("\"data\": [");
+		
+		for(int i=0; i<receiveTaskVoList.size(); i++) {
+			taskVo = receiveTaskVoList.get(i);
+			dataArrayString
+			.append("[")
+			.append("\""+ taskVo.getTaskContent() +"\"")
+			.append(",")
+			.append("\""+ StringToTimestamp.fromLongToString(taskVo.getTaskReportDate().getTime(), "yyyy-MM-dd") +"\"")
+			.append(",")
+			.append("\""+ StringToTimestamp.fromLongToString(taskVo.getTaskStartTime().getTime(), "yyyy-MM-dd")  + "\"")
+			.append(",")
+			.append("\""+ StringToTimestamp.fromLongToString(taskVo.getTaskEndTime().getTime(), "yyyy-MM-dd")  + "\"")
+			.append(",")
+			.append("\""+ taskVo.getSpEmployee().getEmployeeRealName() +"\"")
+			.append(",")
+			.append("\""+ taskVo.getReEmployee().getEmployeeRealName() +"\"");
+			if(taskVo.getTaskStop() == 0) {
+				dataArrayString
+				.append(",")
+				.append("\""+ "未完成" + "\"");
+			}else if(taskVo.getTaskStop() == 1) {
+				dataArrayString
+				.append(",")
+				.append("\""+ "已完成" + "\"");
+			}else if(taskVo.getTaskStop() == -1) {
+				dataArrayString
+				.append(",")
+				.append("\""+ "无法完成" + "\"");
+			}
+			dataArrayString
+			.append(",")
+			.append("\"<button class='btn btn-info'  onclick='addFeedBackShow(\\\""+ taskVo.getTaskId() +"\\\",\\\""+ taskVo.getTaskContent() +"\\\"," + "\\\""+ StringToTimestamp.fromLongToString(taskVo.getTaskReportDate().getTime(), "yyyy-MM-dd") +"\\\"," + "\\\""+ StringToTimestamp.fromLongToString(taskVo.getTaskStartTime().getTime(), "yyyy-MM-dd")  + "\\\"," + "\\\""+ StringToTimestamp.fromLongToString(taskVo.getTaskEndTime().getTime(), "yyyy-MM-dd")  + "\\\"," + "\\\""+ taskVo.getSpEmployee().getEmployeeRealName() +"\\\"," + "\\\""+ taskVo.getReEmployee().getEmployeeRealName() +"\\\"," + "\\\""+ taskVo.getFollowEmployeeIdTask() +"\\\");' ><i class='icon-wrench'></i></button>\"")
+			.append("],");
+		}
+		String substring = dataArrayString.substring(0, dataArrayString.toString().length()-1);
+		substring += 
+					"]" +
+						"}";
+		return substring;
+	}
+	
+	/**
+	 * 根据任务id获取反馈记录
+	 * @param feedbackVo
+	 * @return
+	 */
+	@RequestMapping(value="selectFeedbackVoByTaskId")
+	@ResponseBody
+	private List<FeedbackVo> selectFeedbackVoByTaskId(FeedbackVo feedbackVo, HttpSession session){
+		List<FeedbackVo> feedbackVoList = feedbackVoService.selectFeedbackVoByTaskId(feedbackVo);
+		String imgBasePath = (String) session.getAttribute("imgFilePath");
+		String imgPath = (String) session.getAttribute("imgPath");
+		
+		for(int i=0; i<feedbackVoList.size(); i++) {
+			File file = new File(imgBasePath + feedbackVoList.get(i).getEmployeeVo().getEmployeeId() + ".png");
+			boolean exists = file.exists();
+			if(exists) {
+				feedbackVoList.get(i).getEmployeeVo()
+				.setEmployeeImgPath(imgPath + feedbackVoList.get(i).getEmployeeVo().getEmployeeId() + ".png");;
+			}else {
+				feedbackVoList.get(i).getEmployeeVo()
+				.setEmployeeImgPath(imgPath + "no_image.png");;
+			}
+		}
+		return feedbackVoList;
+	}
+	
+	@RequestMapping(value="insertFeedback")
+	@ResponseBody
+	private Infos insertFeedback(FeedbackVo feedbackVo){
+		feedbackVo.setFeedbackId(UUID.randomUUID().toString());
+		Calendar c = Calendar.getInstance();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			long longtime=df.parse(df.format(c.getTime())).getTime();
+			feedbackVo.setFeedbackTime(new Timestamp(longtime));
+		} catch (ParseException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		Infos infos = feedbackVoService.insertFeedbackVo(feedbackVo);
+		return infos;
+	}
+/*** /任务管理 /end ***/
+
 }

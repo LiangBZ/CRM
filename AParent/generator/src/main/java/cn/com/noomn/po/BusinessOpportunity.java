@@ -16,11 +16,7 @@ public class BusinessOpportunity {
 
     private Timestamp preDealTime;
 
-    private BigDecimal cost;
-
     private String remark;
-
-    private BigDecimal realWages;
 
     public String getBusinessOpportunityId() {
         return businessOpportunityId;
@@ -70,27 +66,11 @@ public class BusinessOpportunity {
         this.preDealTime = preDealTime;
     }
 
-    public BigDecimal getCost() {
-        return cost;
-    }
-
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
-    }
-
     public String getRemark() {
         return remark;
     }
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
-    }
-
-    public BigDecimal getRealWages() {
-        return realWages;
-    }
-
-    public void setRealWages(BigDecimal realWages) {
-        this.realWages = realWages;
     }
 }

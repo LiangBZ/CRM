@@ -86,6 +86,8 @@ public class UserroleAuthorityVoServiceImpl implements UserroleAuthorityVoServic
 			Employee employee = iterator.next();
 			
 			for(int i=0; i<authorityList.size(); i++) {
+				if("06765f5e-0f9e-11e7-8663-28d2444b860a".equals(authorityList.get(i).getAuthorityId()))
+					continue;
 				UserroleAuthority userroleAuthority = new UserroleAuthority();
 				userroleAuthority.setUserroleAuthorityId(UUID.randomUUID().toString());
 				userroleAuthority.setAuthorityId(authorityList.get(i).getAuthorityId());
