@@ -41,4 +41,31 @@ public class TaskVoServiceImpl implements TaskVoService {
 		return receiveTaskVoList;
 	}
 
+	@Override
+	public List<TaskVo> selectSenderTaskVo(TaskVo taskVo) {
+		List<TaskVo> senderTaskVoList = taskVoMapper.selectSenderTaskVo(taskVo);
+		return senderTaskVoList;
+	}
+
+	@Override
+	public Infos updateTaskVo(TaskVo taskVo) {
+		int updateCount = taskMapper.updateByPrimaryKeySelective(taskVo);
+		
+		Infos infos = Infos.getInfosInstance();
+		if(updateCount == 1) {
+			infos.message = Message.SUCCESS;
+			infos.obj = "成功更新任务信息";
+		}else {
+			infos.message = Message.ERROR;
+			infos.obj = "更新任务信息失败";
+		}
+		return infos;
+	}
+
+	@Override
+	public List<TaskVo> selectBusinessOpportunitysAllTask(TaskVo taskVo) {
+		List<TaskVo> opportunitysAllTask = taskVoMapper.selectBusinessOpportunitysAllTask(taskVo);
+		return opportunitysAllTask;
+	}
+
 }

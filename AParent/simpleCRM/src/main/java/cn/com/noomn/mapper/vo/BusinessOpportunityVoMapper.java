@@ -26,4 +26,17 @@ public interface BusinessOpportunityVoMapper {
 	 * @return
 	 */
 	cn.com.noomn.vo.BusinessOpportunityVo selectBusinessOpportunityVoDeatailNoTask(BusinessOpportunityVo businessOpportunityVo);
+	
+	/**
+	 * 获取feedback、task、businessOpportunity，通过 businessOpportunityVoId
+	 * @return
+	 */
+	BusinessOpportunityVo selectFeedbackVoByBusinessOpportunityVoId(BusinessOpportunityVo businessOpportunityVo);
+
+	/**
+	 * 商机分析
+	 * @param businessOpportunityVo
+	 * @return
+	 */
+	List<BusinessOpportunityVo> selectBusinessOpportunityVoForAnalyse(BusinessOpportunityVo businessOpportunityVo);
 }

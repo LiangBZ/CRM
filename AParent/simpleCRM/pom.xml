@@ -225,6 +225,14 @@
 			<version>1.9</version>
 		</dependency>
 
+		
+		<!-- websocket -->
+		<dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-websocket</artifactId>
+	        <version>${spring-framework.version}</version>
+	    </dependency>
+		<!-- /websocket -->
 	</dependencies>
 
 	<build>

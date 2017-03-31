@@ -11,8 +11,8 @@ response.setDateHeader("Expires", -10);
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>container</title>
 	<!-- jquery -->
-    <%-- <script src="${pageContext.request.contextPath}/mainBody/js/jquery-1.8.2.min.js"></script> --%>
-    <script src="${pageContext.request.contextPath}/Util/js/jquery/jquery.2.1.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/mainBody/js/jquery-1.8.3.min.js"></script>
+    <%-- <script src="${pageContext.request.contextPath}/Util/js/jquery/jquery.2.1.1.min.js"></script> --%>
 	<link href="${pageContext.request.contextPath}/mainBody/css/bootstrap-fileupload.css" rel="stylesheet"/>
 	<link href="${pageContext.request.contextPath}/mainBody/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/mainBody/css/bootstrap-responsive.min.css" rel="stylesheet"/>
@@ -20,6 +20,7 @@ response.setDateHeader("Expires", -10);
     <link href="${pageContext.request.contextPath}/mainBody/css/style.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/mainBody/css/style-responsive.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/mainBody/css/style-default.css" rel="stylesheet" id="style_color"/>
+	<link href="${pageContext.request.contextPath}/mainBody/css/bootstrap-fullcalendar.css" rel="stylesheet" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Util/js/bootstrapValidator0.5.2/css/bootstrapValidator.min.css">
 	
 	<!-- 组织结构 -->
@@ -66,200 +67,6 @@ response.setDateHeader("Expires", -10);
                 <span class="arrow"></span>
             </a>
 
-            <div id="top_menu" class="nav notify-row">
-
-                <ul class="nav top-menu">
-
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-tasks"></i>
-                            <span class="badge badge-important">6</span>
-                        </a>
-                        <ul class="dropdown-menu extended tasks-bar">
-                            <li>
-                                <p>你有6条任务</p>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="task-info">
-                                        <div class="desc">控制台</div>
-                                        <div class="percent">44%</div>
-                                    </div>
-                                    <div class="progress progress-striped active no-margin-bot">
-                                        <div class="bar" style="width: 44%;"></div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="task-info">
-                                        <div class="desc">数据库更新</div>
-                                        <div class="percent">65%</div>
-                                    </div>
-                                    <div class="progress progress-striped progress-success active no-margin-bot">
-                                        <div class="bar" style="width: 65%;"></div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="task-info">
-                                        <div class="desc">手机开发进度</div>
-                                        <div class="percent">87%</div>
-                                    </div>
-                                    <div class="progress progress-striped progress-info active no-margin-bot">
-                                        <div class="bar" style="width: 87%;"></div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="task-info">
-                                        <div class="desc">手机App进度</div>
-                                        <div class="percent">33%</div>
-                                    </div>
-                                    <div class="progress progress-striped progress-warning active no-margin-bot">
-                                        <div class="bar" style="width: 33%;"></div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="task-info">
-                                        <div class="desc">控制台</div>
-                                        <div class="percent">90%</div>
-                                    </div>
-                                    <div class="progress progress-striped progress-danger active no-margin-bot">
-                                        <div class="bar" style="width: 90%;"></div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="external">
-                                <a href="#">查看所有任务</a>
-                            </li>
-                        </ul>
-                    </li>
-
-
-                    <li class="dropdown" id="header_inbox_bar">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-envelope-alt"></i>
-                            <span class="badge badge-important">5</span>
-                        </a>
-                        <ul class="dropdown-menu extended inbox">
-                            <li>
-                                <p>你有5条消息</p>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="photo"><img src="${pageContext.request.contextPath}/mainBody/img/png/avatar-mini.png" alt="avatar"/></span>
-									<span class="subject">
-									<span class="from">Jonathan Smith</span>
-									<span class="time">Just now</span>
-									</span>
-									<span class="message">
-									    Hello, 这是个消息列子.
-									</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="photo"><img src="${pageContext.request.contextPath}/mainBody/img/png/avatar-mini.png" alt="avatar"/></span>
-									<span class="subject">
-									<span class="from">Jhon Doe</span>
-									<span class="time">10 mins</span>
-									</span>
-									<span class="message">
-									 Hi, 最近咋样?
-									</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="photo"><img src="${pageContext.request.contextPath}/mainBody/img/png/avatar-mini.png" alt="avatar"/></span>
-									<span class="subject">
-									<span class="from">Jason Stathum</span>
-									<span class="time">3 hrs</span>
-									</span>
-									<span class="message">
-									    This is awesome dashboard.
-									</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="photo"><img src="${pageContext.request.contextPath}/mainBody/img/png/avatar-mini.png" alt="avatar"/></span>
-									<span class="subject">
-									<span class="from">Jondi Rose</span>
-									<span class="time">Just now</span>
-									</span>
-									<span class="message">
-									    Hello, this is metrolab
-									</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">See all messages</a>
-                            </li>
-                        </ul>
-                    </li>
-
-
-                    <li class="dropdown" id="header_notification_bar">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-                            <i class="icon-bell-alt"></i>
-                            <span class="badge badge-warning">7</span>
-                        </a>
-                        <ul class="dropdown-menu extended notification">
-                            <li>
-                                <p>你有7条提示信息</p>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="label label-important"><i class="icon-bolt"></i></span>
-                                    Server #3 overloaded.
-                                    <span class="small italic">34 mins</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="label label-warning"><i class="icon-bell"></i></span>
-                                    Server #10 not respoding.
-                                    <span class="small italic">1 Hours</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="label label-important"><i class="icon-bolt"></i></span>
-                                    Database overloaded 24%.
-                                    <span class="small italic">4 hrs</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="label label-success"><i class="icon-plus"></i></span>
-                                    New user registered.
-                                    <span class="small italic">Just now</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="label label-info"><i class="icon-bullhorn"></i></span>
-                                    Application error.
-                                    <span class="small italic">10 mins</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">See all notifications</a>
-                            </li>
-                        </ul>
-                    </li>
-
-
-                </ul>
-            </div>
-
             <div class="top-nav ">
                 <ul class="nav pull-right top-menu">
 
@@ -270,6 +77,7 @@ response.setDateHeader("Expires", -10);
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
+                            <li><a href="javascript:void(0);" onclick="loadMainBody('mainBody/jsp/profile')"><i class="icon-user"></i>个人资料</a></li>
                             <li><a href="${pageContext.request.contextPath}/logout/removeSession"><i class="icon-key"></i>退出</a></li>
                         </ul>
                     </li>
@@ -322,25 +130,17 @@ response.setDateHeader("Expires", -10);
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:void(0)" class="">
-                        <i class="icon-tasks"></i>
-                        <span>流程</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="javascript:void(0)">申请流程</a></li>
-                        <li><a class="" href="javascript:void(0)">需要我审批的流程</a></li>
-                        <li><a class="" href="javascript:void(0)">历史流程</a></li>
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:void(0)" class="">
                         <i class="icon-th"></i>
                         <span>任务</span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/receiveTaskInformation')">收到的任务</a></li>
-                        <li><a class="" href="javascript:void(0)">往期任务</a></li>
+                    	<c:if test="${authorityMap['7584310e-1030-11e7-8663-28d2444b860a'] eq 1}">
+                        	<li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/receiveTaskInformation')">收到的任务</a></li>
+                        </c:if>
+                        <c:if test="${authorityMap['96151773-102f-11e7-8663-28d2444b860a'] eq 1}">
+                       		<li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/senderTaskInformation')">发布的任务</a></li>
+                        </c:if>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -352,12 +152,15 @@ response.setDateHeader("Expires", -10);
                 <li class="sub-menu">
                     <a class="" href="javascript:void(0)">
                         <i class="icon-map-marker"></i>
-                        <span>外勤拜访</span>
+                        <span>外勤</span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a href="javascript:void(0)" class="">我的外勤拜访</a></li>
-                        <li><a href="javascript:void(0)" class="">我可以查看的拜访</a></li>
+                        <li><a href="javascript:void(0)" class="" onclick="loadMainBody('mainBody/jsp/workOutside')">申请外勤</a></li>
+                        <c:if test="${authorityMap['96dd987b-1138-11e7-8663-28d2444b860a'] eq 1}">
+                       		<li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/workOutsideApprove')">外勤审核</a></li>
+                        </c:if>
+                        <li><a href="javascript:void(0)" class="" onclick="loadMainBody('mainBody/jsp/workOutsideStatistics')">外勤统计</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -368,7 +171,7 @@ response.setDateHeader("Expires", -10);
                     </a>
                     <ul class="sub">
                         <li><a class="" href="javascript:void(0)"  onclick="loadMainBody('mainBody/jsp/businessOpportunityInformation')">所有商机</a></li>
-                        <li><a class="" href="javascript:void(0)">商机分析</a></li>
+                        <li><a class="" href="javascript:void(0)"  onclick="loadMainBody('mainBody/jsp/prospectiveCustomers')">潜在客户 / 销售意向</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -431,8 +234,6 @@ response.setDateHeader("Expires", -10);
 <!-- 校验 -->
 <script src="${pageContext.request.contextPath}/mainBody/js/bootstrap-inputmask.min.js"></script>
 
-<script src="${pageContext.request.contextPath}/Util/js/util.js"></script>
-
 <link rel="stylesheet" href="${pageContext.request.contextPath}/Util/js/craftpip-jquery-confirm-e3e217e/css/jquery-confirm.css">
 <script src="${pageContext.request.contextPath}/Util/js/craftpip-jquery-confirm-e3e217e/js/jquery-confirm.js"></script>
 
@@ -447,9 +248,26 @@ response.setDateHeader("Expires", -10);
 <script type="text/javascript" src="${pageContext.request.contextPath}/mainBody/js/bootstrap-colorpicker.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/mainBody/js/bootstrap-timepicker.js"></script>
 
+
 <!-- 日期 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/Util/js/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/Util/js/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<!-- 提示信息 -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/mainBody/css/jquery.gritter.css"/>
+<script type="text/javascript" src="${pageContext.request.contextPath}/mainBody/js/jquery.gritter.js"></script>
+
+<!-- 日历 -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/mainBody/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/mainBody/js/jquery.slimscroll.min.js"></script>
+<script src="${pageContext.request.contextPath}/mainBody/js/fullcalendar.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/Util/js/echarts/echarts.min.js" type="text/javascript"></script>
+
+<!-- websocket -->
+<script src="${pageContext.request.contextPath}/Util/js/socket/sockjs-0.3.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/Util/js/util.js"></script>
 
 <script type="text/javascript">
 	var loadMainBody = function(jspURL) {
@@ -457,6 +275,24 @@ response.setDateHeader("Expires", -10);
 	}
  	$(function() {
 		loadMainBody('mainBody/jsp/consoleDesk');
+		connect();
+		
+/* 		提示窗口
+		$.gritter.add({
+            // (string | mandatory) the heading of the notification
+            title: '新任务',
+            // (string | mandatory) the text inside the notification
+            //text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eget tincidunt velit. Cum sociis natoque penatibus et <a href="#" style="color:#ccc">magnis dis parturient</a> montes, nascetur ridiculus mus.',
+            text: '<a href="http://localhost:8080/simpleCRM">http://www.baidu.com</a>',
+            // (string | optional) the image to display on the left
+            image: 'img/avatar-mini.png',
+            // (bool | optional) if you want it to fade out on its own or just sit there
+            sticky: true,
+            // (int | optional) the time you want it to be alive for before fading out
+            time: '',
+            // (string | optional) the class name you want to apply to that specific message
+            class_name: 'my-sticky-class'
+        }); */
 	})
 	
 </script>

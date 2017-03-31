@@ -20,4 +20,25 @@ public interface TaskVoService {
 	 * @return
 	 */
 	List<TaskVo> selectReceiveTaskVo(TaskVo taskVo);
+	
+	/**
+	 * 根据发送方查询发布的任务
+	 * @param taskVo
+	 * @return
+	 */
+	List<TaskVo> selectSenderTaskVo(TaskVo taskVo);
+	
+	/**
+	 * 更新一条任务
+	 * @param taskVo
+	 * @return
+	 */
+	Infos updateTaskVo(TaskVo taskVo);
+	
+	/**
+	 * 获取该商机所有发布的任务
+	 * @param taskVo
+	 * @return
+	 */
+	List<TaskVo> selectBusinessOpportunitysAllTask(TaskVo taskVo);
 }

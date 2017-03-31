@@ -14,7 +14,12 @@ public class TimestampConverter implements Converter<String, Timestamp> {
 	@Override
 	public Timestamp convert(String timestamp) {
 		if(timestamp == null) return null;
-		Long time = StringToTimestamp.formStringToLong(timestamp, "yyyy-MM-dd");
+		Long time = null;
+		try {
+			time = StringToTimestamp.formStringToLong(timestamp, "yyyy-MM-dd hh:mm");
+		}catch(Exception e) {
+			time = StringToTimestamp.formStringToLong(timestamp, "yyyy-MM-dd");
+		}
 		return new Timestamp(time);
 	}
 

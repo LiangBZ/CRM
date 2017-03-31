@@ -13,25 +13,32 @@
 			</ul>
 		</div>
 	</div>
-	
+	<!-- 
 	<div class="row-fluid">
 		<div class="span12">
 			<div class="clearfix">
+				
 				<div class="btn-group">
 					<button class="btn btn-info" style="width:100px;">
 						所有商机 <i class="icon-plus"></i>
 					</button>
 				</div>
 				<div class="btn-group">
-					<button class="btn btn-success" style="width:100px;">
-						客户商机 <i class="icon-plus"></i>
+					<button class="btn btn-success" style="width:130px;">
+						客户所有商机 <i class="icon-plus"></i>
+					</button>
+				</div> 
+				
+				<div class="btn-group">
+					<button class="btn btn-success" style="width:130px;">
+						任务列表 <i class="icon-plus"></i>
 					</button>
 				</div>
 			</div>
 		</div>
 		<div class="space15"></div>
 	</div>
-
+ -->
 	<div class="row-fluid">
 		<div class="row-fluid">
 			<!-- 客户信息 begin -->
@@ -179,7 +186,7 @@
 					</h4>
 				</div>
 				<div class="widget-body">
-					<div class="timeline-messages">
+					<div class="timeline-messages" data-timeLine="feedback">
 
 						<div class="msg-time-chat">
 							<a class="message-img" href="#">

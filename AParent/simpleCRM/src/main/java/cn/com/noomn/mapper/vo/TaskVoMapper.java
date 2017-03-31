@@ -12,4 +12,18 @@ public interface TaskVoMapper {
 	 * @return
 	 */
 	List<TaskVo> selectReceiveTaskVo(TaskVo taskVo);
+	/**
+	 * 
+	 * 获取发布的任务
+	 * @param taskVo
+	 * @return
+	 */
+	List<TaskVo> selectSenderTaskVo(TaskVo taskVo);
+	
+	/**
+	 * 获取该商机所有发布的任务
+	 * @param taskVo
+	 * @return
+	 */
+	List<TaskVo> selectBusinessOpportunitysAllTask(TaskVo taskVo);
 }

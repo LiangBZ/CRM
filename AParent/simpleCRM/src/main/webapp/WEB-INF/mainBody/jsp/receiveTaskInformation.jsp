@@ -38,6 +38,7 @@
 							<th>执行者</th>
 							<th>状态</th>
 							<th>反馈</th>
+							<th>商机</th>
 						</thead>
 						<tbody>
 							<tr class="odd gradex">
@@ -54,6 +55,12 @@
 										<i class="icon-tags"></i>
 									</button>
 								</td>
+								<td style="width: 6%">
+									<button class="btn btn-success"
+										onclick="">
+										<i class="icon-tags"></i>
+									</button>
+								</td>
 							</tr>
 							<tr class="odd gradex">
 								<th>第二次发布任务</th>
@@ -63,6 +70,12 @@
 								<td>王五</td>
 								<td>张三</td>
 								<td>未完成</td>
+								<td style="width: 6%">
+									<button class="btn btn-success"
+										onclick="">
+										<i class="icon-tags"></i>
+									</button>
+								</td>
 								<td style="width: 6%">
 									<button class="btn btn-success"
 										onclick="">

@@ -31,19 +31,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import cn.com.noomn.po.Feedback;
 import cn.com.noomn.service.AuthorityService;
 import cn.com.noomn.service.BusinessOpportunityVoService;
 import cn.com.noomn.service.CustomVoService;
 import cn.com.noomn.service.DepartmentService;
 import cn.com.noomn.service.EmployeeVoService;
 import cn.com.noomn.service.FeedbackVoService;
+import cn.com.noomn.service.ProcessVoService;
 import cn.com.noomn.service.ProductVoService;
 import cn.com.noomn.service.SalesStageVoService;
 import cn.com.noomn.service.TaskVoService;
 import cn.com.noomn.service.UserroleAuthorityVoService;
+import cn.com.noomn.util.Analyse;
+import cn.com.noomn.util.CalendarInfos;
+import cn.com.noomn.util.CharData;
 import cn.com.noomn.util.Infos;
+import cn.com.noomn.util.LineCharData;
 import cn.com.noomn.util.Message;
+import cn.com.noomn.util.PieChar;
 import cn.com.noomn.util.StringToTimestamp;
 import cn.com.noomn.vo.AuthorityVo;
 import cn.com.noomn.vo.BusinessOpportunityVo;
@@ -51,6 +56,7 @@ import cn.com.noomn.vo.CustomVo;
 import cn.com.noomn.vo.DepartmentVo;
 import cn.com.noomn.vo.EmployeeVo;
 import cn.com.noomn.vo.FeedbackVo;
+import cn.com.noomn.vo.ProcessVo;
 import cn.com.noomn.vo.ProductVo;
 import cn.com.noomn.vo.SalesStageVo;
 import cn.com.noomn.vo.TaskVo;
@@ -84,6 +90,8 @@ public class MainBodys {
 	private TaskVoService taskVoService;
 	@Autowired
 	private FeedbackVoService feedbackVoService;
+	@Autowired
+	private ProcessVoService processVoService;
 	
 	@RequestMapping(value="loadMainBody")
 	private String loadMainBody(String jspURL) {
@@ -846,6 +854,7 @@ public class MainBodys {
 			.append(",")
 			.append("\"<button class='btn btn-success'  data-id='"+ businessOpportunityVo.getBusinessOpportunityId() + "' onclick='showCustomBusinessOpportunity(\\\""+ businessOpportunityVo.getBusinessOpportunityId() +"\\\");' ><i class='icon-tags'></i></button>\"")
 			.append(",");
+			
 			if(!"0b16581b-0d4c-11e7-9e9d-28d2444b860a".equals(businessOpportunityVo.getSalesStageVo().getSalesStageId()) && !"053bd26b-0d4c-11e7-9e9d-28d2444b860a".equals(businessOpportunityVo.getSalesStageVo().getSalesStageId())) {
 				dataArrayString
 				.append("\"<button class='btn btn-info'  data-id='"+ businessOpportunityVo.getBusinessOpportunityId() + "' onclick='editBusinessOpportunityShow(\\\""+ businessOpportunityVo.getBusinessOpportunityId() +"\\\");' ><i class='icon-pencil'></i></button>\"");
@@ -854,6 +863,8 @@ public class MainBodys {
 				.append("\"\"");
 			}
 			dataArrayString
+			.append(",")
+			.append("\"<button class='btn btn-success'  data-id='"+ businessOpportunityVo.getBusinessOpportunityId() + "' onclick='showBusinessOpportunitysTask(\\\""+ businessOpportunityVo.getBusinessOpportunityId() +"\\\");' ><i class='icon-tags'></i></button>\"")
 			.append(",")
 			.append("\"<button class='btn btn-info'  data-id='"+ businessOpportunityVo.getBusinessOpportunityId() + "' onclick='addTaskShow(\\\""+ businessOpportunityVo.getBusinessOpportunityId() +"\\\",\\\""+ businessOpportunityVo.getCustomVo().getReceiver().getEmployeeId() +"\\\",\\\""+ businessOpportunityVo.getCustomVo().getReceiver().getEmployeeRealName() +"\\\");' ><i class='icon-wrench'></i></button>\"")
 			.append("],");
@@ -960,19 +971,30 @@ public class MainBodys {
 			if(taskVo.getTaskStop() == 0) {
 				dataArrayString
 				.append(",")
-				.append("\""+ "未完成" + "\"");
+				.append("\"<span class='label label-warning'>"+ "未完成" + "</span>\"");
 			}else if(taskVo.getTaskStop() == 1) {
 				dataArrayString
 				.append(",")
-				.append("\""+ "已完成" + "\"");
+				.append("\"<span class='label label-success'>"+ "已完成" + "</span>\"");
 			}else if(taskVo.getTaskStop() == -1) {
 				dataArrayString
 				.append(",")
-				.append("\""+ "无法完成" + "\"");
+				.append("\"<span class='label label-danger'>"+ "无法完成" + "</span>\"");
+			}
+			if(taskVo.getTaskEndTime().getTime() < new Date().getTime()) {
+				dataArrayString
+				.append(",")
+				.append("\"\"");
+			}else {
+				dataArrayString
+				.append(",")
+				.append("\"<button class='btn btn-info'  onclick='addFeedBackShow(\\\""+ taskVo.getTaskId() +"\\\",\\\""+ taskVo.getTaskContent() +"\\\"," + "\\\""+ StringToTimestamp.fromLongToString(taskVo.getTaskReportDate().getTime(), "yyyy-MM-dd") +"\\\"," + "\\\""+ StringToTimestamp.fromLongToString(taskVo.getTaskStartTime().getTime(), "yyyy-MM-dd")  + "\\\"," + "\\\""+ StringToTimestamp.fromLongToString(taskVo.getTaskEndTime().getTime(), "yyyy-MM-dd")  + "\\\"," + "\\\""+ taskVo.getSpEmployee().getEmployeeRealName() +"\\\"," + "\\\""+ taskVo.getReEmployee().getEmployeeRealName() +"\\\"," + "\\\""+ taskVo.getFollowEmployeeIdTask() +"\\\");' ><i class='icon-wrench'></i></button>\"");
 			}
 			dataArrayString
 			.append(",")
-			.append("\"<button class='btn btn-info'  onclick='addFeedBackShow(\\\""+ taskVo.getTaskId() +"\\\",\\\""+ taskVo.getTaskContent() +"\\\"," + "\\\""+ StringToTimestamp.fromLongToString(taskVo.getTaskReportDate().getTime(), "yyyy-MM-dd") +"\\\"," + "\\\""+ StringToTimestamp.fromLongToString(taskVo.getTaskStartTime().getTime(), "yyyy-MM-dd")  + "\\\"," + "\\\""+ StringToTimestamp.fromLongToString(taskVo.getTaskEndTime().getTime(), "yyyy-MM-dd")  + "\\\"," + "\\\""+ taskVo.getSpEmployee().getEmployeeRealName() +"\\\"," + "\\\""+ taskVo.getReEmployee().getEmployeeRealName() +"\\\"," + "\\\""+ taskVo.getFollowEmployeeIdTask() +"\\\");' ><i class='icon-wrench'></i></button>\"")
+			.append("\"<button class='btn btn-success'  onclick='showCustomBusinessOpportunity(\\\""+ taskVo.getBusinessOpportunityIdTask() +"\\\");' ><i class='icon-tags'></i></button>\"");
+			
+			dataArrayString
 			.append("],");
 		}
 		String substring = dataArrayString.substring(0, dataArrayString.toString().length()-1);
@@ -1024,6 +1046,534 @@ public class MainBodys {
 		Infos infos = feedbackVoService.insertFeedbackVo(feedbackVo);
 		return infos;
 	}
+	
+	/**
+	 * 查看已经发布的任务
+	 * @param taskVo
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="getSenderTask")
+	@ResponseBody
+	private String getSenderTask(TaskVo taskVo, HttpSession session) {
+		taskVo.setSponsorIdTask((String)session.getAttribute("employeeId"));
+		List<TaskVo> receiveTaskVoList = taskVoService.selectReceiveTaskVo(taskVo);
+		
+		taskVo = null;
+		StringBuilder dataArrayString = new StringBuilder();
+		if(receiveTaskVoList.size() == 0) {
+			dataArrayString.append("{").append("\"data\": []}");
+			return dataArrayString.toString();
+		}
+		dataArrayString.append("{").append("\"data\": [");
+		
+		for(int i=0; i<receiveTaskVoList.size(); i++) {
+			taskVo = receiveTaskVoList.get(i);
+			dataArrayString
+			.append("[")
+			.append("\""+ taskVo.getTaskContent() +"\"")
+			.append(",")
+			.append("\""+ StringToTimestamp.fromLongToString(taskVo.getTaskReportDate().getTime(), "yyyy-MM-dd") +"\"")
+			.append(",")
+			.append("\""+ StringToTimestamp.fromLongToString(taskVo.getTaskStartTime().getTime(), "yyyy-MM-dd")  + "\"")
+			.append(",")
+			.append("\""+ StringToTimestamp.fromLongToString(taskVo.getTaskEndTime().getTime(), "yyyy-MM-dd")  + "\"")
+			.append(",")
+			.append("\""+ taskVo.getSpEmployee().getEmployeeRealName() +"\"")
+			.append(",")
+			.append("\""+ taskVo.getReEmployee().getEmployeeRealName() +"\"");
+			if(taskVo.getTaskStop() == 0) {
+				dataArrayString
+				.append(",")
+				.append("\"<span class='label label-warning'>"+ "未完成" + "</span>\"");
+			}else if(taskVo.getTaskStop() == 1) {
+				dataArrayString
+				.append(",")
+				.append("\"<span class='label label-success'>"+ "已完成" + "</span>\"");
+			}else if(taskVo.getTaskStop() == -1) {
+				dataArrayString
+				.append(",")
+				.append("\"<span class='label label-danger'>"+ "无法完成" + "</span>\"");
+			}
+			dataArrayString
+			.append(",")
+			.append("\"<button class='btn btn-success'  onclick='showCustomBusinessOpportunity(\\\""+ taskVo.getBusinessOpportunityIdTask() +"\\\");' ><i class='icon-tags'></i></button>\"")
+			.append(",")
+			.append("\"<button class='btn btn-info'  onclick='editTaskShow(\\\""+ taskVo.getTaskId() +"\\\",\\\""+ taskVo.getTaskContent() +"\\\"," + "\\\""+ StringToTimestamp.fromLongToString(taskVo.getTaskReportDate().getTime(), "yyyy-MM-dd") +"\\\"," + "\\\""+ StringToTimestamp.fromLongToString(taskVo.getTaskStartTime().getTime(), "yyyy-MM-dd")  + "\\\"," + "\\\""+ StringToTimestamp.fromLongToString(taskVo.getTaskEndTime().getTime(), "yyyy-MM-dd")  + "\\\"," + "\\\""+ taskVo.getSpEmployee().getEmployeeRealName() +"\\\"," + "\\\""+ taskVo.getReEmployee().getEmployeeRealName() +"\\\"," + "\\\""+ taskVo.getFollowEmployeeIdTask() +"\\\"," + "\\\""+ taskVo.getTaskStop() +"\\\");' ><i class='icon-wrench'></i></button>\"")
+			.append("],");
+		}
+		String substring = dataArrayString.substring(0, dataArrayString.toString().length()-1);
+		substring += 
+					"]" +
+						"}";
+		return substring;
+	}
+	
+	/**
+	 * 更新任务信息
+	 * @param taskVo
+	 * @return
+	 */
+	@RequestMapping(value="updateSenderTask")
+	@ResponseBody
+	private Infos updateSenderTask(TaskVo taskVo) {
+		Infos infos = taskVoService.updateTaskVo(taskVo);
+		return infos;
+	}
+	
+	/**
+	 * 根据商机获取反馈信息
+	 * @param businessOpportunityVo
+	 * @return
+	 */
+	@RequestMapping(value="selectFeedbackByBusinessOpportunityVoId")
+	@ResponseBody
+	private BusinessOpportunityVo selectFeedbackByBusinessOpportunityVoId(BusinessOpportunityVo businessOpportunityVo, HttpSession session) {
+		businessOpportunityVo = businessOpportunityVoService.selectBusinessOpportunityVoTaskVoFeedbackVoByBusinessOpportunityVoId(businessOpportunityVo);
+		
+		if(businessOpportunityVo == null || businessOpportunityVo.getFeedbackVoList().size() == 0) return null;
+		
+		String imgBasePath = (String) session.getAttribute("imgFilePath");
+		String imgPath = (String) session.getAttribute("imgPath");
+		
+		for(int i=0; i<businessOpportunityVo.getFeedbackVoList().size(); i++) {
+			File file = new File(imgBasePath + businessOpportunityVo.getFeedbackVoList().get(i).getEmployeeVo().getEmployeeId() + ".png");
+			boolean exists = file.exists();
+			if(exists) {
+				businessOpportunityVo.getFeedbackVoList().get(i).getEmployeeVo()
+				.setEmployeeImgPath(imgPath + businessOpportunityVo.getFeedbackVoList().get(i).getEmployeeVo().getEmployeeId() + ".png");;
+			}else {
+				businessOpportunityVo.getFeedbackVoList().get(i).getEmployeeVo()
+				.setEmployeeImgPath(imgPath + "no_image.png");;
+			}
+		}
+		
+		return businessOpportunityVo;
+	}
+	
+	
+	@RequestMapping(value="getbusinessOpportunitysAllTask/{businessOpportunityIdTask}")
+	@ResponseBody
+	private String getbusinessOpportunitysAllTask(@PathVariable(value="businessOpportunityIdTask") String businessOpportunityIdTask , TaskVo taskVo, HttpSession session) {
+		taskVo.setBusinessOpportunityIdTask(businessOpportunityIdTask);
+		List<TaskVo> opportunitysAllTask = taskVoService.selectBusinessOpportunitysAllTask(taskVo);
+		taskVo = null;
+		StringBuilder dataArrayString = new StringBuilder();
+		if(opportunitysAllTask.size() == 0) {
+			dataArrayString.append("{").append("\"data\": []}");
+			return dataArrayString.toString();
+		}
+		dataArrayString.append("{").append("\"data\": [");
+		
+		for(int i=0; i<opportunitysAllTask.size(); i++) {
+			taskVo = opportunitysAllTask.get(i);
+			dataArrayString
+			.append("[")
+			.append("\""+ taskVo.getTaskContent() +"\"")
+			.append(",")
+			.append("\""+ StringToTimestamp.fromLongToString(taskVo.getTaskReportDate().getTime(), "yyyy-MM-dd") +"\"")
+			.append(",")
+			.append("\""+ StringToTimestamp.fromLongToString(taskVo.getTaskStartTime().getTime(), "yyyy-MM-dd")  + "\"")
+			.append(",")
+			.append("\""+ StringToTimestamp.fromLongToString(taskVo.getTaskEndTime().getTime(), "yyyy-MM-dd")  + "\"")
+			.append(",")
+			.append("\""+ taskVo.getSpEmployee().getEmployeeRealName() +"\"")
+			.append(",")
+			.append("\""+ taskVo.getReEmployee().getEmployeeRealName() +"\"");
+			if(taskVo.getTaskStop() == 0) {
+				dataArrayString
+				.append(",")
+				.append("\"<span class='label label-warning'>"+ "未完成" + "</span>\"");
+			}else if(taskVo.getTaskStop() == 1) {
+				dataArrayString
+				.append(",")
+				.append("\"<span class='label label-success'>"+ "已完成" + "</span>\"");
+			}else if(taskVo.getTaskStop() == -1) {
+				dataArrayString
+				.append(",")
+				.append("\"<span class='label label-danger'>"+ "无法完成" + "</span>\"");
+			}
+			dataArrayString
+			.append(",")
+			.append("\"<button class='btn btn-success'  onclick='taskDetailShow(\\\""+ taskVo.getTaskId() +"\\\",\\\""+ taskVo.getTaskContent() +"\\\"," + "\\\""+ StringToTimestamp.fromLongToString(taskVo.getTaskReportDate().getTime(), "yyyy-MM-dd") +"\\\"," + "\\\""+ StringToTimestamp.fromLongToString(taskVo.getTaskStartTime().getTime(), "yyyy-MM-dd")  + "\\\"," + "\\\""+ StringToTimestamp.fromLongToString(taskVo.getTaskEndTime().getTime(), "yyyy-MM-dd")  + "\\\"," + "\\\""+ taskVo.getSpEmployee().getEmployeeRealName() +"\\\"," + "\\\""+ taskVo.getReEmployee().getEmployeeRealName() +"\\\"," + "\\\""+ taskVo.getFollowEmployeeIdTask() +"\\\");' ><i class='icon-tags'></i></button>\"");
+			
+			dataArrayString
+			.append("],");
+		}
+		String substring = dataArrayString.substring(0, dataArrayString.toString().length()-1);
+		substring += 
+					"]" +
+						"}";
+		return substring;
+	}
 /*** /任务管理 /end ***/
 
+/***  外勤管理 begin ***/
+	
+	@RequestMapping(value="selectProcessVo")
+	@ResponseBody
+	private String selectProcessVo(ProcessVo processVo, HttpSession session) {
+		String employeeId = (String)session.getAttribute("employeeId");
+		EmployeeVo spOutEmployee = new EmployeeVo();
+		spOutEmployee.setEmployeeId(employeeId);
+		processVo.setSpOutEmployee(spOutEmployee);
+		
+		List<ProcessVo> ProcessVoList = processVoService.selectProcessVo(processVo);
+		StringBuilder dataArrayString = new StringBuilder();
+		if(ProcessVoList.size() == 0) {
+			dataArrayString.append("{").append("\"data\": []}");
+			return dataArrayString.toString();
+		}
+		dataArrayString.append("{").append("\"data\": [");
+		
+		for(int i=0; i<ProcessVoList.size(); i++) {
+			processVo = ProcessVoList.get(i);
+			dataArrayString
+			.append("[")
+			.append("\""+ processVo.getProcessContent() +"\"")
+			.append(",")
+			.append("\""+ processVo.getSpOutEmployee().getEmployeeRealName() +"\"")
+			.append(",")
+			.append("\""+ processVo.getReOutEmployee().getEmployeeRealName() +"\"")
+			.append(",")
+			.append("\""+ StringToTimestamp.fromLongToString(processVo.getProcessStartTime().getTime(), "yyyy/MM/dd HH:mm") +"\"")
+			.append(",")
+			.append("\""+ StringToTimestamp.fromLongToString(processVo.getProcessEndTime().getTime(), "yyyy/MM/dd HH:mm")  + "\"");
+			if(processVo.getProcessState() == 0) {
+				dataArrayString
+				.append(",")
+				.append("\"<span class='label label-warning'>"+ "等待审核" + "</span>\"");
+			}else if(processVo.getProcessState() == 1) {
+				dataArrayString
+				.append(",")
+				.append("\"<span class='label label-success'>"+ "审核通过" + "</span>\"");
+			}else if(processVo.getProcessState() == -1) {
+				dataArrayString
+				.append(",")
+				.append("\"<span class='label label-danger'>"+ "未通过审核" + "</span>\"");
+			}
+//			dataArrayString
+//			.append(",")
+//			.append("\"<button class='btn btn-success'  onclick='takeBackProcess(\\\""+ processVo.getProcessId() +"\\\");' ><i class='icon-tags'></i></button>\"");
+			
+			dataArrayString
+			.append("],");
+		}
+		String substring = dataArrayString.substring(0, dataArrayString.toString().length()-1);
+		substring += 
+					"]" +
+						"}";
+		return substring;
+	}
+	
+	/**
+	 * 获取当前用户信息
+	 * @param employeeVo
+	 * @return
+	 */
+	@RequestMapping(value="getUserInfos")
+	@ResponseBody
+	private EmployeeVo getUserInfos(HttpSession session) {
+		String employeeId = (String)session.getAttribute("employeeId");
+		EmployeeVo employeeVo = new EmployeeVo();
+		employeeVo.setEmployeeId(employeeId);
+		employeeVo = employeeVoService.getOneEmployeeVo(employeeVo);
+		return employeeVo;
+	}
+	
+	/**
+	 * 获取审批人信息
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="getApproverList")
+	@ResponseBody
+	private List<EmployeeVo> getApproverList(HttpSession session) {
+		String departmentIdEmployee = (String)session.getAttribute("departmentIdEmployee");
+		EmployeeVo employeeVo = new EmployeeVo();
+		employeeVo.setDepartmentIdEmployee(departmentIdEmployee);
+		employeeVo.setUserroleIdEmployee("5e8d627f-0987-11e7-b918-28d2444b860a");
+		List<EmployeeVo> approverList = employeeVoService.selectForNimble(employeeVo);
+		if(approverList.size() == 0) {
+			EmployeeVo employeeVo2 = new EmployeeVo();
+			employeeVo2.setUserroleIdEmployee("6566dff0-0987-11e7-b918-28d2444b860a");
+			approverList = employeeVoService.selectForNimble(employeeVo2);
+		}
+		return approverList;
+	}
+	
+	/**
+	 * 添加申请
+	 * @param processVo
+	 * @return
+	 */
+	@RequestMapping(value="addProcessVo")
+	@ResponseBody
+	private Infos addProcessVo(ProcessVo processVo) {
+		processVo.setProcessId(UUID.randomUUID().toString());
+		processVo.setProcessState(0);
+		Infos infos = processVoService.insertProcess(processVo);
+		return infos;
+	}
+	
+	
+	@RequestMapping(value="selectProcessVoApprove")
+	@ResponseBody
+	private String selectProcessVoApprove(ProcessVo processVo, HttpSession session) {
+		String employeeId = (String)session.getAttribute("employeeId");
+		EmployeeVo reOutEmployee = new EmployeeVo();
+		reOutEmployee.setEmployeeId(employeeId);
+		processVo.setReOutEmployee(reOutEmployee);
+		
+		List<ProcessVo> ProcessVoList = processVoService.selectProcessVo(processVo);
+		StringBuilder dataArrayString = new StringBuilder();
+		if(ProcessVoList.size() == 0) {
+			dataArrayString.append("{").append("\"data\": []}");
+			return dataArrayString.toString();
+		}
+		dataArrayString.append("{").append("\"data\": [");
+		
+		for(int i=0; i<ProcessVoList.size(); i++) {
+			processVo = ProcessVoList.get(i);
+			dataArrayString
+			.append("[")
+			.append("\""+ processVo.getProcessContent() +"\"")
+			.append(",")
+			.append("\""+ processVo.getSpOutEmployee().getEmployeeRealName() +"\"")
+			.append(",")
+			.append("\""+ processVo.getReOutEmployee().getEmployeeRealName() +"\"")
+			.append(",")
+			.append("\""+ StringToTimestamp.fromLongToString(processVo.getProcessStartTime().getTime(), "yyyy/MM/dd HH:mm") +"\"")
+			.append(",")
+			.append("\""+ StringToTimestamp.fromLongToString(processVo.getProcessEndTime().getTime(), "yyyy/MM/dd HH:mm")  + "\"");
+			if(processVo.getProcessState() == 0) {
+				dataArrayString
+				.append(",")
+				.append("\"<span class='label label-warning'>"+ "等待审核" + "</span>\"");
+			}else if(processVo.getProcessState() == 1) {
+				dataArrayString
+				.append(",")
+				.append("\"<span class='label label-success'>"+ "审核通过" + "</span>\"");
+			}else if(processVo.getProcessState() == -1) {
+				dataArrayString
+				.append(",")
+				.append("\"<span class='label label-danger'>"+ "未通过审核" + "</span>\"");
+			}
+			if(processVo.getProcessState() == 0) {
+				dataArrayString
+				.append(",")
+				.append("\"<button class='btn btn-success'  onclick='processOkResult(\\\""+ processVo.getProcessId() +"\\\");' ><i class='icon-ok'></i></button>")
+				.append("<button class='btn btn-danger'  onclick='processTrashResult(\\\""+ processVo.getProcessId() +"\\\");' ><i class='icon-trash'></i></button>\"");
+			}else {
+				dataArrayString
+				.append(",")
+				.append("\"\"");
+			}
+			dataArrayString
+			.append("],");
+		}
+		String substring = dataArrayString.substring(0, dataArrayString.toString().length()-1);
+		substring += 
+					"]" +
+						"}";
+		return substring;
+	}
+	
+	/**
+	 * 更新申请
+	 * @param processVo
+	 * @return
+	 */
+	@RequestMapping(value="updateProcessVo")
+	@ResponseBody
+	private Infos updateProcessVo(ProcessVo processVo) {
+		Infos infos = processVoService.updateProcess(processVo);
+		return infos;
+	}
+	
+	/**
+	 * 出勤统计
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="selectProcessVoForCalendar")
+	@ResponseBody
+	private List<CalendarInfos> selectProcessVoForCalendar(ProcessVo processVo , HttpSession session) {
+		String employeeId = (String)session.getAttribute("employeeId");
+		String departmentIdEmployee = (String)session.getAttribute("departmentIdEmployee");
+		String userroleIdEmployee = (String)session.getAttribute("userroleIdEmployee");
+
+		List<ProcessVo> processVoList = null;
+		switch(userroleIdEmployee) {
+		case "10988d26-0986-11e7-b918-28d2444b860a" :	//管理员
+			processVoList = processVoService.selectProcessVo(processVo);
+			break;
+		case "6566dff0-0987-11e7-b918-28d2444b860a" :
+			processVoList = processVoService.selectProcessVo(processVo);
+			break;
+		case "5e8d627f-0987-11e7-b918-28d2444b860a" : 
+			EmployeeVo reOutEmployee = new EmployeeVo();
+			reOutEmployee.setDepartmentIdEmployee(departmentIdEmployee);
+			processVo.setReOutEmployee(reOutEmployee);
+			processVoList = processVoService.selectProcessVo(processVo);
+			break;
+		case "57695387-0987-11e7-b918-28d2444b860a" :
+			EmployeeVo spOutEmployee = new EmployeeVo();
+			spOutEmployee.setEmployeeId(employeeId);
+			processVo.setSpOutEmployee(spOutEmployee);
+			processVoList = processVoService.selectProcessVo(processVo);
+			break;
+		}
+		
+		if(processVoList.size() == 0) return null;
+		List<CalendarInfos> calendarInfosList = new ArrayList<CalendarInfos>();
+		for(int i=0; i<processVoList.size(); i++) {
+			ProcessVo processVo2 = processVoList.get(i);
+			CalendarInfos calendarInfos = new CalendarInfos();
+			calendarInfos.setTitle(processVo2.getProcessContent() + "(" +  processVo2.getSpOutEmployee().getEmployeeRealName() +")");
+			
+			Timestamp processStartTime = processVo2.getProcessStartTime();
+			Timestamp processEndTime = processVo2.getProcessEndTime();
+			Calendar calendar = Calendar.getInstance();
+			
+			calendar.setTime(new Date(processStartTime.getTime()));
+			calendarInfos.setStartY(calendar.get(Calendar.YEAR));
+			calendarInfos.setStartM(calendar.get(Calendar.MONTH) + 1);
+			calendarInfos.setStartD(calendar.get(Calendar.DAY_OF_MONTH));
+			calendarInfos.setStartH(calendar.get(Calendar.HOUR_OF_DAY));
+			calendarInfos.setStartI(calendar.get(Calendar.MINUTE));
+			
+			calendar.setTime(new Date(processEndTime.getTime()));
+			calendarInfos.setEndY(calendar.get(Calendar.YEAR));
+			calendarInfos.setEndM(calendar.get(Calendar.MONTH) + 1);
+			calendarInfos.setEndD(calendar.get(Calendar.DAY_OF_MONTH));
+			calendarInfos.setEndH(calendar.get(Calendar.HOUR_OF_DAY));
+			calendarInfos.setEndI(calendar.get(Calendar.MINUTE));
+			
+			calendarInfosList.add(calendarInfos);
+		}
+		return calendarInfosList;
+	}
+	
+	/**
+	 * 根据主键获取出勤信息
+	 * @param processVo
+	 * @return
+	 */
+	@RequestMapping(value="getProcessVoByProcessVoId")
+	@ResponseBody
+	public ProcessVo getProcessVoByProcessVoId(ProcessVo processVo) {
+		List<ProcessVo> processVoList = processVoService.selectProcessVo(processVo);
+		if(processVoList.size() == 0) return null;
+		if(processVoList.get(0).getProcessId() != null) return processVoList.get(0);
+		return null;
+	}
+	
+/***  /外勤管理 /end ***/
+	
+/***  商机分析 begin ***/
+	
+	/**
+	 * 商机分析表格
+	 * @param businessOpportunityVo
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="selectForAnalyse")
+	@ResponseBody
+	private String selectForAnalyse(HttpSession session) {
+		String employeeId = (String)session.getAttribute("employeeId");
+		String departmentIdEmployee = (String)session.getAttribute("departmentIdEmployee");
+		String userroleIdEmployee = (String)session.getAttribute("userroleIdEmployee");
+
+		List<BusinessOpportunityVo> forAnalyse = null;
+		BusinessOpportunityVo businessOpportunityVo = new BusinessOpportunityVo();
+		CustomVo customVo = new CustomVo();
+		switch(userroleIdEmployee) {
+		case "10988d26-0986-11e7-b918-28d2444b860a" :	//管理员
+			forAnalyse = businessOpportunityVoService.selectBusinessOpportunityVoForAnalyse(null);
+			break;
+		case "6566dff0-0987-11e7-b918-28d2444b860a" :	//总经理
+			forAnalyse = businessOpportunityVoService.selectBusinessOpportunityVoForAnalyse(null);
+			break;
+		case "5e8d627f-0987-11e7-b918-28d2444b860a" : 	//部门经理
+			customVo.setDepartmentId(departmentIdEmployee);
+			businessOpportunityVo.setCustomVo(customVo);
+			forAnalyse = businessOpportunityVoService.selectBusinessOpportunityVoForAnalyse(businessOpportunityVo);
+			break;
+		case "57695387-0987-11e7-b918-28d2444b860a" :	//销售人员
+			customVo.setFollowEmployeeId(employeeId);
+			businessOpportunityVo.setCustomVo(customVo);
+			forAnalyse = businessOpportunityVoService.selectBusinessOpportunityVoForAnalyse(businessOpportunityVo);
+			break;
+		}
+		
+		StringBuilder dataArrayString = new StringBuilder();
+		if(forAnalyse.size() == 0) {
+			dataArrayString.append("{").append("\"data\": []}");
+			return dataArrayString.toString();
+		}
+		dataArrayString.append("{").append("\"data\": [");
+		
+		for(int i=0; i<forAnalyse.size(); i++) {
+			businessOpportunityVo = forAnalyse.get(i);
+			dataArrayString
+			.append("[")
+			.append("\""+ businessOpportunityVo.getCustomVo().getCustomName() +"\"")
+			.append(",")
+			.append("\""+ businessOpportunityVo.getCustomVo().getCustomRankVo().getCustomRankName() +"\"")
+			.append(",")
+			.append("\""+ businessOpportunityVo.getProductVo().getProductNum() +"\"")
+			.append(",")
+			.append("\""+ businessOpportunityVo.getProductVo().getProductName() +"\"")
+			.append(",")
+			.append("\""+ businessOpportunityVo.getPreSalesAmount() +"\"")
+			.append(",")
+			.append("\""+ StringToTimestamp.fromLongToString(businessOpportunityVo.getPreDealTime().getTime(), "yyyy/MM/dd")  +"\"")
+			.append(",")
+			.append("\""+  businessOpportunityVo.getSalesStageVo().getSalesStageName()  +"\"")
+			.append(",");
+			
+			String analyseRatio = Analyse.AnalyseRatio(businessOpportunityVo);
+			dataArrayString
+			.append("\""+  analyseRatio  +"\"")
+			.append(",");
+			
+			dataArrayString
+			.append("\"<button class='btn btn-success'  onclick='showAnalyse(\\\""+ businessOpportunityVo.getBusinessOpportunityId() +"\\\");' ><i class='icon-ok'></i></button>\"")
+			.append("],");
+		}
+		String substring = dataArrayString.substring(0, dataArrayString.toString().length()-1);
+		substring += 
+					"]" +
+						"}";
+		return substring;
+	}
+	
+	
+	@RequestMapping(value="selectForChar")
+	@ResponseBody
+	private CharData selectForChar(BusinessOpportunityVo businessOpportunityVo) {
+		List<BusinessOpportunityVo> BusinessOpportunityVoList = businessOpportunityVoService.selectBusinessOpportunityVoForAnalyse(businessOpportunityVo);
+		if(BusinessOpportunityVoList.size() == 0) return null;
+		businessOpportunityVo = BusinessOpportunityVoList.get(0);
+
+		CharData charData = new CharData();
+		LineCharData lineCharData = Analyse.getLineCharData(businessOpportunityVo);
+		charData.setLineCharData(lineCharData);
+		
+		List<PieChar> pieCharList = charData.getPieCharList();
+		PieChar pieChar = new PieChar();
+		pieChar.setName("产品价格");
+		pieChar.setValue(businessOpportunityVo.getProductVo().getProductPrice());
+		pieCharList.add(pieChar);
+		
+		PieChar pieChar2 = new PieChar();
+		pieChar2.setName("预计出售价格");
+		pieChar2.setValue(businessOpportunityVo.getPreSalesAmount());
+		pieCharList.add(pieChar2);
+		
+		return charData;
+	}
+/***  /商机分析 /end ***/
 }

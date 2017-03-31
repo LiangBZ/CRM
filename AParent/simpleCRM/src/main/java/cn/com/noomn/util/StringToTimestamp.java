@@ -35,12 +35,4 @@ public class StringToTimestamp {
 		String formatDate = simpleDateFormat.format(new Date(timestamp));
 		return formatDate;
 	}
-	
-	public static void main(String[] args) {
-		Long longTime = StringToTimestamp.formStringToLong("2017-03-22", "yyyy-mm-ss");
-		System.out.println(longTime);
-		
-		String stringDate = StringToTimestamp.fromLongToString(longTime, "yyyy-mm-ss");
-		System.out.println(stringDate );
-	}
 }

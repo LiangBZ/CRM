@@ -303,7 +303,7 @@
 						<div class="control-group">
 							<label class="control-label">手机</label>
 							<div class="controls">
-								<input name="employeePhone" data-mask="99999999999" required type="text" class="span6" /> <span class="help-inline">请填写手机号码</span>
+								<input name="employeePhone" data-mask="99999999999" required type="text" class="span6" />
 							</div>
 						</div>
 

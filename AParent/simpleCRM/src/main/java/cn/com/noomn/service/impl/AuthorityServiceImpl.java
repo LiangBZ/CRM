@@ -87,37 +87,101 @@ public class AuthorityServiceImpl implements AuthorityService {
 	public List<AuthorityVo> getAllAuthorityManager(UserroleAuthorityVo userroleAuthorityVo) {
 		String userroleId = userroleAuthorityVo.getUserroleId();
 		List<AuthorityVo> authorityVoList = new ArrayList<AuthorityVo>();
+		AuthorityVo authorityVo = null;
+		String[] notIn = null;
 		switch(userroleId) {
 		case "6566dff0-0987-11e7-b918-28d2444b860a":	//总经理
-			AuthorityVo authorityVo = new AuthorityVo();
-			authorityVo.setAuthorityId("8699fb77-0ace-11e7-a1cf-28d2444b860a");
-			authorityVoList.add(authorityVo);
-			AuthorityVo authorityVo8 = new AuthorityVo();
-			authorityVo8.setAuthorityId("fb9ccbab-0ac3-11e7-991c-28d2444b860a");
-			authorityVoList.add(authorityVo8);
+			notIn = new String[]{
+					"8699fb77-0ace-11e7-a1cf-28d2444b860a", //管理员职务权限修改
+					"fb9ccbab-0ac3-11e7-991c-28d2444b860a", //修改总经理权限
+					"b7b79e68-0beb-11e7-9e9d-28d2444b860a",	//添加总经理
+					"2ff28e74-0c0c-11e7-9e9d-28d2444b860a",	//管理员角色
+					"8ee8e7eb-0ca9-11e7-9e9d-28d2444b860a",	//添加产品
+					"523c4eee-0d3b-11e7-9e9d-28d2444b860a", //编辑产品
+					"06765f5e-0f9e-11e7-8663-28d2444b860a",	//发布任务
+					"7584310e-1030-11e7-8663-28d2444b860a",	//收到的任务
+					"769c7965-1394-11e7-aa71-28d2444b860a"	//编辑任务
+					};	
+			for(int i=0; i<notIn.length; i++) {
+				authorityVo = new AuthorityVo();
+				authorityVo.setAuthorityId(notIn[i]);
+				authorityVoList.add(authorityVo);
+			}
 			break;
+//			AuthorityVo authorityVo = new AuthorityVo();
+//			authorityVo.setAuthorityId("8699fb77-0ace-11e7-a1cf-28d2444b860a");
+//			authorityVoList.add(authorityVo);
+//			AuthorityVo authorityVo8 = new AuthorityVo();
+//			authorityVo8.setAuthorityId("fb9ccbab-0ac3-11e7-991c-28d2444b860a");
+//			authorityVoList.add(authorityVo8);
+//			AuthorityVo authorityVo9 = new AuthorityVo();
+//			authorityVo9.setAuthorityId("8d1bacfa-0ac3-11e7-991c-28d2444b860a");
+//			authorityVoList.add(authorityVo9);
+//			break;
 		case "5e8d627f-0987-11e7-b918-28d2444b860a":	//部门经理
-			AuthorityVo authorityVo2 = new AuthorityVo();
-			authorityVo2.setAuthorityId("8d1bacfa-0ac3-11e7-991c-28d2444b860a");
-			authorityVoList.add(authorityVo2);
-			AuthorityVo authorityVo3 = new AuthorityVo();
-			authorityVo3.setAuthorityId("8699fb77-0ace-11e7-a1cf-28d2444b860a");
-			authorityVoList.add(authorityVo3);
-			AuthorityVo authorityVo4 = new AuthorityVo();
-			authorityVo4.setAuthorityId("fb9ccbab-0ac3-11e7-991c-28d2444b860a");
-			authorityVoList.add(authorityVo4);
-			break;	
+			notIn = new String[]{
+					"346093a3-0a3d-11e7-8d42-28d2444b860a", //添加部门
+					"4d8a6d36-0a3d-11e7-8d42-28d2444b860a", //编辑部门
+					"6fb1f7c9-0a3d-11e7-8d42-28d2444b860a", //删除部门 
+					"8d1bacfa-0ac3-11e7-991c-28d2444b860a", //总经理职务权限
+					"8699fb77-0ace-11e7-a1cf-28d2444b860a",	//管理员职务权限
+					"fb9ccbab-0ac3-11e7-991c-28d2444b860a",	//修改总经理权限
+					"b7b79e68-0beb-11e7-9e9d-28d2444b860a",	//添加总经理
+					"2ff28e74-0c0c-11e7-9e9d-28d2444b860a",	//管理员角色
+					"72621594-0d83-11e7-9e9d-28d2444b860a", //选择客户所属部门
+					"7584310e-1030-11e7-8663-28d2444b860a", //查看已经收到的任务
+					};	
+			for(int i=0; i<notIn.length; i++) {
+				authorityVo = new AuthorityVo();
+				authorityVo.setAuthorityId(notIn[i]);
+				authorityVoList.add(authorityVo);
+			}
+			break;
+//			AuthorityVo authorityVo2 = new AuthorityVo();
+//			authorityVo2.setAuthorityId("8d1bacfa-0ac3-11e7-991c-28d2444b860a");
+//			authorityVoList.add(authorityVo2);
+//			AuthorityVo authorityVo3 = new AuthorityVo();
+//			authorityVo3.setAuthorityId("8699fb77-0ace-11e7-a1cf-28d2444b860a");
+//			authorityVoList.add(authorityVo3);
+//			AuthorityVo authorityVo4 = new AuthorityVo();
+//			authorityVo4.setAuthorityId("fb9ccbab-0ac3-11e7-991c-28d2444b860a");
+//			authorityVoList.add(authorityVo4);
+//			break;	
 		case "57695387-0987-11e7-b918-28d2444b860a":	//销售人员
-			AuthorityVo authorityVo5 = new AuthorityVo();
-			authorityVo5.setAuthorityId("8d1bacfa-0ac3-11e7-991c-28d2444b860a");
-			authorityVoList.add(authorityVo5);
-			AuthorityVo authorityVo6 = new AuthorityVo();
-			authorityVo6.setAuthorityId("8699fb77-0ace-11e7-a1cf-28d2444b860a");
-			authorityVoList.add(authorityVo6);
-			AuthorityVo authorityVo7 = new AuthorityVo();
-			authorityVo7.setAuthorityId("fb9ccbab-0ac3-11e7-991c-28d2444b860a");
-			authorityVoList.add(authorityVo7);
-			break;	
+			notIn = new String[]{
+					"346093a3-0a3d-11e7-8d42-28d2444b860a", //添加部门
+					"4d8a6d36-0a3d-11e7-8d42-28d2444b860a", //编辑部门
+					"6fb1f7c9-0a3d-11e7-8d42-28d2444b860a", //删除部门 
+					"8d1bacfa-0ac3-11e7-991c-28d2444b860a", //总经理职务权限
+					"8699fb77-0ace-11e7-a1cf-28d2444b860a",	//管理员职务权限
+					"fb9ccbab-0ac3-11e7-991c-28d2444b860a",	//修改总经理权限
+					"b3184bfb-0bfc-11e7-9e9d-28d2444b860a",	//员工入职
+					"b7b79e68-0beb-11e7-9e9d-28d2444b860a",	//添加总经理
+					"2ff28e74-0c0c-11e7-9e9d-28d2444b860a",	//管理员角色
+					"8ee8e7eb-0ca9-11e7-9e9d-28d2444b860a",	//添加产品
+					"523c4eee-0d3b-11e7-9e9d-28d2444b860a", //编辑产品
+					"72621594-0d83-11e7-9e9d-28d2444b860a", //选择客户所属部门
+					"06765f5e-0f9e-11e7-8663-28d2444b860a",	//发布任务
+					"96151773-102f-11e7-8663-28d2444b860a",	//查看已经发布的任务
+					"769c7965-1394-11e7-aa71-28d2444b860a",	//编辑任务
+					"96dd987b-1138-11e7-8663-28d2444b860a"	//外勤审批
+					};	
+			for(int i=0; i<notIn.length; i++) {
+				authorityVo = new AuthorityVo();
+				authorityVo.setAuthorityId(notIn[i]);
+				authorityVoList.add(authorityVo);
+			}
+			break;
+//			AuthorityVo authorityVo5 = new AuthorityVo();
+//			authorityVo5.setAuthorityId("8d1bacfa-0ac3-11e7-991c-28d2444b860a");
+//			authorityVoList.add(authorityVo5);
+//			AuthorityVo authorityVo6 = new AuthorityVo();
+//			authorityVo6.setAuthorityId("8699fb77-0ace-11e7-a1cf-28d2444b860a");
+//			authorityVoList.add(authorityVo6);
+//			AuthorityVo authorityVo7 = new AuthorityVo();
+//			authorityVo7.setAuthorityId("fb9ccbab-0ac3-11e7-991c-28d2444b860a");
+//			authorityVoList.add(authorityVo7);
+//			break;	
 		}
 		List<AuthorityVo> authorityManager = authorityVoMapper.getAllAuthorityManager(authorityVoList);
 		

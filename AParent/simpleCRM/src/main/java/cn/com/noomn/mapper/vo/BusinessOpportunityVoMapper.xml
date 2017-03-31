@@ -28,6 +28,36 @@
     <association property="salesStageVo" javaType="cn.com.noomn.vo.SalesStageVo" resultMap="cn.com.noomn.mapper.vo.SalesStageVoMapper.BaseResultMap"></association>
   </resultMap>
   
+  <resultMap id="selectFeedbackVoByBusinessOpportunityVoId" type="cn.com.noomn.vo.BusinessOpportunityVo">
+     <id column="BUSINESS_OPPORTUNITY_ID" jdbcType="VARCHAR" property="businessOpportunityId" />
+    <result column="CUSTOM_ID" jdbcType="VARCHAR" property="customId" />
+    <result column="SALES_STAGE_ID" jdbcType="VARCHAR" property="salesStageId" />
+    <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <result column="PRE_SALES_AMOUNT" jdbcType="DECIMAL" property="preSalesAmount" />
+    <result column="PRE_DEAL_TIME" jdbcType="TIMESTAMP" property="preDealTime" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    
+    <collection property="feedbackVoList" ofType="cn.com.noomn.vo.FeedbackVo" resultMap="cn.com.noomn.mapper.vo.FeedbackVoMapper.FeedbackVoByTaskIdResultMap"></collection>
+  </resultMap>
+  
+  
+  
+   <resultMap id="selectBusinessOpportunityVoForAnalyseResultMap" type="cn.com.noomn.vo.BusinessOpportunityVo">
+     <id column="BUSINESS_OPPORTUNITY_ID" jdbcType="VARCHAR" property="businessOpportunityId" />
+    <result column="CUSTOM_ID" jdbcType="VARCHAR" property="customId" />
+    <result column="SALES_STAGE_ID" jdbcType="VARCHAR" property="salesStageId" />
+    <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <result column="PRE_SALES_AMOUNT" jdbcType="DECIMAL" property="preSalesAmount" />
+    <result column="PRE_DEAL_TIME" jdbcType="TIMESTAMP" property="preDealTime" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    
+    <association property="customVo" javaType="cn.com.noomn.vo.CustomVo" resultMap="cn.com.noomn.mapper.vo.CustomVoMapper.BusinessOpportunityVoByFollwerResult"></association>
+    <association property="productVo" javaType="cn.com.noomn.vo.ProductVo" resultMap="cn.com.noomn.mapper.vo.ProductVoMapper.BaseResultMap"></association>
+    <association property="salesStageVo" javaType="cn.com.noomn.vo.SalesStageVo" resultMap="cn.com.noomn.mapper.vo.SalesStageVoMapper.BaseResultMap"></association>
+    <collection property="taskVoList" ofType="cn.com.noomn.vo.TaskVo" resultMap="cn.com.noomn.mapper.vo.TaskVoMapper.FeedbackResultMap"></collection>
+  </resultMap>
+  
+  
   
   <select id="selectBusinessOpportunityVoByFollwer" parameterType="cn.com.noomn.vo.CustomVo" resultMap="selectBusinessOpportunityVoByFollwerResultMap">
   	select 
@@ -256,5 +286,216 @@
 		</where>
   </select>
   
+  <select id="selectFeedbackVoByBusinessOpportunityVoId" parameterType="cn.com.noomn.vo.BusinessOpportunityVo" resultMap="selectFeedbackVoByBusinessOpportunityVoId">
+  	select 
+	business_opportunity.BUSINESS_OPPORTUNITY_ID,
+	feedback.FEEDBACK_ID,
+	feedback.FEEDBACK_TIME,
+	feedback.FOLLOW_EMPLOYEE_ID_FEEDBACK,
+	feedback.FEEDBACK_DETAIL,
+	employee.DEPARTMENT_ID_EMPLOYEE,
+	employee.EMPLOYEE_EMAIL,
+	employee.EMPLOYEE_ID,
+	employee.EMPLOYEE_NUMBER,
+	employee.EMPLOYEE_PHONE,
+	employee.EMPLOYEE_REAL_NAME,
+	employee.EMPLOYEE_USERNAME,
+	employee.USERROLE_ID_EMPLOYEE
+	from 
+	business_opportunity 
+	JOIN task on business_opportunity.BUSINESS_OPPORTUNITY_ID = task.BUSINESS_OPPORTUNITY_ID_TASK 
+	join feedback on task.TASK_ID = feedback.TASK_ID
+	JOIN employee on feedback.FOLLOW_EMPLOYEE_ID_FEEDBACK = EMPLOYEE_ID
+	<where>
+		<if test="businessOpportunityId != null">
+			and business_opportunity.BUSINESS_OPPORTUNITY_ID = #{businessOpportunityId,jdbcType=VARCHAR}
+		</if>
+	</where>
+	order by feedback.FEEDBACK_TIME desc
+  </select>
   
+  <select id="selectBusinessOpportunityVoForAnalyse" parameterType="cn.com.noomn.vo.BusinessOpportunityVo" resultMap="selectBusinessOpportunityVoForAnalyseResultMap">
+  	select 
+	h.SALES_STAGE_NAME,
+	h.RATE_OF_PROGRESS,
+	g.CUSTOM_ID,
+	g.BUSINESS_OPPORTUNITY_ID,
+	g.PRE_DEAL_TIME,
+	g.PRE_SALES_AMOUNT,
+	g.PRODUCT_ID,
+	g.REMARK,
+	g.SALES_STAGE_ID,
+	g.PRODUCT_DETAIL,
+	g.PRODUCT_NAME,
+	g.PRODUCT_NUM,
+	g.PRODUCT_PDF,
+	g.PRODUCT_PRICE,
+	g.CUSTOM_ADDRESS,
+	g.CUSTOM_LINKMAN_NAME,
+	g.CUSTOM_LINKMAN_PHONE,
+	g.CUSTOM_LINKMAN_POST,
+	g.CUSTOM_LINKMAN_REMARK,
+	g.CUSTOM_NAME,
+	g.CUSTOM_RANK_ID,
+	g.CUSTOM_STATE_ID,
+	g.DEPARTMENT_ID,
+	g.FOLLOW_EMPLOYEE_ID ,
+	g.BUSINESS_OPPORTUNITY_ID_TASK,
+	g.FOLLOW_EMPLOYEE_ID_TASK,
+	g.SPONSOR_ID_TASK,
+	g.TASK_CONTENT,
+	g.TASK_END_TIME,
+	g.TASK_ID,
+	g.TASK_REPORT_DATE,
+	g.TASK_START_TIME,
+	g.TASK_STOP,
+	g.CUSTOM_RANK_NAME,
+	g.FEEDBACK_DETAIL,
+	g.FEEDBACK_ID,
+	g.FEEDBACK_TIME,
+	g.FOLLOW_EMPLOYEE_ID_FEEDBACK
+	 from
+	(
+	select 
+	e.CUSTOM_ID,
+	e.BUSINESS_OPPORTUNITY_ID,
+	e.PRE_DEAL_TIME,
+	e.PRE_SALES_AMOUNT,
+	e.PRODUCT_ID,
+	e.REMARK,
+	e.SALES_STAGE_ID,
+	e.PRODUCT_DETAIL,
+	e.PRODUCT_NAME,
+	e.PRODUCT_NUM,
+	e.PRODUCT_PDF,
+	e.PRODUCT_PRICE,
+	e.CUSTOM_ADDRESS,
+	e.CUSTOM_LINKMAN_NAME,
+	e.CUSTOM_LINKMAN_PHONE,
+	e.CUSTOM_LINKMAN_POST,
+	e.CUSTOM_LINKMAN_REMARK,
+	e.CUSTOM_NAME,
+	e.CUSTOM_RANK_ID,
+	e.CUSTOM_STATE_ID,
+	e.DEPARTMENT_ID,
+	e.FOLLOW_EMPLOYEE_ID ,
+	e.BUSINESS_OPPORTUNITY_ID_TASK,
+	e.FOLLOW_EMPLOYEE_ID_TASK,
+	e.SPONSOR_ID_TASK,
+	e.TASK_CONTENT,
+	e.TASK_END_TIME,
+	e.TASK_ID,
+	e.TASK_REPORT_DATE,
+	e.TASK_START_TIME,
+	e.TASK_STOP,
+	e.CUSTOM_RANK_NAME,
+	f.FEEDBACK_DETAIL,
+	f.FEEDBACK_ID,
+	f.FEEDBACK_TIME,
+	f.FOLLOW_EMPLOYEE_ID_FEEDBACK
+	FROM
+	(
+	select 
+	c.CUSTOM_ID,
+	c.BUSINESS_OPPORTUNITY_ID,
+	c.PRE_DEAL_TIME,
+	c.PRE_SALES_AMOUNT,
+	c.PRODUCT_ID,
+	c.REMARK,
+	c.SALES_STAGE_ID,
+	c.PRODUCT_DETAIL,
+	c.PRODUCT_NAME,
+	c.PRODUCT_NUM,
+	c.PRODUCT_PDF,
+	c.PRODUCT_PRICE,
+	c.CUSTOM_ADDRESS,
+	c.CUSTOM_LINKMAN_NAME,
+	c.CUSTOM_LINKMAN_PHONE,
+	c.CUSTOM_LINKMAN_POST,
+	c.CUSTOM_LINKMAN_REMARK,
+	c.CUSTOM_NAME,
+	c.CUSTOM_RANK_ID,
+	c.CUSTOM_STATE_ID,
+	c.DEPARTMENT_ID,
+	c.FOLLOW_EMPLOYEE_ID ,
+	c.CUSTOM_RANK_NAME,
+	d.BUSINESS_OPPORTUNITY_ID_TASK,
+	d.FOLLOW_EMPLOYEE_ID_TASK,
+	d.SPONSOR_ID_TASK,
+	d.TASK_CONTENT,
+	d.TASK_END_TIME,
+	d.TASK_ID,
+	d.TASK_REPORT_DATE,
+	d.TASK_START_TIME,
+	d.TASK_STOP
+	from
+		(
+		select 
+		a.CUSTOM_ID,
+		a.BUSINESS_OPPORTUNITY_ID,
+		a.PRE_DEAL_TIME,
+		a.PRE_SALES_AMOUNT,
+		a.PRODUCT_ID,
+		a.REMARK,
+		a.SALES_STAGE_ID,
+		a.PRODUCT_DETAIL,
+		a.PRODUCT_NAME,
+		a.PRODUCT_NUM,
+		a.PRODUCT_PDF,
+		a.PRODUCT_PRICE,
+		b.CUSTOM_ADDRESS,
+		b.CUSTOM_LINKMAN_NAME,
+		b.CUSTOM_LINKMAN_PHONE,
+		b.CUSTOM_LINKMAN_POST,
+		b.CUSTOM_LINKMAN_REMARK,
+		b.CUSTOM_NAME,
+		b.CUSTOM_RANK_ID,
+		b.CUSTOM_STATE_ID,
+		b.DEPARTMENT_ID,
+		b.FOLLOW_EMPLOYEE_ID ,
+		custom_rank.CUSTOM_RANK_NAME
+		from 
+			(
+				select 
+				business_opportunity.CUSTOM_ID,
+				business_opportunity.BUSINESS_OPPORTUNITY_ID,
+				business_opportunity.PRE_DEAL_TIME,
+				business_opportunity.PRE_SALES_AMOUNT,
+				business_opportunity.PRODUCT_ID,
+				business_opportunity.REMARK,
+				business_opportunity.SALES_STAGE_ID,
+				product.PRODUCT_DETAIL,
+				product.PRODUCT_NAME,
+				product.PRODUCT_NUM,
+				product.PRODUCT_PDF,
+				product.PRODUCT_PRICE
+				FROM
+				business_opportunity join product on business_opportunity.PRODUCT_ID = product.PRODUCT_ID
+			) as a
+			join custom as b on a.CUSTOM_ID = b.CUSTOM_ID
+			left join custom_rank on b.CUSTOM_RANK_ID = custom_rank.CUSTOM_RANK_ID
+		) as c
+	left join task d on c.BUSINESS_OPPORTUNITY_ID = d.BUSINESS_OPPORTUNITY_ID_TASK
+	) as e 
+	left join feedback as f on e.TASK_ID = f.TASK_ID
+	) AS g
+	left join sales_stage as h
+	on g.SALES_STAGE_ID = h.SALES_STAGE_ID
+	<where>
+		<if test="customVo != null">
+			<if test="customVo.followEmployeeId != null">
+				and g.FOLLOW_EMPLOYEE_ID = #{customVo.followEmployeeId}
+			</if>
+		</if>
+		
+		<if test="customVo != null">
+			<if test="customVo.departmentId != null">
+				and g.DEPARTMENT_ID = #{customVo.departmentId}
+			</if>
+		</if>
+		<if test="businessOpportunityId != null">
+			and g.BUSINESS_OPPORTUNITY_ID = #{businessOpportunityId}
+		</if>
+	</where>
+  </select>
 </mapper>

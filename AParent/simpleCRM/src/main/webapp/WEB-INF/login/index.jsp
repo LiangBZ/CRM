@@ -32,13 +32,17 @@
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/Util/js/security.js"></script>
 	
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/Util/js/craftpip-jquery-confirm-e3e217e/css/jquery-confirm.css">
+	<script src="${pageContext.request.contextPath}/Util/js/craftpip-jquery-confirm-e3e217e/js/jquery-confirm.js"></script>
+	
+	
 	<!-- MyUtil.js -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/Util/js/util.js"></script>
 	
 	<!-- 安全校验 -->
 	<%@ include file="/WEB-INF/Util/jsp/securityRSA.jsp" %>
 	<!-- 模态弹出框 -->
-	<%@ include file="/WEB-INF/Util/jsp/alertModal.jsp" %>
+	<%-- <%@ include file="/WEB-INF/Util/jsp/alertModal.jsp" %> --%>
 </head>
 <body class="login-layout">
 <div class="main-container">

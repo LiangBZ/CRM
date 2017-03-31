@@ -5,8 +5,6 @@ import java.sql.Timestamp;
 public class Process {
     private String processId;
 
-    private String taskIdProcess;
-
     private String processEmployeeId;
 
     private String processApprover;
@@ -14,8 +12,6 @@ public class Process {
     private String processContent;
 
     private Integer processState;
-
-    private Timestamp processApprovalDeadline;
 
     private Timestamp processStartTime;
 
@@ -27,14 +23,6 @@ public class Process {
 
     public void setProcessId(String processId) {
         this.processId = processId == null ? null : processId.trim();
-    }
-
-    public String getTaskIdProcess() {
-        return taskIdProcess;
-    }
-
-    public void setTaskIdProcess(String taskIdProcess) {
-        this.taskIdProcess = taskIdProcess == null ? null : taskIdProcess.trim();
     }
 
     public String getProcessEmployeeId() {
@@ -67,14 +55,6 @@ public class Process {
 
     public void setProcessState(Integer processState) {
         this.processState = processState;
-    }
-
-    public Timestamp getProcessApprovalDeadline() {
-        return processApprovalDeadline;
-    }
-
-    public void setProcessApprovalDeadline(Timestamp processApprovalDeadline) {
-        this.processApprovalDeadline = processApprovalDeadline;
     }
 
     public Timestamp getProcessStartTime() {

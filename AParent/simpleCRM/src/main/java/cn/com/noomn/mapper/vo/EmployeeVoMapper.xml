@@ -46,6 +46,36 @@
     <result column="SP_EMPLOYEE_USEFUL_TIME" jdbcType="TIMESTAMP" property="employeeUsefulTime" />
   </resultMap>
   
+  <resultMap id="spOut_ResultMap" type="cn.com.noomn.vo.EmployeeVo">
+    <id column="spOut_EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
+    <result column="spOut_DEPARTMENT_ID_EMPLOYEE" jdbcType="VARCHAR" property="departmentIdEmployee" />
+    <result column="spOut_USERROLE_ID_EMPLOYEE" jdbcType="VARCHAR" property="userroleIdEmployee" />
+    <result column="spOut_EMPLOYEE_USERNAME" jdbcType="VARCHAR" property="employeeUsername" />
+    <result column="spOut_EMPLOYEE_PASSWORD" jdbcType="VARCHAR" property="employeePassword" />
+    <result column="spOut_EMPLOYEE_NUMBER" jdbcType="VARCHAR" property="employeeNumber" />
+    <result column="spOut_EMPLOYEE_REAL_NAME" jdbcType="VARCHAR" property="employeeRealName" />
+    <result column="spOut_EMPLOYEE_EMAIL" jdbcType="VARCHAR" property="employeeEmail" />
+    <result column="spOut_EMPLOYEE_PHONE" jdbcType="VARCHAR" property="employeePhone" />
+    <result column="spOut_EMPLOYEE_INIT" jdbcType="INTEGER" property="employeeInit" />
+    <result column="spOut_EMPLOYEE_INSTRUCT" jdbcType="VARCHAR" property="employeeInstruct" />
+    <result column="spOut_EMPLOYEE_USEFUL_TIME" jdbcType="TIMESTAMP" property="employeeUsefulTime" />
+  </resultMap>
+  
+  <resultMap id="reOut_ResultMap" type="cn.com.noomn.vo.EmployeeVo">
+    <id column="reOut_EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
+    <result column="reOut_DEPARTMENT_ID_EMPLOYEE" jdbcType="VARCHAR" property="departmentIdEmployee" />
+    <result column="reOut_USERROLE_ID_EMPLOYEE" jdbcType="VARCHAR" property="userroleIdEmployee" />
+    <result column="reOut_EMPLOYEE_USERNAME" jdbcType="VARCHAR" property="employeeUsername" />
+    <result column="reOut_EMPLOYEE_PASSWORD" jdbcType="VARCHAR" property="employeePassword" />
+    <result column="reOut_EMPLOYEE_NUMBER" jdbcType="VARCHAR" property="employeeNumber" />
+    <result column="reOut_EMPLOYEE_REAL_NAME" jdbcType="VARCHAR" property="employeeRealName" />
+    <result column="reOut_EMPLOYEE_EMAIL" jdbcType="VARCHAR" property="employeeEmail" />
+    <result column="reOut_EMPLOYEE_PHONE" jdbcType="VARCHAR" property="employeePhone" />
+    <result column="reOut_EMPLOYEE_INIT" jdbcType="INTEGER" property="employeeInit" />
+    <result column="reOut_EMPLOYEE_INSTRUCT" jdbcType="VARCHAR" property="employeeInstruct" />
+    <result column="reOut_EMPLOYEE_USEFUL_TIME" jdbcType="TIMESTAMP" property="employeeUsefulTime" />
+  </resultMap>
+  
   <resultMap id="roleEmployeeDepartment" type="cn.com.noomn.vo.EmployeeVo">
     <id column="EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
     <result column="DEPARTMENT_ID_EMPLOYEE" jdbcType="VARCHAR" property="departmentIdEmployee" />

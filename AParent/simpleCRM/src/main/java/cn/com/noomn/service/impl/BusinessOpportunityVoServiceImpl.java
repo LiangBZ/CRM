@@ -75,4 +75,18 @@ public class BusinessOpportunityVoServiceImpl implements BusinessOpportunityVoSe
 		return businessOpportunityVo;
 	}
 
+	@Override
+	public BusinessOpportunityVo selectBusinessOpportunityVoTaskVoFeedbackVoByBusinessOpportunityVoId(
+			BusinessOpportunityVo businessOpportunityVo) {
+		businessOpportunityVo = businessOpportunityVoMapper.selectFeedbackVoByBusinessOpportunityVoId(businessOpportunityVo);
+		return businessOpportunityVo;
+	}
+
+	@Override
+	public List<BusinessOpportunityVo> selectBusinessOpportunityVoForAnalyse(
+			BusinessOpportunityVo businessOpportunityVo) {
+		List<BusinessOpportunityVo> analyseList = businessOpportunityVoMapper.selectBusinessOpportunityVoForAnalyse(businessOpportunityVo);
+		return analyseList;
+	}
+
 }

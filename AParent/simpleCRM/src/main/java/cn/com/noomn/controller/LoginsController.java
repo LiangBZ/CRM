@@ -21,6 +21,7 @@ import cn.com.noomn.service.UserroleAuthorityVoService;
 import cn.com.noomn.util.Infos;
 import cn.com.noomn.util.Message;
 import cn.com.noomn.util.RSAModel;
+import cn.com.noomn.util.WebsocketEndPoint;
 import cn.com.noomn.vo.EmployeeVo;
 import cn.com.noomn.vo.UserroleAuthorityVo;
 
@@ -35,6 +36,8 @@ public class LoginsController {
 	private LoginsService loginsService;
 	@Autowired
 	private UserroleAuthorityVoService userroleAuthorityVoService;
+	@Autowired
+	private WebsocketEndPoint websocketEndPoint;
 	
 	@ModelAttribute
 	private void getModel (
@@ -106,6 +109,7 @@ public class LoginsController {
 				userroleAuthorityVo.setUserroleId(employeeVo.getUserroleIdEmployee());
 				Map<String, String> authorityMap = userroleAuthorityVoService.selectAuthorityToMap(userroleAuthorityVo);
 				session.setAttribute("authorityMap", authorityMap);
+				
 				
 				return "mainBody/jsp/container";
 			}

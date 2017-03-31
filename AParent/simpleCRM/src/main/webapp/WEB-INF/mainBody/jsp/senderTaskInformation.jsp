@@ -15,6 +15,84 @@
 		</div>
 	</div>
 	
+	<!-- 查看任务 begin -->
+	<div class="row-fluid" data-task="senderTask">
+		<div class="span12">
+
+			<div class="widget green">
+				<div class="widget-title">
+					<h4>
+						<i class="icon-reorder"></i> 任务
+					</h4>
+				</div>
+				<div class="widget-body">
+					<table
+						class="table table-striped table-advance table-bordered table-hover"
+						data-task="senderTask">
+						<thead>
+							<th>任务内容</th>
+							<th>创建时间</th>
+							<th>开始日期</th>
+							<th>截止日期</th>
+							<th>创建人</th>
+							<th>执行者</th>
+							<th>状态</th>
+							<th>商机</th>
+							<c:if test="${authorityMap['769c7965-1394-11e7-aa71-28d2444b860a'] eq 1}">
+								<th>编辑</th>
+							</c:if>
+						</thead>
+						<tbody>
+							<tr class="odd gradex">
+								<th>第一次发布任务</th>
+								<td>2017-03-21</td>
+								<td>2017-03-21</td>
+								<td>2017-04-01</td>
+								<td>王五</td>
+								<td>李四</td>
+								<td>未完成</td>
+								<td style="width: 6%">
+									<button class="btn btn-success"
+										onclick="">
+										<i class="icon-tags"></i>
+									</button>
+								</td>
+								<td style="width: 6%">
+									<button class="btn btn-success"
+										onclick="">
+										<i class="icon-tags"></i>
+									</button>
+								</td>
+							</tr>
+							<tr class="odd gradex">
+								<th>第二次发布任务</th>
+								<td>2017-03-22</td>
+								<td>2017-03-22</td>
+								<td>2017-04-11</td>
+								<td>王五</td>
+								<td>张三</td>
+								<td>未完成</td>
+								<td style="width: 6%">
+									<button class="btn btn-success"
+										onclick="">
+										<i class="icon-tags"></i>
+									</button>
+								</td>
+								<td style="width: 6%">
+									<button class="btn btn-success"
+										onclick="">
+										<i class="icon-tags"></i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /查看任务 /end -->
+	
 	<!-- 编辑任务 begin -->
 	<div class="row-fluid" data-Task="editTask">
 		<div class="span12">
@@ -29,8 +107,7 @@
 				
 					<form style="margin-left:10px;" action="#" class="form-horizontal" data-Task="editTask" onsubmit="return false;">
 						
-						<input type="hidden" name="businessOpportunityIdTask" value="">
-						<input type="hidden" name="followEmployeeIdTask" value="">
+						<input type="hidden" name="taskId" value="">
 						
 						<div class="control-group">
 							<label class="control-label">任务内容(*)</label>
@@ -64,17 +141,97 @@
 				        </div>
 				        
 				        <div class="control-group">
+							<label class="control-label">状态(*)</label>
+							<div class="controls">
+								<select name="taskStop" required
+									class="chzn-select-deselect span4" >
+									<option value="-1">无法完成</option>
+									<option value="0">未完成</option>
+									<option value="1">已完成</option>
+								</select>
+							</div>
+						</div>
+				        
+				        <div class="control-group">
+							<label class="control-label">发起人</label>
+							<div class="controls">
+								<input type="text" name="spEmployeeRealName" class="span6" disabled> 
+							</div>
+						</div>
+				        
+				        <div class="control-group">
 							<label class="control-label">执行人员</label>
 							<div class="controls">
-								<input type="text" name="employeeRealName" class="span6" disabled> 
+								<input type="text" name="reEmployeeRealName" class="span6" disabled> 
 							</div>
 						</div>
 				        
 						<div class="form-actions">
 							<button type="submit" class="btn btn-success">保存</button>
-							<button type="button" class="btn">取消</button>
+							<button type="button" class="btn" onclick="refreshSenderTaskInfos();">取消</button>
 							<input type="reset" value="Reset" class="hidden"/>
 						</div>
+						
+						<!-- 时间轴 begin  -->
+						<div class="timeline-messages" data-timeLine="feedback">
+						
+							<div class="msg-time-chat">
+								<div class="message-body msg-in">
+									<span class="arrow"></span>
+									<div class="text">
+										<p class="attribution">
+											<a href="#" >Jhon Doe</a>
+											at 1:55pm, 13th April 2013
+										</p>
+										<p>Hello, How are you brother?</p>
+									</div>
+								</div>
+							</div>
+	
+							<div class="msg-time-chat">
+								<div class="message-body msg-out">
+									<span class="arrow"></span>
+									<div class="text">
+										<p class="attribution">
+											<a href="#">Jonathan Smith</a> 
+											at 2:01pm, 13th April 2013
+										</p>
+										<p>I'm Fine, Thank you. What about you? How is going on?</p>
+									</div>
+								</div>
+							</div>
+	
+	
+							<div class="msg-time-chat">
+								<div class="message-body msg-in">
+									<span class="arrow"></span>
+									<div class="text">
+										<p class="attribution">
+											<a href="#">Jhon Doe</a> 
+											at 2:03pm, 13th April 2013
+										</p>
+										<p>Yeah I'm fine too. Everything is going fine here.</p>
+									</div>
+								</div>
+							</div>
+	
+	
+							<div class="msg-time-chat">
+								<div class="message-body msg-out">
+									<span class="arrow"></span>
+									<div class="text">
+										<p class="attribution">
+											<a href="#">Jonathan Smith</a> 
+											at 2:05pm, 13th April 2013
+										</p>
+										<p>
+											well good to know that. anyway how much time you need to done your task?
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /时间轴 /end -->
 					</form>
 					
 				</div>
@@ -85,3 +242,9 @@
 	<!-- /编辑任务 /end -->
 
 </div>
+
+<script>
+	$(function() {
+		initSenderTaskInfo();
+	})
+</script>

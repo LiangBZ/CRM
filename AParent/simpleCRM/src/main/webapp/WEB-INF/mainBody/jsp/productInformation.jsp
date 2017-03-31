@@ -182,7 +182,7 @@
 							<div class="control-group">
 								<label class="control-label">描述</label>
 								<div class="controls">
-									<input name="productDetail" type="text" class="span6" disabled/>
+									<textarea name="productDetail" class="span6 ckeditor" rows="6" disabled/>
 								</div>
 							</div>
 		

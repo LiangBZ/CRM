@@ -1,4 +1,6 @@
 var projectURL="http://localhost:8080/simpleCRM/";
+var socketURL = 'ws://localhost:8080/simpleCRM/websocket';
+var webSocketInstance = null;
 
 function doNext(callback, _url, _data1, _data2) {
 	callback(_url, _data1, _data2);
@@ -7,20 +9,6 @@ function doNext(callback, _url, _data1, _data2) {
 function isTrue(isTrue) {
 	return isTrue;
 }
-
-
-/*function setConfirmModalTitleAndBody(title, body) {
-	$confirmModal = $('div[data-Modal="confirmModal"]');
-	$confirmModal.find('h4[data-modalPart="modalTitle"]').html(title);
-	$confirmModal.find('div[data-modalPart="modalBody"]').html(body);
-}*/
-
-/*function setAlertModalTitleAndBody(title, body) {
-	$alertModal = $('div[data-Modal="alertModal"]');
-	$alertModal.find('h4[data-modalPart="modalTitle"]').html(title);
-	$alertModal.find('div[data-modalPart="modalBody"]').html(body);
-}*/
-
 
 function setAlertModalTitleAndBody(title, body) {
 	$.alert({
@@ -161,6 +149,30 @@ function datetimeFormat_2(longTypeDate){
 
 
 /** /返回yyyy-MM-dd 00:00:00格式日期 /end **/
+/************************************************************/
+/** 格式化Date为 yyyy-MM-dd 00:00 begin **/
+Date.prototype.format = function(fmt) { 
+    var o = { 
+       "M+" : this.getMonth()+1,                 //月份 
+       "d+" : this.getDate(),                    //日 
+       "h+" : this.getHours(),                   //小时 
+       "m+" : this.getMinutes(),                 //分 
+       "s+" : this.getSeconds(),                 //秒 
+       "q+" : Math.floor((this.getMonth()+3)/3), //季度 
+       "S"  : this.getMilliseconds()             //毫秒 
+   }; 
+   if(/(y+)/.test(fmt)) {
+           fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+   }
+    for(var k in o) {
+       if(new RegExp("("+ k +")").test(fmt)){
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+        }
+    }
+   return fmt; 
+}  
+
+/** /格式化Date为 yyyy-MM-dd 00:00 /end **/
 /************************************************************/
 /** 组织管理 begin **/
 
@@ -1075,7 +1087,30 @@ var initProductInfos = function() {
 
 var refreshProductInfos = function() {
 	dataTables.fnDestroy();
-	initProductInfos();
+	
+	var dataTableURL = projectURL + "mainBodys/getAllProduct";
+	dataTables = $('table[data-table="productInformation"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });
+	
+	$('div[data-product="addProduct"]').hide(500);
+	$('div[data-product="showProduct"]').hide(500);
+	$('div[data-product="editProduct"]').hide(500);
+	$('div[data-product="information"]').show(1000);
+	
+//	initProductInfos();
 	$('form[data-product="addProduct"]').find(':input[type="reset"]').click();
 }
 
@@ -1274,7 +1309,30 @@ var initCustomInfos = function() {
 var refreshCustomInfos = function() {
 	if(dataTables != null)
 		dataTables.fnDestroy();
-	initCustomInfos();
+	
+	var dataTableURL = projectURL + "mainBodys/getAllCustom";
+	dataTables = $('table[data-custom="information"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });
+	$('div[data-custom="addCustom"]').hide(500);
+	$('div[data-custom="editCustom"]').hide(500);
+	$('div[data-BusinessOpportunity="addBusinessOpportunity"]').hide(500);
+	$('div[data-custom="information"]').show(1000);
+	
+//	initCustomInfos();
+	
 	$('form[data-custom="addCustom"]').find(':input[type="reset"]').click();
 }
 
@@ -1686,6 +1744,8 @@ var initBusinessOpportunityInfos = function() {
 
 	$('div[data-BusinessOpportunity="editBusinessOpportunity"]').hide(500);
 	$('div[data-Task="addTask"]').hide(500);
+	$('div[data-task="businessOpportunitysAllTask"]').hide(500);
+	$('div[data-oTaskDetail="oTaskDetail"]').hide(500);
 	$('div[data-businessOpportunity="allBusinessOpportunityInfos"]').show(1000);
 }
 
@@ -1710,6 +1770,8 @@ var refreshBusinessOpportunityInfos = function() {
     });
 	$('div[data-BusinessOpportunity="editBusinessOpportunity"]').hide(500);
 	$('div[data-Task="addTask"]').hide(500);
+	$('div[data-task="businessOpportunitysAllTask"]').hide(500);
+	$('div[data-oTaskDetail="oTaskDetail"]').hide(500);
 	$('div[data-businessOpportunity="allBusinessOpportunityInfos"]').show(1000);
 	
 	$('form[data-BusinessOpportunity="editBusinessOpportunity"]').find(':input[type="reset"]').click();
@@ -1854,11 +1916,54 @@ var showCustomAndBusinessOpportunity = function() {
 			$('span[name="employeeRealName"]').html(data.customVo.receiver.employeeRealName);
 			$('span[name="departmentName"]').html(data.customVo.departmentVo.departmentName);
 			$('span[name="preSalesAmount"]').html(data.preSalesAmount);
-			$('span[name="preDealTime"]').html(data.preDealTime);
+			$('span[name="preDealTime"]').html(dateFormat_2(data.preDealTime));
 			$('span[name="salesStageName"]').html(data.salesStageVo.salesStageName);
 			$('span[name="remark"]').html(data.remark);
 			$('span[name="rateOfProgress"]').html(data.salesStageVo.rateOfProgress);
 			$('div[data-rateOfProgress="rateOfProgress"]').css("width",data.salesStageVo.rateOfProgress + "%");
+		
+		
+			var url = projectURL + "mainBodys/selectFeedbackByBusinessOpportunityVoId";
+			$.ajax({
+				url : url,
+				type : "POST",
+				data : {
+					businessOpportunityId : businessOpportunityId
+				},
+				success : function(data) {
+					if(data == null || data == "") {
+						$('div[data-timeLine="feedback"]').html("");
+						return;
+					}
+					var html = "";
+					var feedbackVoList = data.feedbackVoList;
+					for(var i=0; i<feedbackVoList.length; i++) {
+						var feedbackVo = feedbackVoList[i];
+						html += 
+							'<div class="msg-time-chat">' +
+								'<a class="message-img" href="#">' +
+									'<img alt="" src="' + feedbackVo.employeeVo.employeeImgPath + '" class="avatar"> '+
+								'</a>' +
+								'<div class="message-body msg-in">' +
+									'<span class="arrow"></span>' +
+									'<div class="text">' +
+										'<p class="attribution">' +
+											'<a href="javascript:void(0)" >' + feedbackVo.employeeVo.employeeRealName + '</a>' +
+												datetimeFormat_2(feedbackVo.feedbackTime) +
+										'</p>' +
+										'<p>' + feedbackVo.feedbackDetail + '</p>' +
+									'</div>' +
+								'</div>' +
+							'</div>';
+					}
+					$('div[data-timeLine="feedback"]').html(html);	
+				},
+				error : function() {
+					setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+					$('div[data-Modal="alertModal"]').modal('show');
+				}
+			});
+		
 		},
 		error : function() {
 			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
@@ -1901,6 +2006,132 @@ var addTask = function() {
 		success : function(data) {
 			setAlertModalTitleAndBody("提示", data.obj);
 			$('div[data-Modal="alertModal"]').modal('show');
+			
+			var url = projectURL + "mainBodys/getUserInfos";
+			$.ajax({
+				url : url,
+				type : "POST",
+				success : function(data) {
+					var WebsocketVo = {
+							approverId : followEmployeeIdTask,
+							senderId : data.employeeId,
+							senderName : data.employeeRealName + "(新任务)",
+							message : taskContent,
+							URL : "mainBody/jsp/receiveTaskInformation"
+					};
+					doSend(JSON.stringify(WebsocketVo));
+				},
+				error : function() {
+					setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+					$('div[data-Modal="alertModal"]').modal('show');
+				}
+			});
+			
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+var showBusinessOpportunitysTask  = function(businessOpportunityId) {
+	var dataTableURL = projectURL + "mainBodys/getbusinessOpportunitysAllTask/" + businessOpportunityId;
+	
+	if(dataTables != null) dataTables.fnDestroy();
+	
+	dataTables = $('table[data-task="businessOpportunitysAllTask"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });
+	
+	$('div[data-businessOpportunity="allBusinessOpportunityInfos"]').hide(500);
+	$('div[data-BusinessOpportunity="editBusinessOpportunity"]').hide(500);
+	$('div[data-Task="addTask"]').hide(500);
+	$('div[data-oTaskDetail="oTaskDetail"]').hide(500);
+	$('div[data-task="businessOpportunitysAllTask"]').show(1000);
+	
+	$('table[data-task="businessOpportunitysAllTask"]').removeAttr("style");
+}
+
+var reShowBusinessOpportunitysTask = function() {
+	$('div[data-businessOpportunity="allBusinessOpportunityInfos"]').hide(500);
+	$('div[data-BusinessOpportunity="editBusinessOpportunity"]').hide(500);
+	$('div[data-Task="addTask"]').hide(500);
+	$('div[data-oTaskDetail="oTaskDetail"]').hide(500);
+	$('div[data-task="businessOpportunitysAllTask"]').show(1000);
+	
+	$('table[data-task="businessOpportunitysAllTask"]').removeAttr("style");
+}
+
+var reShowBusinessOpportunity = function() {
+	$('div[data-BusinessOpportunity="editBusinessOpportunity"]').hide(500);
+	$('div[data-Task="addTask"]').hide(500);
+	$('div[data-oTaskDetail="oTaskDetail"]').hide(500);
+	$('div[data-task="businessOpportunitysAllTask"]').hide(500);
+	$('div[data-businessOpportunity="allBusinessOpportunityInfos"]').show(1000);
+	
+	$('table[data-task="businessOpportunitysAllTask"]').removeAttr("style");
+}
+
+var taskDetailShow = function(taskId, taskContent, taskReportDate, taskStartTime, taskEndTime, spEmployeeRealName, reEmployeeRealName, reEmployeeId, taskStop, reEmployeeId) {
+	$form = $('form[data-oTaskDetail="oTaskDetail"]');
+	$form.find(':input[name="taskId"]').val(taskId);
+	$form.find(':input[name="reEmployeeId"]').val(reEmployeeId);
+	$form.find('textarea[name="taskContent"]').val(taskContent);
+	$form.find(':input[name="taskStartTime"]').val(taskStartTime);
+	$form.find(':input[name="taskEndTime"]').val(taskEndTime);
+	$form.find(':input[name="spEmployeeRealName"]').val(spEmployeeRealName);
+	$form.find(':input[name="reEmployeeRealName"]').val(reEmployeeRealName);
+	$form.find('select[name="taskStop"]').val(taskStop);
+	
+	var url = projectURL + "mainBodys/selectFeedbackVoByTaskId";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			taskId : taskId
+		},
+		success : function(data) {
+			var html = "";
+			for(var i=0; i<data.length; i++) {
+				var dataNow = data[i];
+				html += 
+					'<div class="msg-time-chat">' +
+						'<a class="message-img" href="#">' +
+							'<img alt="" src="' + dataNow.employeeVo.employeeImgPath + '" class="avatar"> '+
+						'</a>' +
+						'<div class="message-body msg-in">' +
+							'<span class="arrow"></span>' +
+							'<div class="text">' +
+								'<p class="attribution">' +
+									'<a href="javascript:void(0)" >' + dataNow.employeeVo.employeeRealName + '</a>' +
+										datetimeFormat_2(dataNow.feedbackTime) +
+								'</p>' +
+								'<p>' + dataNow.feedbackDetail + '</p>' +
+							'</div>' +
+						'</div>' +
+					'</div>';
+			}
+			
+			$('div[data-timeLine="feedback"]').html(html);	
+			
+			$('div[data-businessOpportunity="allBusinessOpportunityInfos"]').hide(500);
+			$('div[data-BusinessOpportunity="editBusinessOpportunity"]').hide(500);
+			$('div[data-Task="addTask"]').hide(500);
+			$('div[data-task="businessOpportunitysAllTask"]').hide(500);
+			$('div[data-oTaskDetail="oTaskDetail"]').show(1000);
 		},
 		error : function() {
 			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
@@ -2050,5 +2281,866 @@ var addFeedback = function() {
 }
 
 
+var initSenderTaskInfo = function() {
+	var dataTableURL = projectURL + "mainBodys/getSenderTask";
+	
+	if(dataTables != null) dataTables.fnDestroy();
+	
+	dataTables = $('table[data-task="senderTask"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });
+	
+	$('form[data-Task="editTask"]').submit(function() {  
+		editTask();
+		return false;
+	}); 
+	
+	
+	//任务开始时间
+	$('div[name="taskStartTime"]').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0,
+		format: 'yyyy-mm-dd',
+		startDate : new Date() 
+    }).on('changeDate',function() {
+    	var taskStartTime = Date.parse($(':input[name="taskStartTime"]').val());
+    	var taskEndTime = Date.parse($(':input[name="taskEndTime"]').val());
+    	var dataTime = taskEndTime.getTime() - taskStartTime.getTime();
+    	var days = Math.floor(dataTime/(24*3600*1000))
+    	if(days < 1) {
+    		$(':input[name="taskEndTime"]').val("");
+    	}
+    	var date = Date.parse($('div[name="taskStartTime"]').data().date);
+    	date.setDate(date.getDate() + 1);
+    	$('div[name="taskEndTime"]').datetimepicker('setStartDate',date);
+    });
+	
+	//任务截止时间
+	var taskStartTime = Date.parse($(':input[name="taskStartTime"]').val());
+	$('div[name="taskEndTime"]').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0,
+		format: 'yyyy-mm-dd',
+		startDate: taskStartTime
+    }).on('changeDate',function() {
+    	var taskStartTime = Date.parse($(':input[name="taskStartTime"]').val());
+    	var taskEndTime = Date.parse($(':input[name="taskEndTime"]').val());
+    	var dataTime = taskEndTime.getTime() - taskStartTime.getTime();
+    	var days = Math.floor(dataTime/(24*3600*1000))
+    	if(days < 1) 
+    		$(':input[name="taskStartTime"]').val("");
+    });
+	
+	
+	$('div[data-Task="editTask"]').hide(500);
+	$('div[data-task="senderTask"]').show();
+}
+
+var refreshSenderTaskInfos = function() {
+	if(dataTables != null) dataTables.fnDestroy();
+	var dataTableURL = projectURL + "mainBodys/getSenderTask";
+	dataTables = $('table[data-task="senderTask"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });
+	$('div[data-Task="editTask"]').hide(500);
+	$('div[data-task="senderTask"]').show();
+	
+	$('form[data-feedback="addFeedback"]').find(':input[type="reset"]').click();
+}
+
+var editTaskShow = function(taskId, taskContent, taskReportDate, taskStartTime, taskEndTime, spEmployeeRealName, reEmployeeRealName, reEmployeeId, taskStop, reEmployeeId) {
+	$form = $('form[data-Task="editTask"]');
+	$form.find(':input[name="taskId"]').val(taskId);
+	$form.find(':input[name="reEmployeeId"]').val(reEmployeeId);
+	$form.find('textarea[name="taskContent"]').val(taskContent);
+	$form.find(':input[name="taskStartTime"]').val(taskStartTime);
+	$form.find(':input[name="taskEndTime"]').val(taskEndTime);
+	$form.find(':input[name="spEmployeeRealName"]').val(spEmployeeRealName);
+	$form.find(':input[name="reEmployeeRealName"]').val(reEmployeeRealName);
+	$form.find('select[name="taskStop"]').val(taskStop);
+	
+	//任务开始时间
+	var taskStartTime = Date.parse($(':input[name="taskStartTime"]').val());
+	if(taskStartTime.getTime() < new Date().getTime()) {
+		$(':input[name="taskStartTime"]').attr("readonly", "readonly");
+	}
+	$('div[name="taskStartTime"]').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0,
+		format: 'yyyy-MM-dd',
+		startDate : new Date() 
+    }).on('changeDate',function() {
+    	var taskStartTime = Date.parse($(':input[name="taskStartTime"]').val());
+    	var taskEndTime = Date.parse($(':input[name="taskEndTime"]').val());
+    	var dataTime = taskEndTime.getTime() - taskStartTime.getTime();
+    	var days = Math.floor(dataTime/(24*3600*1000))
+    	if(days < 1) {
+    		$(':input[name="taskEndTime"]').val("");
+    	}
+    	var date = Date.parse($('div[name="taskStartTime"]').data().date);
+    	date.setDate(date.getDate() + 1);
+    	$('div[name="taskEndTime"]').datetimepicker('setStartDate',date);
+    });
+	
+	//任务截止时间
+	$('div[name="taskEndTime"]').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0,
+		format: 'yyyy-MM-dd',
+    });
+	var date = Date.parse($(':input[name="taskStartTime"]').val());
+	date.setDate(date.getDate() + 1);
+	$('div[name="taskEndTime"]').datetimepicker('setStartDate',date);
+	
+	var url = projectURL + "mainBodys/selectFeedbackVoByTaskId";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			taskId : taskId
+		},
+		success : function(data) {
+			var html = "";
+			for(var i=0; i<data.length; i++) {
+				var dataNow = data[i];
+				html += 
+					'<div class="msg-time-chat">' +
+						'<a class="message-img" href="#">' +
+							'<img alt="" src="' + dataNow.employeeVo.employeeImgPath + '" class="avatar"> '+
+						'</a>' +
+						'<div class="message-body msg-in">' +
+							'<span class="arrow"></span>' +
+							'<div class="text">' +
+								'<p class="attribution">' +
+									'<a href="javascript:void(0)" >' + dataNow.employeeVo.employeeRealName + '</a>' +
+										datetimeFormat_2(dataNow.feedbackTime) +
+								'</p>' +
+								'<p>' + dataNow.feedbackDetail + '</p>' +
+							'</div>' +
+						'</div>' +
+					'</div>';
+			}
+			
+			$('div[data-timeLine="feedback"]').html(html);	
+			
+			$('div[data-task="senderTask"]').hide(500);
+			$('div[data-Task="editTask"]').show(1000);
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+var editTask = function() {
+	$form = $('form[data-Task="editTask"]');
+	var taskId = $form.find(':input[name="taskId"]').val();
+	var taskContent = $form.find('textarea[name="taskContent"]').val();
+	var taskStartTime = $form.find(':input[name="taskStartTime"]').val();
+	var taskEndTime = $form.find(':input[name="taskEndTime"]').val();
+	var taskStop = $form.find('select[name="taskStop"]').val();
+	
+	var url = projectURL + "mainBodys/updateSenderTask";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			taskId : taskId,
+			taskContent : taskContent ,
+			taskStartTime : taskStartTime ,
+			taskEndTime : taskEndTime ,
+			taskStop : taskStop 
+		},
+		success : function(data) {
+			setAlertModalTitleAndBody("提示", data.obj);
+			$('div[data-Modal="alertModal"]').modal('show');
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
 /**   /任务 /end **/
 /************************************************************/
+/************************************************************/
+/**   外勤 begin **/
+
+var initWorkOutsideInfo = function() {
+	var dataTableURL = projectURL + "mainBodys/selectProcessVo";
+	
+	if(dataTables != null) dataTables.fnDestroy();
+	
+	dataTables = $('table[data-workOutside="showWorkOutside"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });
+	
+	$('form[data-process="addProcess"]').submit(function() {  
+		addProcess();
+		return false;
+	}); 
+	
+	$('div[data-process="addProcess"]').hide(500);
+	$('div[data-workOutside="showWorkOutside"]').show(1000);
+}
+
+var reFreshWorkOutsideInfo = function() {
+	var dataTableURL = projectURL + "mainBodys/selectProcessVo";
+	
+	if(dataTables != null) dataTables.fnDestroy();
+	
+	dataTables = $('table[data-workOutside="showWorkOutside"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });
+	
+	$('div[data-process="addProcess"]').hide(500);
+	$('div[data-workOutside="showWorkOutside"]').show(1000);
+}
+
+var addProcessShow = function() {
+	
+	//外勤开始时间
+	$('div[name="processStartTime"]').datetimepicker({
+		language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 0,
+		format: 'yyyy-mm-dd hh:ii',
+		startDate : new Date() 
+    }).on('changeDate',function() {
+    	var date = Date.parse($('input[name="processStartTime"]').val());
+    	$('div[name="processEndTime"]').datetimepicker('setStartDate',date);
+    	
+    	if($(':input[name="processEndTime"]').val() == "" || $(':input[name="processEndTime"]').val() == undefined)
+    		return;
+    	var processStartTime = Date.parse($(':input[name="processStartTime"]').val());
+    	var processEndTime = Date.parse($(':input[name="processEndTime"]').val());
+    	var dataTime = processEndTime.getTime() - processStartTime.getTime();
+    	if(dataTime < 0) {
+    		$(':input[name="processEndTime"]').val("");
+    	}
+    });
+	
+	//外勤截止时间
+	$('div[name="processEndTime"]').datetimepicker({
+		language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 0,
+		format: 'yyyy-mm-dd hh:ii',
+		startDate : new Date() 
+    });
+	
+	//获取申请人
+	var url = projectURL + "mainBodys/getUserInfos";
+	$.ajax({
+		url : url,
+		type : "POST",
+		success : function(data) {
+			var $form = $('form[data-process="addProcess"]');
+			$form.find(':input[name="processEmployeeName"]').val(data.employeeRealName);
+			$form.find(':input[name="processEmployeeId"]').val(data.employeeId);
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+	
+	//获取审批人
+	var url = projectURL + "mainBodys/getApproverList";
+	$.ajax({
+		url : url,
+		type : "POST",
+		success : function(data) {
+			var $form = $('form[data-process="addProcess"]');
+			
+			var option = '';
+			for(var i=0 ;i<data.length; i++) {
+				var processApprover = data[i];
+				option += '<option value="'+ processApprover.employeeId + '">'+ processApprover.employeeRealName +'</option>';
+			}
+			var $select = $form.find('select[name="processApprover"]');
+			$select.html(option);
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+	
+	
+	$('div[data-workOutside="showWorkOutside"]').hide(500);
+	$('div[data-process="addProcess"]').show(1000);
+}
+
+
+var addProcess = function() {
+	var $form = $('form[data-process="addProcess"]');
+	var processContent = $form.find('textarea[name="processContent"]').val();
+	var processStartTime = $form.find(':input[name="processStartTime"]').val();
+	var processEndTime = $form.find(':input[name="processEndTime"]').val();
+	var processEmployeeId = $form.find(':input[name="processEmployeeId"]').val();
+	var processApprover = $form.find('select[name="processApprover"]').val();
+	var processEmployeeName = $form.find(':input[name="processEmployeeName"]').val();
+	
+	var url = projectURL + "mainBodys/addProcessVo";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			processEmployeeId : processEmployeeId,
+			processApprover : processApprover,
+			processContent : processContent,
+			processStartTime : processStartTime,
+			processEndTime : processEndTime
+		},
+		success : function(data) {
+			setAlertModalTitleAndBody("提示", data.obj);
+			$('div[data-Modal="alertModal"]').modal('show');
+			
+			var WebsocketVo = {
+					approverId : processApprover,
+					senderId : processEmployeeId,
+					senderName : processEmployeeName,
+					message : processContent,
+					URL : "mainBody/jsp/workOutsideApprove"
+			};
+			doSend(JSON.stringify(WebsocketVo));
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+var initWorkOutsideApprove = function() {
+	var dataTableURL = projectURL + "mainBodys/selectProcessVoApprove";
+	
+	if(dataTables != null) dataTables.fnDestroy();
+	
+	dataTables = $('table[data-workOutside="approve"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });
+	
+//	$('form[data-process="addProcess"]').submit(function() {  
+//		addProcess();
+//		return false;
+//	}); 
+//	
+//	$('div[data-process="addProcess"]').hide(500);
+//	$('div[data-workOutside="showWorkOutside"]').show(1000);
+}
+
+var refreshWorkOutsideApprove = function() {
+	var dataTableURL = projectURL + "mainBodys/selectProcessVoApprove";
+	
+	if(dataTables != null) dataTables.fnDestroy();
+	
+	dataTables = $('table[data-workOutside="approve"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });	
+}
+
+var processOkResult = function(processId) {
+	var url = projectURL + "mainBodys/updateProcessVo";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			processId : processId,
+			processState : 1
+		},
+		success : function(data) {
+			setAlertModalTitleAndBody("提示", data.obj);
+			$('div[data-Modal="alertModal"]').modal('show');
+			refreshWorkOutsideApprove();
+			
+			var url = projectURL + "mainBodys/getProcessVoByProcessVoId";
+			$.ajax({
+				url : url,
+				type : "POST",
+				data : {
+					processId : processId
+				},
+				success : function(data) {
+					var WebsocketVo = {
+							approverId : data.spOutEmployee.employeeId,
+							senderId : data.reOutEmployee.employeeId,
+							senderName : data.reOutEmployee.employeeRealName,
+							message : "同意" + "(" + data.processContent +")",
+							URL : "mainBody/jsp/workOutside"
+					};
+					doSend(JSON.stringify(WebsocketVo));
+				},
+				error : function() {
+					setAlertModalTitleAndBody("提示", "websocket发送信息失败");
+					$('div[data-Modal="alertModal"]').modal('show');
+				}
+			});
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+var processTrashResult = function(processId) {
+	var url = projectURL + "mainBodys/updateProcessVo";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			processId : processId,
+			processState : -1
+		},
+		success : function(data) {
+			setAlertModalTitleAndBody("提示", data.obj);
+			$('div[data-Modal="alertModal"]').modal('show');
+			refreshWorkOutsideApprove();
+			
+			var url = projectURL + "mainBodys/getProcessVoByProcessVoId";
+			$.ajax({
+				url : url,
+				type : "POST",
+				data : {
+					processId : processId
+				},
+				success : function(data) {
+					var WebsocketVo = {
+							approverId : data.spOutEmployee.employeeId,
+							senderId : data.reOutEmployee.employeeId,
+							senderName : data.reOutEmployee.employeeRealName,
+							message : "不同意" + "(" + data.processContent +")",
+							URL : "mainBody/jsp/workOutside"
+					};
+					doSend(JSON.stringify(WebsocketVo));
+				},
+				error : function() {
+					setAlertModalTitleAndBody("提示", "websocket发送信息失败");
+					$('div[data-Modal="alertModal"]').modal('show');
+				}
+			});
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+
+
+var workOutsideCalendarInit =function() {
+	var url = projectURL + "mainBodys/selectProcessVoForCalendar";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			processState : 1
+		},
+		success : function(data) {
+			if(data.length == 0) return;
+			var dataSource = [];
+			for(var i=0; i<data.length; i++) {
+				calendarInfos = data[i];
+				var dd = {
+					title: calendarInfos.title,
+	                start: new Date(calendarInfos.startY, calendarInfos.startM, calendarInfos.startD, calendarInfos.startH, calendarInfos.startI),
+	                end: new Date(calendarInfos.endY, calendarInfos.endM, calendarInfos.endD, calendarInfos.endH, calendarInfos.endI),
+	                allDay: false
+				};
+				dataSource[i] = dd;
+			}
+			
+			
+			var date = new Date();
+		    var d = date.getDate();
+		    var m = date.getMonth();
+		    var y = date.getFullYear();
+			$('div[data-calendar="calendar"]').fullCalendar({
+		        header: {
+		            left: 'prev,next today',
+		            center: 'title',
+		            right: 'month,basicWeek,basicDay'
+		        },
+		        editable: true,
+		        monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+				monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+				dayNames: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+				dayNamesShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+				today: ["今天"],
+				firstDay: 1,
+				buttonText: {
+					today: '本月',
+					month: '月',
+					week: '周',
+					day: '日',
+					prev: '往前',
+					next: '往后',
+				},
+		        events: dataSource,
+		        dayClick: function(date, allDay, jsEvent, view) {
+//		        	var timestamp = Date.parse(date);
+//		        	timestamp = timestamp / 1000;
+//		        	
+//		        	var url = projectURL + "mainBodys/selectProcessVoNoOut";
+//		        	$.ajax({
+//		        		url : url,
+//		        		type : "POST",
+//		        		data : {
+//		        			nowTime : timestamp,
+//		        			processState : 1
+//		        		},
+//		        		success : function(data) {
+//		        			alert(data);
+//		        		},
+//		        		error : function() {
+//		        			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+//		        			$('div[data-Modal="alertModal"]').modal('show');
+//		        		}
+//		        	});
+		        },
+				eventClick: function (event){
+					$.confirm({
+					    title: false,
+					    content:  '出勤原因：' + event.title + ' <br> ' +
+					              '开始时间：' + event.start.format("yyyy-MM-dd hh:mm") + ' <br> ' +
+					    		  '结束时间: ' + event.end.format("yyyy-MM-dd hh:mm") + ' <br> ',
+					    buttons: {
+					        确定: {
+					        },
+					    }
+					});
+				},
+		    });
+			
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+	
+}
+/**   /外勤 /end **/
+/************************************************************/
+/**  预测分析 begin **/
+
+var initProspective = function() {
+	var dataTableURL = projectURL + "mainBodys/selectForAnalyse";
+	
+	if(dataTables != null) dataTables.fnDestroy();
+	
+	dataTables = $('table[data-prospective="prospectiveCustomers"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });	
+}
+
+var initChars = function() {
+	$('div[data-char="charLine"]').hide();
+	$('div[data-char="charPie"]').hide();
+}
+
+var charShow = function(callback, charFeedbackCount , data, xAxisData) {
+	var charInstance = echarts.getInstanceByDom(charFeedbackCount);
+	if(charInstance != undefined && charInstance != null) {
+		charInstance.dispose();
+	}
+	var charInstance = echarts.init(charFeedbackCount);
+	charInstance.showLoading();
+	var option = callback(charInstance, data, xAxisData);
+	charInstance.setOption(option);
+	charInstance.resize();
+	charInstance.hideLoading();
+}
+
+var setLineData = function(myChart, data, xAxisData) {
+	var symbolSize = 20;
+	option = {
+	    xAxis: {
+	        data:['2017-3-1', '2017-3-8', '2017-3-15', '2017-3-22', '2017-3-29']
+	    },
+	    yAxis: {
+	    	data: [1, 2, 3, 4, 5, 6, 7, 8 ,9, 10, 11, 12, 13, 14, 15]
+	    },
+	    tooltip: {
+	    	trigger: 'axis'
+	    },
+	    series: [
+	        {
+	        	name: '沟通次数',
+	            type: 'line',
+	            smooth: true,
+	            symbolSize: symbolSize,
+	            data: data
+	        }
+	    ]
+	};
+	return option;
+}
+
+var setPieData = function(myChart, data, xAxisData) {
+	option = {
+		    backgroundColor: '#fff',
+
+		    tooltip : {
+		        trigger: 'item',
+		        formatter: "{a} <br/>{b} : {c} ({d}%)"
+		    },
+
+		    visualMap: {
+		        show: false,
+		        min: 10000,
+		        max: 99999999,
+		        inRange: {
+		            colorLightness: [0, 0.9]
+
+		        }
+		    },
+		    color : ['red', 'yellow'],
+		    series : [
+		        {
+		            name:'销售金额',
+		            type:'pie',
+		            radius : '55%',
+		            center: ['50%', '50%'],
+		            data:data,
+		            roseType: 'angle',
+		            label: {
+		                normal: {
+		                    textStyle: {
+		                        color: 'red',
+		                        fontSize: 13
+		                    }
+		                }
+		            },
+		            labelLine: {
+		                normal: {
+		                    lineStyle: {
+		                        color: 'rgba(0, 0, 0, 1)'
+		                    },
+		                    smooth: 0.2,
+		                    length: 20,
+		                    length2: 40
+		                }
+		            },
+		            itemStyle: {
+		                normal: {
+		                    color: '#c23531',
+		                    shadowBlur: 2000,
+		                    shadowColor: 'rgba(0, 0, 0, 1)'
+		                }
+		            },
+
+		            animationType: 'scale',
+		            animationEasing: 'elasticOut',
+		            animationDelay: function (idx) {
+		                return Math.random() * 200;
+		            }
+		        }
+		    ]
+		};
+	return option;
+}
+
+
+var showAnalyse = function(businessOpportunityId) {
+	var url = projectURL + "mainBodys/selectForChar";
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : {
+			businessOpportunityId : businessOpportunityId,
+		},
+		success : function(data) {
+			$('div[data-char="charLine"]').show();
+			$('div[data-char="charPie"]').show();
+			$('body').animate({
+				scrollTop: '440px'
+			});
+			
+			var lineData = [
+					data.lineCharData.data[0],
+					data.lineCharData.data[1],
+					data.lineCharData.data[2],
+					data.lineCharData.data[3],
+					data.lineCharData.data[4]
+				];
+			var xAxisData = [
+			        data.lineCharData.xAxisData[0],
+			        data.lineCharData.xAxisData[1],
+			        data.lineCharData.xAxisData[2],
+			        data.lineCharData.xAxisData[3],
+			        data.lineCharData.xAxisData[4]
+			    ];
+			var lineChar = $('div[data-char="feedbackCount"]')[0];
+			charShow(setLineData, lineChar, lineData, xAxisData);
+			
+			var pieData = [
+			                {value:data.pieCharList[0].value, name:data.pieCharList[0].name},
+			                {value:data.pieCharList[1].value, name:data.pieCharList[1].name}
+			              ];
+			var pieChar = $('div[data-char="money"]')[0];
+			charShow(setPieData, pieChar, pieData, null);
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
+}
+/**  /预测分析 /end **/
+
+/**  socket begin  **/
+
+var connect = function() {
+	webSocketInstance = new WebSocket(socketURL);
+    console.log("websocket connect ...");
+    
+    webSocketInstance.onmessage = function(event) {
+    	data = eval('(' + event.data + ')' );
+    	$.gritter.add({
+            title: data.senderName,
+            text:  data.message,
+            image: data.imgURL,
+            sticky: true,
+            time: '',
+            class_name: 'my-sticky-class'
+        });
+    };
+    
+    webSocketInstance.onerror = function(event) {
+    	webSocketInstance.close();
+    	console.log("error");
+    };
+    
+}
+
+var doSend = function(webSocketMessage) {
+	if(webSocketInstance == null) {
+		connect();
+	}
+	webSocketInstance.send(webSocketMessage);
+}
+
+/**  /socket /end  **/

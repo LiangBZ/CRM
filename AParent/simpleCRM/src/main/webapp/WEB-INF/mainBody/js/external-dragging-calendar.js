@@ -108,6 +108,12 @@ var Script = function () {
                 start: new Date(y, m, 28),
                 end: new Date(y, m, 29),
                 url: 'http://google.com/'
+            },
+            {
+                title: '测试',
+                start: new Date(y, m, d-10, 19, 0),
+                end: new Date(y, m, d-8, 22, 0),
+                allDay: false
             }
         ]
     });

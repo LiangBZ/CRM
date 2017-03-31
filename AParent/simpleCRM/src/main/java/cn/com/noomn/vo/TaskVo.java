@@ -1,5 +1,7 @@
 package cn.com.noomn.vo;
 
+import java.util.List;
+
 import cn.com.noomn.po.Task;
 
 public class TaskVo extends Task {
@@ -7,7 +9,10 @@ public class TaskVo extends Task {
 	private BusinessOpportunityVo businessOpportunityVo;
 	
 	private EmployeeVo spEmployee;	//任务发起者
+	
 	private EmployeeVo reEmployee;	//任务发起者
+	
+	private List<FeedbackVo> feedbackVo;	//反馈信息 
 
 	public BusinessOpportunityVo getBusinessOpportunityVo() {
 		return businessOpportunityVo;
@@ -33,11 +38,20 @@ public class TaskVo extends Task {
 		this.reEmployee = reEmployee;
 	}
 
+	
+	public List<FeedbackVo> getFeedbackVo() {
+		return feedbackVo;
+	}
+
+	public void setFeedbackVo(List<FeedbackVo> feedbackVo) {
+		this.feedbackVo = feedbackVo;
+	}
+
 	@Override
 	public String toString() {
 		return "TaskVo [businessOpportunityVo=" + businessOpportunityVo
 				+ ", spEmployee=" + spEmployee + ", reEmployee=" + reEmployee
-				+ "]";
+				+ ", feedbackVo=" + feedbackVo + "]";
 	}
 	
 }
