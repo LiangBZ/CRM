@@ -17,13 +17,17 @@ function setAlertModalTitleAndBody(title, body) {
 	});
 }
 
-
-
 function showInfos(infos, message, obj, url) {
 	if(infos !== null && infos !== "") {
 		alert(message + ":" + obj);
 		location.href = url;
 	}
+}
+
+function bodyScrollTop(num) {
+	$('body').animate({
+		scrollTop: num
+	});
 }
 
 /************************************************************/
@@ -36,7 +40,7 @@ function converDateFromString(dataString) {
 }
 
 /** /yyyy-mm-ss转为date /end **/
-
+/************************************************************/
 /** 返回yyyy-MM-dd格式日期 begin **/
 
 function dateFormat_1(longTypeDate){  
@@ -223,11 +227,6 @@ var script = function (_dataTableURL,_treeURL) {
 	jQuery('#sample_1_wrapper .dataTables_length select').addClass("input-mini"); // modify table per page dropdown
 };
 
-/*
- 	var addDepartment = function() {
-	$modal = $('div[data-Modal="organizing_addDepartment"]');
-	$modal.modal('show');
-}*/
 var addDepartment = function() {
 	$.confirm({
 	    title: '添加部门',
@@ -262,7 +261,6 @@ var addDepartmentClick = function(url) {
 	$form.bootstrapValidator(option);
 	$form.data("bootstrapValidator").validateField('departmentName');
 	isTrue = $form.data("bootstrapValidator").isValidField('departmentName');
-//	isTrue = $modal.find("form").data("bootstrapValidator").isValidField('departmentName');
 	if (isTrue == false) return;
 	
 	var departmentName = $form.find(':input[name="departmentName"]').val();
@@ -305,9 +303,6 @@ var editDepartment = function(_this, projectURL) {
 		},
 		success : function(data) {
 			var department = data[0];
-//			$('div[data-Modal="organizing_editDepartment"]').find(':input[name="departmentName"]').val(department.departmentName);
-//			$('div[data-Modal="organizing_editDepartment"]').find(':input[name="departmentId"]').val(department.departmentId);
-//			$('div[data-Modal="organizing_editDepartment"]').modal('show');
 			
 			$.confirm({
 			    title: '编辑部门',
@@ -344,12 +339,9 @@ var editDepartment = function(_this, projectURL) {
 }
 
 var saveClick = function(url) {
-//	$modal = $('div[data-Modal="organizing_editDepartment"]');
-//	$form = $modal.find("form");
 	$form = $('form[data-Modal="organizing_editDepartment"]');
 	$form.bootstrapValidator(option);
 	$form.data("bootstrapValidator").validateField('departmentName');
-//	isTrue = $modal.find("form").data("bootstrapValidator").isValidField('departmentName');
 	isTrue = $form.data("bootstrapValidator").isValidField('departmentName');
 	if (isTrue == false) return;
 	
@@ -485,8 +477,6 @@ var deleteDepartmentList = function(_this, url) {
 
 /**  组织管理 /end **/
 /************************************************************/
-
-/************************************************************/
 /**  职务权限 begin **/
 var pitchOn = function(dataId) {
 	var $checkbox = $(':checkbox[data-id="'+ dataId +'"]');
@@ -572,8 +562,6 @@ var getAllAuthorityManager = function(url, userroleId) {
 
 /**  职务权限 /end **/
 /************************************************************/
-
-/************************************************************/
 /**  成员信息 begin **/
 
 //初始化成员表
@@ -631,6 +619,8 @@ var refreshMemberInfos = function() {
 	$('div[data-member="showMember"]').hide(1000);
 	$('div[data-member="editMember"]').hide(1000);
 	$('div[data-member="information"]').show(500);
+	
+	bodyScrollTop('0px');
 }
 
 var showAddMember = function(url) {
@@ -638,6 +628,7 @@ var showAddMember = function(url) {
 	$('div[data-member="information"]').hide(500);
 	$('div[data-member="addMember"]').show(1000);
 	
+	var url = projectURL + "mainBodys/getAddEmployeeDepartmentVoList";
 	$.ajax({
 		url : url,
 		type : "POST",
@@ -645,13 +636,21 @@ var showAddMember = function(url) {
 			var option = '';
 			for(var i=0 ;i<data.length; i++) {
 				var department = data[i];
-				option += '<option value="'+ department.departmentId + '"';
-				if(department.departmentId === '7fc51cfa-0986-11e7-b918-28d2444b860a')
-					option += 'selected = "selected"'
-				option += '>'+ department.departmentName +'</option>';
+				option += '<option value="'+ department.departmentId + '">'+ department.departmentName +'</option>';
 			}
 			var $select = $('form[data-menberAdd="menberAdd"]').find('select[name="departmentIdEmployee"]');
 			$select.html(option);
+			
+			var selectOneVal = $select.find('option').eq(0).val();
+			var $selectRole = $('form[data-menberAdd="menberAdd"]').find('select[name="userroleIdEmployee"]');
+			option = "";
+			if(selectOneVal == "cfd4baa2-0986-11e7-b918-28d2444b860a") {
+				option += '<option value="6566dff0-0987-11e7-b918-28d2444b860a">总经理</option>';
+			}else {
+				option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+				option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
+			}
+			$selectRole.html(option);
 		},
 		error : function() {
 			setAlertModalTitleAndBody("提示", "获取部门信息失败，请重试");
@@ -659,11 +658,18 @@ var showAddMember = function(url) {
 		}
 	});
 }
-var showMemberInfos = function() {
-	$('div[data-member="showMember"]').hide(1000);
-	$('div[data-member="addMember"]').hide(1000);
-	$('div[data-member="editMember"]').hide(1000);
-	$('div[data-member="information"]').show(500);
+
+var getAddEmployeeUserrole = function(_this) {
+	var selectVal = $(_this).val();
+	var $select = $('form[data-menberAdd="menberAdd"]').find('select[name="userroleIdEmployee"]');
+	option = "";
+	if(selectVal == "cfd4baa2-0986-11e7-b918-28d2444b860a") {
+		option += '<option value="6566dff0-0987-11e7-b918-28d2444b860a">总经理</option>';
+	}else {
+		option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+		option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
+	}
+	$select.html(option);
 }
 
 var menberAdd = function() {
@@ -757,11 +763,26 @@ var detailedEmployee = function(_this) {
 	});
 }
 
+var getEditEmployeeUserrole = function(_this) {
+	var selectVal = $(_this).val();
+	var $select = $('form[data-menberEdit="menberEdit"]').find('select[name="userroleIdEmployee"]');
+	option = "";
+	if(selectVal == "cfd4baa2-0986-11e7-b918-28d2444b860a") {
+		option += '<option value="6566dff0-0987-11e7-b918-28d2444b860a">总经理</option>';
+	}else {
+		option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+		option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
+	}
+	$select.html(option);
+}
+
+
 var editEmployee = function(_this) {
 	$('div[data-member="information"]').hide(500);
 	$('div[data-member="editMember"]').show(1000);
 	
-	var url = projectURL + "/mainBodys/getDepartmentVoList";
+//	var url = projectURL + "/mainBodys/getDepartmentVoList";
+	var url = projectURL + "/mainBodys/getAddEmployeeDepartmentVoList";
 	$.ajax({
 		url : url,
 		type : "POST",
@@ -791,6 +812,17 @@ var editEmployee = function(_this) {
 					$form.find(':input[name="employeeEmail"]').val(data.employeeEmail);
 					$form.find(':input[name="employeePhone"]').val(data.employeePhone);
 					$form.find('select[name="departmentIdEmployee"]').val(data.departmentVo.departmentId);
+					
+					var $select = $('form[data-menberEdit="menberEdit"]').find('select[name="userroleIdEmployee"]');
+					option = "";
+					if(data.departmentVo.departmentId == "cfd4baa2-0986-11e7-b918-28d2444b860a") {
+						option += '<option value="6566dff0-0987-11e7-b918-28d2444b860a">总经理</option>';
+					}else {
+						option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+						option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
+					}
+					$select.html(option);
+					
 					$form.find('select[name="userroleIdEmployee"]').val(data.userroleVo.userroleId);
 				},
 				error : function() {
@@ -856,8 +888,6 @@ var menberUpdate = function() {
 }
 
 /**  成员信息 /end **/
-/************************************************************/
-
 /************************************************************/
 /**  个人信息 begin **/
 
@@ -1048,8 +1078,6 @@ var updatePassword = function() {
 
 /**  /个人信息 /end **/
 /************************************************************/
-
-/************************************************************/
 /**  产品信息 begin **/
 
 var initProductInfos = function() {
@@ -1110,8 +1138,9 @@ var refreshProductInfos = function() {
 	$('div[data-product="editProduct"]').hide(500);
 	$('div[data-product="information"]').show(1000);
 	
-//	initProductInfos();
 	$('form[data-product="addProduct"]').find(':input[type="reset"]').click();
+	
+	bodyScrollTop('0px');
 }
 
 var addProductShow = function() {
@@ -1265,9 +1294,7 @@ var updateProduct = function(_this) {
 
 /**  /产品信息 /end **/
 /************************************************************/
-
-/************************************************************/
-/**  /客户信息 begin **/
+/**   客户信息 begin **/
 
 var initCustomInfos = function() {
 	var dataTableURL = projectURL + "mainBodys/getAllCustom";
@@ -1331,9 +1358,9 @@ var refreshCustomInfos = function() {
 	$('div[data-BusinessOpportunity="addBusinessOpportunity"]').hide(500);
 	$('div[data-custom="information"]').show(1000);
 	
-//	initCustomInfos();
-	
 	$('form[data-custom="addCustom"]').find(':input[type="reset"]').click();
+	
+	bodyScrollTop('0px');
 }
 
 var addCustomShow = function() {
@@ -1665,9 +1692,6 @@ var income = function() {
 
 /**  /客户信息 /end **/
 /************************************************************/
-
-
-/************************************************************/
 /**   商机 begin **/
 var initBusinessOpportunityInfos = function() {
 	var dataTableURL = projectURL + "mainBodys/getBusinessOpportunityVoByFollwer";
@@ -1775,6 +1799,8 @@ var refreshBusinessOpportunityInfos = function() {
 	$('div[data-businessOpportunity="allBusinessOpportunityInfos"]').show(1000);
 	
 	$('form[data-BusinessOpportunity="editBusinessOpportunity"]').find(':input[type="reset"]').click();
+	
+	bodyScrollTop('0px');
 }
 
 var editBusinessOpportunityShow = function(businessOpportunityId) {
@@ -2036,9 +2062,13 @@ var addTask = function() {
 }
 
 var showBusinessOpportunitysTask  = function(businessOpportunityId) {
+	$('div[data-businessOpportunity="allBusinessOpportunityInfos"]').find(':input[name="businessOpportunityId"]').val(businessOpportunityId);
+	
 	var dataTableURL = projectURL + "mainBodys/getbusinessOpportunitysAllTask/" + businessOpportunityId;
 	
-	if(dataTables != null) dataTables.fnDestroy();
+	if(dataTables != null) {
+		dataTables.fnDestroy();
+	}
 	
 	dataTables = $('table[data-task="businessOpportunitysAllTask"]').dataTable({
     	"bLengthChange": false,   // 去掉每页显示多少条数据方法
@@ -2083,6 +2113,27 @@ var reShowBusinessOpportunity = function() {
 	$('div[data-businessOpportunity="allBusinessOpportunityInfos"]').show(1000);
 	
 	$('table[data-task="businessOpportunitysAllTask"]').removeAttr("style");
+	
+	var dataTableURL = projectURL + "mainBodys/getBusinessOpportunityVoByFollwer";
+	if(dataTables != null) {
+		dataTables.fnDestroy();
+	}
+	
+	dataTables = $('table[data-businessOpportunity="allBusinessOpportunityInfos"]').dataTable({
+    	"bLengthChange": false,   // 去掉每页显示多少条数据方法
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ per page",
+            "oPaginate": {
+                "sPrevious": "Prev",
+                "sNext": "Next"
+            }
+        },
+      "sAjaxSource": dataTableURL,
+      "sAjaxDataProp": "data",
+      "bStateSave": true
+    });
 }
 
 var taskDetailShow = function(taskId, taskContent, taskReportDate, taskStartTime, taskEndTime, spEmployeeRealName, reEmployeeRealName, reEmployeeId, taskStop, reEmployeeId) {
@@ -2142,8 +2193,6 @@ var taskDetailShow = function(taskId, taskContent, taskReportDate, taskStartTime
 
 /**   /商机 /end **/
 /************************************************************/
-
-/************************************************************/
 /**   任务 begin **/
 
 var initReceiveTaskInfo = function() {
@@ -2199,6 +2248,8 @@ var refreshTaskInfos = function() {
 	$('div[data-task="receiveTask"]').show();
 	
 	$('form[data-feedback="addFeedback"]').find(':input[type="reset"]').click();
+	
+	bodyScrollTop('0px');
 }
 
 var addFeedBackShow = function(taskId, taskContent, taskReportDate, taskStartTime, taskEndTime, spEmployeeRealName, reEmployeeRealName, reEmployeeId) {
@@ -2382,6 +2433,8 @@ var refreshSenderTaskInfos = function() {
 	$('div[data-task="senderTask"]').show();
 	
 	$('form[data-feedback="addFeedback"]').find(':input[type="reset"]').click();
+	
+	bodyScrollTop('0px');
 }
 
 var editTaskShow = function(taskId, taskContent, taskReportDate, taskStartTime, taskEndTime, spEmployeeRealName, reEmployeeRealName, reEmployeeId, taskStop, reEmployeeId) {
@@ -2513,7 +2566,6 @@ var editTask = function() {
 
 /**   /任务 /end **/
 /************************************************************/
-/************************************************************/
 /**   外勤 begin **/
 
 var initWorkOutsideInfo = function() {
@@ -2569,6 +2621,8 @@ var reFreshWorkOutsideInfo = function() {
 	
 	$('div[data-process="addProcess"]').hide(500);
 	$('div[data-workOutside="showWorkOutside"]').show(1000);
+	
+	bodyScrollTop('0px');
 }
 
 var addProcessShow = function() {
@@ -2717,14 +2771,6 @@ var initWorkOutsideApprove = function() {
       "sAjaxDataProp": "data",
       "bStateSave": true
     });
-	
-//	$('form[data-process="addProcess"]').submit(function() {  
-//		addProcess();
-//		return false;
-//	}); 
-//	
-//	$('div[data-process="addProcess"]').hide(500);
-//	$('div[data-workOutside="showWorkOutside"]').show(1000);
 }
 
 var refreshWorkOutsideApprove = function() {
@@ -2747,6 +2793,8 @@ var refreshWorkOutsideApprove = function() {
       "sAjaxDataProp": "data",
       "bStateSave": true
     });	
+	
+	bodyScrollTop('0px');
 }
 
 var processOkResult = function(processId) {
@@ -2887,27 +2935,6 @@ var workOutsideCalendarInit =function() {
 					next: '往后',
 				},
 		        events: dataSource,
-		        dayClick: function(date, allDay, jsEvent, view) {
-//		        	var timestamp = Date.parse(date);
-//		        	timestamp = timestamp / 1000;
-//		        	
-//		        	var url = projectURL + "mainBodys/selectProcessVoNoOut";
-//		        	$.ajax({
-//		        		url : url,
-//		        		type : "POST",
-//		        		data : {
-//		        			nowTime : timestamp,
-//		        			processState : 1
-//		        		},
-//		        		success : function(data) {
-//		        			alert(data);
-//		        		},
-//		        		error : function() {
-//		        			setAlertModalTitleAndBody("提示", "系统出现错误，请重试");
-//		        			$('div[data-Modal="alertModal"]').modal('show');
-//		        		}
-//		        	});
-		        },
 				eventClick: function (event){
 					$.confirm({
 					    title: false,
@@ -2978,10 +3005,10 @@ var setLineData = function(myChart, data, xAxisData) {
 	var symbolSize = 20;
 	option = {
 	    xAxis: {
-	        data:['2017-3-1', '2017-3-8', '2017-3-15', '2017-3-22', '2017-3-29']
+			data:xAxisData
 	    },
 	    yAxis: {
-	    	data: [1, 2, 3, 4, 5, 6, 7, 8 ,9, 10, 11, 12, 13, 14, 15]
+	    	data: [0, 1, 2, 3, 4, 5, 6, 7, 8 ,9, 10]
 	    },
 	    tooltip: {
 	    	trigger: 'axis'

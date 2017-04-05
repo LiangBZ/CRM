@@ -25,7 +25,6 @@
 		<property name="converters">
 			<list>
 				<bean class="cn.com.noomn.util.TimestampConverter"></bean>
-				<!-- <bean class="cn.com.noomn.util.TimestampConverter2"></bean> -->
 			</list>
 		</property>
 	</bean>

@@ -167,7 +167,7 @@
                                         </div><!-- /employeeInstruct -->
                                         
                                         <div class="clearfix">
-                                        	<button data-sendEmail="sendEmailButton" onclick="sendEmailForResetPassword(20,20);" type="button" class="width-48 pull-left btn btn-sm btn-danger">
+                                        	<button data-sendEmail="sendEmailButton" onclick="sendEmailForResetPassword(30);" type="button" class="width-48 pull-left btn btn-sm btn-danger">
                                                 <i class="ace-icon fa fa-lightbulb-o"></i>
                                                 <span data-sendEmail="sendEmailButtonSpan" class="bigger-110">发送邮件</span>
                                             </button>
@@ -384,15 +384,6 @@
     $(function() {
         var $form = $("form");
         $form.bootstrapValidator(option);
-/*         $form.each(function(index){
-            var $fromNow = $(this);
-            $fromNow.find(':button[data-submit="submitButton"]').click(function() {
-                $fromNow.bootstrapValidator('validate');
-            });
-            $fromNow.find(':button[data-reset="resetButton"]').click(function() {
-                $fromNow.data('bootstrapValidator').resetForm(true);
-            });
-        }); */
     })
 
 </script>
@@ -426,68 +417,72 @@
 
 <script type="text/javascript">
 
-	//发送邮件
-	function sendEmailForResetPassword(timeMax, timeNow) {
-		$form = $('form[data-form="forgotBoxForm"]');
-		$form.data('bootstrapValidator').resetForm();
-		if (timeNow === timeMax) { 
-			
-			$form = $('form[data-form="forgotBoxForm"]');
-			var isTrue = false;
-			$form.data("bootstrapValidator").validateField('employeeUsername');
-			$form.data("bootstrapValidator").validateField('employeeEmail');
-			isTrue = $form.data("bootstrapValidator").isValidField('employeeUsername');
-			if (isTrue == false) return;
-			isTrue = $form.data("bootstrapValidator").isValidField('employeeEmail');
-			if (isTrue == false) return;
-			
-			var $sendEmailButton = $(':button[data-sendEmail="sendEmailButton"]');
-			var $sendEmailButtonSpan = $('span[data-sendEmail="sendEmailButtonSpan"]');
-			$('form[data-form="forgotBoxForm"]').find(":input").attr("disabled", true);
-			$('form[data-form="forgotBoxForm"]').find(":button").attr("disabled", true);
-			
-			$sendEmailButtonSpan.html(timeNow  + "秒后再次发送" );
-			var hander = setTimeout(function() { 
-				sendEmailForResetPassword(timeMax, --timeNow); 
-	        }, 
-	        1000);
-			
-			var employeeUsernameVal = $form.find(':input[name="employeeUsername"]').val();
-			var employeeEmailVal = $form.find(':input[name="employeeEmail"]').val();
-			$.ajax({
-				url : "${pageContext.request.contextPath}/logins/sendEmailForResetPassword",
-				type : "POST",
-				dataType : "json",
-				data : {
-					employeeUsername : employeeUsernameVal,
-					employeeEmail : employeeEmailVal
-				},
-				
-				success : function(data) {
-					setAlertModalTitleAndBody("发送邮件", data.obj);
-					$('div[data-Modal="alertModal"]').modal('show');
-				},
-				error : function() {
-					setAlertModalTitleAndBody("发送邮件", "发送失败，我们会尽快修复该问题。");
-					$('div[data-Modal="alertModal"]').modal('show');
-				}
-			});
-			
-        }else if(timeNow === 0){
-        	var $sendEmailButton = $(':button[data-sendEmail="sendEmailButton"]');
-			var $sendEmailButtonSpan = $('span[data-sendEmail="sendEmailButtonSpan"]');
-			$sendEmailButtonSpan.html("发送邮件");
-			$('form[data-form="forgotBoxForm"]').find(":input").removeAttr("disabled");
-			$('form[data-form="forgotBoxForm"]').find(":button").removeAttr("disabled");
-        }else if(timeNow < timeMax && timeNow > 0){
+	//倒计时
+	var timeID = 0;
+	function timeDown(timeNow) {
+		if(--timeNow >= 0) {
 			var $sendEmailButtonSpan = $('span[data-sendEmail="sendEmailButtonSpan"]');
 			$sendEmailButtonSpan.html(timeNow + "秒后再次发送");
-			
-			setTimeout(function() { 
-				sendEmailForResetPassword(timeMax, --timeNow); 
+			timeID = setTimeout(function() { 
+				timeDown(timeNow);
 	        }, 
 	        1000);
-        }
+		}
+	}
+
+	//发送邮件
+	function sendEmailForResetPassword(timeNow) {
+		$form = $('form[data-form="forgotBoxForm"]');
+		$form.data('bootstrapValidator').resetForm();
+			
+		$form = $('form[data-form="forgotBoxForm"]');
+		var isTrue = false;
+		$form.data("bootstrapValidator").validateField('employeeUsername');
+		$form.data("bootstrapValidator").validateField('employeeEmail');
+		isTrue = $form.data("bootstrapValidator").isValidField('employeeUsername');
+		if (isTrue == false) return;
+		isTrue = $form.data("bootstrapValidator").isValidField('employeeEmail');
+		if (isTrue == false) return;
+		
+		var $sendEmailButton = $(':button[data-sendEmail="sendEmailButton"]');
+		var $sendEmailButtonSpan = $('span[data-sendEmail="sendEmailButtonSpan"]');
+		$('form[data-form="forgotBoxForm"]').find(":input").attr("disabled", true);
+		$('form[data-form="forgotBoxForm"]').find(":button").attr("disabled", true);
+		
+		
+		var employeeUsernameVal = $form.find(':input[name="employeeUsername"]').val();
+		var employeeEmailVal = $form.find(':input[name="employeeEmail"]').val();
+		$.ajax({
+			url : "${pageContext.request.contextPath}/logins/sendEmailForResetPassword",
+			type : "POST",
+			dataType : "json",
+			data : {
+				employeeUsername : employeeUsernameVal,
+				employeeEmail : employeeEmailVal
+			},
+			beforeSend : function() {
+				$sendEmailButtonSpan.html(timeNow  + "秒后再次发送" );
+				timeDown(timeNow);
+			},
+			complete: function(){
+				clearTimeout(timeID);
+				var $sendEmailButton = $(':button[data-sendEmail="sendEmailButton"]');
+				var $sendEmailButtonSpan = $('span[data-sendEmail="sendEmailButtonSpan"]');
+				$sendEmailButtonSpan.html("发送邮件");
+				$('form[data-form="forgotBoxForm"]').find(":input").removeAttr("disabled");
+				$('form[data-form="forgotBoxForm"]').find(":button").removeAttr("disabled");
+			},
+			success : function(data) {
+				setAlertModalTitleAndBody("发送邮件", data.obj);
+				$('div[data-Modal="alertModal"]').modal('show');
+			},
+			error : function() {
+				timeNow = 0;
+				clearTimeout(timeID);
+				setAlertModalTitleAndBody("发送邮件", "发送失败，我们会尽快修复该问题。");
+				$('div[data-Modal="alertModal"]').modal('show');
+			}
+		});
 	}
 
 	//重置密码

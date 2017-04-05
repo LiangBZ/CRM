@@ -90,6 +90,7 @@ public class UserroleAuthorityVoServiceImpl implements UserroleAuthorityVoServic
 				if("7584310e-1030-11e7-8663-28d2444b860a".equals(authorityList.get(i).getAuthorityId())) continue;
 				if("96dd987b-1138-11e7-8663-28d2444b860a".equals(authorityList.get(i).getAuthorityId())) continue;
 				if("769c7965-1394-11e7-aa71-28d2444b860a".equals(authorityList.get(i).getAuthorityId())) continue;
+				if("a4a35af4-167f-11e7-a0f7-94de80188a22".equals(authorityList.get(i).getAuthorityId())) continue;
 				UserroleAuthority userroleAuthority = new UserroleAuthority();
 				userroleAuthority.setUserroleAuthorityId(UUID.randomUUID().toString());
 				userroleAuthority.setAuthorityId(authorityList.get(i).getAuthorityId());

@@ -156,7 +156,9 @@ response.setDateHeader("Expires", -10);
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
+                    	<c:if test="${authorityMap['a4a35af4-167f-11e7-a0f7-94de80188a22'] eq 1}">
                         <li><a href="javascript:void(0)" class="" onclick="loadMainBody('mainBody/jsp/workOutside')">申请外勤</a></li>
+                        </c:if>
                         <c:if test="${authorityMap['96dd987b-1138-11e7-8663-28d2444b860a'] eq 1}">
                        		<li><a class="" href="javascript:void(0)" onclick="loadMainBody('mainBody/jsp/workOutsideApprove')">外勤审核</a></li>
                         </c:if>

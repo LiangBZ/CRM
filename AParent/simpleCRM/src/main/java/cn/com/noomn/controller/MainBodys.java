@@ -143,9 +143,7 @@ public class MainBodys {
 				dataArrayString.append("\"<span class='label label-inverse'>"+ departmentVo.getEmployeeVoList().size()+"</span>\",");
 			}
 			
-			
 			dataArrayString
-//				.append("\"<a href='javascript:void(0);' data-id='"+ departmentVo.getDepartmentId() + "' onclick='addEmployee(this);'><i class='icon-plus'></i> 添加</a>\",")
 				.append("\"<a href='javascript:void(0);' data-id='"+ departmentVo.getDepartmentId() + "' onclick='editDepartment(this,\\\""+ projectURL +"\\\");'><i class='icon-edit'></i> 编辑</a>\",");
 			
 			//初始化不允许删除
@@ -262,7 +260,11 @@ public class MainBodys {
 	 */
 	@RequestMapping(value="getEmployeeVoList", produces={"text/html;charset=UTF-8;","application/text;"})
 	@ResponseBody
-	private String getEmployeeVoList() {
+	private String getEmployeeVoList(HttpSession session) {
+		String employeeId = (String)session.getAttribute("employeeId");
+		String departmentIdEmployee = (String)session.getAttribute("departmentIdEmployee");
+		String userroleIdEmployee = (String)session.getAttribute("userroleIdEmployee");
+		
 		List<EmployeeVo> allEmployeeVo = employeeVoService.getAllEmployeeVo();
 		
 		StringBuilder dataArrayString = new StringBuilder();
@@ -277,13 +279,46 @@ public class MainBodys {
 			.append("\""+ employeeVo.getDepartmentVo().getDepartmentName()+"\",")
 			.append("\""+ employeeVo.getUserroleVo().getUserroleName()+"\",")
 			.append("\""+ employeeVo.getEmployeePhone()+"\",")
-//			.append("\"<button class='btn btn-success'  data-id='"+ employeeVo.getEmployeeId() + "' onclick='detailedEmployee(this);' ><i class='icon-tags'></i></button><button class='btn btn-primary'  data-id='"+ employeeVo.getEmployeeId() + "' onclick='editEmployee(this);'><i class='icon-pencil'></i></button>\"")
-			.append("\"<button class='btn btn-success'  data-id='"+ employeeVo.getEmployeeId() + "' onclick='detailedEmployee(this);' ><i class='icon-tags'></i></button>");
-			if(employeeVo.getEmployeeInit() != 1) {
-				dataArrayString
-				.append("<button class='btn btn-primary'  data-id='"+ employeeVo.getEmployeeId() + "' onclick='editEmployee(this);'><i class='icon-pencil'></i></button>\"");
+			.append("\"<button class='btn btn-success'  data-id='"+ employeeVo.getEmployeeId() + "' onclick='detailedEmployee(this);' ><i class='icon-tags'></i></button>\"");
+			if(employeeVo.getEmployeeInit() != 1 && !employeeId.equals(employeeVo.getEmployeeId())) {
+				switch(userroleIdEmployee) {
+					case "10988d26-0986-11e7-b918-28d2444b860a":{	//管理员
+						dataArrayString
+						.append(",")
+						.append("\"<button class='btn btn-primary'  data-id='"+ employeeVo.getEmployeeId() + "' onclick='editEmployee(this);'><i class='icon-pencil'></i></button>\"");
+					};break;	
+					case "6566dff0-0987-11e7-b918-28d2444b860a":{	//总经理
+						if(!"6566dff0-0987-11e7-b918-28d2444b860a".equals(employeeVo.getUserroleIdEmployee())) {
+							dataArrayString
+							.append(",")
+							.append("\"<button class='btn btn-primary'  data-id='"+ employeeVo.getEmployeeId() + "' onclick='editEmployee(this);'><i class='icon-pencil'></i></button>\"");
+						}else {
+							dataArrayString
+							.append(",")
+							.append("\"\"");
+						}
+					};break;	
+					case "5e8d627f-0987-11e7-b918-28d2444b860a":{	//部门经理
+						if(departmentIdEmployee.equals(employeeVo.getDepartmentIdEmployee()) && !"5e8d627f-0987-11e7-b918-28d2444b860a".equals(employeeVo.getUserroleIdEmployee())) {
+							dataArrayString
+							.append(",")
+							.append("\"<button class='btn btn-primary'  data-id='"+ employeeVo.getEmployeeId() + "' onclick='editEmployee(this);'><i class='icon-pencil'></i></button>\"");
+						}else {
+							dataArrayString
+							.append(",")
+							.append("\"\"");
+						}
+					};break;	
+					case "57695387-0987-11e7-b918-28d2444b860a":{	//销售人员
+						dataArrayString
+						.append(",")
+						.append("\"\"");
+					};break;	
+				}
 			}else {
-				dataArrayString.append("\"");
+				dataArrayString
+				.append(",")
+				.append("\"\"");
 			}
 			dataArrayString.append("],");
 		}
@@ -293,6 +328,56 @@ public class MainBodys {
 						"}";
 		
 		return substring;
+	}
+	
+	/**
+	 * 添加员工所能选择的部门列表
+	 * @param departmentVo
+	 * @return
+	 */
+	@RequestMapping(value="getAddEmployeeDepartmentVoList")
+	@ResponseBody
+	private List<DepartmentVo> getAddEmployeeDepartmentVoList(HttpSession session) {
+		String userroleIdEmployee = (String)session.getAttribute("userroleIdEmployee");
+		String departmentIdEmployee = (String)session.getAttribute("departmentIdEmployee");
+		List<DepartmentVo> departmentList = departmentService.selectDepartmentList(null);
+		if(departmentList.size() == 0) return null;
+		List<DepartmentVo> resultList = new ArrayList<DepartmentVo>();
+		switch(userroleIdEmployee) {
+			case "10988d26-0986-11e7-b918-28d2444b860a":{	//管理员
+				for(int i=0; i<departmentList.size(); i++) {
+					DepartmentVo departmentVo = departmentList.get(i);
+					String departmentId = departmentVo.getDepartmentId();
+					if(departmentId.equals("85ef362e-0987-11e7-b918-28d2444b860a")) {
+						continue;
+					}
+					resultList.add(departmentVo);
+				}
+			};break;
+			case "6566dff0-0987-11e7-b918-28d2444b860a":{	//总经理
+				for(int i=0; i<departmentList.size(); i++) {
+					DepartmentVo departmentVo = departmentList.get(i);
+					String departmentId = departmentVo.getDepartmentId();
+					if(departmentId.equals("cfd4baa2-0986-11e7-b918-28d2444b860a") || departmentId.equals("85ef362e-0987-11e7-b918-28d2444b860a")) {
+						continue;
+					}
+					resultList.add(departmentVo);
+				}
+			};break;
+			case "5e8d627f-0987-11e7-b918-28d2444b860a":{	//部门经理
+				for(int i=0; i<departmentList.size(); i++) {
+					DepartmentVo departmentVo = departmentList.get(i);
+					String departmentId = departmentVo.getDepartmentId();
+					if(departmentIdEmployee.equals(departmentId)) {
+						resultList.add(departmentVo);
+					}
+				}
+			};break;
+			case "57695387-0987-11e7-b918-28d2444b860a":{	//销售人员
+				resultList = null;
+			};break;
+		}
+		return resultList;
 	}
 	
 	@RequestMapping(value="addEmployeeVo")
@@ -939,6 +1024,12 @@ public class MainBodys {
 		return infos;
 	}
 	
+	/**
+	 * 查看收到的任务
+	 * @param taskVo
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value="getReceiveTask")
 	@ResponseBody
 	private String getReceiveTask(TaskVo taskVo, HttpSession session) {
@@ -984,7 +1075,7 @@ public class MainBodys {
 			if(taskVo.getTaskEndTime().getTime() < new Date().getTime()) {
 				dataArrayString
 				.append(",")
-				.append("\"\"");
+				.append("\"<span class='label label-danger'>"+ "已过期" + "</span>\"");
 			}else {
 				dataArrayString
 				.append(",")

@@ -36,9 +36,9 @@
 							<th>截止日期</th>
 							<th>创建人</th>
 							<th>执行者</th>
-							<th>状态</th>
-							<th>反馈</th>
-							<th>商机</th>
+							<th style="width:8%">状态</th>
+							<th style="width:8%">反馈</th>
+							<th style="width:8%">商机</th>
 						</thead>
 						<tbody>
 							<tr class="odd gradex">

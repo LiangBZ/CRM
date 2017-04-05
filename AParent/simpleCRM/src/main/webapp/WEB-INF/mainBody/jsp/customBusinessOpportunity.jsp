@@ -165,7 +165,7 @@
 						<span class="btn btn-inverse"> 
 							<i class="icon-check"></i>
 						</span> 
-						任务已经完成 <strong class="label label-info"><span name="rateOfProgress">85%</span></strong>
+						任务已经完成 <strong class="label label-info"><span name="rateOfProgress">85</span>%</strong>
 						<div class="space10"></div>
 						<div class="progress progress-success progress-striped active">
 							<div data-rateOfProgress="rateOfProgress" style="width: 85%;" class="bar"></div>

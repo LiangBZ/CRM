@@ -9,7 +9,7 @@
 
 <!-- 部门 -->
 <department departmentId="cfd4baa2-0986-11e7-b918-28d2444b860a" departmentName="总裁办" departmentInit="1"/>
-<department departmentId="7fc51cfa-0986-11e7-b918-28d2444b860a" departmentName="待分配" departmentInit="1"/>
+<!-- <department departmentId="7fc51cfa-0986-11e7-b918-28d2444b860a" departmentName="待分配" departmentInit="1"/> -->
 <department departmentId="85ef362e-0987-11e7-b918-28d2444b860a" departmentName="离职员工" departmentInit="1"/>
 
 <!-- 客户级别 -->
@@ -35,68 +35,10 @@
 	departmentIdEmployee="cfd4baa2-0986-11e7-b918-28d2444b860a" 
 	userroleIdEmployee="10988d26-0986-11e7-b918-28d2444b860a"
 	employeeRealName="梁伯昭" 
-	employeeNumber="001" 
+	employeeNumber="0001" 
 	employeeUsername="liangbozhao" 
 	employeePassword="123456"
 	employeeEmail="1175194928@qq.com"
 	employeePhone="15605925286"
 	employeeInit="1"/>
-<user 
-	employeeId="7256db2e-0a1e-11e7-8d42-28d2444b860a" 
-	departmentIdEmployee="cfd4baa2-0986-11e7-b918-28d2444b860a" 
-	userroleIdEmployee="10988d26-0986-11e7-b918-28d2444b860a"
-	employeeRealName="黄河森" 
-	employeeNumber="002" 
-	employeeUsername="huanghesen" 
-	employeePassword="123456"
-	employeeEmail="463973919@qq.com"
-	employeePhone="120"
-	employeeInit="1"/>
-<user 
-	employeeId="9256db2e-0a1e-11e7-8d42-28d2444b860a" 
-	departmentIdEmployee="cfd4baa2-0986-11e7-b918-28d2444b860a" 
-	userroleIdEmployee="10988d26-0986-11e7-b918-28d2444b860a"
-	employeeRealName="江彦增" 
-	employeeNumber="003" 
-	employeeUsername="jiangyanzeng" 
-	employeePassword="123456"
-	employeeEmail="834866279@qq.com"
-	employeePhone="119"
-	employeeInit="1"/>
-<user 
-	employeeId="1236db2e-0a1e-11e7-8d42-28d2444b860a" 
-	departmentIdEmployee="cfd4baa2-0986-11e7-b918-28d2444b860a" 
-	userroleIdEmployee="10988d26-0986-11e7-b918-28d2444b860a"
-	employeeRealName="test" 
-	employeeNumber="007" 
-	employeeUsername="jiangyanzeng" 
-	employeePassword="123456"
-	employeeEmail="834866279@qq.com"
-	employeePhone="122"
-	employeeInit="1"/>
-	
-<!-- 销售人员 -->
-<user 
-	employeeId="0256db2e-0a1e-11e7-8d42-28d2444b860a" 
-	departmentIdEmployee="7fc51cfa-0986-11e7-b918-28d2444b860a" 
-	userroleIdEmployee="57695387-0987-11e7-b918-28d2444b860a"
-	employeeRealName="黄志彦" 
-	employeeNumber="004" 
-	employeeUsername="huangzhiyan" 
-	employeePassword="123456"
-	employeeEmail="110@163.com"
-	employeePhone="110"
-	employeeInit="1"/>
-<!-- 离职员工 -->
-<user 
-	employeeId="1234db2e-0a1e-11e7-8d42-28d2444b860a" 
-	departmentIdEmployee="85ef362e-0987-11e7-b918-28d2444b860a" 
-	userroleIdEmployee="5e8d627f-0987-11e7-b918-28d2444b860a"
-	employeeRealName="洪清锚" 
-	employeeNumber="005" 
-	employeeUsername="hongqingmao" 
-	employeePassword="123456"
-	employeeEmail="114@qq.com"
-	employeePhone="114"
-	employeeInit="-1"/>
 </init>

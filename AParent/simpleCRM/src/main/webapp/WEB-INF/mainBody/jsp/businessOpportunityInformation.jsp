@@ -19,7 +19,7 @@
 	<!-- 查看所有商机 begin -->
 	<div class="row-fluid" data-businessOpportunity="allBusinessOpportunityInfos">
 		<div class="span12">
-
+			<input type="hidden" name="businessOpportunityId" value="">
 			<div class="widget green">
 				<div class="widget-title">
 					<h4>
@@ -164,18 +164,7 @@
                                 </div>
                             </div>
                         </div>
-<!--						
- 						<div class="control-group">
-                            <label class="control-label">成本(*)</label>
-                            <div class="controls">
-                                <div class="input-prepend input-append">
-                                    <span class="add-on">￥</span>
-                                    <input name="cost" type="text" data-mask="99999999.99" required disabled/>
-                                    <span class="add-on">.00</span>
-                                </div>
-                            </div>
-                        </div>
- -->						
+						
 						<div class="control-group">
                             <label class="control-label">(预期)/成交金额(*)</label>
                             <div class="controls">
@@ -186,19 +175,8 @@
                                 </div>
                             </div>
                         </div>
-<!--                         					
+                        
 						<div class="control-group">
-                            <label class="control-label">实际售出金额(*)</label>
-                            <div class="controls">
-                                <div class="input-prepend input-append">
-                                    <span class="add-on">￥</span>
-                                    <input name="realWages" type="text" data-mask="99999999.99" required/>
-                                    <span class="add-on">.00</span>
-                                </div>
-                            </div>
-                        </div>
-						
- -->						<div class="control-group">
 			                <label class="control-label">(预期)/售出时间(*)</label>
 			                <div class="controls input-group date" name="preDealTime" >
 			                    <div class="input-prepend input-append">
