@@ -12,7 +12,8 @@
     <result column="DEPARTMENT_NAME" jdbcType="VARCHAR" property="departmentName" />
     <result column="DEPARTMENT_INIT" jdbcType="INTEGER" property="departmentInit" />
     
-    <collection property="employeeVoList" resultMap="cn.com.noomn.mapper.vo.EmployeeVoMapper.BaseResultMap"></collection>
+<!--     <collection property="employeeVoList" resultMap="cn.com.noomn.mapper.vo.EmployeeVoMapper.BaseResultMap"></collection> -->
+    <collection property="employeeVoList" resultMap="cn.com.noomn.mapper.vo.EmployeeVoMapper.roleEmployeeDepartment"></collection>
   </resultMap>
   
   <select id="selectForNimble" parameterType="cn.com.noomn.vo.DepartmentVo" resultMap="BaseResultMap">
@@ -33,15 +34,31 @@
   	</where>
   </select>
   
-  <select id="selectDepartmentAndEmployee" parameterType="cn.com.noomn.vo.DepartmentVo" resultMap="departmentAndEmployee">
+<!--   <select id="selectDepartmentAndEmployee" parameterType="cn.com.noomn.vo.DepartmentVo" resultMap="departmentAndEmployee">
   	select department.*,employee.* 
 	from 
 	department left join employee 
 	on  
 	department.DEPARTMENT_ID = employee.DEPARTMENT_ID_EMPLOYEE
+	
 	<where>
 		<if test="departmentId != null">
 			DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR}
+		</if>
+	</where>
+  </select> -->
+  <select id="selectDepartmentAndEmployee" parameterType="cn.com.noomn.vo.DepartmentVo" resultMap="departmentAndEmployee">
+  	select department.*,employee.*,userrole.*
+	from 
+	department left join employee 
+	on  
+	department.DEPARTMENT_ID = employee.DEPARTMENT_ID_EMPLOYEE
+	join userrole
+	ON
+	employee.USERROLE_ID_EMPLOYEE = userrole.USERROLE_ID
+	<where>
+		<if test="departmentId != null">
+			AND DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR}
 		</if>
 	</where>
   </select>

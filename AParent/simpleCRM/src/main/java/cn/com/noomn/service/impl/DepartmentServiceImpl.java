@@ -63,7 +63,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 				TreeLeaf treeLeaf3 = new TreeLeaf();
 				treeLeaf3.setId(employeeVo.getEmployeeId());
 				treeLeaf3.setpId(treeLeaf2.getId());
-				treeLeaf3.setName(employeeVo.getEmployeeRealName());
+				treeLeaf3.setName(employeeVo.getEmployeeRealName() + "(" + employeeVo.getUserroleVo().getUserroleName() + ")");
 				treeDatasourceList.add(treeLeaf3);
 				j++;
 			}
