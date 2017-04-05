@@ -55,7 +55,7 @@ response.setDateHeader("Expires", -10);
 
 
             <a class="brand" href="${pageContext.request.contextPath}/logout/removeSession">
-                <img src="${pageContext.request.contextPath}/mainBody/img/png/logo.png" alt="Metro Lab"/>
+                <img src="${pageContext.request.contextPath}/mainBody/img/png/logo2.png" alt="Metro Lab"/>
             </a>
 
 
