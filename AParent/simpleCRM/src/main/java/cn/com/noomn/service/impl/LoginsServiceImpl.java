@@ -11,6 +11,7 @@ import cn.com.noomn.service.LoginsService;
 import cn.com.noomn.util.DataUtil;
 import cn.com.noomn.util.Infos;
 import cn.com.noomn.util.JavaMail;
+import cn.com.noomn.util.MD5Util;
 import cn.com.noomn.util.Message;
 import cn.com.noomn.util.RandomUtil;
 import cn.com.noomn.vo.EmployeeVo;
@@ -26,6 +27,9 @@ public class LoginsServiceImpl implements LoginsService {
 
 	@Override
 	public boolean selectForlogin(EmployeeVo employeeVo) {
+		if(employeeVo != null && employeeVo.getEmployeePassword() != null) {
+			employeeVo.setEmployeePassword(MD5Util.EncoderByMd5(employeeVo.getEmployeePassword()));
+		}
 		try {
 			return employeeVoMapper.selectForlogin(employeeVo) == null ? false : true ;
 		} catch (Exception e) {
@@ -36,6 +40,9 @@ public class LoginsServiceImpl implements LoginsService {
 
 	@Override
 	public List<EmployeeVo> selectEmployee(EmployeeVo employeeVo) {
+		if(employeeVo != null && employeeVo.getEmployeePassword() != null) {
+			employeeVo.setEmployeePassword(MD5Util.EncoderByMd5(employeeVo.getEmployeePassword()));
+		}
 		try {
 			return employeeVoMapper.selectForNimble(employeeVo);
 		} catch (Exception e) {

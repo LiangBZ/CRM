@@ -60,6 +60,10 @@ public class DepartmentServiceImpl implements DepartmentService {
 			int j = 0;
 			while(j<size) {
 				EmployeeVo employeeVo = employeeVoList.get(j);
+				if(employeeVo.getEmployeeId() == null) {
+					j++;
+					continue;
+				}
 				TreeLeaf treeLeaf3 = new TreeLeaf();
 				treeLeaf3.setId(employeeVo.getEmployeeId());
 				treeLeaf3.setpId(treeLeaf2.getId());

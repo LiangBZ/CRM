@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.com.noomn.service.LoginsService;
 import cn.com.noomn.service.UserroleAuthorityVoService;
 import cn.com.noomn.util.Infos;
+import cn.com.noomn.util.MD5Util;
 import cn.com.noomn.util.Message;
 import cn.com.noomn.util.RSAModel;
 import cn.com.noomn.util.WebsocketEndPoint;
@@ -208,7 +209,8 @@ public class LoginsController {
 			return info;
 		}
 		
-		employeeVo.setEmployeePassword("123456");
+		employeeVo.setEmployeePassword(MD5Util.EncoderByMd5("123456"));
+//		employeeVo.setEmployeePassword("123456");
 		employeeVo.setEmployeeInstruct("");
 		int updateRecordNum = loginsService.updateEmployeeByPrimaryKey(employeeVo);
 

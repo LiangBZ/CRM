@@ -30,20 +30,22 @@ response.setDateHeader("Expires", -10);
 	<!-- 日期 -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/Util/js/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.css" />
 	
-<%-- 	
-	<%@ include file="/WEB-INF/Util/jsp/alertModal.jsp" %> 
-	<%@ include file="/WEB-INF/Util/jsp/organizing_editDepartment.jsp" %>
-	<%@ include file="/WEB-INF/Util/jsp/organizing_addDepartment.jsp" %>
---%>
-	
 	<script type="text/javascript">
 		$.ajaxSetup({
 			cache:false
 		});
 	</script>
+	
+	<style>
+		td {
+			border : 1px solid #ddd;
+			padding :8px;
+		}
+	</style>
 </head>
 
 <body class="fixed-top">
+
 <div id="header" class="navbar navbar-inverse navbar-fixed-top">
 
     <div class="navbar-inner">
@@ -213,7 +215,6 @@ response.setDateHeader("Expires", -10);
 </div>
 
 <a class="twitter" data-title="Goto twitter?" href="http://twitter.com/craftpip">Goto twitter</a>
-
 </body>
 
 <script src="${pageContext.request.contextPath}/mainBody/js/bootstrap-fileupload.js" type="text/javascript"></script>
@@ -266,6 +267,10 @@ response.setDateHeader("Expires", -10);
 
 <script src="${pageContext.request.contextPath}/Util/js/echarts/echarts.min.js" type="text/javascript"></script>
 
+<!-- pdfjs -->
+<script src="${pageContext.request.contextPath}/Util/js/PDFJS/pdf.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/Util/js/PDFJS/pdf.worker.js" type="text/javascript"></script>
+
 <!-- websocket -->
 <script src="${pageContext.request.contextPath}/Util/js/socket/sockjs-0.3.min.js"></script>
 
@@ -298,4 +303,5 @@ response.setDateHeader("Expires", -10);
 	})
 	
 </script>
+
 </html>

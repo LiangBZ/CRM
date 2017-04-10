@@ -18,6 +18,7 @@ import cn.com.noomn.service.EmployeeVoService;
 import cn.com.noomn.util.Base64ToImg;
 import cn.com.noomn.util.Infos;
 import cn.com.noomn.util.InitXMLResolve;
+import cn.com.noomn.util.MD5Util;
 import cn.com.noomn.util.Message;
 import cn.com.noomn.vo.EmployeeVo;
 
@@ -59,6 +60,9 @@ public class EmployeeVoServiceImpl implements EmployeeVoService {
 			EmployeeVo employeeVo = iterator.next();
 			boolean isContains = employeeVoIdList.contains(employeeVo.getEmployeeId());
 			if(isContains) continue;
+			if(employeeVo != null && employeeVo.getEmployeePassword() != null) {
+				employeeVo.setEmployeePassword(MD5Util.EncoderByMd5(employeeVo.getEmployeePassword()));
+			}
 			insertCount += employeeMapper.insertSelective(employeeVo);
 		}
 		Infos infos = Infos.getInfosInstance();
@@ -92,6 +96,10 @@ public class EmployeeVoServiceImpl implements EmployeeVoService {
 			employeeNumber = "0" + employeeNumber;
 		}
 		employeeVo.setEmployeeNumber(employeeNumber);
+		
+		if(employeeVo != null && employeeVo.getEmployeePassword() != null) {
+			employeeVo.setEmployeePassword(MD5Util.EncoderByMd5(employeeVo.getEmployeePassword()));
+		}
 		int insertCount = employeeMapper.insertSelective(employeeVo);
 		
 		Infos infos = Infos.getInfosInstance();
@@ -107,6 +115,9 @@ public class EmployeeVoServiceImpl implements EmployeeVoService {
 
 	@Override
 	public EmployeeVo getOneEmployeeVo(EmployeeVo employeeVo) {
+		if(employeeVo != null && employeeVo.getEmployeePassword() != null) {
+			employeeVo.setEmployeePassword(MD5Util.EncoderByMd5(employeeVo.getEmployeePassword()));
+		}
 		List<EmployeeVo> employeeVoList = employeeVoMapper.selectRoleRightEmployeeLeftDepartment(employeeVo);
 		if(employeeVoList.size() > 0) return employeeVoList.get(0);
 		return null;
@@ -120,6 +131,9 @@ public class EmployeeVoServiceImpl implements EmployeeVoService {
 			Base64ToImg.generateImage(employeeImg, employeeVo.getEmployeeImgPath());
 		}
 		
+		if(employeeVo != null && employeeVo.getEmployeePassword() != null) {
+			employeeVo.setEmployeePassword(MD5Util.EncoderByMd5(employeeVo.getEmployeePassword()));
+		}
 		int updateCount = employeeMapper.updateByPrimaryKeySelective(employeeVo);
 		Infos infos = Infos.getInfosInstance();
 		if(updateCount == 1) {
@@ -134,6 +148,9 @@ public class EmployeeVoServiceImpl implements EmployeeVoService {
 
 	@Override
 	public List<EmployeeVo> selectForNimble(EmployeeVo employeeVo) {
+		if(employeeVo != null && employeeVo.getEmployeePassword() != null) {
+			employeeVo.setEmployeePassword(MD5Util.EncoderByMd5(employeeVo.getEmployeePassword()));
+		}
 		List<EmployeeVo> employeeVoList = employeeVoMapper.selectForNimble(employeeVo);
 		return employeeVoList;
 	}

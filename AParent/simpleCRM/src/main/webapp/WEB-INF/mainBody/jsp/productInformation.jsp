@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div class="container-fluid">
+<div class="container-fluid" data-mask="maskoff">
 
 	<div class="row-fluid">
 		<div class="span12">
@@ -29,7 +30,8 @@
 					<div style="min-height: 360px;">
 						<!-- 编辑处理 -->
 
-						<c:if test="${authorityMap['8ee8e7eb-0ca9-11e7-9e9d-28d2444b860a'] eq 1}">
+						<c:if
+							test="${authorityMap['8ee8e7eb-0ca9-11e7-9e9d-28d2444b860a'] eq 1}">
 							<div class="clearfix">
 								<div class="btn-group">
 									<button class="btn green" onclick="addProductShow();">
@@ -46,10 +48,12 @@
 								<th>产品号</th>
 								<th>产品名称</th>
 								<th>产品价格</th>
-								<th style="width:5%;text-align: center;">pdf</th>
-								<th style="width:5%;text-align: center;">查看</th>
-								<c:if test="${authorityMap['523c4eee-0d3b-11e7-9e9d-28d2444b860a'] eq 1}">
-									<th style="width:5%;text-align: center;">编辑</th>
+								<th style="width: 5%; text-align: center;">pdf</th>
+								<th style="width: 5%; text-align: center;">pdf</th>
+								<th style="width: 5%; text-align: center;">查看</th>
+								<c:if
+									test="${authorityMap['523c4eee-0d3b-11e7-9e9d-28d2444b860a'] eq 1}">
+									<th style="width: 5%; text-align: center;">编辑</th>
 								</c:if>
 							</thead>
 							<tbody>
@@ -57,6 +61,11 @@
 									<td>SD0001</td>
 									<td>CRM</td>
 									<td>500000.00</td>
+									<td>
+										<button class="btn btn-success">
+											<i class="icon-search"></i>
+										</button>
+									</td>
 									<td>
 										<button class="btn btn-warning">
 											<i class="icon-arrow-down"></i>
@@ -84,7 +93,7 @@
 		</div>
 	</div>
 	<!-- /产品列表 /end -->
-	
+
 	<!-- 添加新产品 begin -->
 	<div class="row-fluid" data-product="addProduct">
 		<div class="span12">
@@ -96,186 +105,221 @@
 					</h4>
 				</div>
 				<div class="widget-body">
-					<form data-product="addProduct" method="post" enctype="multipart/form-data" class="form-horizontal" onsubmit="return false;">  
+					<form data-product="addProduct" method="post"
+						enctype="multipart/form-data" class="form-horizontal"
+						onsubmit="return false;">
 						<div class="control-group">
 							<label class="control-label">名称</label>
 							<div class="controls">
-								<input name="productName" type="text" class="span6" placeholder="请输入产品名称.." required/> 
+								<input name="productName" type="text" class="span6"
+									placeholder="请输入产品名称.." required />
 							</div>
 						</div>
-						
+
 						<div class="control-group">
-                            <label class="control-label">描述</label>
-                            <div class="controls">
-                              <textarea name="productDetail" class="span6 ckeditor" rows="6"></textarea>
-                            </div>
-	                    </div>
-						
+							<label class="control-label">描述</label>
+							<div class="controls">
+								<textarea name="productDetail" class="span6 ckeditor" rows="6"></textarea>
+							</div>
+						</div>
+
 						<div class="control-group">
-                            <label class="control-label">价格</label>
-                            <div class="controls">
-                                <div class="input-prepend input-append">
-                                    <span class="add-on">￥</span>
-                                    <input name="productPrice" type="text" data-mask="99999999.99" required/>
-                                    <span class="add-on">.00</span>
-                                </div>
-                            </div>
-                        </div>
-						
+							<label class="control-label">价格</label>
+							<div class="controls">
+								<div class="input-prepend input-append">
+									<span class="add-on">￥</span> <input name="productPrice"
+										type="text" data-mask="99999999.99" required /> <span
+										class="add-on">.00</span>
+								</div>
+							</div>
+						</div>
+
 						<div class="control-group">
 							<label class="control-label">pdf</label>
 							<div class="controls">
-								<input name="file" type="file" accept="application/pdf" class="span6 btn" />
+								<input name="file" type="file" accept="application/pdf"
+									class="span6 btn" />
 							</div>
 						</div>
-						
+
 						<div class="form-actions">
 							<button type="submit" class="btn btn-success">保存</button>
 							<button type="button" class="btn" onclick="refreshProductInfos()">取消</button>
-							<input type="reset" value="Reset" class="hidden"/>
+							<input type="reset" value="Reset" class="hidden" />
 						</div>
-					</form> 
-				
+					</form>
+
 				</div>
 			</div>
 
 		</div>
 	</div>
 	<!-- /添加新产品 /end -->
-	
+
 	<!-- 产品信息详情 begin -->
 	<div class="row-fluid" data-product="showProduct">
 		<div class="span12">
-				<div class="widget green">
-					<div class="widget-title">
-						<h4>
-							<i class="icon-reorder"></i> 产品详情
-						</h4>
-					</div>
-					<div class="widget-body">
-						<div class="clearfix" style="margin-bottom: 20px;">
-								<div class="btn-group">
-									<button class="btn green" onclick="refreshProductInfos()">
-										返回 <i class="icon-plus"></i>
-									</button>
-								</div>
-						</div>
-						
-						<form style="padding:10px;" action="#" class="form-horizontal" data-product="showProduct" onsubmit="return false;">
-							
-							<input type="hidden" name="productId" value="">
-							
-							<div class="control-group">
-								<label class="control-label">产品号</label>
-								<div class="controls">
-									<input name="productName" type="text" class="span6" disabled/> 
-								</div>
-							</div>
-							
-							<div class="control-group">
-								<label class="control-label">价格</label>
-								<div class="controls">
-									<input name="productPrice" type="text" class="span6" disabled/> 
-								</div>
-							</div>
-							
-							<div class="control-group">
-								<label class="control-label">描述</label>
-								<div class="controls">
-									<textarea name="productDetail" class="span6 ckeditor" rows="6" disabled/>
-								</div>
-							</div>
-		
-							<div class="control-group">
-								<label class="control-label">pdf</label>
-								<div class="controls">
-									<div class="input-prepend">
-										<a data-button="downloadPDF" href='javasvript:void(0);' class='btn btn-warning'  data-id=''>下载</a>
-									</div>
-								</div>
-							</div>
-		
-						</form>
-					</div>
+			<div class="widget green">
+				<div class="widget-title">
+					<h4>
+						<i class="icon-reorder"></i> 产品详情
+					</h4>
 				</div>
-			
+				<div class="widget-body">
+					<div class="clearfix" style="margin-bottom: 20px;">
+						<div class="btn-group">
+							<button class="btn green" onclick="refreshProductInfos()">
+								返回 <i class="icon-plus"></i>
+							</button>
+						</div>
+					</div>
+
+					<form style="padding: 10px;" action="#" class="form-horizontal"
+						data-product="showProduct" onsubmit="return false;">
+
+						<input type="hidden" name="productId" value="">
+
+						<div class="control-group">
+							<label class="control-label">产品号</label>
+							<div class="controls">
+								<input name="productName" type="text" class="span6" disabled />
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label">价格</label>
+							<div class="controls">
+								<input name="productPrice" type="text" class="span6" disabled />
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label">描述</label>
+							<div class="controls">
+								<textarea name="productDetail" class="span6 ckeditor" rows="6"
+									disabled />
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label">pdf</label>
+							<div class="controls">
+								<div class="input-prepend">
+									<a data-button="downloadPDF" href='javasvript:void(0);'
+										class='btn btn-warning' data-id=''>下载</a>
+								</div>
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+
 		</div>
 	</div>
 	<!-- /产品信息详情 /end -->
-	
-	
+
+
 	<!-- 产品信息修改 begin -->
 	<div class="row-fluid" data-product="editProduct">
 		<div class="span12">
-				<div class="widget green">
-					<div class="widget-title">
-						<h4>
-							<i class="icon-reorder"></i> 编辑产品信息
-						</h4>
-					</div>
-					<div class="widget-body">
-						<div class="clearfix" style="margin-bottom: 20px;">
-								<div class="btn-group">
-									<button class="btn green" onclick="refreshProductInfos()">
-										返回 <i class="icon-plus"></i>
-									</button>
-								</div>
+			<div class="widget green">
+				<div class="widget-title">
+					<h4>
+						<i class="icon-reorder"></i> 编辑产品信息
+					</h4>
+				</div>
+				<div class="widget-body">
+					<div class="clearfix" style="margin-bottom: 20px;">
+						<div class="btn-group">
+							<button class="btn green" onclick="refreshProductInfos()">
+								返回 <i class="icon-plus"></i>
+							</button>
 						</div>
-						
-						<form style="padding:10px;" action="#" class="form-horizontal" data-product="editProduct" onsubmit="return false;">
-							
-							<input type="hidden" name="productId" value="">
-							
-							<div class="control-group">
-								<label class="control-label">产品号</label>
-								<div class="controls">
-									<input name="productNum" type="text" class="span6" disabled required/> 
-								</div>
+					</div>
+
+					<form style="padding: 10px;" action="#" class="form-horizontal"
+						data-product="editProduct" onsubmit="return false;">
+
+						<input type="hidden" name="productId" value="">
+
+						<div class="control-group">
+							<label class="control-label">产品号</label>
+							<div class="controls">
+								<input name="productNum" type="text" class="span6" disabled
+									required />
 							</div>
-							
-							<div class="control-group">
-								<label class="control-label">产品名称</label>
-								<div class="controls">
-									<input name="productName" type="text" class="span6" required/> 
-								</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label">产品名称</label>
+							<div class="controls">
+								<input name="productName" type="text" class="span6" required />
 							</div>
-							
-							<div class="control-group">
-								<label class="control-label">价格</label>
-								<div class="controls">
-									<input name="productPrice" type="text" class="span6" data-mask="99999999.99" required /> 
-								</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label">价格</label>
+							<div class="controls">
+								<input name="productPrice" type="text" class="span6"
+									data-mask="99999999.99" required />
 							</div>
-							
-							<div class="control-group">
-								<label class="control-label">描述</label>
-								<div class="controls">
-									 <textarea name="productDetail" class="span6 ckeditor" rows="6"></textarea>
-								</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label">描述</label>
+							<div class="controls">
+								<textarea name="productDetail" class="span6 ckeditor" rows="6"></textarea>
 							</div>
-		
-							<div class="control-group">
+						</div>
+
+						<div class="control-group">
 							<label class="control-label">pdf</label>
 							<div class="controls">
-								<input name="file" type="file" accept="application/pdf" class="span6 btn" />
+								<input name="file" type="file" accept="application/pdf"
+									class="span6 btn" />
 							</div>
 						</div>
-						
+
 						<div class="form-actions">
 							<button type="submit" class="btn btn-success">保存</button>
 							<button type="button" class="btn" onclick="refreshProductInfos()">取消</button>
-							<input type="reset" value="Reset" class="hidden"/>
+							<input type="reset" value="Reset" class="hidden" />
 						</div>
-		
-						</form>
-					</div>
+
+					</form>
 				</div>
-			
+			</div>
+
 		</div>
 	</div>
 	<!-- /产品信息修改 /end -->
 
 </div>
+
+<div data-mask="maskon"
+	style="position: fixed;; left: 0; top: 0; z-index: 1000; background-color: rgba(0, 0, 0, 0.9); display: none;">
+	<div style="width: 10%; height: 100%; float: left;" onclick="hidePDF()"></div>
+	<div style="width: 80%; height: 100%; float: left;">
+		<iframe src="" frameborder="0" id="pdfContainer" name="pdfContainer"
+			style="width: 100%; height: 100%;"></iframe>
+	</div>
+	<div style="width: 10%; height: 100%; float: left;" onclick="hidePDF()"></div>
+</div>
+<script type="text/javascript">
+	var showPDF = function() {
+		var $mask = $('div[data-mask="maskon" ]');
+		$mask.css("width", $('body').width());
+		$mask.css("height", $('body').height());
+		$mask.css("padding-top", $('div[id="header"]').height());
+		$mask.css("display", "block");
+	}
+
+	var hidePDF = function() {
+		var $mask = $('div[data-mask="maskon" ]');
+		$mask.hide(1000);
+	}
+</script>
 
 <script type="text/javascript">
 	$(function() {

@@ -491,10 +491,16 @@ public class MainBodys {
 				.append("\""+ productVo.getProductPrice() +"\"")
 				.append(",");
 			if(productVo.getProductPdf() == null) {
-				dataArrayString.append("\"\"")
+				dataArrayString
+				.append("\"\"")
+				.append(",")
+				.append("\"\"")
 				.append(",");
 			}else {
-				dataArrayString.append("\"<a href='"+ projectURL +"/mainBodys/downLoadPDF?productId= "+ productVo.getProductId() + "' class='btn btn-warning'  data-id='"+ productVo.getProductId() + "'><i class='icon-arrow-down'></i></button>\"")
+				dataArrayString
+				.append("\"<a target='pdfContainer' href='"+ projectURL +"/mainBody/pdf/" + productVo.getProductId() + ".pdf'" + "class='btn btn-success' onclick='showPDF();'><i class='icon-search'></i></button>\"")
+				.append(",")
+				.append("\"<a href='"+ projectURL +"/mainBodys/downLoadPDF?productId= "+ productVo.getProductId() + "' class='btn btn-warning'  data-id='"+ productVo.getProductId() + "'><i class='icon-arrow-down'></i></button>\"")
 				.append(",");
 			}
 				dataArrayString

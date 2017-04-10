@@ -34,26 +34,13 @@
   	</where>
   </select>
   
-<!--   <select id="selectDepartmentAndEmployee" parameterType="cn.com.noomn.vo.DepartmentVo" resultMap="departmentAndEmployee">
-  	select department.*,employee.* 
-	from 
-	department left join employee 
-	on  
-	department.DEPARTMENT_ID = employee.DEPARTMENT_ID_EMPLOYEE
-	
-	<where>
-		<if test="departmentId != null">
-			DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR}
-		</if>
-	</where>
-  </select> -->
   <select id="selectDepartmentAndEmployee" parameterType="cn.com.noomn.vo.DepartmentVo" resultMap="departmentAndEmployee">
   	select department.*,employee.*,userrole.*
 	from 
 	department left join employee 
 	on  
 	department.DEPARTMENT_ID = employee.DEPARTMENT_ID_EMPLOYEE
-	join userrole
+	left join userrole
 	ON
 	employee.USERROLE_ID_EMPLOYEE = userrole.USERROLE_ID
 	<where>
