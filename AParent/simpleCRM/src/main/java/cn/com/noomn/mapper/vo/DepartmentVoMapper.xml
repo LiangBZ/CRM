@@ -61,7 +61,8 @@
   </delete>
   
   <select id="selectBeUsedDepartmentId" resultType="java.lang.String">
-  	select DISTINCT employee.DEPARTMENT_ID_EMPLOYEE from employee
+  	<!-- select DISTINCT employee.DEPARTMENT_ID_EMPLOYEE from employee -->
+  	select DEPARTMENT_ID_EMPLOYEE, count(DEPARTMENT_ID_EMPLOYEE) from employee group by DEPARTMENT_ID_EMPLOYEE
   </select>
   
   <select id="selectDepartmentId" resultType="java.lang.String">

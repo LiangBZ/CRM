@@ -644,13 +644,42 @@ var showAddMember = function(url) {
 			var selectOneVal = $select.find('option').eq(0).val();
 			var $selectRole = $('form[data-menberAdd="menberAdd"]').find('select[name="userroleIdEmployee"]');
 			option = "";
-			if(selectOneVal == "cfd4baa2-0986-11e7-b918-28d2444b860a") {
-				option += '<option value="6566dff0-0987-11e7-b918-28d2444b860a">总经理</option>';
-			}else {
-				option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
-				option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
-			}
-			$selectRole.html(option);
+			
+//			if(selectOneVal == "cfd4baa2-0986-11e7-b918-28d2444b860a") {
+//				option += '<option value="6566dff0-0987-11e7-b918-28d2444b860a">总经理</option>';
+//			}else {
+//				option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+//				option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
+//			}
+//			$selectRole.html(option);
+			
+			var url = projectURL + "mainBodys/returnUserrole";
+			$.ajax({
+				url : url,
+				type : "POST",
+				success : function(data) {
+					var $select = $('form[data-menberAdd="menberAdd"]').find('select[name="userroleIdEmployee"]');
+					option = "";
+					if(selectOneVal == "cfd4baa2-0986-11e7-b918-28d2444b860a") {	//管理员
+						option += '<option value="6566dff0-0987-11e7-b918-28d2444b860a">总经理</option>';
+					}else {
+						if(data == "10988d26-0986-11e7-b918-28d2444b860a") {	//管理员
+							option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+							option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
+						}else if(data == "6566dff0-0987-11e7-b918-28d2444b860a") {	//总经理
+							option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+							option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
+						}else {	//部门经理
+							option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+						}
+					}
+					$selectRole.html(option);
+				},
+				error : function() {
+					setAlertModalTitleAndBody("提示", "获取角色信息失败，请重试");
+					$('div[data-Modal="alertModal"]').modal('show');
+				}
+			});
 		},
 		error : function() {
 			setAlertModalTitleAndBody("提示", "获取部门信息失败，请重试");
@@ -660,16 +689,34 @@ var showAddMember = function(url) {
 }
 
 var getAddEmployeeUserrole = function(_this) {
-	var selectVal = $(_this).val();
-	var $select = $('form[data-menberAdd="menberAdd"]').find('select[name="userroleIdEmployee"]');
-	option = "";
-	if(selectVal == "cfd4baa2-0986-11e7-b918-28d2444b860a") {
-		option += '<option value="6566dff0-0987-11e7-b918-28d2444b860a">总经理</option>';
-	}else {
-		option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
-		option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
-	}
-	$select.html(option);
+	var url = projectURL + "mainBodys/returnUserrole";
+	$.ajax({
+		url : url,
+		type : "POST",
+		success : function(data) {
+			var selectVal = $(_this).val();
+			var $select = $('form[data-menberAdd="menberAdd"]').find('select[name="userroleIdEmployee"]');
+			option = "";
+			if(selectVal == "cfd4baa2-0986-11e7-b918-28d2444b860a") {	//管理员
+				option += '<option value="6566dff0-0987-11e7-b918-28d2444b860a">总经理</option>';
+			}else {
+				if(data == "10988d26-0986-11e7-b918-28d2444b860a") {	//管理员
+					option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+					option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
+				}else if(data == "6566dff0-0987-11e7-b918-28d2444b860a") {	//总经理
+					option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+					option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
+				}else {	//部门经理
+					option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+				}
+			}
+			$select.html(option);
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "获取角色信息失败，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
 }
 
 var menberAdd = function() {
@@ -764,16 +811,39 @@ var detailedEmployee = function(_this) {
 }
 
 var getEditEmployeeUserrole = function(_this) {
-	var selectVal = $(_this).val();
-	var $select = $('form[data-menberEdit="menberEdit"]').find('select[name="userroleIdEmployee"]');
-	option = "";
-	if(selectVal == "cfd4baa2-0986-11e7-b918-28d2444b860a") {
-		option += '<option value="6566dff0-0987-11e7-b918-28d2444b860a">总经理</option>';
-	}else {
-		option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
-		option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
-	}
-	$select.html(option);
+	var url = projectURL + "mainBodys/returnUserrole";
+	$.ajax({
+		url : url,
+		type : "POST",
+		success : function(data2) {
+			var $select = $('form[data-menberEdit="menberEdit"]').find('select[name="userroleIdEmployee"]');
+			option = "";
+			var selectOneVal = $(_this).val();
+			if(selectOneVal == "cfd4baa2-0986-11e7-b918-28d2444b860a") {	//管理员
+				$select.removeAttr("disabled");
+				option += '<option value="6566dff0-0987-11e7-b918-28d2444b860a">总经理</option>';
+			}else if(selectOneVal == "85ef362e-0987-11e7-b918-28d2444b860a") {	//离职员工
+				option += '<option value="'+ $select.data("defaultID") +'">'+ $select.data("defaultName") +'</option>';
+				$select.attr("disabled","disabled");
+			}else {
+				$select.removeAttr("disabled");
+				if(data2 == "10988d26-0986-11e7-b918-28d2444b860a") {	//管理员
+					option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+					option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
+				}else if(data2 == "6566dff0-0987-11e7-b918-28d2444b860a") {	//总经理
+					option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+					option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
+				}else {	//部门经理
+					option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+				}
+			}
+			$select.html(option);
+		},
+		error : function() {
+			setAlertModalTitleAndBody("提示", "获取角色信息失败，请重试");
+			$('div[data-Modal="alertModal"]').modal('show');
+		}
+	});
 }
 
 
@@ -793,6 +863,7 @@ var editEmployee = function(_this) {
 				option += '<option value="'+ department.departmentId + '"';
 				option += '>'+ department.departmentName +'</option>';
 			}
+			option += '<option value="85ef362e-0987-11e7-b918-28d2444b860a">离职员工</option>';
 			var $select = $('form[data-menberEdit="menberEdit"]').find('select[name="departmentIdEmployee"]');
 			$select.html(option);
 			
@@ -813,17 +884,54 @@ var editEmployee = function(_this) {
 					$form.find(':input[name="employeePhone"]').val(data.employeePhone);
 					$form.find('select[name="departmentIdEmployee"]').val(data.departmentVo.departmentId);
 					
-					var $select = $('form[data-menberEdit="menberEdit"]').find('select[name="userroleIdEmployee"]');
-					option = "";
-					if(data.departmentVo.departmentId == "cfd4baa2-0986-11e7-b918-28d2444b860a") {
-						option += '<option value="6566dff0-0987-11e7-b918-28d2444b860a">总经理</option>';
-					}else {
-						option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
-						option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
-					}
-					$select.html(option);
+//					var $select = $('form[data-menberEdit="menberEdit"]').find('select[name="userroleIdEmployee"]');
+//					option = "";
+//					if(data.departmentVo.departmentId == "cfd4baa2-0986-11e7-b918-28d2444b860a") {
+//						option += '<option value="6566dff0-0987-11e7-b918-28d2444b860a">总经理</option>';
+//					}else {
+//						option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+//						option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
+//					}
+//					$select.html(option);
+//					
+//					$form.find('select[name="userroleIdEmployee"]').val(data.userroleVo.userroleId);
 					
-					$form.find('select[name="userroleIdEmployee"]').val(data.userroleVo.userroleId);
+					var url = projectURL + "mainBodys/returnUserrole";
+					$.ajax({
+						url : url,
+						type : "POST",
+						success : function(data2) {
+							var $select = $('form[data-menberEdit="menberEdit"]').find('select[name="userroleIdEmployee"]');
+							option = "";
+							var selectOneVal = $form.find('select[name="departmentIdEmployee"]').val();
+							if(selectOneVal == "cfd4baa2-0986-11e7-b918-28d2444b860a") {	//管理员
+								$select.removeAttr("disabled");
+								option += '<option value="6566dff0-0987-11e7-b918-28d2444b860a">总经理</option>';
+							}else if(selectOneVal == "85ef362e-0987-11e7-b918-28d2444b860a") {	//离职员工
+								$select.attr("disabled","disabled");
+							}else {
+								$select.removeAttr("disabled");
+								if(data2 == "10988d26-0986-11e7-b918-28d2444b860a") {	//管理员
+									option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+									option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
+								}else if(data2 == "6566dff0-0987-11e7-b918-28d2444b860a") {	//总经理
+									option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+									option += '<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>';
+								}else {	//部门经理
+									option += '<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>';
+								}
+							}
+							$select.html(option);
+							$form.find('select[name="userroleIdEmployee"]').val(data.userroleVo.userroleId);
+							$form.find('select[name="userroleIdEmployee"]').data("defaultID",data.userroleVo.userroleId);
+							var text = $form.find('select[name="userroleIdEmployee"]').find('option[value="'+ data.userroleVo.userroleId +'"]').text();
+							$form.find('select[name="userroleIdEmployee"]').data("defaultName",text);
+						},
+						error : function() {
+							setAlertModalTitleAndBody("提示", "获取角色信息失败，请重试");
+							$('div[data-Modal="alertModal"]').modal('show');
+						}
+					});
 				},
 				error : function() {
 					setAlertModalTitleAndBody("提示", "查询员工信息失败，请重试");

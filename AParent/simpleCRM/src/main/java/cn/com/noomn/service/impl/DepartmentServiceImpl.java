@@ -160,6 +160,12 @@ public class DepartmentServiceImpl implements DepartmentService {
 			else departmentNeedDelete.add(departmentVoList.get(i));
 		}
 		
+		if(departmentNeedDelete.size() == 0) {
+			Infos infos = Infos.getInfosInstance();
+			infos.message = Message.ERROR;
+			infos.obj = "已选部门正在使用，不能删除";
+			return infos;
+		}
 		int deleteCount = departmentVoMapper.deleteDepartmentListByPrimaryKey(departmentNeedDelete);
 		Infos infos = Infos.getInfosInstance();
 		if(deleteCount == 0) {

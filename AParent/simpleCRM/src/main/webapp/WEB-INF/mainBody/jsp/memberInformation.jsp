@@ -159,19 +159,7 @@
 						<div class="control-group">
 							<label class="control-label">角色</label>
 							<div class="controls">
-								<select name="userroleIdEmployee" required class="chzn-select-deselect span6" >
-									<%-- 
-									<option value="57695387-0987-11e7-b918-28d2444b860a">销售人员</option>
-									<c:if test="${authorityMap['1102a510-16a9-11e7-a0f7-94de80188a22'] eq 1}">
-										<option value="5e8d627f-0987-11e7-b918-28d2444b860a">部门经理</option>
-									</c:if>
-									<c:if test="${authorityMap['b7b79e68-0beb-11e7-9e9d-28d2444b860a'] eq 1}">
-										<option value="6566dff0-0987-11e7-b918-28d2444b860a">总经理</option>
-									</c:if>
-									<c:if test="${authorityMap['2ff28e74-0c0c-11e7-9e9d-28d2444b860a'] eq 1}">
-										<option value="10988d26-0986-11e7-b918-28d2444b860a">管理员</option>
-									</c:if> --%>
-								</select>
+								<select name="userroleIdEmployee" required class="chzn-select-deselect span6" ></select>
 							</div>
 						</div>
 

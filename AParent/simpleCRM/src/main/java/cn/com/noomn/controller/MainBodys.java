@@ -133,24 +133,31 @@ public class MainBodys {
 				dataArrayString.append("\"<input type='checkbox' class='checkboxes' data-id=' "+ departmentVo.getDepartmentId() + "' />\",");
 			}
 			dataArrayString.append("\""+ departmentVo.getDepartmentName() +"\",");
-			
+
+			int employeeNumber = 0;
+			for(int j=0; j<departmentVo.getEmployeeVoList().size(); j++) {
+				if(departmentVo.getEmployeeVoList().get(j).getEmployeeId() != null)
+					employeeNumber++;
+			}	
 			//根据员工数量显示不同的 颜色
-			if(departmentVo.getEmployeeVoList().size() == 0) {
-				dataArrayString.append("\"<span class='label label-danger'>"+ departmentVo.getEmployeeVoList().size()+"</span>\",");
-			}else if(departmentVo.getEmployeeVoList().size() >0 && departmentVo.getEmployeeVoList().size() < 5){
-				dataArrayString.append("\"<span class='label label-success'>"+ departmentVo.getEmployeeVoList().size()+"</span>\",");
+			if(employeeNumber == 0) {
+				dataArrayString.append("\"<span class='label label-danger'>"+ employeeNumber+"</span>\",");
+			}else if(employeeNumber >0 && employeeNumber < 5){
+				dataArrayString.append("\"<span class='label label-success'>"+ employeeNumber+"</span>\",");
 			}else {
-				dataArrayString.append("\"<span class='label label-inverse'>"+ departmentVo.getEmployeeVoList().size()+"</span>\",");
+				dataArrayString.append("\"<span class='label label-inverse'>"+ employeeNumber +"</span>\",");
 			}
-			
-			dataArrayString
-				.append("\"<a href='javascript:void(0);' data-id='"+ departmentVo.getDepartmentId() + "' onclick='editDepartment(this,\\\""+ projectURL +"\\\");'><i class='icon-edit'></i> 编辑</a>\",");
 			
 			//初始化不允许删除
 			if(departmentVo.getDepartmentInit() == 1) {
-				dataArrayString.append("\"\"");
+				dataArrayString
+					.append("\"\"")
+					.append(",")
+					.append("\"\"");
 			}else {
-				dataArrayString.append("\"<a href='javascript:void(0);' data-id='"+ departmentVo.getDepartmentId() + "' onclick='deleteConfirmWarm(this,\\\""+ projectURL +"/mainBodys/deleteDepartmentVo\\\");'><i class='icon-minus'></i> 删除</a>\"");
+				dataArrayString
+					.append("\"<a href='javascript:void(0);' data-id='"+ departmentVo.getDepartmentId() + "' onclick='editDepartment(this,\\\""+ projectURL +"\\\");'><i class='icon-edit'></i> 编辑</a>\",")
+					.append("\"<a href='javascript:void(0);' data-id='"+ departmentVo.getDepartmentId() + "' onclick='deleteConfirmWarm(this,\\\""+ projectURL +"/mainBodys/deleteDepartmentVo\\\");'><i class='icon-minus'></i> 删除</a>\"");
 			}
 			
 			dataArrayString.append("],");
@@ -248,6 +255,17 @@ public class MainBodys {
 		userroleVo.setUserroleId(userroleAuthorityVoList.get(0).getUserroleId());
 		Infos infos = userroleAuthorityVoService.updateUserroleAuthorityVo(userroleAuthorityVoList, userroleVo);
 		return infos;
+	}
+	
+	/**
+	 * 获取当前用户的角色
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="returnUserrole")
+	@ResponseBody
+	private String returnUserrole(HttpSession session) {
+		return (String)session.getAttribute("userroleIdEmployee");
 	}
 	
 /*** 角色管理 /end ***/
