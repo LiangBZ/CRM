@@ -3,6 +3,7 @@ encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
 encoding//src/main/resources/authority.xml=UTF-8
 encoding//src/main/webapp/WEB-INF/Util/jsp/alertModal.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/mainBody/jsp/resetPassword.jsp=UTF-8
 encoding//src/test/java=UTF-8
 encoding//src/test/resources=UTF-8
 encoding/<project>=UTF-8

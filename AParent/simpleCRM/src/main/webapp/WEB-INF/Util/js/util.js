@@ -1114,6 +1114,16 @@ var updateProfile = function() {
 	});
 }
 
+var doAction = function() {
+	var action = $('form[data-resetPassword="resetPassword"]').find('li[class="active"]').data('action');
+	if(action == "resetPasswordValidate") {
+		resetPasswordValidate();
+	}
+	if(action == "updatePassword") {
+		updatePassword();
+	}
+}
+
 var resetPasswordValidate = function() {
 	$form = $('form[data-resetPassword="resetPassword"]');
 	var employeePassword = $form.find(':input[name="employeePassword1"]').val();
@@ -1121,7 +1131,7 @@ var resetPasswordValidate = function() {
 	if(employeePassword == "") {
 		setAlertModalTitleAndBody("提示", "请输入原密码");
 		$('div[data-Modal="alertModal"]').modal('show');
-		return;
+		return false;
 	}
 	var url = projectURL + "mainBodys/getOneEmployeeVo";
 	$.ajax({
@@ -1133,7 +1143,12 @@ var resetPasswordValidate = function() {
 		},
 		success : function(data) {
 			if(data.message == "SUCCESS") {
+				$('input[name="doNext"]').val(1);
+				$('a[data-toggle="tab"]').data("show",1)
 				$('a[href="#pills-tab2"]').click();
+				$('a[data-toggle="tab"]').data("show",0);
+				$('input[name="doNext"]').val(0);
+				$form.find(':input[name="employeePassword1"]').val("");
 			}else {
 				setAlertModalTitleAndBody("提示", "密码错误，请重新输入");
 				$('div[data-Modal="alertModal"]').modal('show');
@@ -1145,16 +1160,25 @@ var resetPasswordValidate = function() {
 			$('div[data-Modal="alertModal"]').modal('show');
 		}
 	});
-	
-	return;
 }
 
 var updatePassword = function() {
 	$form = $('form[data-resetPassword="resetPassword"]');
 	var employeePassword = $form.find(':input[name="employeePassword2"]').val();
+	var employeePassword3 = $form.find(':input[name="employeePassword3"]').val();
 	var employeeId = $form.find(':input[name="employeeId"]').val();
 	if(employeePassword == "") {
 		setAlertModalTitleAndBody("提示", "请输入新密码");
+		$('div[data-Modal="alertModal"]').modal('show');
+		return;
+	}
+	if(employeePassword3 == "") {
+		setAlertModalTitleAndBody("提示", "请再次输入新密码");
+		$('div[data-Modal="alertModal"]').modal('show');
+		return;
+	}
+	if(employeePassword3 != employeePassword) {
+		setAlertModalTitleAndBody("提示", "两次密码不一致，请重新输入");
 		$('div[data-Modal="alertModal"]').modal('show');
 		return;
 	}
@@ -1168,7 +1192,14 @@ var updatePassword = function() {
 		},
 		success : function(data) {
 			if(data.message == "SUCCESS") {
+				$('input[name="doNext"]').val(1);
+				$('a[data-toggle="tab"]').data("show",1)
 				$('a[href="#pills-tab3"]').click();
+				$('a[data-toggle="tab"]').data("show",0);
+				$('input[name="doNext"]').val(0);
+				$form.find(':input[name="employeePassword2"]').val("");
+				$form.find(':input[name="employeePassword3"]').val("");
+				$('ul[class="pager wizard"]').hide();
 			}else {
 				setAlertModalTitleAndBody("提示", "修改密码失败，请重试");
 				$('div[data-Modal="alertModal"]').modal('show');

@@ -274,7 +274,11 @@ response.setDateHeader("Expires", -10);
 <!-- websocket -->
 <script src="${pageContext.request.contextPath}/Util/js/socket/sockjs-0.3.min.js"></script>
 
+<link href="${pageContext.request.contextPath}/mainBody/css/jquery.fancybox.css" rel="stylesheet" />
+<script src="${pageContext.request.contextPath}/mainBody/js/jquery.bootstrap.wizard.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/Util/js/util.js"></script>
+
 
 <script type="text/javascript">
 	var loadMainBody = function(jspURL) {
