@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div class="container-fluid" data-mask="maskoff">
+<div class="container-fluid">
+<!-- <div class="container-fluid" data-maskM="maskoff"> -->
 
 	<div class="row-fluid">
 		<div class="span12">
 
 			<h3 class="page-title">产品列表</h3>
 			<ul class="breadcrumb">
-				<li><a href="#">成员</a> <span class="divider">/</span></li>
+				<li><a href="#">产品</a> <span class="divider">/</span></li>
 				<li class="active">产品列表</li>
 				<span class="divider">/</span>
 				</li>
@@ -105,17 +106,16 @@
 					</h4>
 				</div>
 				<div class="widget-body">
-					<form data-product="addProduct" method="post"
-						enctype="multipart/form-data" class="form-horizontal"
-						onsubmit="return false;">
+					<form data-product="addProduct" method="post" enctype="multipart/form-data" class="form-horizontal" onsubmit="return false;">
 						<div class="control-group">
 							<label class="control-label">名称</label>
 							<div class="controls">
 								<input name="productName" type="text" class="span6"
-									placeholder="请输入产品名称.." required />
+									placeholder="请输入产品名称.." required/>
 							</div>
+							
 						</div>
-
+						
 						<div class="control-group">
 							<label class="control-label">描述</label>
 							<div class="controls">
@@ -127,9 +127,9 @@
 							<label class="control-label">价格</label>
 							<div class="controls">
 								<div class="input-prepend input-append">
-									<span class="add-on">￥</span> <input name="productPrice"
-										type="text" data-mask="99999999.99" required /> <span
-										class="add-on">.00</span>
+									<span class="add-on">￥</span> 
+									<input name="productPrice" type="text" data-mask="99999999.99" required /> 
+									<span class="add-on">.00</span>
 								</div>
 							</div>
 						</div>
@@ -189,15 +189,17 @@
 						<div class="control-group">
 							<label class="control-label">价格</label>
 							<div class="controls">
-								<input name="productPrice" type="text" class="span6" disabled />
+								<div class="input-prepend input-append">
+									<span class="add-on">￥</span> 
+									<input name="productPrice" type="text" class="span6" disabled/> 
+								</div>
 							</div>
 						</div>
 
 						<div class="control-group">
 							<label class="control-label">描述</label>
 							<div class="controls">
-								<textarea name="productDetail" class="span6 ckeditor" rows="6"
-									disabled />
+								<textarea name="productDetail" class="span6 ckeditor" rows="6"  disabled/>
 							</div>
 						</div>
 
@@ -261,8 +263,11 @@
 						<div class="control-group">
 							<label class="control-label">价格</label>
 							<div class="controls">
-								<input name="productPrice" type="text" class="span6"
-									data-mask="99999999.99" required />
+								<div class="input-prepend input-append">
+									<span class="add-on">￥</span> 
+									<input name="productPrice" type="text" data-mask="99999999.99" required /> 
+									<span class="add-on">.00</span>
+								</div>
 							</div>
 						</div>
 
@@ -297,7 +302,7 @@
 
 </div>
 
-<div data-mask="maskon"
+<div data-maskM="maskon"
 	style="position: fixed;; left: 0; top: 0; z-index: 1000; background-color: rgba(0, 0, 0, 0.9); display: none;">
 	<div style="width: 10%; height: 100%; float: left;" onclick="hidePDF()"></div>
 	<div style="width: 80%; height: 100%; float: left;">
@@ -308,7 +313,7 @@
 </div>
 <script type="text/javascript">
 	var showPDF = function() {
-		var $mask = $('div[data-mask="maskon" ]');
+		var $mask = $('div[data-maskM="maskon" ]');
 		$mask.css("width", $('body').width());
 		$mask.css("height", $('body').height());
 		$mask.css("padding-top", $('div[id="header"]').height());
@@ -316,7 +321,7 @@
 	}
 
 	var hidePDF = function() {
-		var $mask = $('div[data-mask="maskon" ]');
+		var $mask = $('div[data-maskM="maskon" ]');
 		$mask.hide(1000);
 	}
 </script>

@@ -1092,15 +1092,20 @@ var updateProfile = function() {
 	        		type : "POST",
 	        		data : data,
 	        		success : function(data) {
-	        			$.confirm({
-	        			    title: '提示',
-	        			    content: data.obj + ',请重新登录',
-	        			    buttons: {
-	        			        "确定": function () {
-	        			        	location.reload();
-	        			        }
-	        			    }
-	        			});
+	        			var $img = $form.find('div[data-newImg="newImg"]').find("img");
+		        		var imgData = $img.attr("src");
+	        			$('img[data-profile="img"]').attr("src",imgData);
+	        			setAlertModalTitleAndBody("提示", data.obj);
+	        			$('div[data-Modal="alertModal"]').modal('show');
+//	        			$.confirm({
+//	        			    title: '提示',
+//	        			    content: data.obj + ',请重新登录',
+//	        			    buttons: {
+//	        			        "确定": function () {
+//	        			        	location.reload();
+//	        			        }
+//	        			    }
+//	        			});
 	        		},
 	        		error : function() {
 	        			setAlertModalTitleAndBody("提示", "修改失败，请重试");
@@ -1304,6 +1309,7 @@ var addProduct = function() {
 			$('div[data-Modal="alertModal"]').modal('show');
 			if(data.message == "SUCCESS") {
 				$form.find(':input[type="reset"]').click();
+				refreshProductInfos();
 			}
 		},
 		error : function() {

@@ -69,6 +69,8 @@ public class MainBodys {
 	
 	@Value("${project.url}")
 	private String projectURL;
+	@Value("${pdf.url}")
+	private String pdfURL;
 	
 	@Autowired
 	private DepartmentService departmentService;
@@ -416,8 +418,10 @@ public class MainBodys {
 	@ResponseBody
 	private Infos updateEmployeeVo(EmployeeVo employeeVo,HttpSession session) {
 		if(employeeVo.getEmployeeImg() != null) {
-			String webInf = this.getClass().getClassLoader().getResource("/").getPath().replace("classes/", "");
-			String imgPath = webInf + "mainBody/img/png/" + employeeVo.getEmployeeId() + ".png";
+			String webInf = this.getClass().getClassLoader().getResource("/").getPath().split("simpleCRM")[0];
+			String imgPath = webInf + "simpleCRM-img/" + employeeVo.getEmployeeId() + ".png";
+//			String webInf = this.getClass().getClassLoader().getResource("/").getPath().replace("classes/", "");
+//			String imgPath = webInf + "mainBody/img/png/" + employeeVo.getEmployeeId() + ".png";
 			employeeVo.setEmployeeImgPath(imgPath);
 		}
 		
@@ -464,8 +468,8 @@ public class MainBodys {
 			ProductVo productVo) {
 		productVo.setProductId(UUID.randomUUID().toString());
 		if(productPdf.getSize() > 0) {
-			String webInf = this.getClass().getClassLoader().getResource("/").getPath().replace("classes/", "");
-			String imgPath = webInf + "mainBody/pdf/";
+			String webInf = this.getClass().getClassLoader().getResource("/").getPath().split("simpleCRM")[0];
+			String imgPath = webInf + "simpleCRM-PDF/";
 			File pdfFile = new File(imgPath, productVo.getProductId() + ".pdf");
 			if(!pdfFile.exists()) {
 				pdfFile.mkdirs();
@@ -516,7 +520,7 @@ public class MainBodys {
 				.append(",");
 			}else {
 				dataArrayString
-				.append("\"<a target='pdfContainer' href='"+ projectURL +"/mainBody/pdf/" + productVo.getProductId() + ".pdf'" + "class='btn btn-success' onclick='showPDF();'><i class='icon-search'></i></button>\"")
+				.append("\"<a target='pdfContainer' href='"+ pdfURL +"/pdf/" + productVo.getProductId() + ".pdf'" + "class='btn btn-success' onclick='showPDF();'><i class='icon-search'></i></button>\"")
 				.append(",")
 				.append("\"<a href='"+ projectURL +"/mainBodys/downLoadPDF?productId= "+ productVo.getProductId() + "' class='btn btn-warning'  data-id='"+ productVo.getProductId() + "'><i class='icon-arrow-down'></i></button>\"")
 				.append(",");
@@ -613,14 +617,20 @@ public class MainBodys {
 		}
 	}
 	
+	/**
+	 * 编辑产品信息
+	 * @param productPdf
+	 * @param productVo
+	 * @return
+	 */
 	@RequestMapping(value="updateProduct")
 	@ResponseBody
 	private Infos updateProduct(
 			@RequestParam(value = "file", required = false) MultipartFile productPdf, 
 			ProductVo productVo) {
 		if(productPdf.getSize() > 0) {
-			String webInf = this.getClass().getClassLoader().getResource("/").getPath().replace("classes/", "");
-			String imgPath = webInf + "mainBody/pdf/";
+			String webInf = this.getClass().getClassLoader().getResource("/").getPath().split("simpleCRM")[0];
+			String imgPath = webInf + "simpleCRM-PDF/";
 			File pdfFile = new File(imgPath, productVo.getProductId() + ".pdf");
 			if(!pdfFile.exists()) {
 				pdfFile.mkdirs();

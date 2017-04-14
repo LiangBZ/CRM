@@ -74,7 +74,7 @@ response.setDateHeader("Expires", -10);
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-userInfo="userInfo">
-                            <img src="${employeeImgPath}"  style="width:29px;height:29px;">
+                            <img data-profile="img" src="${employeeImgPath}"  style="width:29px;height:29px;">
                             <span class="username">${sessionScope.employeeRealName}</span>
                             <b class="caret"></b>
                         </a>

@@ -22,7 +22,7 @@
 			<div class="widget green">
 				<div class="widget-title">
 					<h4>
-						<i class="icon-reorder"></i> 员工入职
+						<i class="icon-reorder"></i> 修改个人资料
 					</h4>
 				</div>
 				<div class="widget-body">
@@ -72,8 +72,7 @@
                                 </div>
 
 						<div class="form-actions">
-							<button type="submit" class="btn btn-success">保存</button>
-							<button type="button" class="btn">取消</button>
+							<button type="submit" class="btn btn-success btn-lg" style="width:200px;">保存</button>
 							<input type="reset" value="Reset" class="hidden" />
 						</div>
 					</form>

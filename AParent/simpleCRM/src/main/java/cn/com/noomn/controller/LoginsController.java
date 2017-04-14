@@ -32,6 +32,8 @@ public class LoginsController {
 	
 	@Value("${project.url}")
 	private String projectURL;
+	@Value("${pdf.url}")
+	private String pdfURL;
 	
 	@Autowired
 	private LoginsService loginsService;
@@ -93,12 +95,15 @@ public class LoginsController {
 				session.setAttribute("departmentIdEmployee", employeeVo.getDepartmentIdEmployee());
 				session.setAttribute("userroleIdEmployee", employeeVo.getUserroleIdEmployee());
 				
-				String webInf = this.getClass().getClassLoader().getResource("/").getPath().replace("classes/", "");
-				String imgPath = webInf + "mainBody/img/png/" + employeeVo.getEmployeeId() + ".png";
+				
+				String webInf = this.getClass().getClassLoader().getResource("/").getPath().split("simpleCRM")[0];
+				String imgPath = webInf + "simpleCRM-img/" + employeeVo.getEmployeeId() + ".png";
+//				String webInf = this.getClass().getClassLoader().getResource("/").getPath().replace("classes/", "");
+//				String imgPath = webInf + "mainBody/img/png/" + employeeVo.getEmployeeId() + ".png";
 				File file = new File(imgPath);
 				boolean exists = file.exists();
 				if(exists)
-					session.setAttribute("employeeImgPath", projectURL + "/mainBody/img/png/" + employeeVo.getEmployeeId() + ".png");
+					session.setAttribute("employeeImgPath", pdfURL + "/img/" + employeeVo.getEmployeeId() + ".png");
 				else
 					session.setAttribute("employeeImgPath", projectURL + "/mainBody/img/png/no_image.png");
 				
