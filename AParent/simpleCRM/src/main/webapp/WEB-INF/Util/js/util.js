@@ -1521,7 +1521,7 @@ var addCustomShow = function() {
 			var option = '';
 			for(var i=0 ;i<data.length; i++) {
 				var employeeVo = data[i];
-				option += '<option value="'+ employeeVo.employeeId + '">'+ employeeVo.employeeRealName +'</option>';
+				option += '<option value="'+ employeeVo.employeeId + '">'+ employeeVo.employeeRealName + '(' + employeeVo.departmentVo.departmentName + ')' +'</option>';
 			}
 			var $select = $('form[data-custom="addCustom"]').find('select[name="followEmployeeId"]');
 			$select.html(option);
@@ -1596,7 +1596,7 @@ var editCustomShow = function(customId) {
 			var option = '';
 			for(var i=0 ;i<data.length; i++) {
 				var employeeVo = data[i];
-				option += '<option value="'+ employeeVo.employeeId + '">'+ employeeVo.employeeRealName +'</option>';
+				option += '<option value="'+ employeeVo.employeeId + '">'+ employeeVo.employeeRealName + '(' + employeeVo.departmentVo.departmentName + ')' +'</option>';
 			}
 			var $select = $form.find('select[name="followEmployeeId"]');
 			$select.html(option);
@@ -1823,7 +1823,7 @@ var income = function() {
 	
 	var productPrice =$form.find('select[name="productPrice"]').val();
 	productPrice = $('select[name="productPrice"]').find("option[value='"+ productPrice +"']").html();
-	var preSalesAmount = $form.find(':input[name="preSalesAmount"]').val();
+	var preSalesAmount = $form.find(':input[name="preSalesAmount"]').val() * 1.00;
 	
 	if(preSalesAmount < productPrice) {
 		setAlertModalTitleAndBody("提示", "低于产品价格，无法创建商机");
@@ -2952,6 +2952,8 @@ var processOkResult = function(processId) {
 			processState : 1
 		},
 		success : function(data) {
+			if(data.obj == "申请成功") data.obj = "审批成功";
+			else data.obj = "审批失败";
 			setAlertModalTitleAndBody("提示", data.obj);
 			$('div[data-Modal="alertModal"]').modal('show');
 			refreshWorkOutsideApprove();
@@ -2996,6 +2998,8 @@ var processTrashResult = function(processId) {
 			processState : -1
 		},
 		success : function(data) {
+			if(data.obj == "申请成功") data.obj = "审批成功";
+			else data.obj = "审批失败";
 			setAlertModalTitleAndBody("提示", data.obj);
 			$('div[data-Modal="alertModal"]').modal('show');
 			refreshWorkOutsideApprove();
@@ -3046,8 +3050,8 @@ var workOutsideCalendarInit =function() {
 				calendarInfos = data[i];
 				var dd = {
 					title: calendarInfos.title,
-	                start: new Date(calendarInfos.startY, calendarInfos.startM, calendarInfos.startD, calendarInfos.startH, calendarInfos.startI),
-	                end: new Date(calendarInfos.endY, calendarInfos.endM, calendarInfos.endD, calendarInfos.endH, calendarInfos.endI),
+	                start: new Date(calendarInfos.startY, calendarInfos.startM-1, calendarInfos.startD, calendarInfos.startH, calendarInfos.startI),
+	                end: new Date(calendarInfos.endY, calendarInfos.endM-1, calendarInfos.endD, calendarInfos.endH, calendarInfos.endI),
 	                allDay: false
 				};
 				dataSource[i] = dd;
@@ -3182,14 +3186,12 @@ var setPieData = function(myChart, data, xAxisData) {
 
 		    visualMap: {
 		        show: false,
-		        min: 10000,
-		        max: 99999999,
-		        inRange: {
-		            colorLightness: [0, 0.9]
-
-		        }
+//		        min: 100000000,
+//		        max: 999999999,
+//		        inRange: {
+//		            colorLightness: [0, 10]
+//		        }
 		    },
-		    color : ['red', 'yellow'],
 		    series : [
 		        {
 		            name:'销售金额',

@@ -44,4 +44,11 @@ public interface EmployeeVoService {
 	 * @return
 	 */
 	public List<EmployeeVo> selectForNimble(EmployeeVo employeeVo);
+	
+	/**
+	 * 获取可以选择的跟进人
+	 * @param employeeVo
+	 * @return
+	 */
+	public List<EmployeeVo> selectcanChooseFoller(EmployeeVo employeeVo);
 }

@@ -40,4 +40,6 @@ public interface CustomVoService {
 	 * @return
 	 */
 	CustomVo selectDetailed(CustomVo customVo);
+	
+	public List<CustomVo> selectDetailedList(CustomVo customVo);
 }

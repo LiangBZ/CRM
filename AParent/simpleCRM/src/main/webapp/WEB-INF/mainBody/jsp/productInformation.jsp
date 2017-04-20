@@ -48,7 +48,7 @@
 							<thead>
 								<th>产品号</th>
 								<th>产品名称</th>
-								<th>产品价格</th>
+								<th>产品价格(￥)</th>
 								<th style="width: 5%; text-align: center;">pdf</th>
 								<th style="width: 5%; text-align: center;">pdf</th>
 								<th style="width: 5%; text-align: center;">查看</th>

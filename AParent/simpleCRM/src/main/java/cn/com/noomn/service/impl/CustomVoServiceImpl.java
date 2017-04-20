@@ -65,5 +65,10 @@ public class CustomVoServiceImpl implements CustomVoService {
 		if(selectDetailed.size() != 0) return selectDetailed.get(0);
 		return null;
 	}
+	
+	@Override
+	public List<CustomVo> selectDetailedList(CustomVo customVo) {
+		return customVoMapper.selectDetailed(customVo);
+	}
 
 }

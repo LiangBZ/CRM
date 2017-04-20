@@ -744,21 +744,35 @@ public class MainBodys {
 		switch(userroleIdEmployee ) {
 		case "10988d26-0986-11e7-b918-28d2444b860a": //管理员
 			employeeVo.setUserroleIdEmployee("57695387-0987-11e7-b918-28d2444b860a");
-			employeeVoList = employeeVoService.selectForNimble(employeeVo);
+//			employeeVoList = employeeVoService.selectForNimble(employeeVo);
+			employeeVoList = employeeVoService.selectcanChooseFoller(employeeVo);
 			break; 
 		case "6566dff0-0987-11e7-b918-28d2444b860a": //总经理
 			employeeVo.setUserroleIdEmployee("57695387-0987-11e7-b918-28d2444b860a");
-			employeeVoList = employeeVoService.selectForNimble(employeeVo);
+//			employeeVoList = employeeVoService.selectForNimble(employeeVo);
+			employeeVoList = employeeVoService.selectcanChooseFoller(employeeVo);
 			break; 
 		case "5e8d627f-0987-11e7-b918-28d2444b860a":	//部门经理
 			employeeVo.setDepartmentIdEmployee(departmentIdEmployee);
-			employeeVo.setUserroleIdEmployee("57695387-0987-11e7-b918-28d2444b860a");
-			employeeVoList = employeeVoService.selectForNimble(employeeVo);
+//			employeeVo.setUserroleIdEmployee("57695387-0987-11e7-b918-28d2444b860a");
+//			employeeVoList = employeeVoService.selectForNimble(employeeVo);
+			employeeVoList = employeeVoService.selectcanChooseFoller(employeeVo);
+			List<EmployeeVo> employeeVoList2 = new ArrayList<EmployeeVo>();
+			for(int i=0; i<employeeVoList.size(); i++) {
+				if(!employeeVoList.get(i).getUserroleIdEmployee().equals("57695387-0987-11e7-b918-28d2444b860a"))
+					continue;
+				employeeVoList2.add(employeeVoList.get(i));
+			}
+			employeeVoList = employeeVoList2;
 			break; 
 		case "57695387-0987-11e7-b918-28d2444b860a": //销售人员
 			employeeVo.setEmployeeId(employeeId);
-			employeeVo.setEmployeeRealName(employeeRealName);
-			employeeVoList.add(employeeVo); 
+			employeeVoList = employeeVoService.selectcanChooseFoller(employeeVo);
+//			List<EmployeeVo> selectForNimble = employeeVoService.selectForNimble(employeeVo);
+//			if(selectForNimble.size() > 0) {
+//				employeeVo = selectForNimble.get(0);
+//				employeeVoList.add(employeeVo); 
+//			}
 			break; 
 		}
 		
@@ -821,7 +835,8 @@ public class MainBodys {
 	@RequestMapping(value="editCustomShow")
 	@ResponseBody
 	private CustomVo editCustomShow(CustomVo customVo) {
-		List<CustomVo> customVoList = customVoService.selectCustomVoList(customVo);
+//		List<CustomVo> customVoList = customVoService.selectCustomVoList(customVo);
+		List<CustomVo> customVoList = customVoService.selectDetailedList(customVo);
 		if(customVoList.size() > 0)
 			return customVoList.get(0);
 		return null;
@@ -830,6 +845,10 @@ public class MainBodys {
 	@RequestMapping(value="editCustom")
 	@ResponseBody
 	private Infos editCustom(CustomVo customVo) {
+		EmployeeVo employeeVo = new EmployeeVo();
+		employeeVo.setEmployeeId(customVo.getFollowEmployeeId());
+		employeeVo = employeeVoService.getOneEmployeeVo(employeeVo);
+		customVo.setDepartmentId(employeeVo.getDepartmentIdEmployee());
 		Infos infos = customVoService.updateCustomVo(customVo);
 		return infos;
 	}
@@ -1138,20 +1157,37 @@ public class MainBodys {
 	@ResponseBody
 	private List<FeedbackVo> selectFeedbackVoByTaskId(FeedbackVo feedbackVo, HttpSession session){
 		List<FeedbackVo> feedbackVoList = feedbackVoService.selectFeedbackVoByTaskId(feedbackVo);
-		String imgBasePath = (String) session.getAttribute("imgFilePath");
+//		String imgBasePath = (String) session.getAttribute("imgFilePath");
+//		String imgPath = (String) session.getAttribute("imgPath");
+//		
+//		for(int i=0; i<feedbackVoList.size(); i++) {
+//			File file = new File(imgBasePath + feedbackVoList.get(i).getEmployeeVo().getEmployeeId() + ".png");
+//			boolean exists = file.exists();
+//			if(exists) {
+//				feedbackVoList.get(i).getEmployeeVo()
+//				.setEmployeeImgPath(imgPath + feedbackVoList.get(i).getEmployeeVo().getEmployeeId() + ".png");;
+//			}else {
+//				feedbackVoList.get(i).getEmployeeVo()
+//				.setEmployeeImgPath(imgPath + "no_image.png");;
+//			}
+//		}
+		
+		String webInf = this.getClass().getClassLoader().getResource("/").getPath().split("simpleCRM")[0];
+//		String imgBasePath = (String) session.getAttribute("imgFilePath");
 		String imgPath = (String) session.getAttribute("imgPath");
 		
 		for(int i=0; i<feedbackVoList.size(); i++) {
-			File file = new File(imgBasePath + feedbackVoList.get(i).getEmployeeVo().getEmployeeId() + ".png");
+			File file = new File(webInf + "simpleCRM-img/" + feedbackVoList.get(i).getEmployeeVo().getEmployeeId() + ".png");
 			boolean exists = file.exists();
 			if(exists) {
 				feedbackVoList.get(i).getEmployeeVo()
-				.setEmployeeImgPath(imgPath + feedbackVoList.get(i).getEmployeeVo().getEmployeeId() + ".png");;
+				.setEmployeeImgPath(pdfURL + "/img/" + feedbackVoList.get(i).getEmployeeVo().getEmployeeId() + ".png");;
 			}else {
 				feedbackVoList.get(i).getEmployeeVo()
 				.setEmployeeImgPath(imgPath + "no_image.png");;
 			}
 		}
+		
 		return feedbackVoList;
 	}
 	
@@ -1181,9 +1217,22 @@ public class MainBodys {
 	@RequestMapping(value="getSenderTask")
 	@ResponseBody
 	private String getSenderTask(TaskVo taskVo, HttpSession session) {
-		taskVo.setSponsorIdTask((String)session.getAttribute("employeeId"));
-		List<TaskVo> receiveTaskVoList = taskVoService.selectReceiveTaskVo(taskVo);
-		
+		String userroleIdEmployee = (String) session.getAttribute("userroleIdEmployee");
+		List<TaskVo> receiveTaskVoList = null;
+		switch(userroleIdEmployee) {
+		case "10988d26-0986-11e7-b918-28d2444b860a": //管理员
+			receiveTaskVoList = taskVoService.selectSenderTaskVo(null);
+			break; 
+		case "6566dff0-0987-11e7-b918-28d2444b860a": //总经理
+			receiveTaskVoList = taskVoService.selectSenderTaskVo(null);
+			break; 
+		case "5e8d627f-0987-11e7-b918-28d2444b860a":	//部门经理
+			taskVo.setSponsorIdTask((String)session.getAttribute("employeeId"));
+			receiveTaskVoList = taskVoService.selectSenderTaskVo(taskVo);
+			break; 
+		}
+//		taskVo.setSponsorIdTask((String)session.getAttribute("employeeId"));
+//		List<TaskVo> receiveTaskVoList = taskVoService.selectSenderTaskVo(taskVo);
 		taskVo = null;
 		StringBuilder dataArrayString = new StringBuilder();
 		if(receiveTaskVoList.size() == 0) {
@@ -1258,15 +1307,17 @@ public class MainBodys {
 		
 		if(businessOpportunityVo == null || businessOpportunityVo.getFeedbackVoList().size() == 0) return null;
 		
-		String imgBasePath = (String) session.getAttribute("imgFilePath");
+		
+		String webInf = this.getClass().getClassLoader().getResource("/").getPath().split("simpleCRM")[0];
+//		String imgBasePath = (String) session.getAttribute("imgFilePath");
 		String imgPath = (String) session.getAttribute("imgPath");
 		
 		for(int i=0; i<businessOpportunityVo.getFeedbackVoList().size(); i++) {
-			File file = new File(imgBasePath + businessOpportunityVo.getFeedbackVoList().get(i).getEmployeeVo().getEmployeeId() + ".png");
+			File file = new File(webInf + "simpleCRM-img/" + businessOpportunityVo.getFeedbackVoList().get(i).getEmployeeVo().getEmployeeId() + ".png");
 			boolean exists = file.exists();
 			if(exists) {
 				businessOpportunityVo.getFeedbackVoList().get(i).getEmployeeVo()
-				.setEmployeeImgPath(imgPath + businessOpportunityVo.getFeedbackVoList().get(i).getEmployeeVo().getEmployeeId() + ".png");;
+				.setEmployeeImgPath(pdfURL + "/img/" + businessOpportunityVo.getFeedbackVoList().get(i).getEmployeeVo().getEmployeeId() + ".png");;
 			}else {
 				businessOpportunityVo.getFeedbackVoList().get(i).getEmployeeVo()
 				.setEmployeeImgPath(imgPath + "no_image.png");;
@@ -1417,8 +1468,17 @@ public class MainBodys {
 		String departmentIdEmployee = (String)session.getAttribute("departmentIdEmployee");
 		EmployeeVo employeeVo = new EmployeeVo();
 		employeeVo.setDepartmentIdEmployee(departmentIdEmployee);
-		employeeVo.setUserroleIdEmployee("5e8d627f-0987-11e7-b918-28d2444b860a");
+//		employeeVo.setUserroleIdEmployee("5e8d627f-0987-11e7-b918-28d2444b860a");
 		List<EmployeeVo> approverList = employeeVoService.selectForNimble(employeeVo);
+		
+		List<EmployeeVo> approverList2 = new ArrayList<EmployeeVo>();
+		for(int i=0; i<approverList.size(); i++) {
+			if("5e8d627f-0987-11e7-b918-28d2444b860a".equals(approverList.get(i).getUserroleIdEmployee())) {
+				approverList2.add(approverList.get(i));
+			}
+		}
+		approverList = approverList2;
+		
 		if(approverList.size() == 0) {
 			EmployeeVo employeeVo2 = new EmployeeVo();
 			employeeVo2.setUserroleIdEmployee("6566dff0-0987-11e7-b918-28d2444b860a");

@@ -8,6 +8,7 @@ import java.util.Map;
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;  
 import org.springframework.web.socket.WebSocketSession;  
@@ -19,6 +20,9 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
 	
 	@Autowired
 	private EmployeeVoService employeeVoService;
+	@Value("${pdf.url}")
+	private String pdfURL;
+	
 	private static Map<String, WebSocketSession> WebSocketSessionMap = new HashMap<String, WebSocketSession>();
   
     @Override  
@@ -28,12 +32,15 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
         WebsocketVo websocketVo = (WebsocketVo) JSONObject.toBean(fromObject, WebsocketVo.class);
         websocketVo.setMessage("<a href='javascript:void(0)' onclick='loadMainBody(\""+ websocketVo.getURL() +"\")'>" + websocketVo.getMessage() + "</a>");
         
-        String imgPath = (String)session.getHandshakeAttributes().get("imgPath");
-        String imgFilePath = (String)session.getHandshakeAttributes().get("imgFilePath") + websocketVo.getSenderId() + ".png";
-        File file = new File(imgFilePath);
+//        String imgPath = (String)session.getHandshakeAttributes().get("imgPath");
+//        String imgFilePath = (String)session.getHandshakeAttributes().get("imgFilePath") + websocketVo.getSenderId() + ".png";
+       
+        String webInf = this.getClass().getClassLoader().getResource("/").getPath().split("simpleCRM")[0];
+        String imgPath = (String) session.getHandshakeAttributes().get("imgPath");
+        File file = new File(webInf + "simpleCRM-img/" + websocketVo.getSenderId() + ".png");
 		boolean exists = file.exists();
 		if(exists)
-			imgPath = imgPath + websocketVo.getSenderId() + ".png";
+			imgPath = pdfURL + "/img/" + websocketVo.getSenderId() + ".png";
 		else
 			imgPath = imgPath + "no_image.png";
         

@@ -155,4 +155,10 @@ public class EmployeeVoServiceImpl implements EmployeeVoService {
 		return employeeVoList;
 	}
 
+	@Override
+	public List<EmployeeVo> selectcanChooseFoller(EmployeeVo employeeVo) {
+		List<EmployeeVo> employeeVoList = employeeVoMapper.selectRoleRightEmployeeLeftDepartment(employeeVo);
+		return employeeVoList;
+	}
+
 }

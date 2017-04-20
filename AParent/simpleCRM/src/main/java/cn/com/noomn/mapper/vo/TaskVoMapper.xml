@@ -219,7 +219,7 @@
 	join employee as d
 	on c.FOLLOW_EMPLOYEE_ID_TASK = d.EMPLOYEE_ID
 	<where>
-		<if test="followEmployeeIdTask != null">
+		<if test="sponsorIdTask != null">
 			c.SPONSOR_ID_TASK = #{sponsorIdTask,jdbcType=VARCHAR}
      	 </if>
 	</where>

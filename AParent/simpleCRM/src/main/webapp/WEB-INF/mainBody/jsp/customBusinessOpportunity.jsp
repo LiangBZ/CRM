@@ -49,7 +49,7 @@
 							<i class="icon-reorder"> </i> 客户信息
 						</h4>
 					</div>
-					<div class="widget-body" style="height:320px;">
+					<div class="widget-body" >
 						<div class="row-fluid">
 							<div class=" profile span12">
 								<div class="span3">
@@ -82,7 +82,7 @@
 												</div>
 												<div class="space10"></div>
 												<div style="margin-bottom:15px;">
-													<div style="width:60px;display:block;float:left;">备注 : </div> <div name="customLinkmanRemark" style="width:240px; display:block;float:left;">软件公司，主要做金融业务。业务广，客户多。需要CRM管理客户关系。</div>
+													<div style="width:60px;display:block;float:left;">备注 : </div> <div name="customLinkmanRemark" style="width:240px;display:block;float:left;">软件公司，主要做金融业务。业务广，客户多。需要CRM管理客户关系。</div>..
 												</div>
 												<div class="space10"></div>
 												<hr>

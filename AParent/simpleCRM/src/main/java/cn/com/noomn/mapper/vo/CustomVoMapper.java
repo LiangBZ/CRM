@@ -18,4 +18,5 @@ public interface CustomVoMapper {
 	 * @return
 	 */
 	List<CustomVo> selectDetailed(CustomVo customVo);
+	
 }
