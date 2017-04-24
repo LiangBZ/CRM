@@ -1483,7 +1483,17 @@ public class MainBodys {
 			EmployeeVo employeeVo2 = new EmployeeVo();
 			employeeVo2.setUserroleIdEmployee("6566dff0-0987-11e7-b918-28d2444b860a");
 			approverList = employeeVoService.selectForNimble(employeeVo2);
+			if(approverList.size() > 0) {
+				for(int i=0; i<approverList.size(); i++) {
+					EmployeeVo employeeVo3 = approverList.get(i);
+					if(employeeVo3 != null) {
+						if(employeeVo3.getEmployeeInit() > -1)
+							approverList2.add(approverList.get(i));
+					}
+				}
+			}
 		}
+		approverList = approverList2;
 		return approverList;
 	}
 	
@@ -1719,7 +1729,12 @@ public class MainBodys {
 			.append("\""+  businessOpportunityVo.getSalesStageVo().getSalesStageName()  +"\"")
 			.append(",");
 			
-			String analyseRatio = Analyse.AnalyseRatio(businessOpportunityVo);
+			String analyseRatio = "";
+			if(businessOpportunityVo.getSalesStageVo().getRateOfProgress()==100) {
+				analyseRatio = "--";
+			}else {
+				analyseRatio = Analyse.AnalyseRatio(businessOpportunityVo);
+			}
 			dataArrayString
 			.append("\""+  analyseRatio  +"\"")
 			.append(",");
