@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<authoritys id="root" explain="所有权限" fatherNodeId="/" isFatherNode="true">
+	<authority id="department" explain="部门管理" fatherNodeId="root" isFatherNode="true">
+		<key-value id="346093a3-0a3d-11e7-8d42-28d2444b860a" name="添加部门" explain="添加新的部门" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="4d8a6d36-0a3d-11e7-8d42-28d2444b860a" name="编辑部门" explain="编辑部门信息" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="6fb1f7c9-0a3d-11e7-8d42-28d2444b860a" name="删除部门" explain="删除已经存在的部门" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="8d1bacfa-0ac3-11e7-991c-28d2444b860a" name="权限设置" explain="设置职务权限" fatherNodeId="department" isFatherNode="false"></key-value><!-- 总经理 -->
+		<key-value id="8699fb77-0ace-11e7-a1cf-28d2444b860a" name="管理员职务权限修改" explain="管理员可以访问管理员职务权限修改页面" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="fb9ccbab-0ac3-11e7-991c-28d2444b860a" name="修改总经理权限" explain="可以更改总经理的权限" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="b3184bfb-0bfc-11e7-9e9d-28d2444b860a" name="员工入职" explain="添加新员工" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="e23df149-1686-11e7-a0f7-94de80188a22" name="编辑员工信息" explain="编辑员工信息" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="b7b79e68-0beb-11e7-9e9d-28d2444b860a" name="添加总经理" explain="添加或修改员工为总经理" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="1102a510-16a9-11e7-a0f7-94de80188a22" name="添加部门经理" explain="添加部门经理" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="2ff28e74-0c0c-11e7-9e9d-28d2444b860a" name="管理员角色" explain="添加或修改为管理员角色" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="8ee8e7eb-0ca9-11e7-9e9d-28d2444b860a" name="添加产品" explain="添加新的产品信息" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="523c4eee-0d3b-11e7-9e9d-28d2444b860a" name="编辑产品" explain="编辑已有的产品信息" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="34a71c5d-0d3b-11e7-9e9d-28d2444b860a" name="添加客户" explain="添加新客户到部门" fatherNodeId="department" isFatherNode="false"></key-value>
+		<!-- <key-value id="72621594-0d83-11e7-9e9d-28d2444b860a" name="客户部门" explain="可以选择任意部门的销售人员作为客户跟进人" fatherNodeId="department" isFatherNode="false"></key-value> -->
+		<key-value id="10c42c6f-0d91-11e7-9e9d-28d2444b860a" name="编辑客户" explain="编辑客户信息" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="06765f5e-0f9e-11e7-8663-28d2444b860a" name="发布任务" explain="根据商机给跟进人发布任务" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="96151773-102f-11e7-8663-28d2444b860a" name="发布的任务" explain="查看已经的发布任务" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="7584310e-1030-11e7-8663-28d2444b860a" name="收到的任务" explain="查看已经的收到任务" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="769c7965-1394-11e7-aa71-28d2444b860a" name="编辑任务" explain="编辑已经发布的任务" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="96dd987b-1138-11e7-8663-28d2444b860a" name="外勤审批" explain="审批收到的外勤申请" fatherNodeId="department" isFatherNode="false"></key-value>
+		<key-value id="a4a35af4-167f-11e7-a0f7-94de80188a22" name="外勤申请" explain="销售人员外勤申请" fatherNodeId="department" isFatherNode="false"></key-value>
+	</authority>
+</authoritys>

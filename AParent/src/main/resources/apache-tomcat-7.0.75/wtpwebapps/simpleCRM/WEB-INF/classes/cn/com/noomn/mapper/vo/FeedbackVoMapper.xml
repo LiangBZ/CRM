@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.noomn.mapper.vo.FeedbackVoMapper">
+  <resultMap id="BaseResultMap" type="cn.com.noomn.vo.FeedbackVo">
+    <id column="FEEDBACK_ID" jdbcType="VARCHAR" property="feedbackId" />
+    <result column="TASK_ID" jdbcType="VARCHAR" property="taskId" />
+    <result column="FOLLOW_EMPLOYEE_ID_FEEDBACK" jdbcType="VARCHAR" property="followEmployeeIdFeedback" />
+    <result column="FEEDBACK_DETAIL" jdbcType="VARCHAR" property="feedbackDetail" />
+    <result column="FEEDBACK_TIME" jdbcType="TIMESTAMP" property="feedbackTime" />
+  </resultMap>
+  
+  <resultMap id="FeedbackVoByTaskIdResultMap" type="cn.com.noomn.vo.FeedbackVo">
+    <id column="FEEDBACK_ID" jdbcType="VARCHAR" property="feedbackId" />
+    <result column="TASK_ID" jdbcType="VARCHAR" property="taskId" />
+    <result column="FOLLOW_EMPLOYEE_ID_FEEDBACK" jdbcType="VARCHAR" property="followEmployeeIdFeedback" />
+    <result column="FEEDBACK_DETAIL" jdbcType="VARCHAR" property="feedbackDetail" />
+    <result column="FEEDBACK_TIME" jdbcType="TIMESTAMP" property="feedbackTime" />
+    
+    <association property="employeeVo" javaType="cn.com.noomn.vo.EmployeeVo" resultMap="cn.com.noomn.mapper.vo.EmployeeVoMapper.BaseResultMap"></association>
+  </resultMap>
+  
+  <select id="selectFeedbackVoByTaskId" parameterType="cn.com.noomn.vo.FeedbackVo" resultMap="FeedbackVoByTaskIdResultMap">
+  	select 
+	feedback.FEEDBACK_ID,
+	feedback.FEEDBACK_TIME,
+	feedback.FOLLOW_EMPLOYEE_ID_FEEDBACK,
+	feedback.FEEDBACK_DETAIL,
+	feedback.TASK_ID,
+	employee.DEPARTMENT_ID_EMPLOYEE,
+	employee.EMPLOYEE_EMAIL,
+	employee.EMPLOYEE_ID,
+	employee.EMPLOYEE_NUMBER,
+	employee.EMPLOYEE_PHONE,
+	employee.EMPLOYEE_REAL_NAME,
+	employee.EMPLOYEE_USERNAME,
+	employee.USERROLE_ID_EMPLOYEE
+	from 
+	feedback JOIN
+	employee on feedback.FOLLOW_EMPLOYEE_ID_FEEDBACK = EMPLOYEE_ID
+	<where>
+		<if test="taskId != null">
+	        feedback.TASK_ID = #{taskId,jdbcType=VARCHAR}
+	      </if>
+	</where>
+	order by feedback.FEEDBACK_TIME desc
+  </select>
+</mapper>

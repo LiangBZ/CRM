@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.noomn.mapper.vo.SalesStageVoMapper">
+  <resultMap id="BaseResultMap" type="cn.com.noomn.vo.SalesStageVo">
+    <id column="SALES_STAGE_ID" jdbcType="VARCHAR" property="salesStageId" />
+    <result column="SALES_STAGE_NAME" jdbcType="VARCHAR" property="salesStageName" />
+    <result column="RATE_OF_PROGRESS" jdbcType="INTEGER" property="rateOfProgress" />
+  </resultMap>
+  
+  <select id="selectUpOrZeroSalesStageVo" parameterType="cn.com.noomn.vo.SalesStageVo" resultMap="BaseResultMap">
+  	select 
+	sales_stage.SALES_STAGE_ID,
+	sales_stage.SALES_STAGE_NAME,
+	sales_stage.RATE_OF_PROGRESS
+	from sales_stage
+	WHERE
+	sales_stage.RATE_OF_PROGRESS = 0
+	or
+	sales_stage.RATE_OF_PROGRESS > #{rateOfProgress}
+	or
+	sales_stage.RATE_OF_PROGRESS = #{rateOfProgress}
+	order by 
+	sales_stage.RATE_OF_PROGRESS asc
+  </select>
+</mapper>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.noomn.mapper.vo.ProcessVoMapper">
+  <resultMap id="BaseResultMap" type="cn.com.noomn.vo.ProcessVo">
+    <id column="PROCESS_ID" jdbcType="VARCHAR" property="processId" />
+    <result column="PROCESS_EMPLOYEE_ID" jdbcType="VARCHAR" property="processEmployeeId" />
+    <result column="PROCESS_APPROVER" jdbcType="VARCHAR" property="processApprover" />
+    <result column="PROCESS_CONTENT" jdbcType="VARCHAR" property="processContent" />
+    <result column="PROCESS_STATE" jdbcType="INTEGER" property="processState" />
+    <result column="PROCESS_START_TIME" jdbcType="TIMESTAMP" property="processStartTime" />
+    <result column="PROCESS_END_TIME" jdbcType="TIMESTAMP" property="processEndTime" />
+  </resultMap>
+  
+  <resultMap id="SelectProcessVoResultMap" type="cn.com.noomn.vo.ProcessVo">
+    <id column="PROCESS_ID" jdbcType="VARCHAR" property="processId" />
+    <result column="PROCESS_EMPLOYEE_ID" jdbcType="VARCHAR" property="processEmployeeId" />
+    <result column="PROCESS_APPROVER" jdbcType="VARCHAR" property="processApprover" />
+    <result column="PROCESS_CONTENT" jdbcType="VARCHAR" property="processContent" />
+    <result column="PROCESS_STATE" jdbcType="INTEGER" property="processState" />
+    <result column="PROCESS_START_TIME" jdbcType="TIMESTAMP" property="processStartTime" />
+    <result column="PROCESS_END_TIME" jdbcType="TIMESTAMP" property="processEndTime" />
+  
+  	 <association property="spOutEmployee" javaType="cn.com.noomn.vo.EmployeeVo" resultMap="cn.com.noomn.mapper.vo.EmployeeVoMapper.spOut_ResultMap"></association>
+  	 <association property="reOutEmployee" javaType="cn.com.noomn.vo.EmployeeVo" resultMap="cn.com.noomn.mapper.vo.EmployeeVoMapper.reOut_ResultMap"></association>
+  </resultMap>
+  
+  <select id="selectProcessVo" parameterType="cn.com.noomn.vo.ProcessVo" resultMap="SelectProcessVoResultMap">
+  	select 
+	a.PROCESS_APPROVER,
+	a.PROCESS_CONTENT,
+	a.PROCESS_EMPLOYEE_ID,
+	a.PROCESS_END_TIME,
+	a.PROCESS_ID,
+	a.PROCESS_START_TIME,
+	a.PROCESS_STATE,
+	a.DEPARTMENT_ID_EMPLOYEE as spOut_DEPARTMENT_ID_EMPLOYEE,
+	a.EMPLOYEE_EMAIL as spOut_EMPLOYEE_EMAIL,
+	a.EMPLOYEE_ID as spOut_EMPLOYEE_ID,
+	a.EMPLOYEE_NUMBER as spOut_EMPLOYEE_NUMBER,
+	a.EMPLOYEE_PHONE as spOut_EMPLOYEE_PHONE,
+	a.EMPLOYEE_REAL_NAME as spOut_EMPLOYEE_REAL_NAME,
+	a.EMPLOYEE_USERNAME as spOut_EMPLOYEE_USERNAME,
+	a.USERROLE_ID_EMPLOYEE as spOut_USERROLE_ID_EMPLOYEE,
+	b.DEPARTMENT_ID_EMPLOYEE as reOut_DEPARTMENT_ID_EMPLOYEE,
+	b.EMPLOYEE_EMAIL as reOut_EMPLOYEE_EMAIL,
+	b.EMPLOYEE_ID as reOut_EMPLOYEE_ID,
+	b.EMPLOYEE_NUMBER as reOut_EMPLOYEE_NUMBER,
+	b.EMPLOYEE_PHONE as reOut_EMPLOYEE_PHONE,
+	b.EMPLOYEE_REAL_NAME as reOut_EMPLOYEE_REAL_NAME,
+	b.EMPLOYEE_USERNAME as reOut_EMPLOYEE_USERNAME,
+	b.USERROLE_ID_EMPLOYEE as reOut_USERROLE_ID_EMPLOYEE 
+	from
+	(
+	select 
+	process.PROCESS_APPROVER,
+	process.PROCESS_CONTENT,
+	process.PROCESS_EMPLOYEE_ID,
+	process.PROCESS_END_TIME,
+	process.PROCESS_ID,
+	process.PROCESS_START_TIME,
+	process.PROCESS_STATE,
+	employee.DEPARTMENT_ID_EMPLOYEE,
+	employee.EMPLOYEE_EMAIL,
+	employee.EMPLOYEE_ID,
+	employee.EMPLOYEE_NUMBER,
+	employee.EMPLOYEE_PHONE,
+	employee.EMPLOYEE_REAL_NAME,
+	employee.EMPLOYEE_USERNAME,
+	employee.USERROLE_ID_EMPLOYEE
+	FROM
+	process
+	join employee on process.PROCESS_EMPLOYEE_ID = EMPLOYEE_ID
+	) as a
+	join employee as b on a.PROCESS_APPROVER = b.EMPLOYEE_ID
+	<where>
+		<if test="processId != null">
+			AND a.PROCESS_ID = #{processId}
+		</if>
+		<if test="spOutEmployee != null">
+			<if test="spOutEmployee.employeeId != null">
+				AND a.EMPLOYEE_ID = #{spOutEmployee.employeeId}
+			</if>
+		</if>
+		<if test="spOutEmployee != null">
+			<if test="spOutEmployee.departmentIdEmployee != null">
+				AND a.DEPARTMENT_ID_EMPLOYEE = #{spOutEmployee.departmentIdEmployee}
+			</if>
+		</if>
+		<if test="reOutEmployee != null">
+			<if test="reOutEmployee.employeeId != null">
+				AND b.EMPLOYEE_ID = #{reOutEmployee.employeeId}
+			</if>
+		</if>
+		<if test="reOutEmployee != null">
+			<if test="reOutEmployee.departmentIdEmployee != null">
+				AND b.DEPARTMENT_ID_EMPLOYEE = #{reOutEmployee.departmentIdEmployee}
+			</if>
+		</if>
+		<if test="processState != null">
+			AND a.PROCESS_STATE = #{processState}
+		</if>
+	</where>
+  </select>
+  
+<!--   <select id="selectProcessVoNoOut" parameterType="cn.com.noomn.vo.ProcessVo" resultMap="SelectProcessVoResultMap">
+  	select 
+		a.PROCESS_APPROVER,
+		a.PROCESS_CONTENT,
+		a.PROCESS_EMPLOYEE_ID,
+		a.PROCESS_END_TIME,
+		a.PROCESS_ID,
+		a.PROCESS_START_TIME,
+		a.PROCESS_STATE,
+		a.DEPARTMENT_ID_EMPLOYEE as spOut_DEPARTMENT_ID_EMPLOYEE,
+		a.EMPLOYEE_EMAIL as spOut_EMPLOYEE_EMAIL,
+		a.EMPLOYEE_ID as spOut_EMPLOYEE_ID,
+		a.EMPLOYEE_NUMBER as spOut_EMPLOYEE_NUMBER,
+		a.EMPLOYEE_PHONE as spOut_EMPLOYEE_PHONE,
+		a.EMPLOYEE_REAL_NAME as spOut_EMPLOYEE_REAL_NAME,
+		a.EMPLOYEE_USERNAME as spOut_EMPLOYEE_USERNAME,
+		a.USERROLE_ID_EMPLOYEE as spOut_USERROLE_ID_EMPLOYEE,
+		b.DEPARTMENT_ID_EMPLOYEE as reOut_DEPARTMENT_ID_EMPLOYEE,
+		b.EMPLOYEE_EMAIL as reOut_EMPLOYEE_EMAIL,
+		b.EMPLOYEE_ID as reOut_EMPLOYEE_ID,
+		b.EMPLOYEE_NUMBER as reOut_EMPLOYEE_NUMBER,
+		b.EMPLOYEE_PHONE as reOut_EMPLOYEE_PHONE,
+		b.EMPLOYEE_REAL_NAME as reOut_EMPLOYEE_REAL_NAME,
+		b.EMPLOYEE_USERNAME as reOut_EMPLOYEE_USERNAME,
+		b.USERROLE_ID_EMPLOYEE as reOut_USERROLE_ID_EMPLOYEE 
+		from
+		(
+		select 
+		process.PROCESS_APPROVER,
+		process.PROCESS_CONTENT,
+		process.PROCESS_EMPLOYEE_ID,
+		process.PROCESS_END_TIME,
+		process.PROCESS_ID,
+		process.PROCESS_START_TIME,
+		process.PROCESS_STATE,
+		employee.DEPARTMENT_ID_EMPLOYEE,
+		employee.EMPLOYEE_EMAIL,
+		employee.EMPLOYEE_ID,
+		employee.EMPLOYEE_NUMBER,
+		employee.EMPLOYEE_PHONE,
+		employee.EMPLOYEE_REAL_NAME,
+		employee.EMPLOYEE_USERNAME,
+		employee.USERROLE_ID_EMPLOYEE
+		FROM
+		process
+		join employee on process.PROCESS_EMPLOYEE_ID = EMPLOYEE_ID
+		) as a
+		join employee as b on a.PROCESS_APPROVER = b.EMPLOYEE_ID
+	<where>
+		<if test="processId != null">
+			AND a.PROCESS_ID = #{processId}
+		</if>
+		<if test="spOutEmployee != null">
+			<if test="spOutEmployee.employeeId != null">
+				AND a.EMPLOYEE_ID = #{spOutEmployee.employeeId}
+			</if>
+		</if>
+		<if test="spOutEmployee != null">
+			<if test="spOutEmployee.departmentIdEmployee != null">
+				AND a.DEPARTMENT_ID_EMPLOYEE = #{spOutEmployee.departmentIdEmployee}
+			</if>
+		</if>
+		<if test="reOutEmployee != null">
+			<if test="reOutEmployee.employeeId != null">
+				AND b.EMPLOYEE_ID = #{reOutEmployee.employeeId}
+			</if>
+		</if>
+		<if test="reOutEmployee != null">
+			<if test="reOutEmployee.departmentIdEmployee != null">
+				AND b.DEPARTMENT_ID_EMPLOYEE = #{reOutEmployee.departmentIdEmployee}
+			</if>
+		</if>
+		<if test="processState != null">
+			AND a.PROCESS_STATE = #{processState}
+		</if>
+		<if test="nowTime != null">
+			unix_timestamp(a.PROCESS_START_TIME) > #{nowTime} or 
+			unix_timestamp(a.PROCESS_END_TIME) < #{nowTime}
+		</if>
+	</where>
+  </select> -->
+</mapper>

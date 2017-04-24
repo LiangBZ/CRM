@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.noomn.mapper.vo.AuthorityVoMapper">
+	<resultMap id="BaseResultMap" type="cn.com.noomn.vo.AuthorityVo">
+		<id column="AUTHORITY_ID" jdbcType="VARCHAR" property="authorityId" />
+	    <result column="AUTHORITY_NAME" jdbcType="VARCHAR" property="authorityName" />
+	    <result column="AUTHORITY_EXPLAIN" jdbcType="VARCHAR" property="authorityExplain" />
+	</resultMap>
+
+	<sql id="authorityIDIn">
+		<foreach collection="array" item="authorityID" open="(" close=")" separator=",">
+			#{authorityID}
+		</foreach>
+	</sql>
+  
+  <delete id="deleteAuthorityIfXmlNoExistByPrimaryKeys" parameterType="Object[]">
+  	delete from authority
+  	<where>
+  		authority.AUTHORITY_ID in
+  		<include refid="authorityIDIn"></include>
+  	</where>	
+  </delete>
+  
+  <select id="selectAuthorityXMLNoExistByPrimaryKeys" parameterType="Object[]" resultType="java.lang.String">
+  	select 
+  	authority.AUTHORITY_ID
+  	from authority
+  	<where>
+  		authority.AUTHORITY_ID not IN
+  		<include refid="authorityIDIn"></include>
+  	</where>
+  </select>
+  
+  <select id="selectForNimble" resultMap="BaseResultMap">
+  	select * from authority
+  	<where>
+		<if test="authorityId != null">
+			and
+			AUTHORITY_ID = #{authorityId,jdbcType=VARCHAR}
+		</if>
+		<if test="authorityName != null">
+			and
+			AUTHORITY_NAME = #{authorityName,jdbcType=VARCHAR}
+		</if>
+		<if test="authorityExplain != null">
+			and
+			AUTHORITY_EXPLAIN = #{authorityExplain,jdbcType=VARCHAR}
+		</if>
+  	</where>
+  </select>
+  
+  <select id="selectAllPrimaryKey" resultType="java.lang.String">
+  	select 
+  	authority.AUTHORITY_ID
+  	from authority
+  </select>
+  
+  <select id="getAllAuthorityManager" parameterType="cn.com.noomn.vo.AuthorityVo" resultMap="BaseResultMap">
+  	select * from authority 
+	<where>
+		authority.AUTHORITY_ID 
+		not IN
+		<foreach collection="list" open="(" close=")" separator="," item="authorityVo">
+			#{authorityVo.authorityId}
+		</foreach>
+	</where>	
+  </select>
+</mapper>

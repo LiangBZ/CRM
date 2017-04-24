@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.noomn.mapper.vo.TaskVoMapper">
+  <resultMap id="BaseResultMap" type="cn.com.noomn.vo.TaskVo">
+    <id column="TASK_ID" jdbcType="VARCHAR" property="taskId" />
+    <result column="BUSINESS_OPPORTUNITY_ID_TASK" jdbcType="VARCHAR" property="businessOpportunityIdTask" />
+    <result column="SPONSOR_ID_TASK" jdbcType="VARCHAR" property="sponsorIdTask" />
+    <result column="FOLLOW_EMPLOYEE_ID_TASK" jdbcType="VARCHAR" property="followEmployeeIdTask" />
+    <result column="TASK_CONTENT" jdbcType="VARCHAR" property="taskContent" />
+    <result column="TASK_REPORT_DATE" jdbcType="TIMESTAMP" property="taskReportDate" />
+    <result column="TASK_START_TIME" jdbcType="TIMESTAMP" property="taskStartTime" />
+    <result column="TASK_END_TIME" jdbcType="TIMESTAMP" property="taskEndTime" />
+    <result column="TASK_STOP" jdbcType="INTEGER" property="taskStop" />
+  </resultMap>
+  
+   <resultMap id="ReceiveTaskVoResultMap" type="cn.com.noomn.vo.TaskVo">
+    <id column="TASK_ID" jdbcType="VARCHAR" property="taskId" />
+    <result column="BUSINESS_OPPORTUNITY_ID_TASK" jdbcType="VARCHAR" property="businessOpportunityIdTask" />
+    <result column="SPONSOR_ID_TASK" jdbcType="VARCHAR" property="sponsorIdTask" />
+    <result column="FOLLOW_EMPLOYEE_ID_TASK" jdbcType="VARCHAR" property="followEmployeeIdTask" />
+    <result column="TASK_CONTENT" jdbcType="VARCHAR" property="taskContent" />
+    <result column="TASK_REPORT_DATE" jdbcType="TIMESTAMP" property="taskReportDate" />
+    <result column="TASK_START_TIME" jdbcType="TIMESTAMP" property="taskStartTime" />
+    <result column="TASK_END_TIME" jdbcType="TIMESTAMP" property="taskEndTime" />
+    <result column="TASK_STOP" jdbcType="INTEGER" property="taskStop" />
+    
+    <association property="businessOpportunityVo" javaType="cn.com.noomn.vo.BusinessOpportunityVo" resultMap="cn.com.noomn.mapper.vo.BusinessOpportunityVoMapper.BaseResultMap"></association>
+    <association property="spEmployee" javaType="cn.com.noomn.vo.EmployeeVo" resultMap="cn.com.noomn.mapper.vo.EmployeeVoMapper.SenderResultMap"></association>
+    <association property="reEmployee" javaType="cn.com.noomn.vo.EmployeeVo" resultMap="cn.com.noomn.mapper.vo.EmployeeVoMapper.ReceiveResultMap"></association>
+  </resultMap>
+  
+  <resultMap id="FeedbackResultMap" type="cn.com.noomn.vo.TaskVo">
+    <id column="TASK_ID" jdbcType="VARCHAR" property="taskId" />
+    <result column="BUSINESS_OPPORTUNITY_ID_TASK" jdbcType="VARCHAR" property="businessOpportunityIdTask" />
+    <result column="SPONSOR_ID_TASK" jdbcType="VARCHAR" property="sponsorIdTask" />
+    <result column="FOLLOW_EMPLOYEE_ID_TASK" jdbcType="VARCHAR" property="followEmployeeIdTask" />
+    <result column="TASK_CONTENT" jdbcType="VARCHAR" property="taskContent" />
+    <result column="TASK_REPORT_DATE" jdbcType="TIMESTAMP" property="taskReportDate" />
+    <result column="TASK_START_TIME" jdbcType="TIMESTAMP" property="taskStartTime" />
+    <result column="TASK_END_TIME" jdbcType="TIMESTAMP" property="taskEndTime" />
+    <result column="TASK_STOP" jdbcType="INTEGER" property="taskStop" />
+    <collection property="feedbackVo" ofType="cn.com.noomn.vo.FeedbackVo" resultMap="cn.com.noomn.mapper.vo.FeedbackVoMapper.BaseResultMap"></collection>
+  </resultMap>
+  
+  <select id="selectReceiveTaskVo" resultMap="ReceiveTaskVoResultMap" parameterType="cn.com.noomn.vo.TaskVo">
+  	select 
+	c.BUSINESS_OPPORTUNITY_ID_TASK,
+	c.FOLLOW_EMPLOYEE_ID_TASK,
+	c.SPONSOR_ID_TASK,
+	c.TASK_CONTENT,
+	c.TASK_END_TIME,
+	c.TASK_ID,
+	c.TASK_REPORT_DATE,
+	c.TASK_START_TIME,
+	c.TASK_STOP,
+	c.CUSTOM_ID,
+	c.PRE_DEAL_TIME,
+	c.PRE_SALES_AMOUNT,
+	c.PRODUCT_ID,
+	c.REMARK,
+	c.SALES_STAGE_ID,
+	c.DEPARTMENT_ID_EMPLOYEE as SP_DEPARTMENT_ID_EMPLOYEE,
+	c.EMPLOYEE_EMAIL as SP_EMPLOYEE_EMAIL,
+	c.EMPLOYEE_NUMBER as SP_EMPLOYEE_NUMBER,
+	c.EMPLOYEE_PHONE as SP_EMPLOYEE_PHONE,
+	c.EMPLOYEE_REAL_NAME as SP_EMPLOYEE_REAL_NAME,
+	c.EMPLOYEE_USERNAME as SP_EMPLOYEE_USERNAME,
+	c.USERROLE_ID_EMPLOYEE as SP_USERROLE_ID_EMPLOYEE,
+	d.DEPARTMENT_ID_EMPLOYEE as RE_DEPARTMENT_ID_EMPLOYEE,
+	d.EMPLOYEE_EMAIL as RE_EMPLOYEE_EMAIL,
+	d.EMPLOYEE_NUMBER as RE_EMPLOYEE_NUMBER,
+	d.EMPLOYEE_PHONE as RE_EMPLOYEE_PHONE,
+	d.EMPLOYEE_REAL_NAME as RE_EMPLOYEE_REAL_NAME,
+	d.EMPLOYEE_USERNAME as RE_EMPLOYEE_USERNAME,
+	d.USERROLE_ID_EMPLOYEE as RE_USERROLE_ID_EMPLOYEE
+	from
+	(	
+	select 
+		a.BUSINESS_OPPORTUNITY_ID_TASK,
+		a.FOLLOW_EMPLOYEE_ID_TASK,
+		a.SPONSOR_ID_TASK,
+		a.TASK_CONTENT,
+		a.TASK_END_TIME,
+		a.TASK_ID,
+		a.TASK_REPORT_DATE,
+		a.TASK_START_TIME,
+		a.TASK_STOP,
+		a.CUSTOM_ID,
+		a.PRE_DEAL_TIME,
+		a.PRE_SALES_AMOUNT,
+		a.PRODUCT_ID,
+		a.REMARK,
+		a.SALES_STAGE_ID,
+		b.DEPARTMENT_ID_EMPLOYEE,
+		b.EMPLOYEE_EMAIL,
+	 	b.EMPLOYEE_NUMBER,
+		b.EMPLOYEE_PHONE,
+		b.EMPLOYEE_REAL_NAME,
+		b.EMPLOYEE_USERNAME,
+		b.USERROLE_ID_EMPLOYEE
+		from
+		(
+			select 
+			task.BUSINESS_OPPORTUNITY_ID_TASK,
+			task.FOLLOW_EMPLOYEE_ID_TASK,
+			task.SPONSOR_ID_TASK,
+			task.TASK_CONTENT,
+			task.TASK_END_TIME,
+			task.TASK_ID,
+			task.TASK_REPORT_DATE,
+			task.TASK_START_TIME,
+			task.TASK_STOP,
+			business_opportunity.CUSTOM_ID,
+			business_opportunity.PRE_DEAL_TIME,
+			business_opportunity.PRE_SALES_AMOUNT,
+			business_opportunity.PRODUCT_ID,
+			business_opportunity.REMARK,
+			business_opportunity.SALES_STAGE_ID
+			from 
+			task JOIN business_opportunity
+			on task.BUSINESS_OPPORTUNITY_ID_TASK = business_opportunity.BUSINESS_OPPORTUNITY_ID
+		) as a
+		join
+		employee as b
+		ON a.SPONSOR_ID_TASK = b.EMPLOYEE_ID
+	) as c
+	join employee as d
+	on c.FOLLOW_EMPLOYEE_ID_TASK = d.EMPLOYEE_ID
+	<where>
+		<if test="followEmployeeIdTask != null">
+			c.FOLLOW_EMPLOYEE_ID_TASK = #{followEmployeeIdTask,jdbcType=VARCHAR}
+     	 </if>
+	</where>
+	order by c.TASK_REPORT_DATE desc
+  </select>
+  
+  <select id="selectSenderTaskVo" resultMap="ReceiveTaskVoResultMap" parameterType="cn.com.noomn.vo.TaskVo">
+  	select 
+	c.BUSINESS_OPPORTUNITY_ID_TASK,
+	c.FOLLOW_EMPLOYEE_ID_TASK,
+	c.SPONSOR_ID_TASK,
+	c.TASK_CONTENT,
+	c.TASK_END_TIME,
+	c.TASK_ID,
+	c.TASK_REPORT_DATE,
+	c.TASK_START_TIME,
+	c.TASK_STOP,
+	c.CUSTOM_ID,
+	c.PRE_DEAL_TIME,
+	c.PRE_SALES_AMOUNT,
+	c.PRODUCT_ID,
+	c.REMARK,
+	c.SALES_STAGE_ID,
+	c.DEPARTMENT_ID_EMPLOYEE as SP_DEPARTMENT_ID_EMPLOYEE,
+	c.EMPLOYEE_EMAIL as SP_EMPLOYEE_EMAIL,
+	c.EMPLOYEE_NUMBER as SP_EMPLOYEE_NUMBER,
+	c.EMPLOYEE_PHONE as SP_EMPLOYEE_PHONE,
+	c.EMPLOYEE_REAL_NAME as SP_EMPLOYEE_REAL_NAME,
+	c.EMPLOYEE_USERNAME as SP_EMPLOYEE_USERNAME,
+	c.USERROLE_ID_EMPLOYEE as SP_USERROLE_ID_EMPLOYEE,
+	d.DEPARTMENT_ID_EMPLOYEE as RE_DEPARTMENT_ID_EMPLOYEE,
+	d.EMPLOYEE_EMAIL as RE_EMPLOYEE_EMAIL,
+	d.EMPLOYEE_NUMBER as RE_EMPLOYEE_NUMBER,
+	d.EMPLOYEE_PHONE as RE_EMPLOYEE_PHONE,
+	d.EMPLOYEE_REAL_NAME as RE_EMPLOYEE_REAL_NAME,
+	d.EMPLOYEE_USERNAME as RE_EMPLOYEE_USERNAME,
+	d.USERROLE_ID_EMPLOYEE as RE_USERROLE_ID_EMPLOYEE
+	from
+	(	
+	select 
+		a.BUSINESS_OPPORTUNITY_ID_TASK,
+		a.FOLLOW_EMPLOYEE_ID_TASK,
+		a.SPONSOR_ID_TASK,
+		a.TASK_CONTENT,
+		a.TASK_END_TIME,
+		a.TASK_ID,
+		a.TASK_REPORT_DATE,
+		a.TASK_START_TIME,
+		a.TASK_STOP,
+		a.CUSTOM_ID,
+		a.PRE_DEAL_TIME,
+		a.PRE_SALES_AMOUNT,
+		a.PRODUCT_ID,
+		a.REMARK,
+		a.SALES_STAGE_ID,
+		b.DEPARTMENT_ID_EMPLOYEE,
+		b.EMPLOYEE_EMAIL,
+	 	b.EMPLOYEE_NUMBER,
+		b.EMPLOYEE_PHONE,
+		b.EMPLOYEE_REAL_NAME,
+		b.EMPLOYEE_USERNAME,
+		b.USERROLE_ID_EMPLOYEE
+		from
+		(
+			select 
+			task.BUSINESS_OPPORTUNITY_ID_TASK,
+			task.FOLLOW_EMPLOYEE_ID_TASK,
+			task.SPONSOR_ID_TASK,
+			task.TASK_CONTENT,
+			task.TASK_END_TIME,
+			task.TASK_ID,
+			task.TASK_REPORT_DATE,
+			task.TASK_START_TIME,
+			task.TASK_STOP,
+			business_opportunity.CUSTOM_ID,
+			business_opportunity.PRE_DEAL_TIME,
+			business_opportunity.PRE_SALES_AMOUNT,
+			business_opportunity.PRODUCT_ID,
+			business_opportunity.REMARK,
+			business_opportunity.SALES_STAGE_ID
+			from 
+			task JOIN business_opportunity
+			on task.BUSINESS_OPPORTUNITY_ID_TASK = business_opportunity.BUSINESS_OPPORTUNITY_ID
+		) as a
+		join
+		employee as b
+		ON a.SPONSOR_ID_TASK = b.EMPLOYEE_ID
+	) as c
+	join employee as d
+	on c.FOLLOW_EMPLOYEE_ID_TASK = d.EMPLOYEE_ID
+	<where>
+		<if test="sponsorIdTask != null">
+			c.SPONSOR_ID_TASK = #{sponsorIdTask,jdbcType=VARCHAR}
+     	 </if>
+	</where>
+	order by c.TASK_REPORT_DATE desc
+  </select>
+  
+  <select id="selectBusinessOpportunitysAllTask" resultMap="ReceiveTaskVoResultMap" parameterType="cn.com.noomn.vo.TaskVo">
+  	select 
+	c.BUSINESS_OPPORTUNITY_ID_TASK,
+	c.FOLLOW_EMPLOYEE_ID_TASK,
+	c.SPONSOR_ID_TASK,
+	c.TASK_CONTENT,
+	c.TASK_END_TIME,
+	c.TASK_ID,
+	c.TASK_REPORT_DATE,
+	c.TASK_START_TIME,
+	c.TASK_STOP,
+	c.CUSTOM_ID,
+	c.PRE_DEAL_TIME,
+	c.PRE_SALES_AMOUNT,
+	c.PRODUCT_ID,
+	c.REMARK,
+	c.SALES_STAGE_ID,
+	c.DEPARTMENT_ID_EMPLOYEE as SP_DEPARTMENT_ID_EMPLOYEE,
+	c.EMPLOYEE_EMAIL as SP_EMPLOYEE_EMAIL,
+	c.EMPLOYEE_NUMBER as SP_EMPLOYEE_NUMBER,
+	c.EMPLOYEE_PHONE as SP_EMPLOYEE_PHONE,
+	c.EMPLOYEE_REAL_NAME as SP_EMPLOYEE_REAL_NAME,
+	c.EMPLOYEE_USERNAME as SP_EMPLOYEE_USERNAME,
+	c.USERROLE_ID_EMPLOYEE as SP_USERROLE_ID_EMPLOYEE,
+	d.DEPARTMENT_ID_EMPLOYEE as RE_DEPARTMENT_ID_EMPLOYEE,
+	d.EMPLOYEE_EMAIL as RE_EMPLOYEE_EMAIL,
+	d.EMPLOYEE_NUMBER as RE_EMPLOYEE_NUMBER,
+	d.EMPLOYEE_PHONE as RE_EMPLOYEE_PHONE,
+	d.EMPLOYEE_REAL_NAME as RE_EMPLOYEE_REAL_NAME,
+	d.EMPLOYEE_USERNAME as RE_EMPLOYEE_USERNAME,
+	d.USERROLE_ID_EMPLOYEE as RE_USERROLE_ID_EMPLOYEE
+	from
+	(	
+	select 
+		a.BUSINESS_OPPORTUNITY_ID_TASK,
+		a.FOLLOW_EMPLOYEE_ID_TASK,
+		a.SPONSOR_ID_TASK,
+		a.TASK_CONTENT,
+		a.TASK_END_TIME,
+		a.TASK_ID,
+		a.TASK_REPORT_DATE,
+		a.TASK_START_TIME,
+		a.TASK_STOP,
+		a.CUSTOM_ID,
+		a.PRE_DEAL_TIME,
+		a.PRE_SALES_AMOUNT,
+		a.PRODUCT_ID,
+		a.REMARK,
+		a.SALES_STAGE_ID,
+		b.DEPARTMENT_ID_EMPLOYEE,
+		b.EMPLOYEE_EMAIL,
+	 	b.EMPLOYEE_NUMBER,
+		b.EMPLOYEE_PHONE,
+		b.EMPLOYEE_REAL_NAME,
+		b.EMPLOYEE_USERNAME,
+		b.USERROLE_ID_EMPLOYEE
+		from
+		(
+			select 
+			task.BUSINESS_OPPORTUNITY_ID_TASK,
+			task.FOLLOW_EMPLOYEE_ID_TASK,
+			task.SPONSOR_ID_TASK,
+			task.TASK_CONTENT,
+			task.TASK_END_TIME,
+			task.TASK_ID,
+			task.TASK_REPORT_DATE,
+			task.TASK_START_TIME,
+			task.TASK_STOP,
+			business_opportunity.CUSTOM_ID,
+			business_opportunity.PRE_DEAL_TIME,
+			business_opportunity.PRE_SALES_AMOUNT,
+			business_opportunity.PRODUCT_ID,
+			business_opportunity.REMARK,
+			business_opportunity.SALES_STAGE_ID
+			from 
+			task JOIN business_opportunity
+			on task.BUSINESS_OPPORTUNITY_ID_TASK = business_opportunity.BUSINESS_OPPORTUNITY_ID
+		) as a
+		join
+		employee as b
+		ON a.SPONSOR_ID_TASK = b.EMPLOYEE_ID
+	) as c
+	join employee as d
+	on c.FOLLOW_EMPLOYEE_ID_TASK = d.EMPLOYEE_ID
+	<where>
+		<if test="businessOpportunityIdTask != null">
+			c.BUSINESS_OPPORTUNITY_ID_TASK = #{businessOpportunityIdTask,jdbcType=VARCHAR}
+     	 </if>
+	</where>
+  </select>
+</mapper>

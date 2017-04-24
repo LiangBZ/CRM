@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<init inited="0">
+
+<!-- 角色 -->
+<role userroleId="10988d26-0986-11e7-b918-28d2444b860a" userroleName="管理员" userroleExplain="管理员"/>
+<role userroleId="6566dff0-0987-11e7-b918-28d2444b860a" userroleName="总经理" userroleExplain="总经理"/>
+<role userroleId="5e8d627f-0987-11e7-b918-28d2444b860a" userroleName="部门经理" userroleExplain="部门经理"/>
+<role userroleId="57695387-0987-11e7-b918-28d2444b860a" userroleName="销售人员" userroleExplain="销售人员"/>
+
+<!-- 部门 -->
+<department departmentId="cfd4baa2-0986-11e7-b918-28d2444b860a" departmentName="总裁办" departmentInit="1"/>
+<!-- <department departmentId="7fc51cfa-0986-11e7-b918-28d2444b860a" departmentName="待分配" departmentInit="1"/> -->
+<department departmentId="85ef362e-0987-11e7-b918-28d2444b860a" departmentName="离职员工" departmentInit="1"/>
+
+<!-- 客户级别 -->
+<customRank customRankId="84084e44-0d45-11e7-9e9d-28d2444b860a" customRankName="小型客户"></customRank>
+<customRank customRankId="8ac12910-0d45-11e7-9e9d-28d2444b860a" customRankName="中型客户"></customRank>
+<customRank customRankId="8efeffc1-0d45-11e7-9e9d-28d2444b860a" customRankName="大型客户"></customRank>
+
+<!-- 客户状态 -->
+<customState customStateId="31b14919-0d46-11e7-9e9d-28d2444b860a" customStateName="普通"></customState>
+<customState customStateId="373c6373-0d46-11e7-9e9d-28d2444b860a" customStateName="重要"></customState>
+<customState customStateId="72c10457-0d46-11e7-9e9d-28d2444b860a" customStateName="非常重要"></customState>
+
+<!-- 销售阶段 -->
+<salesStage salesStageId="ddc2e328-0d4b-11e7-9e9d-28d2444b860a" rateOfProgress="10" salesStageName="初步沟通(10%)"></salesStage>
+<salesStage salesStageId="fbf40d99-0d4b-11e7-9e9d-28d2444b860a" rateOfProgress="50" salesStageName="方案报价(50%)"></salesStage>
+<salesStage salesStageId="011bc899-0d4c-11e7-9e9d-28d2444b860a" rateOfProgress="80" salesStageName="谈判协商(80%)"></salesStage>
+<salesStage salesStageId="053bd26b-0d4c-11e7-9e9d-28d2444b860a" rateOfProgress="100" salesStageName="赢单(100%)"></salesStage>
+<salesStage salesStageId="0b16581b-0d4c-11e7-9e9d-28d2444b860a" rateOfProgress="0" salesStageName="输单(0%)"></salesStage>
+
+<!-- 管理员 -->
+<user 
+	employeeId="5e2bf358-0985-11e7-b918-28d2444b860a" 
+	departmentIdEmployee="cfd4baa2-0986-11e7-b918-28d2444b860a" 
+	userroleIdEmployee="10988d26-0986-11e7-b918-28d2444b860a"
+	employeeRealName="梁伯昭" 
+	employeeNumber="0001" 
+	employeeUsername="liangbozhao" 
+	employeePassword="123456"
+	employeeEmail="1175194928@qq.com"
+	employeePhone="15605925286"
+	employeeInit="1"/>
+</init>

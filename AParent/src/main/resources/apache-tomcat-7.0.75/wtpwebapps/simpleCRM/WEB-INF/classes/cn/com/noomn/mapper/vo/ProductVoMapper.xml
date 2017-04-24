@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.noomn.mapper.vo.ProductVoMapper">
+  <resultMap id="BaseResultMap" type="cn.com.noomn.vo.ProductVo">
+    <id column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <result column="PRODUCT_NAME" jdbcType="VARCHAR" property="productName" />
+    <result column="PRODUCT_PRICE" jdbcType="DECIMAL" property="productPrice" />
+    <result column="PRODUCT_PDF" jdbcType="VARCHAR" property="productPdf" />
+    <result column="PRODUCT_NUM" jdbcType="VARCHAR" property="productNum" />
+    <result column="PRODUCT_DETAIL" jdbcType="VARCHAR" property="productDetail" />
+  </resultMap>
+  
+<select id="selectForNimble" parameterType="cn.com.noomn.vo.ProductVo" resultMap="BaseResultMap">
+	select * from product
+	<where>
+		<if test="productId != null">
+			and
+			PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+		</if>
+		<if test="productName != null">
+			and
+			PRODUCT_NAME = #{productName,jdbcType=VARCHAR}
+		</if>
+		<if test="productPrice != null">
+			and
+			PRODUCT_PRICE = #{productPrice,jdbcType=DECIMAL}
+		</if>
+		<if test="productPdf != null">
+			and
+			PRODUCT_PDF = #{productPdf,jdbcType=VARCHAR}
+		</if>
+		<if test="productNum != null">
+			and
+			PRODUCT_NUM = #{productNum,jdbcType=VARCHAR}
+		</if>
+		<if test="productDetail != null">
+			and
+			PRODUCT_DETAIL = #{productDetail,jdbcType=VARCHAR}
+		</if>
+	</where>
+</select>
+
+</mapper>

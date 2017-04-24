@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.noomn.mapper.vo.UserroleVoMapper">
+  <resultMap id="BaseResultMap" type="cn.com.noomn.vo.UserroleVo">
+    <id column="USERROLE_ID" jdbcType="VARCHAR" property="userroleId" />
+    <result column="USERROLE_NAME" jdbcType="VARCHAR" property="userroleName" />
+    <result column="USERROLE_EXPLAIN" jdbcType="VARCHAR" property="userroleExplain" />
+  </resultMap>
+  
+  <select id="selectUserroleId" resultType="java.lang.String">
+  	select userrole.USERROLE_ID from userrole
+  </select>
+  
+</mapper>
